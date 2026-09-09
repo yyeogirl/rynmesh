@@ -1,0 +1,69 @@
+{
+  "checked_at": "2026-09-07T21:49:16.9984692+08:00",
+  "task_id": "task_90dd301a0b26488a9b52913e53bb20f1",
+  "state": "succeeded",
+  "service_id": "qwen3-14b",
+  "model_alias": "qwen3-14b-v100",
+  "model_output": "严格 P2P 最终验收通过",
+  "duration_ms": 948,
+  "transport": "ice_udp_direct",
+  "relay_allowed": false,
+  "relay_used": false,
+  "public_candidates_exchanged": {
+    "windows_consumer": {
+      "type": "srflx",
+      "transport": "udp",
+      "host": "14.154.222.55",
+      "port": 60707
+    },
+    "v100_provider": {
+      "type": "srflx",
+      "transport": "udp",
+      "host": "117.50.189.73",
+      "port": 3000
+    }
+  },
+  "nominated_candidate_pairs": {
+    "consumer_view": {
+      "local": {
+        "type": "host",
+        "transport": "udp",
+        "host": "10.10.10.175",
+        "port": 60707
+      },
+      "remote": {
+        "type": "srflx",
+        "transport": "udp",
+        "host": "117.50.189.73",
+        "port": 3000
+      },
+      "path_kind": "server_reflexive"
+    },
+    "provider_view": {
+      "local": {
+        "type": "host",
+        "transport": "udp",
+        "host": "10.60.24.42",
+        "port": 3000
+      },
+      "remote": {
+        "type": "prflx",
+        "transport": "udp",
+        "host": "14.154.222.55",
+        "port": 14253
+      },
+      "path_kind": "peer_reflexive"
+    }
+  },
+  "payload_bytes": {
+    "request": 987,
+    "response": 952
+  },
+  "assertions": {
+    "both_public_candidates": true,
+    "nominated_candidate_pair": true,
+    "strict_public_nat_traversal": true,
+    "distinct_public_egress": true,
+    "real_model_response": true
+  }
+}

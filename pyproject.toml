@@ -51,6 +51,19 @@ dev = [
 reality = [
     "curl_cffi>=0.7.0",
 ]
+gpu-provider = [
+    "accelerate>=1.10,<2",
+    "beautifulsoup4>=4.12,<5",
+    "bitsandbytes>=0.47,<1",
+    "diffusers>=0.35,<0.36",
+    "ftfy>=6.3,<7",
+    "imageio>=2.37,<3",
+    "imageio-ffmpeg>=0.6,<1",
+    "protobuf>=6,<7",
+    "safetensors>=0.6,<1",
+    "sentencepiece>=0.2,<1",
+    "transformers>=4.57,<4.58",
+]
 
 [project.scripts]
 rynmesh-mcp = "rynmesh.mcp_server:main"
@@ -62,6 +75,10 @@ rynmesh-embeddings-worker = "rynmesh.services.embeddings:main"
 rynmesh-egress-worker = "rynmesh.services.net_egress:main"
 rynmesh-egress = "rynmesh.services.net_egress_client:main"
 rynmesh-llm = "rynmesh.llm_package.cli:main"
+rynmesh-transformers-llm = "rynmesh.llm_runtime_server:main"
+rynmesh-video = "rynmesh.video_package.cli:client_main"
+rynmesh-video-provider = "rynmesh.video_package.cli:server_main"
+rynmesh-provider-gateway = "rynmesh.provider_gateway:main"
 rynmesh-transit = "rynmesh.peer_transit_service:main"
 rynmesh-publish = "rynmesh.tools.publish_release:main"
 rynmesh-vpn = "rynmesh.services.vpn_cli:main"

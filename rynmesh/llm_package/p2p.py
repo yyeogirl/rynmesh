@@ -13,6 +13,7 @@ import ipaddress
 import json
 import math
 import os
+import socket
 import struct
 import time
 import uuid
@@ -128,13 +129,97 @@ def stun_server_from_env() -> tuple[str, int] | None:
 
 def new_connection(*, controlling: bool) -> aioice.Connection:
     # No TURN server is accepted here: strict P2P must never nominate a relay.
-    return aioice.Connection(
+    bind_port = _bind_port_from_env()
+    connection_type = _FixedPortConnection if bind_port is not None else aioice.Connection
+    return connection_type(
         ice_controlling=controlling,
         components=1,
         stun_server=stun_server_from_env(),
         use_ipv4=True,
         use_ipv6=True,
+        **({"bind_port": bind_port} if bind_port is not None else {}),
     )
+
+
+def _bind_port_from_env() -> int | None:
+    value = os.environ.get("RYNMESH_P2P_BIND_PORT", "").strip()
+    if not value:
+        return None
+    try:
+        port = int(value)
+    except ValueError as exc:
+        raise P2PError("RYNMESH_P2P_BIND_PORT must be an integer") from exc
+    if port < 1 or port > 65535:
+        raise P2PError("RYNMESH_P2P_BIND_PORT must be between 1 and 65535")
+    return port
+
+
+class _FixedPortConnection(aioice.Connection):
+    """aioice connection whose host sockets use a firewall-friendly port.
+
+    aioice normally binds an ephemeral UDP port. Cloud security groups cannot
+    safely allow an unknown port, so Providers may opt into one UDP port while
+    Consumers keep the normal ephemeral behavior.
+    """
+
+    def __init__(self, *, bind_port: int, **kwargs: Any) -> None:
+        super().__init__(**kwargs)
+        self._rynmesh_bind_port = bind_port
+
+    async def get_component_candidates(
+        self, component: int, addresses: list[str], timeout: int = 5
+    ) -> list[aioice.Candidate]:
+        from aioice.ice import (
+            StunProtocol,
+            candidate_foundation,
+            candidate_priority,
+            server_reflexive_candidate,
+        )
+
+        candidates: list[aioice.Candidate] = []
+        host_protocols = []
+        loop = asyncio.get_event_loop()
+        port = self._rynmesh_bind_port + component - 1
+        for address in addresses:
+            try:
+                transport, protocol = await loop.create_datagram_endpoint(
+                    lambda: StunProtocol(self), local_addr=(address, port)
+                )
+            except OSError:
+                continue
+            sock = transport.get_extra_info("socket")
+            if sock is not None:
+                sock.setsockopt(socket.SOL_SOCKET, socket.SO_RCVBUF, 1 << 20)
+            host_protocols.append(protocol)
+            candidate_address = transport.get_extra_info("sockname")
+            protocol.local_candidate = aioice.Candidate(
+                foundation=candidate_foundation("host", "udp", candidate_address[0]),
+                component=component,
+                transport="udp",
+                priority=candidate_priority(component, "host"),
+                host=candidate_address[0],
+                port=candidate_address[1],
+                type="host",
+            )
+            candidates.append(protocol.local_candidate)
+        self._protocols += host_protocols
+        tasks = [
+            asyncio.create_task(server_reflexive_candidate(protocol, self.stun_server))
+            for protocol in host_protocols
+            if self.stun_server
+            and ipaddress.ip_address(protocol.local_candidate.host).version == 4
+        ]
+        if tasks:
+            done, pending = await asyncio.wait(tasks, timeout=timeout)
+            for task in done:
+                if task.exception() is None:
+                    candidate, protocol = task.result()
+                    candidates.append(candidate)
+                    if protocol is not None:
+                        self._protocols.append(protocol)
+            for task in pending:
+                task.cancel()
+        return candidates
 
 
 def public_nat_traversal_required() -> bool:
@@ -227,9 +312,9 @@ def selected_pair(connection: aioice.Connection) -> dict[str, Any]:
     remote = getattr(pair, "remote_candidate", None)
     if str(getattr(local, "type", "")) == "relay" or str(getattr(remote, "type", "")) == "relay":
         raise P2PError("TURN/relay candidate was nominated in strict P2P mode")
-    if public_nat_traversal_required() and str(getattr(remote, "type", "")) != "srflx":
-        raise P2PError("strict public NAT traversal did not nominate the peer's STUN mapping")
     remote_type = str(getattr(remote, "type", ""))
+    if public_nat_traversal_required() and remote_type not in {"srflx", "prflx"}:
+        raise P2PError("strict public NAT traversal did not nominate a public peer mapping")
     return {
         "transport": "ice_udp_direct",
         "relay_used": False,

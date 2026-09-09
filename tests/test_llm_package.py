@@ -7,6 +7,7 @@ import time
 from datetime import datetime, timedelta, timezone
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
+from types import SimpleNamespace
 
 import pytest
 from fastapi import FastAPI
@@ -559,7 +560,23 @@ def test_public_nat_mode_refuses_to_fall_back_to_host_candidate(monkeypatch):
     asyncio.run(scenario())
 
 
+def test_public_nat_mode_accepts_peer_reflexive_nominated_candidate(monkeypatch):
+    monkeypatch.setenv("RYNMESH_P2P_REQUIRE_PUBLIC", "1")
+    local = SimpleNamespace(type="srflx", transport="udp", host="117.50.189.73", port=3000)
+    remote = SimpleNamespace(type="prflx", transport="udp", host="14.154.222.55", port=52066)
+    pair = SimpleNamespace(local_candidate=local, remote_candidate=remote)
+    connection = SimpleNamespace(_nominated={1: pair})
+
+    evidence = selected_pair(connection)
+
+    assert evidence["transport"] == "ice_udp_direct"
+    assert evidence["relay_used"] is False
+    assert evidence["peer_public_mapping_nominated"] is True
+    assert evidence["path_kind"] == "peer_reflexive"
+
+
 def test_strict_p2p_connection_never_passes_turn_configuration(monkeypatch):
+    monkeypatch.delenv("RYNMESH_P2P_BIND_PORT", raising=False)
     monkeypatch.setenv("RYNMESH_P2P_STUN", "stun.example.test:3478")
     monkeypatch.setenv("RYNMESH_P2P_TURN", "turn.example.test:3478")
     monkeypatch.setenv("RYNMESH_P2P_TURN_USERNAME", "must-be-ignored")
@@ -582,6 +599,19 @@ def test_strict_p2p_connection_never_passes_turn_configuration(monkeypatch):
         "use_ipv6": True,
     }
     assert all("turn" not in key.lower() for key in captured)
+
+
+def test_provider_can_bind_ice_to_one_firewall_port(monkeypatch):
+    monkeypatch.setenv("RYNMESH_P2P_STUN", "off")
+    monkeypatch.setenv("RYNMESH_P2P_BIND_PORT", "3000")
+    connection = new_connection(controlling=False)
+    assert connection._rynmesh_bind_port == 3000
+
+
+def test_invalid_fixed_ice_port_fails_closed(monkeypatch):
+    monkeypatch.setenv("RYNMESH_P2P_BIND_PORT", "70000")
+    with pytest.raises(P2PError, match="between 1 and 65535"):
+        new_connection(controlling=False)
 
 
 def test_ice_signal_rejects_turn_relay_candidate_before_connecting():
