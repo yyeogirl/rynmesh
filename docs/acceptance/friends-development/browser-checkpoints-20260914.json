@@ -1,0 +1,1642 @@
+{
+  "scope": "Fresh unseeded nodes; real loopback browser operations; synthetic article source; not packaged desktop or NAT",
+  "observations": [
+    {
+      "label": "paired-bidirectional-text",
+      "at": "2026-09-14T07:56:23.820151+00:00",
+      "nodes": {
+        "A": {
+          "pid": 59552,
+          "peer_requests": {
+            "/api/peer/friends/accept": 1,
+            "/api/peer/friends/message": 1
+          },
+          "outbound_requests": {
+            "/api/peer/ai-access/services": 12,
+            "/api/peer/friends/message": 1
+          },
+          "online": true,
+          "friends": [
+            {
+              "relationship_id": "1a2eab35f9ed44d881d22f623336626b",
+              "peer_id": "CjAH/1AShC0Snu8RooGfW8kr8ZUvmZPOdZyvsgxGJJw=",
+              "permissions": [
+                "friend.message",
+                "friend.attachment.small",
+                "friend.content-card"
+              ],
+              "status": "active",
+              "created_at": "2026-09-14T07:54:23.086789+00:00",
+              "revoked_at": null,
+              "revocation_delivery": null
+            }
+          ],
+          "invites": [
+            {
+              "invite_id": "c3f3738dd8b240b3a7502c92d05117c9",
+              "status": "used",
+              "created_at": "2026-09-14T07:50:53.905595+00:00",
+              "expires_at": "2026-09-14T08:05:53.905595+00:00"
+            }
+          ],
+          "messages": [
+            {
+              "msg_id": "134100d34fc7423384dd62557bb364a0",
+              "dir": "in",
+              "kind": "text",
+              "ts": "2026-09-14T07:54:36.704928+00:00",
+              "delivered": true,
+              "delivery_state": "delivered",
+              "error": null,
+              "expires_at": null,
+              "text_digest": "cdf2aeee0fc3b8fdbf42759e3b8dbf5061de010b29e1ada4333d7ea9fe9495ab"
+            },
+            {
+              "msg_id": "0b290e0b38414c86b5edc1370d710e10",
+              "dir": "out",
+              "kind": "text",
+              "ts": "2026-09-14T07:55:21.656220+00:00",
+              "delivered": true,
+              "delivery_state": "delivered",
+              "error": "",
+              "expires_at": "2026-09-14T08:55:21.656220+00:00",
+              "text_digest": "ee949f73452c8a45fe27b944e6a58b26eba59beebb9d58225fe52e327ff4bb8e"
+            }
+          ],
+          "cards": [],
+          "document_count": 0,
+          "reading_count": 0,
+          "model_configured": false
+        },
+        "B": {
+          "pid": 38340,
+          "peer_requests": {
+            "/api/peer/friends/message": 1
+          },
+          "outbound_requests": {
+            "/api/peer/friends/accept": 2,
+            "/api/peer/ai-access/services": 12,
+            "/api/peer/friends/message": 1
+          },
+          "online": true,
+          "friends": [
+            {
+              "relationship_id": "1a2eab35f9ed44d881d22f623336626b",
+              "peer_id": "ggxogO0APR9vQpwHlRvYZ1kbj4oCV+zR3ELSFgHVNkg=",
+              "permissions": [
+                "friend.message",
+                "friend.attachment.small",
+                "friend.content-card"
+              ],
+              "status": "active",
+              "created_at": "2026-09-14T07:54:23.135385+00:00",
+              "revoked_at": null,
+              "revocation_delivery": null
+            }
+          ],
+          "invites": [],
+          "messages": [
+            {
+              "msg_id": "134100d34fc7423384dd62557bb364a0",
+              "dir": "out",
+              "kind": "text",
+              "ts": "2026-09-14T07:54:36.704928+00:00",
+              "delivered": true,
+              "delivery_state": "delivered",
+              "error": "",
+              "expires_at": "2026-09-14T08:54:36.704928+00:00",
+              "text_digest": "cdf2aeee0fc3b8fdbf42759e3b8dbf5061de010b29e1ada4333d7ea9fe9495ab"
+            },
+            {
+              "msg_id": "0b290e0b38414c86b5edc1370d710e10",
+              "dir": "in",
+              "kind": "text",
+              "ts": "2026-09-14T07:55:21.656220+00:00",
+              "delivered": true,
+              "delivery_state": "delivered",
+              "error": null,
+              "expires_at": null,
+              "text_digest": "ee949f73452c8a45fe27b944e6a58b26eba59beebb9d58225fe52e327ff4bb8e"
+            }
+          ],
+          "cards": [],
+          "document_count": 0,
+          "reading_count": 0,
+          "model_configured": false
+        }
+      }
+    },
+    {
+      "label": "metadata-before-download",
+      "at": "2026-09-14T08:04:29.266103+00:00",
+      "nodes": {
+        "A": {
+          "pid": 63252,
+          "peer_requests": {
+            "/api/peer/friends/accept": 1,
+            "/api/peer/friends/message": 1
+          },
+          "outbound_requests": {
+            "/api/peer/ai-access/services": 58,
+            "/api/peer/friends/message": 1,
+            "/api/peer/friends/content-card": 1
+          },
+          "online": true,
+          "friends": [
+            {
+              "relationship_id": "1a2eab35f9ed44d881d22f623336626b",
+              "peer_id": "CjAH/1AShC0Snu8RooGfW8kr8ZUvmZPOdZyvsgxGJJw=",
+              "permissions": [
+                "friend.message",
+                "friend.attachment.small",
+                "friend.content-card"
+              ],
+              "status": "active",
+              "created_at": "2026-09-14T07:54:23.086789+00:00",
+              "revoked_at": null,
+              "revocation_delivery": null
+            }
+          ],
+          "invites": [
+            {
+              "invite_id": "c3f3738dd8b240b3a7502c92d05117c9",
+              "status": "used",
+              "created_at": "2026-09-14T07:50:53.905595+00:00",
+              "expires_at": "2026-09-14T08:05:53.905595+00:00"
+            }
+          ],
+          "messages": [
+            {
+              "msg_id": "134100d34fc7423384dd62557bb364a0",
+              "dir": "in",
+              "kind": "text",
+              "ts": "2026-09-14T07:54:36.704928+00:00",
+              "delivered": true,
+              "delivery_state": "delivered",
+              "error": null,
+              "expires_at": null,
+              "text_digest": "cdf2aeee0fc3b8fdbf42759e3b8dbf5061de010b29e1ada4333d7ea9fe9495ab"
+            },
+            {
+              "msg_id": "0b290e0b38414c86b5edc1370d710e10",
+              "dir": "out",
+              "kind": "text",
+              "ts": "2026-09-14T07:55:21.656220+00:00",
+              "delivered": true,
+              "delivery_state": "delivered",
+              "error": "",
+              "expires_at": "2026-09-14T08:55:21.656220+00:00",
+              "text_digest": "ee949f73452c8a45fe27b944e6a58b26eba59beebb9d58225fe52e327ff4bb8e"
+            }
+          ],
+          "cards": [
+            {
+              "card_id": "5eeb4fea0c7044b6be02f48b636bc9dd",
+              "dir": "out",
+              "created_at": "2026-09-14T08:04:23.492077+00:00",
+              "fetch_state": null,
+              "fetched_library_id": null,
+              "sha256_verified": null,
+              "delivered": true,
+              "delivery_state": "delivered",
+              "error": ""
+            }
+          ],
+          "document_count": 1,
+          "reading_count": 1,
+          "model_configured": false
+        },
+        "B": {
+          "pid": 38340,
+          "peer_requests": {
+            "/api/peer/friends/message": 1,
+            "/api/peer/friends/content-card": 1
+          },
+          "outbound_requests": {
+            "/api/peer/friends/accept": 2,
+            "/api/peer/ai-access/services": 59,
+            "/api/peer/friends/message": 1
+          },
+          "online": true,
+          "friends": [
+            {
+              "relationship_id": "1a2eab35f9ed44d881d22f623336626b",
+              "peer_id": "ggxogO0APR9vQpwHlRvYZ1kbj4oCV+zR3ELSFgHVNkg=",
+              "permissions": [
+                "friend.message",
+                "friend.attachment.small",
+                "friend.content-card"
+              ],
+              "status": "active",
+              "created_at": "2026-09-14T07:54:23.135385+00:00",
+              "revoked_at": null,
+              "revocation_delivery": null
+            }
+          ],
+          "invites": [],
+          "messages": [
+            {
+              "msg_id": "134100d34fc7423384dd62557bb364a0",
+              "dir": "out",
+              "kind": "text",
+              "ts": "2026-09-14T07:54:36.704928+00:00",
+              "delivered": true,
+              "delivery_state": "delivered",
+              "error": "",
+              "expires_at": "2026-09-14T08:54:36.704928+00:00",
+              "text_digest": "cdf2aeee0fc3b8fdbf42759e3b8dbf5061de010b29e1ada4333d7ea9fe9495ab"
+            },
+            {
+              "msg_id": "0b290e0b38414c86b5edc1370d710e10",
+              "dir": "in",
+              "kind": "text",
+              "ts": "2026-09-14T07:55:21.656220+00:00",
+              "delivered": true,
+              "delivery_state": "delivered",
+              "error": null,
+              "expires_at": null,
+              "text_digest": "ee949f73452c8a45fe27b944e6a58b26eba59beebb9d58225fe52e327ff4bb8e"
+            }
+          ],
+          "cards": [
+            {
+              "card_id": "5eeb4fea0c7044b6be02f48b636bc9dd",
+              "dir": "in",
+              "created_at": "2026-09-14T08:04:23.492077+00:00",
+              "fetch_state": "available",
+              "fetched_library_id": null,
+              "sha256_verified": null,
+              "delivered": null,
+              "delivery_state": null,
+              "error": null
+            }
+          ],
+          "document_count": 0,
+          "reading_count": 0,
+          "model_configured": false
+        }
+      }
+    },
+    {
+      "label": "recipient-explicit-download",
+      "at": "2026-09-14T08:04:48.659662+00:00",
+      "nodes": {
+        "A": {
+          "pid": 63252,
+          "peer_requests": {
+            "/api/peer/friends/accept": 1,
+            "/api/peer/friends/message": 1,
+            "/api/peer/friends/content-card/fetch": 1
+          },
+          "outbound_requests": {
+            "/api/peer/ai-access/services": 60,
+            "/api/peer/friends/message": 1,
+            "/api/peer/friends/content-card": 1
+          },
+          "online": true,
+          "friends": [
+            {
+              "relationship_id": "1a2eab35f9ed44d881d22f623336626b",
+              "peer_id": "CjAH/1AShC0Snu8RooGfW8kr8ZUvmZPOdZyvsgxGJJw=",
+              "permissions": [
+                "friend.message",
+                "friend.attachment.small",
+                "friend.content-card"
+              ],
+              "status": "active",
+              "created_at": "2026-09-14T07:54:23.086789+00:00",
+              "revoked_at": null,
+              "revocation_delivery": null
+            }
+          ],
+          "invites": [
+            {
+              "invite_id": "c3f3738dd8b240b3a7502c92d05117c9",
+              "status": "used",
+              "created_at": "2026-09-14T07:50:53.905595+00:00",
+              "expires_at": "2026-09-14T08:05:53.905595+00:00"
+            }
+          ],
+          "messages": [
+            {
+              "msg_id": "134100d34fc7423384dd62557bb364a0",
+              "dir": "in",
+              "kind": "text",
+              "ts": "2026-09-14T07:54:36.704928+00:00",
+              "delivered": true,
+              "delivery_state": "delivered",
+              "error": null,
+              "expires_at": null,
+              "text_digest": "cdf2aeee0fc3b8fdbf42759e3b8dbf5061de010b29e1ada4333d7ea9fe9495ab"
+            },
+            {
+              "msg_id": "0b290e0b38414c86b5edc1370d710e10",
+              "dir": "out",
+              "kind": "text",
+              "ts": "2026-09-14T07:55:21.656220+00:00",
+              "delivered": true,
+              "delivery_state": "delivered",
+              "error": "",
+              "expires_at": "2026-09-14T08:55:21.656220+00:00",
+              "text_digest": "ee949f73452c8a45fe27b944e6a58b26eba59beebb9d58225fe52e327ff4bb8e"
+            }
+          ],
+          "cards": [
+            {
+              "card_id": "5eeb4fea0c7044b6be02f48b636bc9dd",
+              "dir": "out",
+              "created_at": "2026-09-14T08:04:23.492077+00:00",
+              "fetch_state": null,
+              "fetched_library_id": null,
+              "sha256_verified": null,
+              "delivered": true,
+              "delivery_state": "delivered",
+              "error": ""
+            }
+          ],
+          "document_count": 1,
+          "reading_count": 1,
+          "model_configured": false
+        },
+        "B": {
+          "pid": 38340,
+          "peer_requests": {
+            "/api/peer/friends/message": 1,
+            "/api/peer/friends/content-card": 1
+          },
+          "outbound_requests": {
+            "/api/peer/friends/accept": 2,
+            "/api/peer/ai-access/services": 61,
+            "/api/peer/friends/message": 1,
+            "/api/peer/friends/content-card/fetch": 1
+          },
+          "online": true,
+          "friends": [
+            {
+              "relationship_id": "1a2eab35f9ed44d881d22f623336626b",
+              "peer_id": "ggxogO0APR9vQpwHlRvYZ1kbj4oCV+zR3ELSFgHVNkg=",
+              "permissions": [
+                "friend.message",
+                "friend.attachment.small",
+                "friend.content-card"
+              ],
+              "status": "active",
+              "created_at": "2026-09-14T07:54:23.135385+00:00",
+              "revoked_at": null,
+              "revocation_delivery": null
+            }
+          ],
+          "invites": [],
+          "messages": [
+            {
+              "msg_id": "134100d34fc7423384dd62557bb364a0",
+              "dir": "out",
+              "kind": "text",
+              "ts": "2026-09-14T07:54:36.704928+00:00",
+              "delivered": true,
+              "delivery_state": "delivered",
+              "error": "",
+              "expires_at": "2026-09-14T08:54:36.704928+00:00",
+              "text_digest": "cdf2aeee0fc3b8fdbf42759e3b8dbf5061de010b29e1ada4333d7ea9fe9495ab"
+            },
+            {
+              "msg_id": "0b290e0b38414c86b5edc1370d710e10",
+              "dir": "in",
+              "kind": "text",
+              "ts": "2026-09-14T07:55:21.656220+00:00",
+              "delivered": true,
+              "delivery_state": "delivered",
+              "error": null,
+              "expires_at": null,
+              "text_digest": "ee949f73452c8a45fe27b944e6a58b26eba59beebb9d58225fe52e327ff4bb8e"
+            }
+          ],
+          "cards": [
+            {
+              "card_id": "5eeb4fea0c7044b6be02f48b636bc9dd",
+              "dir": "in",
+              "created_at": "2026-09-14T08:04:23.492077+00:00",
+              "fetch_state": "fetched",
+              "fetched_library_id": "import:imp_b85d0b8cfc6c8e1df5980404f83357b7f10e6bf552ea81f2688f8ac5829d1de4",
+              "sha256_verified": true,
+              "delivered": null,
+              "delivery_state": null,
+              "error": null,
+              "body_digest": "b9afc6a95014a89d6ab6ec2666bf0ce1a41c9082a0de6649a4744b9d96bc5db7"
+            }
+          ],
+          "document_count": 1,
+          "reading_count": 1,
+          "model_configured": false
+        }
+      }
+    },
+    {
+      "label": "bidirectional-content-verified",
+      "at": "2026-09-14T08:05:25.056798+00:00",
+      "nodes": {
+        "A": {
+          "pid": 63252,
+          "peer_requests": {
+            "/api/peer/friends/accept": 1,
+            "/api/peer/friends/message": 1,
+            "/api/peer/friends/content-card/fetch": 1,
+            "/api/peer/friends/content-card": 1
+          },
+          "outbound_requests": {
+            "/api/peer/ai-access/services": 63,
+            "/api/peer/friends/message": 1,
+            "/api/peer/friends/content-card": 1,
+            "/api/peer/friends/content-card/fetch": 1
+          },
+          "online": true,
+          "friends": [
+            {
+              "relationship_id": "1a2eab35f9ed44d881d22f623336626b",
+              "peer_id": "CjAH/1AShC0Snu8RooGfW8kr8ZUvmZPOdZyvsgxGJJw=",
+              "permissions": [
+                "friend.message",
+                "friend.attachment.small",
+                "friend.content-card"
+              ],
+              "status": "active",
+              "created_at": "2026-09-14T07:54:23.086789+00:00",
+              "revoked_at": null,
+              "revocation_delivery": null
+            }
+          ],
+          "invites": [
+            {
+              "invite_id": "c3f3738dd8b240b3a7502c92d05117c9",
+              "status": "used",
+              "created_at": "2026-09-14T07:50:53.905595+00:00",
+              "expires_at": "2026-09-14T08:05:53.905595+00:00"
+            }
+          ],
+          "messages": [
+            {
+              "msg_id": "134100d34fc7423384dd62557bb364a0",
+              "dir": "in",
+              "kind": "text",
+              "ts": "2026-09-14T07:54:36.704928+00:00",
+              "delivered": true,
+              "delivery_state": "delivered",
+              "error": null,
+              "expires_at": null,
+              "text_digest": "cdf2aeee0fc3b8fdbf42759e3b8dbf5061de010b29e1ada4333d7ea9fe9495ab"
+            },
+            {
+              "msg_id": "0b290e0b38414c86b5edc1370d710e10",
+              "dir": "out",
+              "kind": "text",
+              "ts": "2026-09-14T07:55:21.656220+00:00",
+              "delivered": true,
+              "delivery_state": "delivered",
+              "error": "",
+              "expires_at": "2026-09-14T08:55:21.656220+00:00",
+              "text_digest": "ee949f73452c8a45fe27b944e6a58b26eba59beebb9d58225fe52e327ff4bb8e"
+            }
+          ],
+          "cards": [
+            {
+              "card_id": "118c80dafcee4f54975b17e985442e75",
+              "dir": "in",
+              "created_at": "2026-09-14T08:05:03.894143+00:00",
+              "fetch_state": "fetched",
+              "fetched_library_id": "import:imp_43c54c2c98d70e84921498160f1b6b6facb9ec113bc20f37ac6bb04a3bf5789b",
+              "sha256_verified": true,
+              "delivered": null,
+              "delivery_state": null,
+              "error": null,
+              "body_digest": "b9afc6a95014a89d6ab6ec2666bf0ce1a41c9082a0de6649a4744b9d96bc5db7"
+            },
+            {
+              "card_id": "5eeb4fea0c7044b6be02f48b636bc9dd",
+              "dir": "out",
+              "created_at": "2026-09-14T08:04:23.492077+00:00",
+              "fetch_state": null,
+              "fetched_library_id": null,
+              "sha256_verified": null,
+              "delivered": true,
+              "delivery_state": "delivered",
+              "error": ""
+            }
+          ],
+          "document_count": 2,
+          "reading_count": 2,
+          "model_configured": false
+        },
+        "B": {
+          "pid": 38340,
+          "peer_requests": {
+            "/api/peer/friends/message": 1,
+            "/api/peer/friends/content-card": 1,
+            "/api/peer/friends/content-card/fetch": 1
+          },
+          "outbound_requests": {
+            "/api/peer/friends/accept": 2,
+            "/api/peer/ai-access/services": 64,
+            "/api/peer/friends/message": 1,
+            "/api/peer/friends/content-card/fetch": 1,
+            "/api/peer/friends/content-card": 1
+          },
+          "online": true,
+          "friends": [
+            {
+              "relationship_id": "1a2eab35f9ed44d881d22f623336626b",
+              "peer_id": "ggxogO0APR9vQpwHlRvYZ1kbj4oCV+zR3ELSFgHVNkg=",
+              "permissions": [
+                "friend.message",
+                "friend.attachment.small",
+                "friend.content-card"
+              ],
+              "status": "active",
+              "created_at": "2026-09-14T07:54:23.135385+00:00",
+              "revoked_at": null,
+              "revocation_delivery": null
+            }
+          ],
+          "invites": [],
+          "messages": [
+            {
+              "msg_id": "134100d34fc7423384dd62557bb364a0",
+              "dir": "out",
+              "kind": "text",
+              "ts": "2026-09-14T07:54:36.704928+00:00",
+              "delivered": true,
+              "delivery_state": "delivered",
+              "error": "",
+              "expires_at": "2026-09-14T08:54:36.704928+00:00",
+              "text_digest": "cdf2aeee0fc3b8fdbf42759e3b8dbf5061de010b29e1ada4333d7ea9fe9495ab"
+            },
+            {
+              "msg_id": "0b290e0b38414c86b5edc1370d710e10",
+              "dir": "in",
+              "kind": "text",
+              "ts": "2026-09-14T07:55:21.656220+00:00",
+              "delivered": true,
+              "delivery_state": "delivered",
+              "error": null,
+              "expires_at": null,
+              "text_digest": "ee949f73452c8a45fe27b944e6a58b26eba59beebb9d58225fe52e327ff4bb8e"
+            }
+          ],
+          "cards": [
+            {
+              "card_id": "118c80dafcee4f54975b17e985442e75",
+              "dir": "out",
+              "created_at": "2026-09-14T08:05:03.894143+00:00",
+              "fetch_state": null,
+              "fetched_library_id": null,
+              "sha256_verified": null,
+              "delivered": true,
+              "delivery_state": "delivered",
+              "error": ""
+            },
+            {
+              "card_id": "5eeb4fea0c7044b6be02f48b636bc9dd",
+              "dir": "in",
+              "created_at": "2026-09-14T08:04:23.492077+00:00",
+              "fetch_state": "fetched",
+              "fetched_library_id": "import:imp_b85d0b8cfc6c8e1df5980404f83357b7f10e6bf552ea81f2688f8ac5829d1de4",
+              "sha256_verified": true,
+              "delivered": null,
+              "delivery_state": null,
+              "error": null,
+              "body_digest": "b9afc6a95014a89d6ab6ec2666bf0ce1a41c9082a0de6649a4744b9d96bc5db7"
+            }
+          ],
+          "document_count": 1,
+          "reading_count": 1,
+          "model_configured": false
+        }
+      }
+    },
+    {
+      "label": "offline-mailbox-unconfirmed",
+      "at": "2026-09-14T08:06:26.778283+00:00",
+      "nodes": {
+        "A": {
+          "pid": 63252,
+          "peer_requests": {
+            "/api/peer/friends/accept": 1,
+            "/api/peer/friends/message": 1,
+            "/api/peer/friends/content-card/fetch": 1,
+            "/api/peer/friends/content-card": 1
+          },
+          "outbound_requests": {
+            "/api/peer/ai-access/services": 65,
+            "/api/peer/friends/message": 5,
+            "/api/peer/friends/content-card": 1,
+            "/api/peer/friends/content-card/fetch": 1
+          },
+          "online": true,
+          "friends": [
+            {
+              "relationship_id": "1a2eab35f9ed44d881d22f623336626b",
+              "peer_id": "CjAH/1AShC0Snu8RooGfW8kr8ZUvmZPOdZyvsgxGJJw=",
+              "permissions": [
+                "friend.message",
+                "friend.attachment.small",
+                "friend.content-card"
+              ],
+              "status": "active",
+              "created_at": "2026-09-14T07:54:23.086789+00:00",
+              "revoked_at": null,
+              "revocation_delivery": null
+            }
+          ],
+          "invites": [
+            {
+              "invite_id": "c3f3738dd8b240b3a7502c92d05117c9",
+              "status": "used",
+              "created_at": "2026-09-14T07:50:53.905595+00:00",
+              "expires_at": "2026-09-14T08:05:53.905595+00:00"
+            }
+          ],
+          "messages": [
+            {
+              "msg_id": "134100d34fc7423384dd62557bb364a0",
+              "dir": "in",
+              "kind": "text",
+              "ts": "2026-09-14T07:54:36.704928+00:00",
+              "delivered": true,
+              "delivery_state": "delivered",
+              "error": null,
+              "expires_at": null,
+              "text_digest": "cdf2aeee0fc3b8fdbf42759e3b8dbf5061de010b29e1ada4333d7ea9fe9495ab"
+            },
+            {
+              "msg_id": "0b290e0b38414c86b5edc1370d710e10",
+              "dir": "out",
+              "kind": "text",
+              "ts": "2026-09-14T07:55:21.656220+00:00",
+              "delivered": true,
+              "delivery_state": "delivered",
+              "error": "",
+              "expires_at": "2026-09-14T08:55:21.656220+00:00",
+              "text_digest": "ee949f73452c8a45fe27b944e6a58b26eba59beebb9d58225fe52e327ff4bb8e"
+            },
+            {
+              "msg_id": "7aa5c3099cd341e0852b9a5129acd816",
+              "dir": "out",
+              "kind": "text",
+              "ts": "2026-09-14T08:05:50.896930+00:00",
+              "delivered": false,
+              "delivery_state": "mailbox",
+              "error": "",
+              "expires_at": "2026-09-14T09:05:50.896930+00:00",
+              "text_digest": "38c2ae7f8c3924c653b93daba4b2a9cf6015b949623e3b28eaf6f2d49dc4d4d4"
+            }
+          ],
+          "cards": [
+            {
+              "card_id": "118c80dafcee4f54975b17e985442e75",
+              "dir": "in",
+              "created_at": "2026-09-14T08:05:03.894143+00:00",
+              "fetch_state": "fetched",
+              "fetched_library_id": "import:imp_43c54c2c98d70e84921498160f1b6b6facb9ec113bc20f37ac6bb04a3bf5789b",
+              "sha256_verified": true,
+              "delivered": null,
+              "delivery_state": null,
+              "error": null,
+              "body_digest": "b9afc6a95014a89d6ab6ec2666bf0ce1a41c9082a0de6649a4744b9d96bc5db7"
+            },
+            {
+              "card_id": "5eeb4fea0c7044b6be02f48b636bc9dd",
+              "dir": "out",
+              "created_at": "2026-09-14T08:04:23.492077+00:00",
+              "fetch_state": null,
+              "fetched_library_id": null,
+              "sha256_verified": null,
+              "delivered": true,
+              "delivery_state": "delivered",
+              "error": ""
+            }
+          ],
+          "document_count": 2,
+          "reading_count": 2,
+          "model_configured": false
+        },
+        "B": {
+          "pid": 38340,
+          "peer_requests": {
+            "/api/peer/friends/message": 1,
+            "/api/peer/friends/content-card": 1,
+            "/api/peer/friends/content-card/fetch": 1
+          },
+          "outbound_requests": {
+            "/api/peer/friends/accept": 2,
+            "/api/peer/ai-access/services": 65,
+            "/api/peer/friends/message": 1,
+            "/api/peer/friends/content-card/fetch": 1,
+            "/api/peer/friends/content-card": 1
+          },
+          "online": false
+        }
+      }
+    },
+    {
+      "label": "mailbox-received-sender-offline",
+      "at": "2026-09-14T08:07:10.541680+00:00",
+      "nodes": {
+        "A": {
+          "pid": 63252,
+          "peer_requests": {
+            "/api/peer/friends/accept": 1,
+            "/api/peer/friends/message": 1,
+            "/api/peer/friends/content-card/fetch": 1,
+            "/api/peer/friends/content-card": 1
+          },
+          "outbound_requests": {
+            "/api/peer/ai-access/services": 66,
+            "/api/peer/friends/message": 5,
+            "/api/peer/friends/content-card": 1,
+            "/api/peer/friends/content-card/fetch": 1
+          },
+          "online": false
+        },
+        "B": {
+          "pid": 62800,
+          "peer_requests": {
+            "/api/peer/friends/message": 1,
+            "/api/peer/friends/content-card": 1,
+            "/api/peer/friends/content-card/fetch": 1
+          },
+          "outbound_requests": {
+            "/api/peer/friends/accept": 2,
+            "/api/peer/ai-access/services": 67,
+            "/api/peer/friends/message": 1,
+            "/api/peer/friends/content-card/fetch": 1,
+            "/api/peer/friends/content-card": 1
+          },
+          "online": true,
+          "friends": [
+            {
+              "relationship_id": "1a2eab35f9ed44d881d22f623336626b",
+              "peer_id": "ggxogO0APR9vQpwHlRvYZ1kbj4oCV+zR3ELSFgHVNkg=",
+              "permissions": [
+                "friend.message",
+                "friend.attachment.small",
+                "friend.content-card"
+              ],
+              "status": "active",
+              "created_at": "2026-09-14T07:54:23.135385+00:00",
+              "revoked_at": null,
+              "revocation_delivery": null
+            }
+          ],
+          "invites": [],
+          "messages": [
+            {
+              "msg_id": "134100d34fc7423384dd62557bb364a0",
+              "dir": "out",
+              "kind": "text",
+              "ts": "2026-09-14T07:54:36.704928+00:00",
+              "delivered": true,
+              "delivery_state": "delivered",
+              "error": "",
+              "expires_at": "2026-09-14T08:54:36.704928+00:00",
+              "text_digest": "cdf2aeee0fc3b8fdbf42759e3b8dbf5061de010b29e1ada4333d7ea9fe9495ab"
+            },
+            {
+              "msg_id": "0b290e0b38414c86b5edc1370d710e10",
+              "dir": "in",
+              "kind": "text",
+              "ts": "2026-09-14T07:55:21.656220+00:00",
+              "delivered": true,
+              "delivery_state": "delivered",
+              "error": null,
+              "expires_at": null,
+              "text_digest": "ee949f73452c8a45fe27b944e6a58b26eba59beebb9d58225fe52e327ff4bb8e"
+            },
+            {
+              "msg_id": "7aa5c3099cd341e0852b9a5129acd816",
+              "dir": "in",
+              "kind": "text",
+              "ts": "2026-09-14T08:05:50.896930+00:00",
+              "delivered": true,
+              "delivery_state": "delivered",
+              "error": null,
+              "expires_at": null,
+              "text_digest": "38c2ae7f8c3924c653b93daba4b2a9cf6015b949623e3b28eaf6f2d49dc4d4d4"
+            }
+          ],
+          "cards": [
+            {
+              "card_id": "118c80dafcee4f54975b17e985442e75",
+              "dir": "out",
+              "created_at": "2026-09-14T08:05:03.894143+00:00",
+              "fetch_state": null,
+              "fetched_library_id": null,
+              "sha256_verified": null,
+              "delivered": true,
+              "delivery_state": "delivered",
+              "error": ""
+            },
+            {
+              "card_id": "5eeb4fea0c7044b6be02f48b636bc9dd",
+              "dir": "in",
+              "created_at": "2026-09-14T08:04:23.492077+00:00",
+              "fetch_state": "fetched",
+              "fetched_library_id": "import:imp_b85d0b8cfc6c8e1df5980404f83357b7f10e6bf552ea81f2688f8ac5829d1de4",
+              "sha256_verified": true,
+              "delivered": null,
+              "delivery_state": null,
+              "error": null,
+              "body_digest": "b9afc6a95014a89d6ab6ec2666bf0ce1a41c9082a0de6649a4744b9d96bc5db7"
+            }
+          ],
+          "document_count": 1,
+          "reading_count": 1,
+          "model_configured": false
+        }
+      }
+    },
+    {
+      "label": "mailbox-receipt-after-sender-restart",
+      "at": "2026-09-14T08:07:42.548418+00:00",
+      "nodes": {
+        "A": {
+          "pid": 44160,
+          "peer_requests": {
+            "/api/peer/friends/accept": 1,
+            "/api/peer/friends/message": 1,
+            "/api/peer/friends/content-card/fetch": 1,
+            "/api/peer/friends/content-card": 1
+          },
+          "outbound_requests": {
+            "/api/peer/ai-access/services": 69,
+            "/api/peer/friends/message": 6,
+            "/api/peer/friends/content-card": 1,
+            "/api/peer/friends/content-card/fetch": 1
+          },
+          "online": true,
+          "friends": [
+            {
+              "relationship_id": "1a2eab35f9ed44d881d22f623336626b",
+              "peer_id": "CjAH/1AShC0Snu8RooGfW8kr8ZUvmZPOdZyvsgxGJJw=",
+              "permissions": [
+                "friend.message",
+                "friend.attachment.small",
+                "friend.content-card"
+              ],
+              "status": "active",
+              "created_at": "2026-09-14T07:54:23.086789+00:00",
+              "revoked_at": null,
+              "revocation_delivery": null
+            }
+          ],
+          "invites": [
+            {
+              "invite_id": "c3f3738dd8b240b3a7502c92d05117c9",
+              "status": "used",
+              "created_at": "2026-09-14T07:50:53.905595+00:00",
+              "expires_at": "2026-09-14T08:05:53.905595+00:00"
+            }
+          ],
+          "messages": [
+            {
+              "msg_id": "134100d34fc7423384dd62557bb364a0",
+              "dir": "in",
+              "kind": "text",
+              "ts": "2026-09-14T07:54:36.704928+00:00",
+              "delivered": true,
+              "delivery_state": "delivered",
+              "error": null,
+              "expires_at": null,
+              "text_digest": "cdf2aeee0fc3b8fdbf42759e3b8dbf5061de010b29e1ada4333d7ea9fe9495ab"
+            },
+            {
+              "msg_id": "0b290e0b38414c86b5edc1370d710e10",
+              "dir": "out",
+              "kind": "text",
+              "ts": "2026-09-14T07:55:21.656220+00:00",
+              "delivered": true,
+              "delivery_state": "delivered",
+              "error": "",
+              "expires_at": "2026-09-14T08:55:21.656220+00:00",
+              "text_digest": "ee949f73452c8a45fe27b944e6a58b26eba59beebb9d58225fe52e327ff4bb8e"
+            },
+            {
+              "msg_id": "7aa5c3099cd341e0852b9a5129acd816",
+              "dir": "out",
+              "kind": "text",
+              "ts": "2026-09-14T08:05:50.896930+00:00",
+              "delivered": true,
+              "delivery_state": "delivered",
+              "error": "",
+              "expires_at": "2026-09-14T09:05:50.896930+00:00",
+              "text_digest": "38c2ae7f8c3924c653b93daba4b2a9cf6015b949623e3b28eaf6f2d49dc4d4d4"
+            }
+          ],
+          "cards": [
+            {
+              "card_id": "118c80dafcee4f54975b17e985442e75",
+              "dir": "in",
+              "created_at": "2026-09-14T08:05:03.894143+00:00",
+              "fetch_state": "fetched",
+              "fetched_library_id": "import:imp_43c54c2c98d70e84921498160f1b6b6facb9ec113bc20f37ac6bb04a3bf5789b",
+              "sha256_verified": true,
+              "delivered": null,
+              "delivery_state": null,
+              "error": null,
+              "body_digest": "b9afc6a95014a89d6ab6ec2666bf0ce1a41c9082a0de6649a4744b9d96bc5db7"
+            },
+            {
+              "card_id": "5eeb4fea0c7044b6be02f48b636bc9dd",
+              "dir": "out",
+              "created_at": "2026-09-14T08:04:23.492077+00:00",
+              "fetch_state": null,
+              "fetched_library_id": null,
+              "sha256_verified": null,
+              "delivered": true,
+              "delivery_state": "delivered",
+              "error": ""
+            }
+          ],
+          "document_count": 2,
+          "reading_count": 2,
+          "model_configured": false
+        },
+        "B": {
+          "pid": 62800,
+          "peer_requests": {
+            "/api/peer/friends/message": 2,
+            "/api/peer/friends/content-card": 1,
+            "/api/peer/friends/content-card/fetch": 1
+          },
+          "outbound_requests": {
+            "/api/peer/friends/accept": 2,
+            "/api/peer/ai-access/services": 68,
+            "/api/peer/friends/message": 1,
+            "/api/peer/friends/content-card/fetch": 1,
+            "/api/peer/friends/content-card": 1
+          },
+          "online": true,
+          "friends": [
+            {
+              "relationship_id": "1a2eab35f9ed44d881d22f623336626b",
+              "peer_id": "ggxogO0APR9vQpwHlRvYZ1kbj4oCV+zR3ELSFgHVNkg=",
+              "permissions": [
+                "friend.message",
+                "friend.attachment.small",
+                "friend.content-card"
+              ],
+              "status": "active",
+              "created_at": "2026-09-14T07:54:23.135385+00:00",
+              "revoked_at": null,
+              "revocation_delivery": null
+            }
+          ],
+          "invites": [],
+          "messages": [
+            {
+              "msg_id": "134100d34fc7423384dd62557bb364a0",
+              "dir": "out",
+              "kind": "text",
+              "ts": "2026-09-14T07:54:36.704928+00:00",
+              "delivered": true,
+              "delivery_state": "delivered",
+              "error": "",
+              "expires_at": "2026-09-14T08:54:36.704928+00:00",
+              "text_digest": "cdf2aeee0fc3b8fdbf42759e3b8dbf5061de010b29e1ada4333d7ea9fe9495ab"
+            },
+            {
+              "msg_id": "0b290e0b38414c86b5edc1370d710e10",
+              "dir": "in",
+              "kind": "text",
+              "ts": "2026-09-14T07:55:21.656220+00:00",
+              "delivered": true,
+              "delivery_state": "delivered",
+              "error": null,
+              "expires_at": null,
+              "text_digest": "ee949f73452c8a45fe27b944e6a58b26eba59beebb9d58225fe52e327ff4bb8e"
+            },
+            {
+              "msg_id": "7aa5c3099cd341e0852b9a5129acd816",
+              "dir": "in",
+              "kind": "text",
+              "ts": "2026-09-14T08:05:50.896930+00:00",
+              "delivered": true,
+              "delivery_state": "delivered",
+              "error": null,
+              "expires_at": null,
+              "text_digest": "38c2ae7f8c3924c653b93daba4b2a9cf6015b949623e3b28eaf6f2d49dc4d4d4"
+            }
+          ],
+          "cards": [
+            {
+              "card_id": "118c80dafcee4f54975b17e985442e75",
+              "dir": "out",
+              "created_at": "2026-09-14T08:05:03.894143+00:00",
+              "fetch_state": null,
+              "fetched_library_id": null,
+              "sha256_verified": null,
+              "delivered": true,
+              "delivery_state": "delivered",
+              "error": ""
+            },
+            {
+              "card_id": "5eeb4fea0c7044b6be02f48b636bc9dd",
+              "dir": "in",
+              "created_at": "2026-09-14T08:04:23.492077+00:00",
+              "fetch_state": "fetched",
+              "fetched_library_id": "import:imp_b85d0b8cfc6c8e1df5980404f83357b7f10e6bf552ea81f2688f8ac5829d1de4",
+              "sha256_verified": true,
+              "delivered": null,
+              "delivery_state": null,
+              "error": null,
+              "body_digest": "b9afc6a95014a89d6ab6ec2666bf0ce1a41c9082a0de6649a4744b9d96bc5db7"
+            }
+          ],
+          "document_count": 1,
+          "reading_count": 1,
+          "model_configured": false
+        }
+      }
+    },
+    {
+      "label": "protected-fetch-before-revoke",
+      "at": "2026-09-14T08:08:08.861940+00:00",
+      "nodes": {
+        "A": {
+          "pid": 44160,
+          "peer_requests": {
+            "/api/peer/friends/accept": 1,
+            "/api/peer/friends/message": 1,
+            "/api/peer/friends/content-card/fetch": 1,
+            "/api/peer/friends/content-card": 1
+          },
+          "outbound_requests": {
+            "/api/peer/ai-access/services": 70,
+            "/api/peer/friends/message": 6,
+            "/api/peer/friends/content-card": 1,
+            "/api/peer/friends/content-card/fetch": 1
+          },
+          "online": true,
+          "friends": [
+            {
+              "relationship_id": "1a2eab35f9ed44d881d22f623336626b",
+              "peer_id": "CjAH/1AShC0Snu8RooGfW8kr8ZUvmZPOdZyvsgxGJJw=",
+              "permissions": [
+                "friend.message",
+                "friend.attachment.small",
+                "friend.content-card"
+              ],
+              "status": "active",
+              "created_at": "2026-09-14T07:54:23.086789+00:00",
+              "revoked_at": null,
+              "revocation_delivery": null
+            }
+          ],
+          "invites": [
+            {
+              "invite_id": "c3f3738dd8b240b3a7502c92d05117c9",
+              "status": "used",
+              "created_at": "2026-09-14T07:50:53.905595+00:00",
+              "expires_at": "2026-09-14T08:05:53.905595+00:00"
+            }
+          ],
+          "messages": [
+            {
+              "msg_id": "134100d34fc7423384dd62557bb364a0",
+              "dir": "in",
+              "kind": "text",
+              "ts": "2026-09-14T07:54:36.704928+00:00",
+              "delivered": true,
+              "delivery_state": "delivered",
+              "error": null,
+              "expires_at": null,
+              "text_digest": "cdf2aeee0fc3b8fdbf42759e3b8dbf5061de010b29e1ada4333d7ea9fe9495ab"
+            },
+            {
+              "msg_id": "0b290e0b38414c86b5edc1370d710e10",
+              "dir": "out",
+              "kind": "text",
+              "ts": "2026-09-14T07:55:21.656220+00:00",
+              "delivered": true,
+              "delivery_state": "delivered",
+              "error": "",
+              "expires_at": "2026-09-14T08:55:21.656220+00:00",
+              "text_digest": "ee949f73452c8a45fe27b944e6a58b26eba59beebb9d58225fe52e327ff4bb8e"
+            },
+            {
+              "msg_id": "7aa5c3099cd341e0852b9a5129acd816",
+              "dir": "out",
+              "kind": "text",
+              "ts": "2026-09-14T08:05:50.896930+00:00",
+              "delivered": true,
+              "delivery_state": "delivered",
+              "error": "",
+              "expires_at": "2026-09-14T09:05:50.896930+00:00",
+              "text_digest": "38c2ae7f8c3924c653b93daba4b2a9cf6015b949623e3b28eaf6f2d49dc4d4d4"
+            }
+          ],
+          "cards": [
+            {
+              "card_id": "118c80dafcee4f54975b17e985442e75",
+              "dir": "in",
+              "created_at": "2026-09-14T08:05:03.894143+00:00",
+              "fetch_state": "fetched",
+              "fetched_library_id": "import:imp_43c54c2c98d70e84921498160f1b6b6facb9ec113bc20f37ac6bb04a3bf5789b",
+              "sha256_verified": true,
+              "delivered": null,
+              "delivery_state": null,
+              "error": null,
+              "body_digest": "b9afc6a95014a89d6ab6ec2666bf0ce1a41c9082a0de6649a4744b9d96bc5db7"
+            },
+            {
+              "card_id": "5eeb4fea0c7044b6be02f48b636bc9dd",
+              "dir": "out",
+              "created_at": "2026-09-14T08:04:23.492077+00:00",
+              "fetch_state": null,
+              "fetched_library_id": null,
+              "sha256_verified": null,
+              "delivered": true,
+              "delivery_state": "delivered",
+              "error": ""
+            }
+          ],
+          "document_count": 2,
+          "reading_count": 2,
+          "model_configured": false
+        },
+        "B": {
+          "pid": 62800,
+          "peer_requests": {
+            "/api/peer/friends/message": 2,
+            "/api/peer/friends/content-card": 1,
+            "/api/peer/friends/content-card/fetch": 1
+          },
+          "outbound_requests": {
+            "/api/peer/friends/accept": 2,
+            "/api/peer/ai-access/services": 68,
+            "/api/peer/friends/message": 1,
+            "/api/peer/friends/content-card/fetch": 1,
+            "/api/peer/friends/content-card": 1
+          },
+          "online": false
+        }
+      },
+      "private_fetch_status": 200
+    },
+    {
+      "label": "revoked-while-recipient-offline",
+      "at": "2026-09-14T08:08:30.472250+00:00",
+      "nodes": {
+        "A": {
+          "pid": 44160,
+          "peer_requests": {
+            "/api/peer/friends/accept": 1,
+            "/api/peer/friends/message": 1,
+            "/api/peer/friends/content-card/fetch": 2,
+            "/api/peer/friends/content-card": 1
+          },
+          "outbound_requests": {
+            "/api/peer/ai-access/services": 71,
+            "/api/peer/friends/message": 6,
+            "/api/peer/friends/content-card": 1,
+            "/api/peer/friends/content-card/fetch": 1,
+            "/api/peer/friends/revoke": 1
+          },
+          "online": true,
+          "friends": [
+            {
+              "relationship_id": "1a2eab35f9ed44d881d22f623336626b",
+              "peer_id": "CjAH/1AShC0Snu8RooGfW8kr8ZUvmZPOdZyvsgxGJJw=",
+              "permissions": [
+                "friend.message",
+                "friend.attachment.small",
+                "friend.content-card"
+              ],
+              "status": "revoked",
+              "created_at": "2026-09-14T07:54:23.086789+00:00",
+              "revoked_at": "2026-09-14T08:08:24.001821+00:00",
+              "revocation_delivery": "pending"
+            }
+          ],
+          "invites": [
+            {
+              "invite_id": "c3f3738dd8b240b3a7502c92d05117c9",
+              "status": "used",
+              "created_at": "2026-09-14T07:50:53.905595+00:00",
+              "expires_at": "2026-09-14T08:05:53.905595+00:00"
+            }
+          ],
+          "messages": [
+            {
+              "msg_id": "134100d34fc7423384dd62557bb364a0",
+              "dir": "in",
+              "kind": "text",
+              "ts": "2026-09-14T07:54:36.704928+00:00",
+              "delivered": true,
+              "delivery_state": "delivered",
+              "error": null,
+              "expires_at": null,
+              "text_digest": "cdf2aeee0fc3b8fdbf42759e3b8dbf5061de010b29e1ada4333d7ea9fe9495ab"
+            },
+            {
+              "msg_id": "0b290e0b38414c86b5edc1370d710e10",
+              "dir": "out",
+              "kind": "text",
+              "ts": "2026-09-14T07:55:21.656220+00:00",
+              "delivered": true,
+              "delivery_state": "delivered",
+              "error": "",
+              "expires_at": "2026-09-14T08:55:21.656220+00:00",
+              "text_digest": "ee949f73452c8a45fe27b944e6a58b26eba59beebb9d58225fe52e327ff4bb8e"
+            },
+            {
+              "msg_id": "7aa5c3099cd341e0852b9a5129acd816",
+              "dir": "out",
+              "kind": "text",
+              "ts": "2026-09-14T08:05:50.896930+00:00",
+              "delivered": true,
+              "delivery_state": "delivered",
+              "error": "",
+              "expires_at": "2026-09-14T09:05:50.896930+00:00",
+              "text_digest": "38c2ae7f8c3924c653b93daba4b2a9cf6015b949623e3b28eaf6f2d49dc4d4d4"
+            }
+          ],
+          "cards": [
+            {
+              "card_id": "118c80dafcee4f54975b17e985442e75",
+              "dir": "in",
+              "created_at": "2026-09-14T08:05:03.894143+00:00",
+              "fetch_state": "fetched",
+              "fetched_library_id": "import:imp_43c54c2c98d70e84921498160f1b6b6facb9ec113bc20f37ac6bb04a3bf5789b",
+              "sha256_verified": true,
+              "delivered": null,
+              "delivery_state": null,
+              "error": null,
+              "body_digest": "b9afc6a95014a89d6ab6ec2666bf0ce1a41c9082a0de6649a4744b9d96bc5db7"
+            },
+            {
+              "card_id": "5eeb4fea0c7044b6be02f48b636bc9dd",
+              "dir": "out",
+              "created_at": "2026-09-14T08:04:23.492077+00:00",
+              "fetch_state": null,
+              "fetched_library_id": null,
+              "sha256_verified": null,
+              "delivered": true,
+              "delivery_state": "delivered",
+              "error": ""
+            }
+          ],
+          "document_count": 2,
+          "reading_count": 2,
+          "model_configured": false
+        },
+        "B": {
+          "pid": 62800,
+          "peer_requests": {
+            "/api/peer/friends/message": 2,
+            "/api/peer/friends/content-card": 1,
+            "/api/peer/friends/content-card/fetch": 1
+          },
+          "outbound_requests": {
+            "/api/peer/friends/accept": 2,
+            "/api/peer/ai-access/services": 68,
+            "/api/peer/friends/message": 1,
+            "/api/peer/friends/content-card/fetch": 1,
+            "/api/peer/friends/content-card": 1
+          },
+          "online": false
+        }
+      },
+      "private_fetch_status": 403
+    },
+    {
+      "label": "revoked-after-sender-restart",
+      "at": "2026-09-14T08:09:15.255448+00:00",
+      "nodes": {
+        "A": {
+          "pid": 56800,
+          "peer_requests": {
+            "/api/peer/friends/accept": 1,
+            "/api/peer/friends/message": 1,
+            "/api/peer/friends/content-card/fetch": 3,
+            "/api/peer/friends/content-card": 1
+          },
+          "outbound_requests": {
+            "/api/peer/ai-access/services": 71,
+            "/api/peer/friends/message": 6,
+            "/api/peer/friends/content-card": 1,
+            "/api/peer/friends/content-card/fetch": 1,
+            "/api/peer/friends/revoke": 3
+          },
+          "online": true,
+          "friends": [
+            {
+              "relationship_id": "1a2eab35f9ed44d881d22f623336626b",
+              "peer_id": "CjAH/1AShC0Snu8RooGfW8kr8ZUvmZPOdZyvsgxGJJw=",
+              "permissions": [
+                "friend.message",
+                "friend.attachment.small",
+                "friend.content-card"
+              ],
+              "status": "revoked",
+              "created_at": "2026-09-14T07:54:23.086789+00:00",
+              "revoked_at": "2026-09-14T08:08:24.001821+00:00",
+              "revocation_delivery": "pending"
+            }
+          ],
+          "invites": [
+            {
+              "invite_id": "c3f3738dd8b240b3a7502c92d05117c9",
+              "status": "used",
+              "created_at": "2026-09-14T07:50:53.905595+00:00",
+              "expires_at": "2026-09-14T08:05:53.905595+00:00"
+            }
+          ],
+          "messages": [
+            {
+              "msg_id": "134100d34fc7423384dd62557bb364a0",
+              "dir": "in",
+              "kind": "text",
+              "ts": "2026-09-14T07:54:36.704928+00:00",
+              "delivered": true,
+              "delivery_state": "delivered",
+              "error": null,
+              "expires_at": null,
+              "text_digest": "cdf2aeee0fc3b8fdbf42759e3b8dbf5061de010b29e1ada4333d7ea9fe9495ab"
+            },
+            {
+              "msg_id": "0b290e0b38414c86b5edc1370d710e10",
+              "dir": "out",
+              "kind": "text",
+              "ts": "2026-09-14T07:55:21.656220+00:00",
+              "delivered": true,
+              "delivery_state": "delivered",
+              "error": "",
+              "expires_at": "2026-09-14T08:55:21.656220+00:00",
+              "text_digest": "ee949f73452c8a45fe27b944e6a58b26eba59beebb9d58225fe52e327ff4bb8e"
+            },
+            {
+              "msg_id": "7aa5c3099cd341e0852b9a5129acd816",
+              "dir": "out",
+              "kind": "text",
+              "ts": "2026-09-14T08:05:50.896930+00:00",
+              "delivered": true,
+              "delivery_state": "delivered",
+              "error": "",
+              "expires_at": "2026-09-14T09:05:50.896930+00:00",
+              "text_digest": "38c2ae7f8c3924c653b93daba4b2a9cf6015b949623e3b28eaf6f2d49dc4d4d4"
+            }
+          ],
+          "cards": [
+            {
+              "card_id": "118c80dafcee4f54975b17e985442e75",
+              "dir": "in",
+              "created_at": "2026-09-14T08:05:03.894143+00:00",
+              "fetch_state": "fetched",
+              "fetched_library_id": "import:imp_43c54c2c98d70e84921498160f1b6b6facb9ec113bc20f37ac6bb04a3bf5789b",
+              "sha256_verified": true,
+              "delivered": null,
+              "delivery_state": null,
+              "error": null,
+              "body_digest": "b9afc6a95014a89d6ab6ec2666bf0ce1a41c9082a0de6649a4744b9d96bc5db7"
+            },
+            {
+              "card_id": "5eeb4fea0c7044b6be02f48b636bc9dd",
+              "dir": "out",
+              "created_at": "2026-09-14T08:04:23.492077+00:00",
+              "fetch_state": null,
+              "fetched_library_id": null,
+              "sha256_verified": null,
+              "delivered": true,
+              "delivery_state": "delivered",
+              "error": ""
+            }
+          ],
+          "document_count": 2,
+          "reading_count": 2,
+          "model_configured": false
+        },
+        "B": {
+          "pid": 62800,
+          "peer_requests": {
+            "/api/peer/friends/message": 2,
+            "/api/peer/friends/content-card": 1,
+            "/api/peer/friends/content-card/fetch": 1
+          },
+          "outbound_requests": {
+            "/api/peer/friends/accept": 2,
+            "/api/peer/ai-access/services": 68,
+            "/api/peer/friends/message": 1,
+            "/api/peer/friends/content-card/fetch": 1,
+            "/api/peer/friends/content-card": 1
+          },
+          "online": false
+        }
+      },
+      "private_fetch_status": 403
+    },
+    {
+      "label": "revocation-delivered-saved-copy-readable",
+      "at": "2026-09-14T08:09:52.075529+00:00",
+      "nodes": {
+        "A": {
+          "pid": 56800,
+          "peer_requests": {
+            "/api/peer/friends/accept": 1,
+            "/api/peer/friends/message": 1,
+            "/api/peer/friends/content-card/fetch": 4,
+            "/api/peer/friends/content-card": 1
+          },
+          "outbound_requests": {
+            "/api/peer/ai-access/services": 71,
+            "/api/peer/friends/message": 6,
+            "/api/peer/friends/content-card": 1,
+            "/api/peer/friends/content-card/fetch": 1,
+            "/api/peer/friends/revoke": 4
+          },
+          "online": true,
+          "friends": [
+            {
+              "relationship_id": "1a2eab35f9ed44d881d22f623336626b",
+              "peer_id": "CjAH/1AShC0Snu8RooGfW8kr8ZUvmZPOdZyvsgxGJJw=",
+              "permissions": [
+                "friend.message",
+                "friend.attachment.small",
+                "friend.content-card"
+              ],
+              "status": "revoked",
+              "created_at": "2026-09-14T07:54:23.086789+00:00",
+              "revoked_at": "2026-09-14T08:08:24.001821+00:00",
+              "revocation_delivery": "delivered"
+            }
+          ],
+          "invites": [
+            {
+              "invite_id": "c3f3738dd8b240b3a7502c92d05117c9",
+              "status": "used",
+              "created_at": "2026-09-14T07:50:53.905595+00:00",
+              "expires_at": "2026-09-14T08:05:53.905595+00:00"
+            }
+          ],
+          "messages": [
+            {
+              "msg_id": "134100d34fc7423384dd62557bb364a0",
+              "dir": "in",
+              "kind": "text",
+              "ts": "2026-09-14T07:54:36.704928+00:00",
+              "delivered": true,
+              "delivery_state": "delivered",
+              "error": null,
+              "expires_at": null,
+              "text_digest": "cdf2aeee0fc3b8fdbf42759e3b8dbf5061de010b29e1ada4333d7ea9fe9495ab"
+            },
+            {
+              "msg_id": "0b290e0b38414c86b5edc1370d710e10",
+              "dir": "out",
+              "kind": "text",
+              "ts": "2026-09-14T07:55:21.656220+00:00",
+              "delivered": true,
+              "delivery_state": "delivered",
+              "error": "",
+              "expires_at": "2026-09-14T08:55:21.656220+00:00",
+              "text_digest": "ee949f73452c8a45fe27b944e6a58b26eba59beebb9d58225fe52e327ff4bb8e"
+            },
+            {
+              "msg_id": "7aa5c3099cd341e0852b9a5129acd816",
+              "dir": "out",
+              "kind": "text",
+              "ts": "2026-09-14T08:05:50.896930+00:00",
+              "delivered": true,
+              "delivery_state": "delivered",
+              "error": "",
+              "expires_at": "2026-09-14T09:05:50.896930+00:00",
+              "text_digest": "38c2ae7f8c3924c653b93daba4b2a9cf6015b949623e3b28eaf6f2d49dc4d4d4"
+            }
+          ],
+          "cards": [
+            {
+              "card_id": "118c80dafcee4f54975b17e985442e75",
+              "dir": "in",
+              "created_at": "2026-09-14T08:05:03.894143+00:00",
+              "fetch_state": "fetched",
+              "fetched_library_id": "import:imp_43c54c2c98d70e84921498160f1b6b6facb9ec113bc20f37ac6bb04a3bf5789b",
+              "sha256_verified": true,
+              "delivered": null,
+              "delivery_state": null,
+              "error": null,
+              "body_digest": "b9afc6a95014a89d6ab6ec2666bf0ce1a41c9082a0de6649a4744b9d96bc5db7"
+            },
+            {
+              "card_id": "5eeb4fea0c7044b6be02f48b636bc9dd",
+              "dir": "out",
+              "created_at": "2026-09-14T08:04:23.492077+00:00",
+              "fetch_state": null,
+              "fetched_library_id": null,
+              "sha256_verified": null,
+              "delivered": true,
+              "delivery_state": "delivered",
+              "error": ""
+            }
+          ],
+          "document_count": 2,
+          "reading_count": 2,
+          "model_configured": false
+        },
+        "B": {
+          "pid": 62988,
+          "peer_requests": {
+            "/api/peer/friends/message": 2,
+            "/api/peer/friends/content-card": 1,
+            "/api/peer/friends/content-card/fetch": 1,
+            "/api/peer/friends/revoke": 1
+          },
+          "outbound_requests": {
+            "/api/peer/friends/accept": 2,
+            "/api/peer/ai-access/services": 68,
+            "/api/peer/friends/message": 1,
+            "/api/peer/friends/content-card/fetch": 1,
+            "/api/peer/friends/content-card": 1
+          },
+          "online": true,
+          "friends": [
+            {
+              "relationship_id": "1a2eab35f9ed44d881d22f623336626b",
+              "peer_id": "ggxogO0APR9vQpwHlRvYZ1kbj4oCV+zR3ELSFgHVNkg=",
+              "permissions": [
+                "friend.message",
+                "friend.attachment.small",
+                "friend.content-card"
+              ],
+              "status": "revoked",
+              "created_at": "2026-09-14T07:54:23.135385+00:00",
+              "revoked_at": "2026-09-14T08:09:22.214657+00:00",
+              "revocation_delivery": null
+            }
+          ],
+          "invites": [],
+          "messages": [
+            {
+              "msg_id": "134100d34fc7423384dd62557bb364a0",
+              "dir": "out",
+              "kind": "text",
+              "ts": "2026-09-14T07:54:36.704928+00:00",
+              "delivered": true,
+              "delivery_state": "delivered",
+              "error": "",
+              "expires_at": "2026-09-14T08:54:36.704928+00:00",
+              "text_digest": "cdf2aeee0fc3b8fdbf42759e3b8dbf5061de010b29e1ada4333d7ea9fe9495ab"
+            },
+            {
+              "msg_id": "0b290e0b38414c86b5edc1370d710e10",
+              "dir": "in",
+              "kind": "text",
+              "ts": "2026-09-14T07:55:21.656220+00:00",
+              "delivered": true,
+              "delivery_state": "delivered",
+              "error": null,
+              "expires_at": null,
+              "text_digest": "ee949f73452c8a45fe27b944e6a58b26eba59beebb9d58225fe52e327ff4bb8e"
+            },
+            {
+              "msg_id": "7aa5c3099cd341e0852b9a5129acd816",
+              "dir": "in",
+              "kind": "text",
+              "ts": "2026-09-14T08:05:50.896930+00:00",
+              "delivered": true,
+              "delivery_state": "delivered",
+              "error": null,
+              "expires_at": null,
+              "text_digest": "38c2ae7f8c3924c653b93daba4b2a9cf6015b949623e3b28eaf6f2d49dc4d4d4"
+            }
+          ],
+          "cards": [
+            {
+              "card_id": "118c80dafcee4f54975b17e985442e75",
+              "dir": "out",
+              "created_at": "2026-09-14T08:05:03.894143+00:00",
+              "fetch_state": null,
+              "fetched_library_id": null,
+              "sha256_verified": null,
+              "delivered": true,
+              "delivery_state": "delivered",
+              "error": ""
+            },
+            {
+              "card_id": "5eeb4fea0c7044b6be02f48b636bc9dd",
+              "dir": "in",
+              "created_at": "2026-09-14T08:04:23.492077+00:00",
+              "fetch_state": "fetched",
+              "fetched_library_id": "import:imp_b85d0b8cfc6c8e1df5980404f83357b7f10e6bf552ea81f2688f8ac5829d1de4",
+              "sha256_verified": true,
+              "delivered": null,
+              "delivery_state": null,
+              "error": null,
+              "body_digest": "b9afc6a95014a89d6ab6ec2666bf0ce1a41c9082a0de6649a4744b9d96bc5db7"
+            }
+          ],
+          "document_count": 1,
+          "reading_count": 1,
+          "model_configured": false
+        }
+      }
+    }
+  ]
+}

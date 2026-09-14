@@ -1,0 +1,13 @@
+{
+  "verified_at": "2026-09-11T16:06:57.555183+00:00",
+  "environment": "Windows loopback HTTP with live workers",
+  "initial_results": 3,
+  "damaged_results": 2,
+  "healthy_results_retained": true,
+  "damaged_result_open_denied": true,
+  "saved_document_warning_returned": true,
+  "fixture_metadata_restoration_recovered_all_results": true,
+  "warning_cleared": true,
+  "remote_requests_for_repair": false,
+  "packaged_desktop": false
+}

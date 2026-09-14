@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "started_at": "2026-09-14T06:08:57.984382+00:00",
+  "passed": false,
+  "scope": "isolated real TCP processes, HTTP registry mailbox, deterministic local article source",
+  "not_proven": [
+    "desktop installation/UI",
+    "different public network exits",
+    "mailbox quota/expiry failures",
+    "full privacy export audit"
+  ],
+  "checks": [
+    {
+      "name": "cancelled_invite_and_offline_local_preview",
+      "result": "passed"
+    },
+    {
+      "name": "concurrent_accept_one_relationship_and_retry",
+      "result": "passed",
+      "invite_to_accept_seconds": 1.906
+    },
+    {
+      "name": "bidirectional_text_attachment_and_dedup",
+      "result": "passed",
+      "accept_to_confirm_seconds": 1.188
+    },
+    {
+      "name": "read_save_share_explicit_fetch_and_share_back",
+      "result": "passed",
+      "body_sha256": "2ddae3d2d0b8dbfd1be287d726032b6c0591b07e2bd453095293f35a61cc4fc8"
+    },
+    {
+      "name": "real_http_mailbox_receiver_confirmation_and_process_restart",
+      "result": "passed"
+    }
+  ],
+  "finished_at": "2026-09-14T06:09:29.669591+00:00"
+}

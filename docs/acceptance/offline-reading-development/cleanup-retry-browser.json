@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "date": "2026-09-11",
+  "environment": "Windows, synthetic loopback node and origin, in-app browser, final production Vite assets",
+  "assets": ["index-BQGjKKFQ.js", "index-LzLFuvnz.css"],
+  "steps": [
+    {"action": "Select the synthetic garden article and download it from Offline reading", "observed": "The article reaches partial: verified body and one PNG, with a deliberately missing second image."},
+    {"action": "Hold its actual encrypted JSON file with Windows CreateFileW, sharing reads/writes but not deletion", "observed": "The file remains readable for review, but unlink fails while the owned helper handle is open."},
+    {"action": "Review this download; Tab from Cancel and press Enter to confirm", "observed": "The UI reports failure, focuses the error, displays File cleanup unfinished and disables starting another cleanup. The old body is unavailable in the reader and disk usage still includes its file."},
+    {"action": "Stop the node and source, restart with the same synthetic directory, reload the browser", "observed": "The persisted unfinished cleanup and Continue file cleanup action return without reconstructing a review."},
+    {"action": "Download the same article again while the old file is still held open", "observed": "A new job and file become readable. The old pending file remains protected from generic download GC."},
+    {"action": "Release the Windows helper handle and Continue file cleanup", "observed": "Only the original file is removed. The unfinished panel disappears, result focus is restored and the new copy remains available."},
+    {"action": "Open the retained new offline copy", "observed": "The content dialog contains the synthetic article body and one local image."},
+    {"action": "Replay the original completed request over HTTP and verify local file hashes", "observed": "The original result is returned; the new copy's ciphertext is unchanged. See cleanup-retry-http.json."},
+    {"action": "Close the acceptance tab and stop the restarted server", "observed": "The two owned server sessions, file-holding helper and browser tab are terminal/closed."}
+  ],
+  "limits": [
+    "Synthetic data, Windows file-sharing failure and loopback networking",
+    "Changed-file reapproval is covered by backend and frontend tests, not this browser sequence",
+    "No packaged desktop, cross-NAT or complete data-maintenance acceptance"
+  ]
+}

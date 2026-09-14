@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "scenario": "synthetic-privacy-node-product-export",
+  "transport": "loopback HTTP with the production route package",
+  "scopes": [
+    "first_reading",
+    "reading",
+    "conversations",
+    "friends",
+    "friend_feed",
+    "saved_documents",
+    "offline_reading",
+    "devices",
+    "ai_permissions"
+  ],
+  "files": 11,
+  "zip_bytes": 5674,
+  "uncompressed_bytes": 7945,
+  "elapsed_seconds": 0.031,
+  "zip_and_all_file_hashes_verified": true,
+  "conversation_draft_and_recovery_present": true,
+  "limits": [
+    "Synthetic data",
+    "No packaged desktop or remote-device export acceptance",
+    "Binary download read over HTTP; no claim about the browser download folder"
+  ]
+}

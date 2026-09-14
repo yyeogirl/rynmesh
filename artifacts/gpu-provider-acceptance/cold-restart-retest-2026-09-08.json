@@ -1,0 +1,68 @@
+{
+  "checked_at": "2026-09-08T10:21:00+08:00",
+  "server": {
+    "public_endpoint": "117.50.189.73:3000",
+    "public_health": "ok",
+    "gpu": "Tesla V100S-PCIE-32GB",
+    "gpu_memory_mib": 32768,
+    "cuda_available": true
+  },
+  "process_supervision": {
+    "manager": "supervisor",
+    "autostart": true,
+    "autorestart": true,
+    "programs": {
+      "rynmesh-llm-runtime": "RUNNING",
+      "rynmesh-provider-gateway": "RUNNING",
+      "rynmesh-provider-node": "RUNNING"
+    },
+    "provider_failure_recovery": {
+      "old_pid": 354,
+      "new_pid": 379,
+      "result": "automatically_restarted"
+    }
+  },
+  "strict_p2p_after_supervisor_restart": {
+    "task_id": "task_c32ac6c2a35444fe8cd3def4c071fe01",
+    "state": "succeeded",
+    "model_output": "严格 P2P 最终验收通过",
+    "transport": "ice_udp_direct",
+    "relay_used": false,
+    "provider_public_candidate": "117.50.189.73:3000",
+    "duration_ms": 80693,
+    "request_bytes": 987,
+    "response_bytes": 952
+  },
+  "full_video_after_cloud_start": {
+    "job_id": "vid_7dbff0240bed442a926cdb94e09bec2c",
+    "state": "succeeded",
+    "model": "Wan2.1-T2V-1.3B",
+    "resolution": "480x272",
+    "frames": 33,
+    "steps": 20,
+    "duration_seconds": 4.125,
+    "generation_seconds": 75.37,
+    "bytes": 20615,
+    "sha256": "17741918e1122c75384bc95072a676bdc20d5fca8f0717b97da0490032f14481",
+    "local_file": "retest-2026-09-08.mp4"
+  },
+  "video_after_supervisor_restart": {
+    "job_id": "vid_15d5b0ff4a524b90881d67c9c44cea1f",
+    "state": "succeeded",
+    "model": "Wan2.1-T2V-1.3B",
+    "resolution": "480x272",
+    "frames": 5,
+    "steps": 2,
+    "duration_seconds": 0.625,
+    "generation_seconds": 58.962,
+    "bytes": 6622,
+    "sha256": "54e60e561ea0afcf89d56888cf1349d3080ec096a5fb63242cce1dd2676c3e9b",
+    "local_file": "retest-supervisor-2026-09-08.mp4"
+  },
+  "verification": {
+    "video_health": "ok",
+    "video_pipeline_loaded": true,
+    "pytest": "77 passed",
+    "ruff": "clean"
+  }
+}

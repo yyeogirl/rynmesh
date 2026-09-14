@@ -3,13 +3,15 @@
 from __future__ import annotations
 
 import hashlib
-import json
-import os
 import random
 import re
+import threading
+import uuid
 from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any, Mapping
+
+from .atomic_io import atomic_write_json, migration_backup, read_json
 
 __all__ = [
     "PLATFORM_CHOICES",
@@ -72,11 +74,12 @@ def _now() -> str:
 
 def _defaults() -> dict[str, Any]:
     return {
-        "version": 1,
+        "version": 2,
         "direction": "",
         "topics": [],
         "platforms": [],
         "feedback": {},
+        "feedback_events": [],
         "updated_at": "",
     }
 
@@ -92,18 +95,29 @@ class RecommendationProfileStore:
 
     def __init__(self, path: str | Path) -> None:
         self.path = Path(path)
+        self._lock = threading.RLock()
 
     def get(self) -> dict[str, Any]:
+        with self._lock:
+            return self._get()
+
+    def _get(self) -> dict[str, Any]:
         data = _defaults()
-        try:
-            loaded = json.loads(self.path.read_text(encoding="utf-8"))
-        except (OSError, ValueError):
-            loaded = {}
+        loaded = read_json(self.path) if self.path.exists() else {}
+        if not isinstance(loaded, dict):
+            raise ValueError("recommendation_profile_invalid")
+        version = loaded.get("version", 1)
+        if type(version) is not int or version not in {1, 2}:
+            raise ValueError("recommendation_profile_version_unsupported")
         if isinstance(loaded, dict):
+            data.update(loaded)  # Retain extension fields through edits and migration.
+            data["version"] = 2
             data["direction"] = str(loaded.get("direction", "") or "")[:2000]
             data["topics"] = _clean_ids(loaded.get("topics"), _TOPICS)
             data["platforms"] = _clean_ids(loaded.get("platforms"), _PLATFORMS)
             feedback = loaded.get("feedback", {})
+            if not isinstance(feedback, dict):
+                raise ValueError("recommendation_profile_invalid")
             if isinstance(feedback, dict):
                 data["feedback"] = {
                     str(key)[:256]: dict(value)
@@ -111,13 +125,49 @@ class RecommendationProfileStore:
                     if isinstance(value, dict) and value.get("action") in _ACTIONS
                 }
             data["updated_at"] = str(loaded.get("updated_at", "") or "")
+        if version == 1:
+            data["feedback_events"] = [
+                {**record, "event_id": "legacy-" + hashlib.sha256(key.encode()).hexdigest()[:32],
+                 "content_id": key, "title": key, "undone_at": "", "migrated": True}
+                for key, record in data["feedback"].items()
+            ]
+            if len(data["feedback_events"]) > 10000:
+                raise ValueError("recommendation_history_full")
+            if self.path.exists():
+                if migration_backup(self.path) is None:
+                    raise OSError("recommendation_migration_backup_failed")
+                self._write(data)
+        events = data.get("feedback_events")
+        if not isinstance(events, list) or len(events) > 10000 or any(
+            not isinstance(event, dict) or not event.get("event_id")
+            or not event.get("content_id") or event.get("action") not in _ACTIONS
+            for event in events
+        ):
+            raise ValueError("recommendation_history_invalid")
+        data["feedback"] = self._active(events)
         return data
+
+    @staticmethod
+    def _active(events: list[dict[str, Any]]) -> dict[str, Any]:
+        active: dict[str, Any] = {}
+        for event in events:
+            if event.get("undone_at"):
+                continue
+            content_id = event["content_id"]
+            if event["action"] == "neutral":
+                active.pop(content_id, None)
+            else:
+                active[content_id] = event
+        return active
 
     def public(self) -> dict[str, Any]:
         data = self.get()
         signals = self.signals(data)
         return {
-            **data,
+            **{key: data[key] for key in _defaults() if key not in {"feedback_events", "feedback"}},
+            "feedback": {key: {field: record.get(field) for field in (
+                "event_id", "action", "tags", "publisher", "platform", "updated_at"
+            )} for key, record in data["feedback"].items()},
             "topic_choices": list(TOPIC_CHOICES),
             "platform_choices": list(PLATFORM_CHOICES),
             "learned_signals": len(signals["tag_weights"]),
@@ -125,6 +175,10 @@ class RecommendationProfileStore:
         }
 
     def patch(self, patch: Mapping[str, Any]) -> dict[str, Any]:
+        with self._lock:
+            return self._patch(patch)
+
+    def _patch(self, patch: Mapping[str, Any]) -> dict[str, Any]:
         data = self.get()
         if "direction" in patch:
             data["direction"] = str(patch.get("direction", "") or "").strip()[:2000]
@@ -138,22 +192,34 @@ class RecommendationProfileStore:
 
     def clear(self) -> dict[str, Any]:
         """Erase all explicit and learned recommendation preferences."""
-        self._write(_defaults())
-        return self.public()
+        with self._lock:
+            self.get()  # Never erase an unsupported future record.
+            self._write(_defaults())
+            self.path.with_name(self.path.name + ".migrated").unlink(missing_ok=True)
+            return self.public()
 
     def feedback(self, item: Mapping[str, Any], action: str) -> dict[str, Any]:
+        with self._lock:
+            return self._feedback(item, action)
+
+    def _feedback(self, item: Mapping[str, Any], action: str) -> dict[str, Any]:
         action = str(action or "").strip().lower()
         if action not in _ACTIONS:
             raise ValueError("recommendation_feedback_action_invalid")
         content_id = str(item.get("content_id", "") or "")
-        if not content_id:
+        if not content_id or len(content_id) > 256:
             raise ValueError("recommendation_content_id_required")
         data = self.get()
-        if action == "neutral":
-            data["feedback"].pop(content_id, None)
-        else:
-            tags = item.get("tags", [])
-            data["feedback"][content_id] = {
+        current = data["feedback"].get(content_id)
+        if (current and current["action"] == action) or (not current and action == "neutral"):
+            return self.public()  # Retry after a lost reply must not duplicate a signal.
+        if len(data["feedback_events"]) >= 10000:
+            raise ValueError("recommendation_history_full")
+        tags = item.get("tags", [])
+        data["feedback_events"].append({
+                "event_id": uuid.uuid4().hex,
+                "content_id": content_id,
+                "title": str(item.get("title", "") or content_id)[:500],
                 "action": action,
                 "tags": [str(tag)[:64] for tag in tags if str(tag).strip()][:32]
                 if isinstance(tags, list)
@@ -161,10 +227,43 @@ class RecommendationProfileStore:
                 "publisher": str(item.get("publisher_peer_id", "") or "")[:256],
                 "platform": str(item.get("source_platform", "") or "")[:64],
                 "updated_at": _now(),
-            }
+                "undone_at": "",
+            })
+        data["feedback"] = self._active(data["feedback_events"])
         data["updated_at"] = _now()
         self._write(data)
         return self.public()
+
+    def history(self, *, offset: int = 0, limit: int = 50) -> dict[str, Any]:
+        data = self.get()
+        active_ids = {event["event_id"] for event in data["feedback"].values()}
+        records = []
+        for event in reversed(data["feedback_events"]):
+            active = event["event_id"] in active_ids
+            # Never expose unknown stored fields as explanation metadata.
+            row = {key: event.get(key, "") for key in (
+                "event_id", "content_id", "title", "action", "updated_at", "undone_at",
+                "publisher", "platform",
+            )}
+            row.update(tags=event.get("tags", []), active=active,
+                       migrated=bool(event.get("migrated")))
+            records.append(row)
+        return {"items": records[offset:offset + limit], "total": len(records),
+                "offset": offset, "limit": limit}
+
+    def undo(self, event_id: str) -> dict[str, Any]:
+        with self._lock:
+            data = self.get()
+            event = next((event for event in data["feedback_events"]
+                          if event["event_id"] == event_id), None)
+            if event is None:
+                raise ValueError("recommendation_feedback_not_found")
+            if not event.get("undone_at"):
+                event["undone_at"] = _now()
+                data["updated_at"] = event["undone_at"]
+                data["feedback"] = self._active(data["feedback_events"])
+                self._write(data)
+            return self.public()
 
     def signals(self, data: Mapping[str, Any] | None = None) -> dict[str, Any]:
         profile = dict(data or self.get())
@@ -223,10 +322,7 @@ class RecommendationProfileStore:
         }
 
     def _write(self, data: Mapping[str, Any]) -> None:
-        self.path.parent.mkdir(parents=True, exist_ok=True)
-        tmp = self.path.with_suffix(self.path.suffix + ".tmp")
-        tmp.write_text(json.dumps(dict(data), indent=2, sort_keys=True), encoding="utf-8")
-        os.replace(tmp, self.path)
+        atomic_write_json(self.path, dict(data), indent=2, sort_keys=True)
 
 
 _STARTERS: tuple[dict[str, Any], ...] = (

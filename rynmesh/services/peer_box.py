@@ -34,19 +34,42 @@ def public_key_b64(priv: X25519PrivateKey) -> str:
     return base64.b64encode(priv.public_key().public_bytes_raw()).decode("ascii")
 
 
-def _shared(priv: X25519PrivateKey, their_pub_b64: str) -> bytes:
+def _shared(priv: X25519PrivateKey, their_pub_b64: str, info: bytes = _INFO) -> bytes:
     their_pub = X25519PublicKey.from_public_bytes(base64.b64decode(their_pub_b64))
     raw = priv.exchange(their_pub)
-    return HKDF(algorithm=hashes.SHA256(), length=32, salt=None, info=_INFO).derive(raw)
+    return HKDF(algorithm=hashes.SHA256(), length=32, salt=None, info=info).derive(raw)
 
 
-def seal(priv: X25519PrivateKey, their_pub_b64: str, plaintext: bytes) -> tuple[str, str]:
+def seal(
+    priv: X25519PrivateKey,
+    their_pub_b64: str,
+    plaintext: bytes,
+    *,
+    info: bytes = _INFO,
+) -> tuple[str, str]:
+    """Seal for `their_pub_b64`. `info` domain-separates one channel from another.
+
+    The default is the direct peer-message channel. A caller that seals for a
+    different channel (the registry-hosted mailbox, say) passes its own label so
+    a ciphertext captured on one channel cannot be replayed into the other: the
+    HKDF output differs, so the AEAD open fails.
+    """
+
     nonce = os.urandom(12)
-    ct = ChaCha20Poly1305(_shared(priv, their_pub_b64)).encrypt(nonce, plaintext, None)
+    ct = ChaCha20Poly1305(_shared(priv, their_pub_b64, info)).encrypt(nonce, plaintext, None)
     return base64.b64encode(nonce).decode("ascii"), base64.b64encode(ct).decode("ascii")
 
 
-def open_sealed(priv: X25519PrivateKey, their_pub_b64: str, nonce_b64: str, ct_b64: str) -> bytes:
-    return ChaCha20Poly1305(_shared(priv, their_pub_b64)).decrypt(
+def open_sealed(
+    priv: X25519PrivateKey,
+    their_pub_b64: str,
+    nonce_b64: str,
+    ct_b64: str,
+    *,
+    info: bytes = _INFO,
+) -> bytes:
+    """Open a message sealed with the same `info` label. Others fail to decrypt."""
+
+    return ChaCha20Poly1305(_shared(priv, their_pub_b64, info)).decrypt(
         base64.b64decode(nonce_b64), base64.b64decode(ct_b64), None
     )

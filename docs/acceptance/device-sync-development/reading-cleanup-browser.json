@@ -1,0 +1,28 @@
+{
+  "date": "2026-09-11",
+  "environment": "Windows, isolated loopback node, Codex in-app browser",
+  "data": "Synthetic reading acceptance records only",
+  "final_assets": ["index-Be0ZAEmm.js", "index-LzLFuvnz.css"],
+  "checks": [
+    "Settings > Privacy & data exposes reviewed reading cleanup instead of the live legacy clear-history button",
+    "Initial review showed one local item, no opted-in sync entries, and one impending migration backup",
+    "Keyboard opened confirmation, cancelled without clearing, then confirmed; all four steps completed",
+    "A Windows handle without delete sharing held an explicitly named reading atomic orphan",
+    "Second cleanup committed source and replica, then reported unfinished backups/search; reading count refreshed from one to zero",
+    "Node was stopped and restarted with the same isolated home while the file handle remained open",
+    "A new bookmark using the same item identity was created after the source step",
+    "Pending steps survived restart; a changed backup was rejected until reviewed again",
+    "Reapproval of the current backup version remained unfinished while the file was held open",
+    "Fixed confirmation focus restoration and verified the persistent error retained keyboard focus after the dialog closed",
+    "Releasing the handle and continuing the existing job completed backups and search",
+    "My reading > Saved content still showed the new bookmark after cleanup"
+  ],
+  "limitations": [
+    "No packaged desktop, physical second device or cross-NAT validation",
+    "This flow does not erase saved documents, offline article files, browser copies or remote devices",
+    "Unseen concurrent remote reading edits remain subject to explicit conflict handling"
+  ],
+  "owned_browser_closed": true,
+  "owned_nodes_stopped": true,
+  "held_file_handle_released": true
+}

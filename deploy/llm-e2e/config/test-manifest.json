@@ -1,0 +1,21 @@
+{
+  "package_id": "e2e-test-service",
+  "mode": "openai_compatible",
+  "public_model_alias": "rynmesh-test-adapter",
+  "adapter": "openai_compatible",
+  "runtime": "external",
+  "base_url": "http://test-llm:8080",
+  "allow_non_loopback": true,
+  "model": "rynmesh-test-adapter",
+  "capabilities": ["text-generation"],
+  "context_window": 2048,
+  "max_output_tokens": 128,
+  "max_concurrent": 1,
+  "queue_limit": 0,
+  "timeout_seconds": 30,
+  "pricing": {"currency": "DEV_TASK_BALANCE", "input_per_1k": 0.001, "output_per_1k": 0.002, "minimum": 0.001, "maximum_per_task": 1.0},
+  "privacy": {"log_bodies": false, "temporary_storage": false, "retention_seconds": 0, "compute_node_sees_plaintext": true, "policy_text": "Test-only adapter; no prompt/response logs."},
+  "risk_labels": ["deterministic-test-adapter", "not-real-inference"],
+  "content_rules": "Automated tests only.",
+  "license_id": "MIT-test-code"
+}

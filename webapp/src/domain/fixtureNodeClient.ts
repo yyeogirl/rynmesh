@@ -3,6 +3,7 @@ import type {
   ActivityEvent,
   ContentFilters,
   ContentItem,
+  FirstSuccessStatus,
   NodeSettings,
   Peer,
   PeerFilters,
@@ -969,6 +970,25 @@ export function makeFixtureNodeClient(): NodeClient {
     connectedAt: null, uptimeSeconds: null,
   };
   let _autoUpdate = true;
+  let firstSuccess: FirstSuccessStatus = {
+    version: "ryn.first-success.v1",
+    phase: "ready",
+    completed: false,
+    dismissed: false,
+    node_ready: true,
+    content_ready: true,
+    item_count: RECOMMENDATIONS.length,
+    healthy_sources: 4,
+    source_count: 4,
+    failed_sources: 0,
+    degraded: false,
+    using_cache: false,
+    first_item_opened: false,
+    first_signal_recorded: false,
+    milestones: { node_ready: Date.now() / 1000, content_ready: Date.now() / 1000 },
+    safe_error: null,
+    recoverable_actions: [],
+  };
 
   return {
     mode: "fixture",
@@ -1039,6 +1059,137 @@ export function makeFixtureNodeClient(): NodeClient {
       await delay();
       return [];
     },
+    async listLLMServices() {
+      await delay();
+      return [{
+        peer_id: "peer:fixture-llm-provider",
+        node_name: "Fixture LLM provider",
+        online: true,
+        capacity: { available: 1, max_concurrent: 1, running: 0 },
+        benchmark: { latency_ms: 12, tokens_per_second: 42 },
+        service: {
+          package_id: "fixture-local-llm",
+          model_alias: "fixture-private-model",
+          capabilities: ["text-generation"],
+          context_window: 2048,
+          max_output_tokens: 128,
+          pricing: {
+            currency: "DEV_TASK_BALANCE",
+            input_per_1k: 0.001,
+            output_per_1k: 0.002,
+            minimum: 0.001,
+            maximum_per_task: 1,
+          },
+          privacy: { policy_text: "Fixture only; compute node sees plaintext.", compute_node_sees_plaintext: true },
+          risk_labels: ["fixture"],
+        },
+      }];
+    },
+    async getLLMServiceStatus() {
+      await delay();
+      return { configured: false, online: false };
+    },
+    async publishLLMService() {
+      await delay();
+      return { ok: true };
+    },
+    async pauseLLMService() {
+      await delay();
+      return { configured: true, online: false, publication_enabled: false };
+    },
+    async setupLLMService() {
+      await delay();
+      return { configured: true, publication_enabled: false };
+    },
+    async startLLMSetup() {
+      await delay();
+      return { job_id: "setup_fixture", state: "succeeded", stage: "completed", progress: 100 };
+    },
+    async getLLMSetupStatus() {
+      await delay();
+      return { job_id: "setup_fixture", state: "succeeded", stage: "completed", progress: 100 };
+    },
+    async cancelLLMSetup(jobId) {
+      await delay();
+      return { job_id: jobId, state: "cancelled", stage: "cancelled", progress: 0 };
+    },
+    async getLLMHardware() {
+      await delay();
+      return {
+        // The fixture node has no LLM configured yet, so the bundled runtime
+        // is downloadable (`available`) but not installed (`present`). The
+        // two fields are deliberately different: the setup panel must report
+        // what is on the device, not what could be fetched.
+        hardware: { native_runtime_available: true, native_runtime_present: false },
+        recommendations: [
+          {
+            profile: "light", can_run: true, display_name: "Light",
+            estimated_memory_mb: 2048, estimated_disk_mb: 3200, recommended: false,
+          },
+          {
+            profile: "balanced", can_run: true, display_name: "Balanced",
+            estimated_memory_mb: 4096, estimated_disk_mb: 6400, recommended: true,
+          },
+          {
+            profile: "quality", can_run: true, display_name: "Quality",
+            estimated_memory_mb: 8192, estimated_disk_mb: 12800, recommended: false,
+          },
+        ],
+      };
+    },
+    async runLLMServiceAction(action) {
+      await delay();
+      return { ok: true, action };
+    },
+    async getTaskBalance() {
+      await delay();
+      return { currency: "DEV_TASK_BALANCE", available: 100, held: 0, earned: 0 };
+    },
+    async submitLLMOrder(req) {
+      await delay();
+      return {
+        task_id: `task_fixture_${Math.random().toString(16).slice(2, 10)}`,
+        state: "succeeded",
+        output: `Fixture response for: ${req.prompt.slice(0, 40)}`,
+        model_alias: "fixture-private-model",
+        input_tokens: 8,
+        output_tokens: 8,
+        duration_ms: 12,
+        amount: 0.001,
+        transport: req.transport === "relay" ? "encrypted_relay"
+          : req.transport === "p2p" ? "ice_udp_direct" : "peer_http_direct",
+      };
+    },
+    async getLLMOrder(taskId) {
+      await delay();
+      return { task_id: taskId, state: "succeeded", output: "Fixture completed response" };
+    },
+    async cancelLLMOrder(taskId) {
+      await delay();
+      return { task_id: taskId, state: "cancelled" };
+    },
+    async listLLMOrders() {
+      await delay();
+      return [];
+    },
+    async getLLMPrivacy() {
+      await delay();
+      return {
+        result_retention_seconds: 3600 as const, plaintext_persisted: false,
+        stored_results_encrypted: true, compute_node_sees_plaintext: true,
+      };
+    },
+    async updateLLMPrivacy(resultRetentionSeconds) {
+      await delay();
+      return {
+        result_retention_seconds: resultRetentionSeconds, plaintext_persisted: false,
+        stored_results_encrypted: true, compute_node_sees_plaintext: true,
+      };
+    },
+    async clearLLMOrders() {
+      await delay();
+      return { ok: true, removed: 0 };
+    },
     async discoverPeers() {
       await delay();
       return PEERS;
@@ -1090,6 +1241,53 @@ export function makeFixtureNodeClient(): NodeClient {
       await delay();
       const limit = req?.limit ?? RECOMMENDATIONS.length;
       return RECOMMENDATIONS.slice(0, limit);
+    },
+    async getFirstSuccess() {
+      await delay();
+      return { ...firstSuccess, milestones: { ...firstSuccess.milestones } };
+    },
+    async dismissFirstSuccess() {
+      await delay();
+      firstSuccess = { ...firstSuccess, dismissed: true };
+      return firstSuccess;
+    },
+    async resetFirstSuccess() {
+      await delay();
+      firstSuccess = {
+        ...firstSuccess,
+        phase: "ready",
+        completed: false,
+        dismissed: false,
+        first_item_opened: false,
+        first_signal_recorded: false,
+        milestones: { node_ready: Date.now() / 1000, content_ready: Date.now() / 1000 },
+      };
+      return firstSuccess;
+    },
+    async recordContentConsumption(_item, action) {
+      await delay();
+      const now = Date.now() / 1000;
+      if (action === "opened") {
+        firstSuccess = {
+          ...firstSuccess,
+          phase: firstSuccess.first_signal_recorded ? "completed" : "awaiting_signal",
+          first_item_opened: true,
+          completed: firstSuccess.first_signal_recorded,
+          milestones: { ...firstSuccess.milestones, first_item_opened: now },
+        };
+      } else if (action === "bookmark" || action === "completed") {
+        firstSuccess = {
+          ...firstSuccess,
+          phase: firstSuccess.first_item_opened ? "completed" : firstSuccess.phase,
+          first_signal_recorded: true,
+          completed: firstSuccess.first_item_opened,
+          milestones: {
+            ...firstSuccess.milestones,
+            first_signal_recorded: now,
+            ...(firstSuccess.first_item_opened ? { completed: now } : {}),
+          },
+        };
+      }
     },
     async getRecommendationProfile() {
       await delay();

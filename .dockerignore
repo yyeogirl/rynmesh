@@ -1,6 +1,5 @@
 # Keep the rynnet build context small (context = repo root).
 .git
-webapp
 **/node_modules
 **/target
 .venv

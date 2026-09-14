@@ -1,0 +1,387 @@
+{
+  "recorded_at": "2026-09-11T03:28:13.158716+00:00",
+  "scope": "Two independent loopback node processes and browser UIs with real native llama.cpp; not packaged desktop or cross-NAT acceptance",
+  "provider_peer_id": "31QPVqwHR8puKwMvslGKIWcZC9eYhFZCt+H8D6qi4YA=",
+  "friend_peer_id": "AWpRUOLDUFIIltmBOMfXGhogITa+MEKsP5GrQN3xyuM=",
+  "relationship_id": "c59a20f6e9f74c1783c7ac53ab2ac14c",
+  "conversation": {
+    "id": "076a51e9-d465-4683-b612-91a34abb22c8",
+    "title": "只回答数字：7加8等于多少？",
+    "serviceKey": "31QPVqwHR8puKwMvslGKIWcZC9eYhFZCt+H8D6qi4YA=::local-small",
+    "serviceName": "rynmesh-qwen2.5-0.5b-q4",
+    "providerPeerId": "31QPVqwHR8puKwMvslGKIWcZC9eYhFZCt+H8D6qi4YA=",
+    "networkId": "rynmesh-main",
+    "createdAt": "2026-09-11T03:19:34.965Z",
+    "updatedAt": "2026-09-11T03:22:53.374169+00:00",
+    "messages": [
+      {
+        "id": "question_task_920cbff9492b4bafb2bdd8ef2c390fdb",
+        "role": "user",
+        "content": "只回答数字：7加8等于多少？",
+        "createdAt": "2026-09-11T03:20:04.048044+00:00",
+        "status": "complete",
+        "taskId": "task_920cbff9492b4bafb2bdd8ef2c390fdb"
+      },
+      {
+        "id": "answer_task_920cbff9492b4bafb2bdd8ef2c390fdb",
+        "role": "assistant",
+        "content": "15",
+        "createdAt": "2026-09-11T03:20:04.048044+00:00",
+        "status": "complete",
+        "taskId": "task_920cbff9492b4bafb2bdd8ef2c390fdb",
+        "inputTokens": 83,
+        "outputTokens": 3,
+        "cost": 0.001,
+        "contextIds": [],
+        "contextBytes": [],
+        "promptSha256": "11a88af13655389e19bdfc3cdc883d712d486196c74b80e240e430b63c6b151d"
+      },
+      {
+        "id": "question_task_6568caab041644409e96f00724afa668",
+        "role": "user",
+        "content": "请按顺序列出从1到300的所有整数，每行一个数字，不要解释。",
+        "createdAt": "2026-09-11T03:22:46.356376+00:00",
+        "status": "complete",
+        "taskId": "task_6568caab041644409e96f00724afa668"
+      },
+      {
+        "id": "answer_task_6568caab041644409e96f00724afa668",
+        "role": "assistant",
+        "content": "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 6",
+        "createdAt": "2026-09-11T03:22:46.356376+00:00",
+        "status": "complete",
+        "taskId": "task_6568caab041644409e96f00724afa668",
+        "inputTokens": 117,
+        "outputTokens": 256,
+        "cost": 0.001,
+        "contextIds": [],
+        "contextBytes": [],
+        "promptSha256": "9415d6e4fd8372d9455536c8de61223f1cef197cf322cc437b1b0f7040d74506"
+      }
+    ],
+    "revision": 7,
+    "draft": ""
+  },
+  "provider_grant_after": {
+    "service_id": "local-small",
+    "relationship_id": "c59a20f6e9f74c1783c7ac53ab2ac14c",
+    "peer_id": "AWpRUOLDUFIIltmBOMfXGhogITa+MEKsP5GrQN3xyuM=",
+    "allowed": false,
+    "revision": 4,
+    "effective": false
+  },
+  "inflight_revocation": {
+    "conversation_id": "70d6a90b-4ca3-462b-8d21-c518ef748125",
+    "task_id": "task_41c24435d69548339b2426a9379c9c3a",
+    "observed_before_revocation": {
+      "state": "running",
+      "at": "2026-09-11T03:26:47.488927+00:00"
+    },
+    "permission_used": {
+      "relationship_id": "c59a20f6e9f74c1783c7ac53ab2ac14c",
+      "revision": 3
+    },
+    "revocation": {
+      "grant": {
+        "service_id": "local-small",
+        "relationship_id": "c59a20f6e9f74c1783c7ac53ab2ac14c",
+        "peer_id": "AWpRUOLDUFIIltmBOMfXGhogITa+MEKsP5GrQN3xyuM=",
+        "allowed": false,
+        "revision": 4,
+        "effective": false
+      },
+      "cancellation": "requested"
+    },
+    "final_run": {
+      "task_id": "task_41c24435d69548339b2426a9379c9c3a",
+      "conversation_id": "70d6a90b-4ca3-462b-8d21-c518ef748125",
+      "state": "cancelled",
+      "cancel_requested": false,
+      "error_code": "consumer_cancelled"
+    },
+    "provider_final_state": "cancelled",
+    "provider_capacity_after": {
+      "max_concurrent": 2,
+      "running": 0,
+      "available": 2,
+      "queue_limit": 0,
+      "queue_policy": "reject_when_full"
+    }
+  },
+  "revoked_request": {
+    "task_id": "task_de94e0509bcf44029582c7663656b653",
+    "state": "rejected",
+    "error_code": "ai_permission_denied",
+    "service_id": "local-small"
+  },
+  "rejected_before_provider_order_creation": true,
+  "repeat_confirmation_did_not_change_balance": true,
+  "provider_balance": {
+    "version": "rynmesh-dev-task-balance-view-v2",
+    "development_only": true,
+    "available": 100.0,
+    "held": 0.0,
+    "earned": 0.002,
+    "currency": "DEV_TASK_BALANCE",
+    "ledger_backed": true,
+    "events": [
+      {
+        "kind": "hold",
+        "task_id": "task_6d9807f2fd7743df8b8651a091b4de03",
+        "amount": 0.0,
+        "service_id": "local-small",
+        "state": "held"
+      },
+      {
+        "kind": "settle",
+        "task_id": "task_6d9807f2fd7743df8b8651a091b4de03",
+        "amount": 0.0,
+        "service_id": "local-small"
+      },
+      {
+        "kind": "hold",
+        "task_id": "task_322dc750bac54ed4a74efc9d68a02d19",
+        "amount": 0.0,
+        "service_id": "local-small",
+        "state": "held"
+      },
+      {
+        "kind": "settle",
+        "task_id": "task_322dc750bac54ed4a74efc9d68a02d19",
+        "amount": 0.0,
+        "service_id": "local-small"
+      },
+      {
+        "kind": "hold",
+        "task_id": "task_2fabba6c36bc4fb4b5350f599476ed76",
+        "amount": 0.0,
+        "service_id": "local-small",
+        "state": "held"
+      },
+      {
+        "kind": "settle",
+        "task_id": "task_2fabba6c36bc4fb4b5350f599476ed76",
+        "amount": 0.0,
+        "service_id": "local-small"
+      },
+      {
+        "kind": "hold",
+        "task_id": "task_711139240a1b4fb8ac6f3fa2744b8d6d",
+        "amount": 0.0,
+        "service_id": "local-small",
+        "state": "held"
+      },
+      {
+        "kind": "settle",
+        "task_id": "task_711139240a1b4fb8ac6f3fa2744b8d6d",
+        "amount": 0.0,
+        "service_id": "local-small"
+      },
+      {
+        "kind": "hold",
+        "task_id": "task_285857c229c8462caa60ec17fd1e84f3",
+        "amount": 0.0,
+        "service_id": "local-small",
+        "state": "held"
+      },
+      {
+        "kind": "settle",
+        "task_id": "task_285857c229c8462caa60ec17fd1e84f3",
+        "amount": 0.0,
+        "service_id": "local-small"
+      },
+      {
+        "kind": "hold",
+        "task_id": "task_eb832547a6bf47138348ba34cceeacf6",
+        "amount": 0.0,
+        "service_id": "local-small",
+        "state": "held"
+      },
+      {
+        "kind": "settle",
+        "task_id": "task_eb832547a6bf47138348ba34cceeacf6",
+        "amount": 0.0,
+        "service_id": "local-small"
+      },
+      {
+        "kind": "earning",
+        "task_id": "task_920cbff9492b4bafb2bdd8ef2c390fdb",
+        "amount": 0.001,
+        "service_id": "local-small"
+      },
+      {
+        "kind": "earning",
+        "task_id": "task_6568caab041644409e96f00724afa668",
+        "amount": 0.001,
+        "service_id": "local-small"
+      }
+    ]
+  },
+  "consumer_balance": {
+    "version": "rynmesh-dev-task-balance-view-v2",
+    "development_only": true,
+    "available": 99.998,
+    "held": 0.0,
+    "earned": 0.0,
+    "currency": "DEV_TASK_BALANCE",
+    "ledger_backed": true,
+    "events": [
+      {
+        "kind": "hold",
+        "task_id": "task_920cbff9492b4bafb2bdd8ef2c390fdb",
+        "amount": 0.001,
+        "service_id": "local-small",
+        "state": "held"
+      },
+      {
+        "kind": "settle",
+        "task_id": "task_920cbff9492b4bafb2bdd8ef2c390fdb",
+        "amount": 0.001,
+        "service_id": "local-small"
+      },
+      {
+        "kind": "hold",
+        "task_id": "task_6568caab041644409e96f00724afa668",
+        "amount": 0.001,
+        "service_id": "local-small",
+        "state": "held"
+      },
+      {
+        "kind": "settle",
+        "task_id": "task_6568caab041644409e96f00724afa668",
+        "amount": 0.001,
+        "service_id": "local-small"
+      },
+      {
+        "kind": "hold",
+        "task_id": "task_41c24435d69548339b2426a9379c9c3a",
+        "amount": 0.001,
+        "service_id": "local-small",
+        "state": "held"
+      },
+      {
+        "kind": "release",
+        "task_id": "task_41c24435d69548339b2426a9379c9c3a",
+        "amount": 0.001
+      }
+    ]
+  },
+  "network_registry": "separate private local file registries",
+  "gpu_immediate_stop_confirmed": false,
+  "restart_verification": {
+    "at": "2026-09-11T03:37:47.624824+00:00",
+    "previous_node_pids": [
+      37032,
+      42396
+    ],
+    "restarted_node_pids": [
+      25320,
+      38428
+    ],
+    "previous_node_and_runtime_ports_confirmed_closed": [
+      18846,
+      18847,
+      18848
+    ],
+    "grant": {
+      "service_id": "local-small",
+      "relationship_id": "c59a20f6e9f74c1783c7ac53ab2ac14c",
+      "peer_id": "AWpRUOLDUFIIltmBOMfXGhogITa+MEKsP5GrQN3xyuM=",
+      "allowed": false,
+      "revision": 4,
+      "effective": false
+    },
+    "friend_catalog_status": "revoked",
+    "revoked_request": {
+      "task_id": "task_e059643c27f244a6ad6354e3b2d97d",
+      "state": "rejected",
+      "error_code": "ai_permission_denied",
+      "service_id": "local-small"
+    },
+    "browser_history_readable": true,
+    "browser_original_answer": "15",
+    "browser_revocation_message": "Your friend revoked AI access. Ask them before requesting a new grant.",
+    "provider_services": [
+      {
+        "configured": true,
+        "ready": true,
+        "service": {
+          "package_id": "local-small",
+          "version": "0.1.0",
+          "protocol_version": "rynmesh.llm.task.v1",
+          "adapter": "openai_compatible",
+          "runtime": "native_llama_cpp",
+          "model_alias": "rynmesh-qwen2.5-0.5b-q4",
+          "capabilities": [
+            "text-generation",
+            "chat_messages_v1"
+          ],
+          "context_window": 4096,
+          "max_output_tokens": 256,
+          "max_concurrent": 2,
+          "queue_limit": 0,
+          "timeout_seconds": 120.0,
+          "hardware_requirements": {
+            "estimated_memory_mb": 900
+          },
+          "pricing": {
+            "currency": "DEV_TASK_BALANCE",
+            "input_per_1k": 0,
+            "output_per_1k": 0,
+            "minimum": 0,
+            "maximum_per_task": 1.0
+          },
+          "privacy": {
+            "log_bodies": false,
+            "temporary_storage": false,
+            "retention_seconds": 0,
+            "compute_node_sees_plaintext": true,
+            "policy_text": "No prompt/response logging; plaintext exists at the compute node during inference."
+          },
+          "healthcheck": {
+            "enabled": true
+          },
+          "license_id": "Apache-2.0",
+          "license_notice": "Qwen2.5 and llama.cpp are Apache-2.0; review their notices before use.",
+          "risk_labels": [],
+          "content_rules": "Provider-defined content policy applies.",
+          "model_fingerprint": "sha256:74a4da8c9fdbcd15bd1f6d01d621410d31c6fc00986f5eb687824e7b93d7a9db"
+        },
+        "online": true,
+        "accepting_orders": false,
+        "access_policy": "explicit_friends",
+        "health": {
+          "ok": true,
+          "model_count": 1,
+          "model": "rynmesh-qwen2.5-0.5b-q4",
+          "latency_ms": 16
+        },
+        "capacity": {
+          "max_concurrent": 2,
+          "running": 0,
+          "available": 2,
+          "queue_limit": 0,
+          "queue_policy": "reject_when_full"
+        },
+        "node_messaging_pub": "+7zd6dzPgw7dVZakELTI13XF+WIrMBI5lIXmcp1JoQg=",
+        "peer_id": "31QPVqwHR8puKwMvslGKIWcZC9eYhFZCt+H8D6qi4YA=",
+        "node_name": "This device",
+        "access": "self",
+        "updated_at": "2026-09-11T03:37:47.513714+00:00"
+      }
+    ]
+  },
+  "cleanup": {
+    "node_pids_stopped": [
+      25320,
+      38428
+    ],
+    "node_and_native_runtime_ports_confirmed_closed": [
+      18846,
+      18847,
+      18848
+    ],
+    "acceptance_browser_tabs_closed": true,
+    "downloaded_model_preserved": true
+  }
+}

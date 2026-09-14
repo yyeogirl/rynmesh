@@ -1,0 +1,24 @@
+{
+  "commit": "04d94f21fb702ffe0ac9ed596ccb56e681e578f4",
+  "ui_asset": "index-DaWWiomT.js",
+  "scope": "Installed wheel, Windows in-app browser, synthetic isolated source records; real Windows file handle failure",
+  "steps": [
+    "Enter review; focus enters region",
+    "Tab to clear then cancel; Enter cancels and restores focus",
+    "Hold migration backup without Windows delete sharing; Enter clear fails and error receives focus",
+    "Restart same node and reload; review shows 2 original cards, 1 remaining legacy file, resuming true",
+    "Release file handle; Tab/Enter resumes; local completion receives focus; remote remains unconfirmed"
+  ],
+  "current_cards": 0,
+  "backup_cards": 0,
+  "legacy_file_bytes": 0,
+  "retained_deletion_identifiers": 2,
+  "pending": false,
+  "independent_document_preserved": true,
+  "independent_document_sha256": "3a49d905ab7b5c44d95448f60f98224d3fc694cbad14e952cfdefc0f572c8f34",
+  "remote_confirmed": false,
+  "limits": [
+    "No remote erasure claim",
+    "Old encrypted delivery replay tested by real-crypto integration tests, not a second browser fault injection"
+  ]
+}

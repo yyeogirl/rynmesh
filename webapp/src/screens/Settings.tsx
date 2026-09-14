@@ -1,12 +1,19 @@
 import { Activity, BellRing, Cloud, Download, DownloadCloud, HardDrive, History, Network, Save, ShieldCheck, SlidersHorizontal, Sparkles, Trash2 } from "lucide-react";
 import type { ReactNode } from "react";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import { useAppContext } from "../appContext";
 import { Button, Chip, KV, LoadingPanel, PageHeader, Panel } from "../components/ui";
 import type { NodeClient } from "../domain/nodeClient";
 import { requestDesktopNotificationPermission, sendTestNotification } from "../domain/notifications";
 import AccessPanel from "./components/AccessPanel";
 import LocalModelPicker from "./components/LocalModelPicker";
+import PrivateCopiesPanel from "./components/PrivateCopiesPanel";
+import ConversationCleanupPanel from "./components/ConversationCleanupPanel";
+import BrowserConversationCleanup from "./components/BrowserConversationCleanup";
+import ProductExportPanel from "./components/ProductExportPanel";
+import ReadingCleanupPanel from "./components/ReadingCleanupPanel";
+import FeedCleanupPanel from "./components/FeedCleanupPanel";
 import type { ActivityEvent, NodeSettings, PrivacyEraseScope, PrivacyStatus, UpdateStatus } from "../domain/types";
 
 const sections = [
@@ -25,12 +32,30 @@ export default function Settings() {
   const { client, confirm, notify, refreshShell } = useAppContext();
   const [active, setActive] = useState<(typeof sections)[number]>("Identity & storage");
   const [settings, setSettings] = useState<NodeSettings | null>(null);
+  const [loadError, setLoadError] = useState("");
+  const [loadAttempt, setLoadAttempt] = useState(0);
+  const loadResult = useRef<HTMLParagraphElement>(null);
+  const [privacyRevision, setPrivacyRevision] = useState(0);
+  const readingChanged = useCallback(() => setPrivacyRevision((value) => value + 1), []);
 
   useEffect(() => {
-    void client.getSettings().then(setSettings);
-  }, [client]);
+    let active = true;
+    setSettings(null);
+    setLoadError("");
+    void client.getSettings().then((value) => {
+      if (active) setSettings(value);
+    }).catch(() => {
+      if (active) setLoadError("Settings could not be loaded. Check the local node connection, then retry.");
+    });
+    return () => { active = false; };
+  }, [client, loadAttempt]);
 
-  if (!settings) return <LoadingPanel />;
+  useEffect(() => { if (loadError) loadResult.current?.focus(); }, [loadError]);
+
+  if (!settings) return loadError ? <Panel>
+    <p ref={loadResult} tabIndex={-1} role="alert">{loadError}</p>
+    <Button onClick={() => { setLoadError(""); setLoadAttempt((value) => value + 1); }}>Retry settings</Button>
+  </Panel> : <LoadingPanel />;
 
   const update = async (patch: Partial<NodeSettings>) => {
     const next = await client.updateSettings(patch);
@@ -57,6 +82,7 @@ export default function Settings() {
         actions={<Chip tone="info">local control API</Chip>}
       />
       <aside className="settings-rail">
+        <Link to="/devices">My devices</Link>
         {sections.map((section) => (
           <button key={section} type="button" className={active === section ? "active" : ""} onClick={() => setActive(section)}>
             {section}
@@ -76,7 +102,7 @@ export default function Settings() {
           <NotificationsSection settings={settings} onUpdate={update} notify={notify} />
         ) : null}
         {active === "Privacy & data" ? (
-          <PrivacySection client={client} confirm={confirm} notify={notify} />
+          <><PrivacySection client={client} confirm={confirm} notify={notify} revision={privacyRevision} />{client.mode === "live" ? <><ProductExportPanel /><ReadingCleanupPanel onChange={readingChanged} /><FeedCleanupPanel /></> : null}<ConversationCleanupPanel /><BrowserConversationCleanup /></>
         ) : null}
         {active === "Ranking & publish" ? <RankingSection settings={settings} onUpdate={update} /> : null}
         {active === "Fetch limits" ? <FetchSection settings={settings} onUpdate={update} /> : null}
@@ -86,41 +112,64 @@ export default function Settings() {
   );
 }
 
-function PrivacySection({
+export function PrivacySection({
   client,
   confirm,
   notify,
+  revision,
 }: {
   client: NodeClient;
   confirm: ReturnType<typeof useAppContext>["confirm"];
   notify: (tone: "ok" | "warn" | "danger", text: string) => void;
+  revision: number;
 }) {
   const [status, setStatus] = useState<PrivacyStatus | null>(null);
   const [events, setEvents] = useState<ActivityEvent[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [loadError, setLoadError] = useState("");
+  const [exporting, setExporting] = useState(false);
+  const [exportError, setExportError] = useState("");
+  const [exportNotice, setExportNotice] = useState("");
+  const exportPending = useRef(false);
+  const exportResult = useRef<HTMLParagraphElement>(null);
 
-  const reload = async () => {
-    const [nextStatus, nextEvents] = await Promise.all([
-      client.getPrivacyStatus(),
-      client.getActivity(),
-    ]);
-    setStatus(nextStatus);
-    setEvents(nextEvents);
-  };
+  const reload = useCallback(async () => {
+    setLoading(true); setLoadError("");
+    try {
+      const [nextStatus, nextEvents] = await Promise.all([
+        client.getPrivacyStatus(), client.getActivity(),
+      ]);
+      setStatus(nextStatus); setEvents(nextEvents);
+    } catch {
+      setLoadError("The local data summary could not be refreshed. Check the node connection and retry.");
+    } finally { setLoading(false); }
+  }, [client]);
 
   useEffect(() => {
     void reload();
-  }, [client]);
+  }, [reload, revision]);
+
+  useEffect(() => { if (exportError || exportNotice) exportResult.current?.focus(); }, [exportError, exportNotice]);
 
   const download = async () => {
-    const payload = await client.exportPersonalData();
-    const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
-    const url = URL.createObjectURL(blob);
-    const anchor = document.createElement("a");
-    anchor.href = url;
-    anchor.download = `ryn-personal-data-${new Date().toISOString().slice(0, 10)}.json`;
-    anchor.click();
-    URL.revokeObjectURL(url);
-    notify("ok", "Personal data export created locally");
+    if (exportPending.current) return;
+    exportPending.current = true;
+    setExporting(true); setExportError(""); setExportNotice("");
+    try {
+      const payload = await client.exportPersonalData();
+      const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const revoke = URL.revokeObjectURL.bind(URL);
+      try {
+        const anchor = document.createElement("a");
+        anchor.href = url;
+        anchor.download = `ryn-personal-data-${new Date().toISOString().slice(0, 10)}.json`;
+        anchor.click();
+      } finally { window.setTimeout(() => revoke(url), 1000); }
+      setExportNotice("Reading and preferences export prepared; download requested. Check your browser downloads.");
+    } catch {
+      setExportError("The node did not return a complete reading and preferences export. Check the connection and retry.");
+    } finally { exportPending.current = false; setExporting(false); }
   };
 
   const erase = (scopes: PrivacyEraseScope[], title: string, body: string) => {
@@ -130,7 +179,8 @@ function PrivacySection({
       risk: "high",
       confirmLabel: "Erase local data",
       onConfirm: async () => {
-        await client.erasePersonalData(scopes);
+        try { await client.erasePersonalData(scopes); }
+        catch { throw new Error("The selected data could not be fully erased. Check the node connection and storage access, then retry. Some steps may already have completed."); }
         await reload();
         notify("ok", "Selected personal data erased from this node");
       },
@@ -142,8 +192,8 @@ function PrivacySection({
       <div className="privacy-local-callout">
         <HardDrive size={18} />
         <span>
-          <b>Your profile, history, cached reading, and audit trail stay on this node.</b>
-          <small>Public content discovery contacts the listed source sites. AI metadata leaves the device only when you explicitly enable cloud access.</small>
+          <b>Manage this node's profile, reading history, cached content and audit trail.</b>
+          <small>Discovery contacts your chosen source sites. Sharing, device sync and AI requests have their own permissions.</small>
         </span>
       </div>
       {status ? (
@@ -155,14 +205,16 @@ function PrivacySection({
           { label: "Assistant audit", value: `${status.audit_events} events` },
           { label: "Cloud AI", value: status.cloud_ai_enabled ? "enabled" : "disabled" },
         ]} />
-      ) : <p className="muted">Inspecting local data…</p>}
+      ) : loading ? <p className="muted">Inspecting local data…</p> : null}
+      {loadError ? <p role="alert">{loadError} <Button disabled={loading} onClick={() => void reload()}>Retry data summary</Button></p> : null}
+      <p ref={exportResult} tabIndex={-1} role={exportError ? "alert" : "status"}>{exportError || exportNotice}</p>
       <div className="button-row">
-        <Button icon={Download} variant="primary" onClick={() => void download()}>
-          Export my data
+        <Button icon={Download} variant="primary" disabled={exporting} onClick={() => void download()}>
+          {exporting ? "Preparing reading export…" : "Export reading & preferences (JSON)"}
         </Button>
-        <Button icon={History} onClick={() => erase(["history"], "Clear reading history?", "This erases opened items, bookmarks, playback position, and reading progress from this node.")}>
+        {client.mode !== "live" ? <Button icon={History} onClick={() => erase(["history"], "Clear reading history?", "This erases opened items, bookmarks, playback position, and reading progress from this node.")}>
           Clear history
-        </Button>
+        </Button> : null}
         <Button icon={Trash2} onClick={() => erase(["profile"], "Reset recommendation learning?", "This erases your direction, topic and platform choices, and all more/less/hide feedback.")}>
           Reset learning
         </Button>
@@ -174,6 +226,7 @@ function PrivacySection({
         </Button>
       </div>
       <div className="privacy-audit">
+        {client.mode === "live" ? <PrivateCopiesPanel /> : null}
         <div className="privacy-audit-head"><Activity size={16} /><b>Recent assistant activity</b></div>
         {events.slice(0, 8).map((event) => (
           <div className="privacy-audit-row" key={event.id ?? `${event.t}-${event.text}`}>

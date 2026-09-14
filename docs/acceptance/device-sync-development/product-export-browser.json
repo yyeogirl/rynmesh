@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "date": "2026-09-11",
+  "environment": "Windows, isolated synthetic node, loopback HTTP, in-app browser, production Vite assets",
+  "initial_asset": "index-DzMYXO39.js",
+  "final_assets": ["index-DiKyx6M3.js", "index-LzLFuvnz.css"],
+  "steps": [
+    {"action": "Open Settings then Privacy & data", "observed": "Nine product export scopes and a separate reading/preferences JSON button are visible."},
+    {"action": "Uncheck Friend AI permission choices; Tab and Enter on exclusions", "observed": "Selection changes, exclusion list opens by keyboard and names credentials, other devices and browser copies."},
+    {"action": "Tab and Enter on ZIP download", "observed": "The node returns an archive; the UI reports download requested and moves focus to the result. Browser download-folder persistence is not claimed."},
+    {"action": "Inspect scope layout", "observed": "Initial checkboxes inherited full-width input styling. Added explicit 16px sizing and reloaded the final production assets."},
+    {"action": "Inspect corrected layout", "observed": "All nine checkboxes measure 16px by 16px; labels are adjacent and readable in the 1280px desktop viewport. Document client width is 1265px and scroll width is 1266px, retaining the existing 1px overflow."},
+    {"action": "Stop the owned acceptance node, then keyboard-trigger export", "observed": "An error reports no complete export, focus moves to the error, and the eight selected scopes remain selected. No success result is shown."},
+    {"action": "Restart the same synthetic node and retry from the page", "observed": "The same selected scopes export successfully without reloading; focus moves to the download-requested result."},
+    {"action": "Close the acceptance tab and stop the restarted node", "observed": "Both owned server sessions terminated and the isolated browser tab closed."}
+  ],
+  "http_archive_integrity_evidence": "product-export-http.json",
+  "limits": [
+    "Synthetic node data; no model required or provider invoked",
+    "No claim that a browser save dialog or download folder was verified",
+    "No packaged desktop, physical remote-device or cross-NAT acceptance",
+    "No full privacy-erasure or all-requirements acceptance"
+  ]
+}

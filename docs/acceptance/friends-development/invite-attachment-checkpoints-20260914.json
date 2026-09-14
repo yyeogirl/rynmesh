@@ -1,0 +1,1173 @@
+{
+  "scope": "Windows browser and three independent loopback nodes; no preseeded relationships/messages; no mailbox server",
+  "checkpoints": [
+    {
+      "label": "before-race",
+      "at": "2026-09-14T11:10:12.462928+00:00",
+      "nodes": {
+        "A": {
+          "friends": [],
+          "invites": [
+            {
+              "invite_id": "a895fead4843445d822406912b576b6e",
+              "status": "active",
+              "created_at": "2026-09-14T11:06:36.836554+00:00",
+              "expires_at": "2026-09-14T11:21:36.836554+00:00"
+            },
+            {
+              "invite_id": "b1ddfdc7164d4ff7817c9d51914e55a9",
+              "status": "cancelled",
+              "created_at": "2026-09-14T11:07:36.273472+00:00",
+              "expires_at": "2026-09-14T11:22:36.273472+00:00"
+            },
+            {
+              "invite_id": "eb2970b096bc456388e9325840b5c090",
+              "status": "active",
+              "created_at": "2026-09-14T11:08:32.743740+00:00",
+              "expires_at": "2026-09-14T11:23:32.743740+00:00"
+            }
+          ],
+          "messages": []
+        },
+        "B": {
+          "friends": [],
+          "invites": [],
+          "messages": []
+        },
+        "C": {
+          "friends": [],
+          "invites": [],
+          "messages": []
+        }
+      }
+    },
+    {
+      "label": "after-race",
+      "at": "2026-09-14T11:10:50.967614+00:00",
+      "nodes": {
+        "A": {
+          "friends": [
+            {
+              "peer_id": "W4tcv/oApKSZvAy5fitRs5ODXDovdz008+/FBIKb7S0=",
+              "node_name": "Invite acceptance C",
+              "relationship_id": "d25d5d17f0fa446fbde505ef4cfb635c",
+              "permissions": [
+                "friend.message",
+                "friend.attachment.small",
+                "friend.content-card"
+              ],
+              "status": "active"
+            }
+          ],
+          "invites": [
+            {
+              "invite_id": "a895fead4843445d822406912b576b6e",
+              "status": "active",
+              "created_at": "2026-09-14T11:06:36.836554+00:00",
+              "expires_at": "2026-09-14T11:21:36.836554+00:00"
+            },
+            {
+              "invite_id": "b1ddfdc7164d4ff7817c9d51914e55a9",
+              "status": "cancelled",
+              "created_at": "2026-09-14T11:07:36.273472+00:00",
+              "expires_at": "2026-09-14T11:22:36.273472+00:00"
+            },
+            {
+              "invite_id": "eb2970b096bc456388e9325840b5c090",
+              "status": "used",
+              "created_at": "2026-09-14T11:08:32.743740+00:00",
+              "expires_at": "2026-09-14T11:23:32.743740+00:00"
+            }
+          ],
+          "messages": []
+        },
+        "B": {
+          "friends": [],
+          "invites": [],
+          "messages": []
+        },
+        "C": {
+          "friends": [
+            {
+              "peer_id": "Hgrcmc6hOapgKiChYwrKSBIPeORSKNh2ZVkFFHveIEI=",
+              "node_name": "Invite acceptance A",
+              "relationship_id": "d25d5d17f0fa446fbde505ef4cfb635c",
+              "permissions": [
+                "friend.message",
+                "friend.attachment.small",
+                "friend.content-card"
+              ],
+              "status": "active"
+            }
+          ],
+          "invites": [],
+          "messages": []
+        }
+      }
+    },
+    {
+      "label": "oversize-blocked",
+      "at": "2026-09-14T11:11:56.067975+00:00",
+      "nodes": {
+        "A": {
+          "friends": [
+            {
+              "peer_id": "W4tcv/oApKSZvAy5fitRs5ODXDovdz008+/FBIKb7S0=",
+              "node_name": "Invite acceptance C",
+              "relationship_id": "d25d5d17f0fa446fbde505ef4cfb635c",
+              "permissions": [
+                "friend.message",
+                "friend.attachment.small",
+                "friend.content-card"
+              ],
+              "status": "active"
+            }
+          ],
+          "invites": [
+            {
+              "invite_id": "a895fead4843445d822406912b576b6e",
+              "status": "active",
+              "created_at": "2026-09-14T11:06:36.836554+00:00",
+              "expires_at": "2026-09-14T11:21:36.836554+00:00"
+            },
+            {
+              "invite_id": "b1ddfdc7164d4ff7817c9d51914e55a9",
+              "status": "cancelled",
+              "created_at": "2026-09-14T11:07:36.273472+00:00",
+              "expires_at": "2026-09-14T11:22:36.273472+00:00"
+            },
+            {
+              "invite_id": "eb2970b096bc456388e9325840b5c090",
+              "status": "used",
+              "created_at": "2026-09-14T11:08:32.743740+00:00",
+              "expires_at": "2026-09-14T11:23:32.743740+00:00"
+            }
+          ],
+          "messages": []
+        },
+        "B": {
+          "friends": [],
+          "invites": [],
+          "messages": []
+        },
+        "C": {
+          "friends": [
+            {
+              "peer_id": "Hgrcmc6hOapgKiChYwrKSBIPeORSKNh2ZVkFFHveIEI=",
+              "node_name": "Invite acceptance A",
+              "relationship_id": "d25d5d17f0fa446fbde505ef4cfb635c",
+              "permissions": [
+                "friend.message",
+                "friend.attachment.small",
+                "friend.content-card"
+              ],
+              "status": "active"
+            }
+          ],
+          "invites": [],
+          "messages": []
+        }
+      }
+    },
+    {
+      "label": "attachments-and-repeat",
+      "at": "2026-09-14T11:14:50.998369+00:00",
+      "nodes": {
+        "A": {
+          "friends": [
+            {
+              "peer_id": "W4tcv/oApKSZvAy5fitRs5ODXDovdz008+/FBIKb7S0=",
+              "node_name": "Invite acceptance C",
+              "relationship_id": "d25d5d17f0fa446fbde505ef4cfb635c",
+              "permissions": [
+                "friend.message",
+                "friend.attachment.small",
+                "friend.content-card"
+              ],
+              "status": "active"
+            }
+          ],
+          "invites": [
+            {
+              "invite_id": "a895fead4843445d822406912b576b6e",
+              "status": "active",
+              "created_at": "2026-09-14T11:06:36.836554+00:00",
+              "expires_at": "2026-09-14T11:21:36.836554+00:00"
+            },
+            {
+              "invite_id": "b1ddfdc7164d4ff7817c9d51914e55a9",
+              "status": "cancelled",
+              "created_at": "2026-09-14T11:07:36.273472+00:00",
+              "expires_at": "2026-09-14T11:22:36.273472+00:00"
+            },
+            {
+              "invite_id": "eb2970b096bc456388e9325840b5c090",
+              "status": "used",
+              "created_at": "2026-09-14T11:08:32.743740+00:00",
+              "expires_at": "2026-09-14T11:23:32.743740+00:00"
+            }
+          ],
+          "messages": [
+            {
+              "msg_id": "35279d65e2364e7c945ecc7e8ab3c1e3",
+              "dir": "out",
+              "kind": "file",
+              "delivered": true,
+              "delivery_state": "delivered",
+              "error": "",
+              "attachment": {
+                "blob_id": "363e90de50fe0271bcabe2d620fad0fff6f505db4abaeeb8c187f2a8dab4c8c9",
+                "filename": "friend-note-20260914-a.txt",
+                "mime": "text/plain",
+                "size": 71
+              }
+            },
+            {
+              "msg_id": "c3dcf03eda414cc6a0c5094c594e465c",
+              "dir": "in",
+              "kind": "file",
+              "delivered": true,
+              "delivery_state": "delivered",
+              "error": null,
+              "attachment": {
+                "blob_id": "715087370c7332ecd058ee925627e881e3db37959bc29f6e61f49a3b07fd3e56",
+                "filename": "friend-note-20260914-b.bin",
+                "mime": "application/octet-stream",
+                "size": 2048
+              }
+            },
+            {
+              "msg_id": "eb9bc22d345c49619b30ee9817d03848",
+              "dir": "out",
+              "kind": "file",
+              "delivered": true,
+              "delivery_state": "delivered",
+              "error": "",
+              "attachment": {
+                "blob_id": "2bd51644fd9cbd97bd41626e153a4aaf228eda55adc61b9a50304a9162e4a455",
+                "filename": "friend-limit-20260914.bin",
+                "mime": "application/octet-stream",
+                "size": 5242880
+              }
+            }
+          ]
+        },
+        "B": {
+          "friends": [],
+          "invites": [],
+          "messages": []
+        },
+        "C": {
+          "friends": [
+            {
+              "peer_id": "Hgrcmc6hOapgKiChYwrKSBIPeORSKNh2ZVkFFHveIEI=",
+              "node_name": "Invite acceptance A",
+              "relationship_id": "d25d5d17f0fa446fbde505ef4cfb635c",
+              "permissions": [
+                "friend.message",
+                "friend.attachment.small",
+                "friend.content-card"
+              ],
+              "status": "active"
+            }
+          ],
+          "invites": [],
+          "messages": [
+            {
+              "msg_id": "35279d65e2364e7c945ecc7e8ab3c1e3",
+              "dir": "in",
+              "kind": "file",
+              "delivered": true,
+              "delivery_state": "delivered",
+              "error": null,
+              "attachment": {
+                "blob_id": "363e90de50fe0271bcabe2d620fad0fff6f505db4abaeeb8c187f2a8dab4c8c9",
+                "filename": "friend-note-20260914-a.txt",
+                "mime": "text/plain",
+                "size": 71
+              }
+            },
+            {
+              "msg_id": "c3dcf03eda414cc6a0c5094c594e465c",
+              "dir": "out",
+              "kind": "file",
+              "delivered": true,
+              "delivery_state": "delivered",
+              "error": "",
+              "attachment": {
+                "blob_id": "715087370c7332ecd058ee925627e881e3db37959bc29f6e61f49a3b07fd3e56",
+                "filename": "friend-note-20260914-b.bin",
+                "mime": "application/octet-stream",
+                "size": 2048
+              }
+            },
+            {
+              "msg_id": "eb9bc22d345c49619b30ee9817d03848",
+              "dir": "in",
+              "kind": "file",
+              "delivered": true,
+              "delivery_state": "delivered",
+              "error": null,
+              "attachment": {
+                "blob_id": "2bd51644fd9cbd97bd41626e153a4aaf228eda55adc61b9a50304a9162e4a455",
+                "filename": "friend-limit-20260914.bin",
+                "mime": "application/octet-stream",
+                "size": 5242880
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "label": "replacement-recovered",
+      "at": "2026-09-14T11:21:03.455844+00:00",
+      "nodes": {
+        "A": {
+          "friends": [
+            {
+              "peer_id": "OU7a2f/AMXG4X64YM4A+Ctxe2auP+CtaviqlFhlGkSc=",
+              "node_name": "Invite acceptance B",
+              "relationship_id": "13c22a73ebfb4e799bd1dd3b8e85178a",
+              "permissions": [
+                "friend.message",
+                "friend.attachment.small",
+                "friend.content-card"
+              ],
+              "status": "active"
+            },
+            {
+              "peer_id": "W4tcv/oApKSZvAy5fitRs5ODXDovdz008+/FBIKb7S0=",
+              "node_name": "Invite acceptance C",
+              "relationship_id": "d25d5d17f0fa446fbde505ef4cfb635c",
+              "permissions": [
+                "friend.message",
+                "friend.attachment.small",
+                "friend.content-card"
+              ],
+              "status": "active"
+            }
+          ],
+          "invites": [
+            {
+              "invite_id": "4d36a7b79b46447f81e1b9817531fcf5",
+              "status": "used",
+              "created_at": "2026-09-14T11:20:29.071483+00:00",
+              "expires_at": "2026-09-14T11:35:29.071483+00:00"
+            },
+            {
+              "invite_id": "a895fead4843445d822406912b576b6e",
+              "status": "active",
+              "created_at": "2026-09-14T11:06:36.836554+00:00",
+              "expires_at": "2026-09-14T11:21:36.836554+00:00"
+            },
+            {
+              "invite_id": "b1ddfdc7164d4ff7817c9d51914e55a9",
+              "status": "cancelled",
+              "created_at": "2026-09-14T11:07:36.273472+00:00",
+              "expires_at": "2026-09-14T11:22:36.273472+00:00"
+            },
+            {
+              "invite_id": "eb2970b096bc456388e9325840b5c090",
+              "status": "used",
+              "created_at": "2026-09-14T11:08:32.743740+00:00",
+              "expires_at": "2026-09-14T11:23:32.743740+00:00"
+            }
+          ],
+          "messages": [
+            {
+              "msg_id": "e1dd15ea76ad445db79973dec056e059",
+              "dir": "in",
+              "kind": "text",
+              "delivered": true,
+              "delivery_state": "delivered",
+              "error": null,
+              "attachment": null
+            },
+            {
+              "msg_id": "35279d65e2364e7c945ecc7e8ab3c1e3",
+              "dir": "out",
+              "kind": "file",
+              "delivered": true,
+              "delivery_state": "delivered",
+              "error": "",
+              "attachment": {
+                "blob_id": "363e90de50fe0271bcabe2d620fad0fff6f505db4abaeeb8c187f2a8dab4c8c9",
+                "filename": "friend-note-20260914-a.txt",
+                "mime": "text/plain",
+                "size": 71
+              }
+            },
+            {
+              "msg_id": "c3dcf03eda414cc6a0c5094c594e465c",
+              "dir": "in",
+              "kind": "file",
+              "delivered": true,
+              "delivery_state": "delivered",
+              "error": null,
+              "attachment": {
+                "blob_id": "715087370c7332ecd058ee925627e881e3db37959bc29f6e61f49a3b07fd3e56",
+                "filename": "friend-note-20260914-b.bin",
+                "mime": "application/octet-stream",
+                "size": 2048
+              }
+            },
+            {
+              "msg_id": "eb9bc22d345c49619b30ee9817d03848",
+              "dir": "out",
+              "kind": "file",
+              "delivered": true,
+              "delivery_state": "delivered",
+              "error": "",
+              "attachment": {
+                "blob_id": "2bd51644fd9cbd97bd41626e153a4aaf228eda55adc61b9a50304a9162e4a455",
+                "filename": "friend-limit-20260914.bin",
+                "mime": "application/octet-stream",
+                "size": 5242880
+              }
+            }
+          ]
+        },
+        "B": {
+          "friends": [
+            {
+              "peer_id": "Hgrcmc6hOapgKiChYwrKSBIPeORSKNh2ZVkFFHveIEI=",
+              "node_name": "Invite acceptance A",
+              "relationship_id": "13c22a73ebfb4e799bd1dd3b8e85178a",
+              "permissions": [
+                "friend.message",
+                "friend.attachment.small",
+                "friend.content-card"
+              ],
+              "status": "active"
+            }
+          ],
+          "invites": [],
+          "messages": [
+            {
+              "msg_id": "e1dd15ea76ad445db79973dec056e059",
+              "dir": "out",
+              "kind": "text",
+              "delivered": true,
+              "delivery_state": "delivered",
+              "error": "",
+              "attachment": null
+            }
+          ]
+        },
+        "C": {
+          "friends": [
+            {
+              "peer_id": "Hgrcmc6hOapgKiChYwrKSBIPeORSKNh2ZVkFFHveIEI=",
+              "node_name": "Invite acceptance A",
+              "relationship_id": "d25d5d17f0fa446fbde505ef4cfb635c",
+              "permissions": [
+                "friend.message",
+                "friend.attachment.small",
+                "friend.content-card"
+              ],
+              "status": "active"
+            }
+          ],
+          "invites": [],
+          "messages": [
+            {
+              "msg_id": "35279d65e2364e7c945ecc7e8ab3c1e3",
+              "dir": "in",
+              "kind": "file",
+              "delivered": true,
+              "delivery_state": "delivered",
+              "error": null,
+              "attachment": {
+                "blob_id": "363e90de50fe0271bcabe2d620fad0fff6f505db4abaeeb8c187f2a8dab4c8c9",
+                "filename": "friend-note-20260914-a.txt",
+                "mime": "text/plain",
+                "size": 71
+              }
+            },
+            {
+              "msg_id": "c3dcf03eda414cc6a0c5094c594e465c",
+              "dir": "out",
+              "kind": "file",
+              "delivered": true,
+              "delivery_state": "delivered",
+              "error": "",
+              "attachment": {
+                "blob_id": "715087370c7332ecd058ee925627e881e3db37959bc29f6e61f49a3b07fd3e56",
+                "filename": "friend-note-20260914-b.bin",
+                "mime": "application/octet-stream",
+                "size": 2048
+              }
+            },
+            {
+              "msg_id": "eb9bc22d345c49619b30ee9817d03848",
+              "dir": "in",
+              "kind": "file",
+              "delivered": true,
+              "delivery_state": "delivered",
+              "error": null,
+              "attachment": {
+                "blob_id": "2bd51644fd9cbd97bd41626e153a4aaf228eda55adc61b9a50304a9162e4a455",
+                "filename": "friend-limit-20260914.bin",
+                "mime": "application/octet-stream",
+                "size": 5242880
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "label": "expired",
+      "at": "2026-09-14T11:23:03.848579+00:00",
+      "nodes": {
+        "A": {
+          "friends": [
+            {
+              "peer_id": "OU7a2f/AMXG4X64YM4A+Ctxe2auP+CtaviqlFhlGkSc=",
+              "node_name": "Invite acceptance B",
+              "relationship_id": "13c22a73ebfb4e799bd1dd3b8e85178a",
+              "permissions": [
+                "friend.message",
+                "friend.attachment.small",
+                "friend.content-card"
+              ],
+              "status": "active"
+            },
+            {
+              "peer_id": "W4tcv/oApKSZvAy5fitRs5ODXDovdz008+/FBIKb7S0=",
+              "node_name": "Invite acceptance C",
+              "relationship_id": "d25d5d17f0fa446fbde505ef4cfb635c",
+              "permissions": [
+                "friend.message",
+                "friend.attachment.small",
+                "friend.content-card"
+              ],
+              "status": "active"
+            }
+          ],
+          "invites": [
+            {
+              "invite_id": "4d36a7b79b46447f81e1b9817531fcf5",
+              "status": "used",
+              "created_at": "2026-09-14T11:20:29.071483+00:00",
+              "expires_at": "2026-09-14T11:35:29.071483+00:00"
+            },
+            {
+              "invite_id": "a895fead4843445d822406912b576b6e",
+              "status": "active",
+              "created_at": "2026-09-14T11:06:36.836554+00:00",
+              "expires_at": "2026-09-14T11:21:36.836554+00:00"
+            },
+            {
+              "invite_id": "b1ddfdc7164d4ff7817c9d51914e55a9",
+              "status": "cancelled",
+              "created_at": "2026-09-14T11:07:36.273472+00:00",
+              "expires_at": "2026-09-14T11:22:36.273472+00:00"
+            },
+            {
+              "invite_id": "eb2970b096bc456388e9325840b5c090",
+              "status": "used",
+              "created_at": "2026-09-14T11:08:32.743740+00:00",
+              "expires_at": "2026-09-14T11:23:32.743740+00:00"
+            }
+          ],
+          "messages": [
+            {
+              "msg_id": "e1dd15ea76ad445db79973dec056e059",
+              "dir": "in",
+              "kind": "text",
+              "delivered": true,
+              "delivery_state": "delivered",
+              "error": null,
+              "attachment": null
+            },
+            {
+              "msg_id": "35279d65e2364e7c945ecc7e8ab3c1e3",
+              "dir": "out",
+              "kind": "file",
+              "delivered": true,
+              "delivery_state": "delivered",
+              "error": "",
+              "attachment": {
+                "blob_id": "363e90de50fe0271bcabe2d620fad0fff6f505db4abaeeb8c187f2a8dab4c8c9",
+                "filename": "friend-note-20260914-a.txt",
+                "mime": "text/plain",
+                "size": 71
+              }
+            },
+            {
+              "msg_id": "c3dcf03eda414cc6a0c5094c594e465c",
+              "dir": "in",
+              "kind": "file",
+              "delivered": true,
+              "delivery_state": "delivered",
+              "error": null,
+              "attachment": {
+                "blob_id": "715087370c7332ecd058ee925627e881e3db37959bc29f6e61f49a3b07fd3e56",
+                "filename": "friend-note-20260914-b.bin",
+                "mime": "application/octet-stream",
+                "size": 2048
+              }
+            },
+            {
+              "msg_id": "eb9bc22d345c49619b30ee9817d03848",
+              "dir": "out",
+              "kind": "file",
+              "delivered": true,
+              "delivery_state": "delivered",
+              "error": "",
+              "attachment": {
+                "blob_id": "2bd51644fd9cbd97bd41626e153a4aaf228eda55adc61b9a50304a9162e4a455",
+                "filename": "friend-limit-20260914.bin",
+                "mime": "application/octet-stream",
+                "size": 5242880
+              }
+            }
+          ]
+        },
+        "B": {
+          "friends": [
+            {
+              "peer_id": "Hgrcmc6hOapgKiChYwrKSBIPeORSKNh2ZVkFFHveIEI=",
+              "node_name": "Invite acceptance A",
+              "relationship_id": "13c22a73ebfb4e799bd1dd3b8e85178a",
+              "permissions": [
+                "friend.message",
+                "friend.attachment.small",
+                "friend.content-card"
+              ],
+              "status": "active"
+            }
+          ],
+          "invites": [],
+          "messages": [
+            {
+              "msg_id": "e1dd15ea76ad445db79973dec056e059",
+              "dir": "out",
+              "kind": "text",
+              "delivered": true,
+              "delivery_state": "delivered",
+              "error": "",
+              "attachment": null
+            }
+          ]
+        },
+        "C": {
+          "friends": [
+            {
+              "peer_id": "Hgrcmc6hOapgKiChYwrKSBIPeORSKNh2ZVkFFHveIEI=",
+              "node_name": "Invite acceptance A",
+              "relationship_id": "d25d5d17f0fa446fbde505ef4cfb635c",
+              "permissions": [
+                "friend.message",
+                "friend.attachment.small",
+                "friend.content-card"
+              ],
+              "status": "active"
+            }
+          ],
+          "invites": [],
+          "messages": [
+            {
+              "msg_id": "35279d65e2364e7c945ecc7e8ab3c1e3",
+              "dir": "in",
+              "kind": "file",
+              "delivered": true,
+              "delivery_state": "delivered",
+              "error": null,
+              "attachment": {
+                "blob_id": "363e90de50fe0271bcabe2d620fad0fff6f505db4abaeeb8c187f2a8dab4c8c9",
+                "filename": "friend-note-20260914-a.txt",
+                "mime": "text/plain",
+                "size": 71
+              }
+            },
+            {
+              "msg_id": "c3dcf03eda414cc6a0c5094c594e465c",
+              "dir": "out",
+              "kind": "file",
+              "delivered": true,
+              "delivery_state": "delivered",
+              "error": "",
+              "attachment": {
+                "blob_id": "715087370c7332ecd058ee925627e881e3db37959bc29f6e61f49a3b07fd3e56",
+                "filename": "friend-note-20260914-b.bin",
+                "mime": "application/octet-stream",
+                "size": 2048
+              }
+            },
+            {
+              "msg_id": "eb9bc22d345c49619b30ee9817d03848",
+              "dir": "in",
+              "kind": "file",
+              "delivered": true,
+              "delivery_state": "delivered",
+              "error": null,
+              "attachment": {
+                "blob_id": "2bd51644fd9cbd97bd41626e153a4aaf228eda55adc61b9a50304a9162e4a455",
+                "filename": "friend-limit-20260914.bin",
+                "mime": "application/octet-stream",
+                "size": 5242880
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "label": "after-restart",
+      "at": "2026-09-14T11:23:45.390861+00:00",
+      "nodes": {
+        "A": {
+          "friends": [
+            {
+              "peer_id": "OU7a2f/AMXG4X64YM4A+Ctxe2auP+CtaviqlFhlGkSc=",
+              "node_name": "Invite acceptance B",
+              "relationship_id": "13c22a73ebfb4e799bd1dd3b8e85178a",
+              "permissions": [
+                "friend.message",
+                "friend.attachment.small",
+                "friend.content-card"
+              ],
+              "status": "active"
+            },
+            {
+              "peer_id": "W4tcv/oApKSZvAy5fitRs5ODXDovdz008+/FBIKb7S0=",
+              "node_name": "Invite acceptance C",
+              "relationship_id": "d25d5d17f0fa446fbde505ef4cfb635c",
+              "permissions": [
+                "friend.message",
+                "friend.attachment.small",
+                "friend.content-card"
+              ],
+              "status": "active"
+            }
+          ],
+          "invites": [
+            {
+              "invite_id": "4d36a7b79b46447f81e1b9817531fcf5",
+              "status": "used",
+              "created_at": "2026-09-14T11:20:29.071483+00:00",
+              "expires_at": "2026-09-14T11:35:29.071483+00:00"
+            },
+            {
+              "invite_id": "a895fead4843445d822406912b576b6e",
+              "status": "active",
+              "created_at": "2026-09-14T11:06:36.836554+00:00",
+              "expires_at": "2026-09-14T11:21:36.836554+00:00"
+            },
+            {
+              "invite_id": "b1ddfdc7164d4ff7817c9d51914e55a9",
+              "status": "cancelled",
+              "created_at": "2026-09-14T11:07:36.273472+00:00",
+              "expires_at": "2026-09-14T11:22:36.273472+00:00"
+            },
+            {
+              "invite_id": "eb2970b096bc456388e9325840b5c090",
+              "status": "used",
+              "created_at": "2026-09-14T11:08:32.743740+00:00",
+              "expires_at": "2026-09-14T11:23:32.743740+00:00"
+            }
+          ],
+          "messages": [
+            {
+              "msg_id": "e1dd15ea76ad445db79973dec056e059",
+              "dir": "in",
+              "kind": "text",
+              "delivered": true,
+              "delivery_state": "delivered",
+              "error": null,
+              "attachment": null
+            },
+            {
+              "msg_id": "35279d65e2364e7c945ecc7e8ab3c1e3",
+              "dir": "out",
+              "kind": "file",
+              "delivered": true,
+              "delivery_state": "delivered",
+              "error": "",
+              "attachment": {
+                "blob_id": "363e90de50fe0271bcabe2d620fad0fff6f505db4abaeeb8c187f2a8dab4c8c9",
+                "filename": "friend-note-20260914-a.txt",
+                "mime": "text/plain",
+                "size": 71
+              }
+            },
+            {
+              "msg_id": "c3dcf03eda414cc6a0c5094c594e465c",
+              "dir": "in",
+              "kind": "file",
+              "delivered": true,
+              "delivery_state": "delivered",
+              "error": null,
+              "attachment": {
+                "blob_id": "715087370c7332ecd058ee925627e881e3db37959bc29f6e61f49a3b07fd3e56",
+                "filename": "friend-note-20260914-b.bin",
+                "mime": "application/octet-stream",
+                "size": 2048
+              }
+            },
+            {
+              "msg_id": "eb9bc22d345c49619b30ee9817d03848",
+              "dir": "out",
+              "kind": "file",
+              "delivered": true,
+              "delivery_state": "delivered",
+              "error": "",
+              "attachment": {
+                "blob_id": "2bd51644fd9cbd97bd41626e153a4aaf228eda55adc61b9a50304a9162e4a455",
+                "filename": "friend-limit-20260914.bin",
+                "mime": "application/octet-stream",
+                "size": 5242880
+              }
+            }
+          ]
+        },
+        "B": {
+          "friends": [
+            {
+              "peer_id": "Hgrcmc6hOapgKiChYwrKSBIPeORSKNh2ZVkFFHveIEI=",
+              "node_name": "Invite acceptance A",
+              "relationship_id": "13c22a73ebfb4e799bd1dd3b8e85178a",
+              "permissions": [
+                "friend.message",
+                "friend.attachment.small",
+                "friend.content-card"
+              ],
+              "status": "active"
+            }
+          ],
+          "invites": [],
+          "messages": [
+            {
+              "msg_id": "e1dd15ea76ad445db79973dec056e059",
+              "dir": "out",
+              "kind": "text",
+              "delivered": true,
+              "delivery_state": "delivered",
+              "error": "",
+              "attachment": null
+            }
+          ]
+        },
+        "C": {
+          "friends": [
+            {
+              "peer_id": "Hgrcmc6hOapgKiChYwrKSBIPeORSKNh2ZVkFFHveIEI=",
+              "node_name": "Invite acceptance A",
+              "relationship_id": "d25d5d17f0fa446fbde505ef4cfb635c",
+              "permissions": [
+                "friend.message",
+                "friend.attachment.small",
+                "friend.content-card"
+              ],
+              "status": "active"
+            }
+          ],
+          "invites": [],
+          "messages": [
+            {
+              "msg_id": "35279d65e2364e7c945ecc7e8ab3c1e3",
+              "dir": "in",
+              "kind": "file",
+              "delivered": true,
+              "delivery_state": "delivered",
+              "error": null,
+              "attachment": {
+                "blob_id": "363e90de50fe0271bcabe2d620fad0fff6f505db4abaeeb8c187f2a8dab4c8c9",
+                "filename": "friend-note-20260914-a.txt",
+                "mime": "text/plain",
+                "size": 71
+              }
+            },
+            {
+              "msg_id": "c3dcf03eda414cc6a0c5094c594e465c",
+              "dir": "out",
+              "kind": "file",
+              "delivered": true,
+              "delivery_state": "delivered",
+              "error": "",
+              "attachment": {
+                "blob_id": "715087370c7332ecd058ee925627e881e3db37959bc29f6e61f49a3b07fd3e56",
+                "filename": "friend-note-20260914-b.bin",
+                "mime": "application/octet-stream",
+                "size": 2048
+              }
+            },
+            {
+              "msg_id": "eb9bc22d345c49619b30ee9817d03848",
+              "dir": "in",
+              "kind": "file",
+              "delivered": true,
+              "delivery_state": "delivered",
+              "error": null,
+              "attachment": {
+                "blob_id": "2bd51644fd9cbd97bd41626e153a4aaf228eda55adc61b9a50304a9162e4a455",
+                "filename": "friend-limit-20260914.bin",
+                "mime": "application/octet-stream",
+                "size": 5242880
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "label": "final",
+      "at": "2026-09-14T11:27:25.210640+00:00",
+      "nodes": {
+        "A": {
+          "friends": [
+            {
+              "peer_id": "OU7a2f/AMXG4X64YM4A+Ctxe2auP+CtaviqlFhlGkSc=",
+              "node_name": "Invite acceptance B",
+              "relationship_id": "13c22a73ebfb4e799bd1dd3b8e85178a",
+              "permissions": [
+                "friend.message",
+                "friend.attachment.small",
+                "friend.content-card"
+              ],
+              "status": "active"
+            },
+            {
+              "peer_id": "W4tcv/oApKSZvAy5fitRs5ODXDovdz008+/FBIKb7S0=",
+              "node_name": "Invite acceptance C",
+              "relationship_id": "d25d5d17f0fa446fbde505ef4cfb635c",
+              "permissions": [
+                "friend.message",
+                "friend.attachment.small",
+                "friend.content-card"
+              ],
+              "status": "active"
+            }
+          ],
+          "invites": [
+            {
+              "invite_id": "4d36a7b79b46447f81e1b9817531fcf5",
+              "status": "used",
+              "created_at": "2026-09-14T11:20:29.071483+00:00",
+              "expires_at": "2026-09-14T11:35:29.071483+00:00"
+            },
+            {
+              "invite_id": "a895fead4843445d822406912b576b6e",
+              "status": "expired",
+              "created_at": "2026-09-14T11:06:36.836554+00:00",
+              "expires_at": "2026-09-14T11:21:36.836554+00:00"
+            },
+            {
+              "invite_id": "b1ddfdc7164d4ff7817c9d51914e55a9",
+              "status": "cancelled",
+              "created_at": "2026-09-14T11:07:36.273472+00:00",
+              "expires_at": "2026-09-14T11:22:36.273472+00:00"
+            },
+            {
+              "invite_id": "eb2970b096bc456388e9325840b5c090",
+              "status": "used",
+              "created_at": "2026-09-14T11:08:32.743740+00:00",
+              "expires_at": "2026-09-14T11:23:32.743740+00:00"
+            }
+          ],
+          "messages": [
+            {
+              "msg_id": "e1dd15ea76ad445db79973dec056e059",
+              "dir": "in",
+              "kind": "text",
+              "delivered": true,
+              "delivery_state": "delivered",
+              "error": null,
+              "attachment": null
+            },
+            {
+              "msg_id": "35279d65e2364e7c945ecc7e8ab3c1e3",
+              "dir": "out",
+              "kind": "file",
+              "delivered": true,
+              "delivery_state": "delivered",
+              "error": "",
+              "attachment": {
+                "blob_id": "363e90de50fe0271bcabe2d620fad0fff6f505db4abaeeb8c187f2a8dab4c8c9",
+                "filename": "friend-note-20260914-a.txt",
+                "mime": "text/plain",
+                "size": 71
+              }
+            },
+            {
+              "msg_id": "c3dcf03eda414cc6a0c5094c594e465c",
+              "dir": "in",
+              "kind": "file",
+              "delivered": true,
+              "delivery_state": "delivered",
+              "error": null,
+              "attachment": {
+                "blob_id": "715087370c7332ecd058ee925627e881e3db37959bc29f6e61f49a3b07fd3e56",
+                "filename": "friend-note-20260914-b.bin",
+                "mime": "application/octet-stream",
+                "size": 2048
+              }
+            },
+            {
+              "msg_id": "eb9bc22d345c49619b30ee9817d03848",
+              "dir": "out",
+              "kind": "file",
+              "delivered": true,
+              "delivery_state": "delivered",
+              "error": "",
+              "attachment": {
+                "blob_id": "2bd51644fd9cbd97bd41626e153a4aaf228eda55adc61b9a50304a9162e4a455",
+                "filename": "friend-limit-20260914.bin",
+                "mime": "application/octet-stream",
+                "size": 5242880
+              }
+            }
+          ]
+        },
+        "B": {
+          "friends": [
+            {
+              "peer_id": "Hgrcmc6hOapgKiChYwrKSBIPeORSKNh2ZVkFFHveIEI=",
+              "node_name": "Invite acceptance A",
+              "relationship_id": "13c22a73ebfb4e799bd1dd3b8e85178a",
+              "permissions": [
+                "friend.message",
+                "friend.attachment.small",
+                "friend.content-card"
+              ],
+              "status": "active"
+            }
+          ],
+          "invites": [],
+          "messages": [
+            {
+              "msg_id": "e1dd15ea76ad445db79973dec056e059",
+              "dir": "out",
+              "kind": "text",
+              "delivered": true,
+              "delivery_state": "delivered",
+              "error": "",
+              "attachment": null
+            }
+          ]
+        },
+        "C": {
+          "friends": [
+            {
+              "peer_id": "Hgrcmc6hOapgKiChYwrKSBIPeORSKNh2ZVkFFHveIEI=",
+              "node_name": "Invite acceptance A",
+              "relationship_id": "d25d5d17f0fa446fbde505ef4cfb635c",
+              "permissions": [
+                "friend.message",
+                "friend.attachment.small",
+                "friend.content-card"
+              ],
+              "status": "active"
+            }
+          ],
+          "invites": [],
+          "messages": [
+            {
+              "msg_id": "35279d65e2364e7c945ecc7e8ab3c1e3",
+              "dir": "in",
+              "kind": "file",
+              "delivered": true,
+              "delivery_state": "delivered",
+              "error": null,
+              "attachment": {
+                "blob_id": "363e90de50fe0271bcabe2d620fad0fff6f505db4abaeeb8c187f2a8dab4c8c9",
+                "filename": "friend-note-20260914-a.txt",
+                "mime": "text/plain",
+                "size": 71
+              }
+            },
+            {
+              "msg_id": "c3dcf03eda414cc6a0c5094c594e465c",
+              "dir": "out",
+              "kind": "file",
+              "delivered": true,
+              "delivery_state": "delivered",
+              "error": "",
+              "attachment": {
+                "blob_id": "715087370c7332ecd058ee925627e881e3db37959bc29f6e61f49a3b07fd3e56",
+                "filename": "friend-note-20260914-b.bin",
+                "mime": "application/octet-stream",
+                "size": 2048
+              }
+            },
+            {
+              "msg_id": "eb9bc22d345c49619b30ee9817d03848",
+              "dir": "in",
+              "kind": "file",
+              "delivered": true,
+              "delivery_state": "delivered",
+              "error": null,
+              "attachment": {
+                "blob_id": "2bd51644fd9cbd97bd41626e153a4aaf228eda55adc61b9a50304a9162e4a455",
+                "filename": "friend-limit-20260914.bin",
+                "mime": "application/octet-stream",
+                "size": 5242880
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "reverse_attachment_http": {
+    "status": 200,
+    "bytes": 2048,
+    "sha256": "10fc3c51a152e90e5b90319b601d92ccf37290ef53c35ff92507687d8a911a08",
+    "matches_original": true,
+    "content_type": "application/octet-stream",
+    "content_disposition": "attachment"
+  },
+  "downloaded_files": [
+    {
+      "filename": "friend-note-20260914-a.txt",
+      "bytes": 71,
+      "sha256": "a9d3d92f5da66a7137871906560342cc36a24033807cc418629ff1dea99fc41a",
+      "matches_original": true,
+      "present": true
+    },
+    {
+      "filename": "friend-note-20260914-b.bin",
+      "bytes": 2048,
+      "sha256": "10fc3c51a152e90e5b90319b601d92ccf37290ef53c35ff92507687d8a911a08",
+      "matches_original": true,
+      "present": true
+    },
+    {
+      "filename": "friend-limit-20260914.bin",
+      "bytes": 5242880,
+      "sha256": "c036cbb7553a909f8b8877d4461924307f27ecb66cff928eeeafd569c3887e29",
+      "matches_original": true,
+      "present": true
+    }
+  ],
+  "assertions": {
+    "single_race_winner": true,
+    "accept_requests_overlap": true,
+    "request_starts": [
+      "2026-09-14T11:10:39.537621+00:00",
+      "2026-09-14T11:10:39.536653+00:00"
+    ],
+    "response_ends": [
+      "2026-09-14T11:10:39.613233+00:00",
+      "2026-09-14T11:10:39.615269+00:00"
+    ],
+    "oversize_created_no_messages": true,
+    "successful_repeat_preserved_relationship": true,
+    "states_and_messages_preserved_after_restart": true,
+    "sharing_permissions_only": true
+  },
+  "download_browser_comparison": {
+    "initial_environment": "Codex in-app browser",
+    "initial_reverse_file_present": false,
+    "reverse_http_matches_original": true,
+    "comparison_environment": "Chrome extension-controlled browser",
+    "comparison_source": "same node at 127.0.0.1:18970 and same received message; unchanged frontend",
+    "comparison_reverse_file_present": true,
+    "comparison_reverse_sha256": "10fc3c51a152e90e5b90319b601d92ccf37290ef53c35ff92507687d8a911a08",
+    "security_warnings_bypassed": false,
+    "in_app_difference_resolved": false
+  }
+}

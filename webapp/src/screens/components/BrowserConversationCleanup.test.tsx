@@ -1,0 +1,40 @@
+import { act, render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import { afterEach, expect, it, vi } from "vitest";
+import * as storage from "../../domain/llmConversationStore";
+import BrowserConversationCleanup from "./BrowserConversationCleanup";
+
+const { confirm } = vi.hoisted(() => ({ confirm: vi.fn() }));
+vi.mock("../../appContext", () => ({ useAppContext: () => ({ confirm }) }));
+afterEach(() => { vi.restoreAllMocks(); confirm.mockReset(); });
+it("reviews browser copies separately and does not clear them on review or cancellation", async () => {
+  vi.spyOn(storage, "reviewBrowserConversations").mockResolvedValue({ token: "browser-review", copies: 3, memoryCopies: 1 });
+  const erase = vi.spyOn(storage, "eraseReviewedBrowserConversations").mockResolvedValue({ removed: 3, reviewed_copies_cleared: true });
+  const user = userEvent.setup();
+  render(<BrowserConversationCleanup />);
+  await user.click(screen.getByRole("button", { name: "Review browser copies" }));
+  expect(await screen.findByLabelText('Reviewed browser scope')).toHaveFocus();
+  await user.click(await screen.findByRole("button", { name: "Discard browser review" }));
+  expect(screen.getByRole("button", { name: "Review browser copies" })).toHaveFocus();
+  expect(erase).not.toHaveBeenCalled();
+  await user.click(screen.getByRole("button", { name: "Review browser copies" }));
+  await user.click(await screen.findByRole("button", { name: "Clear reviewed browser copies" }));
+  expect(erase).not.toHaveBeenCalled();
+  expect(confirm.mock.calls[0][0].body).toContain("other tabs' open views");
+  await act(() => confirm.mock.calls[0][0].onConfirm());
+  expect(erase).toHaveBeenCalledExactlyOnceWith("browser-review");
+  expect(screen.getByRole("status")).toHaveTextContent("3 reviewed browser copies cleared");
+  expect(screen.getByRole("status")).toHaveFocus();
+});
+it("does not report a failed browser transaction as successful", async () => {
+  vi.spyOn(storage, "reviewBrowserConversations").mockResolvedValue({ token: "review", copies: 1, memoryCopies: 0 });
+  vi.spyOn(storage, "eraseReviewedBrowserConversations").mockRejectedValue(new Error("IndexedDB transaction aborted"));
+  const user = userEvent.setup();
+  render(<BrowserConversationCleanup />);
+  await user.click(screen.getByRole("button", { name: "Review browser copies" }));
+  await user.click(await screen.findByRole("button", { name: "Clear reviewed browser copies" }));
+  await act(() => confirm.mock.calls[0][0].onConfirm());
+  expect(screen.getByRole("alert")).toHaveTextContent("did not confirm cleanup");
+  expect(screen.getByRole("alert")).toHaveFocus();
+  expect(screen.queryByText(/reviewed browser cop(?:y|ies) cleared/)).not.toBeInTheDocument();
+});

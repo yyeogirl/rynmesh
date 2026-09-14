@@ -1,0 +1,12 @@
+{
+  "status_code": 200,
+  "checked_at": "2026-09-07T21:49:16.9984692+08:00",
+  "task_id": "task_90dd301a0b26488a9b52913e53bb20f1",
+  "state": "succeeded",
+  "output": "严格 P2P 最终验收通过",
+  "duration_ms": 948,
+  "transport": "ice_udp_direct",
+  "relay_used": false,
+  "provider_public_candidate": "117.50.189.73:3000",
+  "full_evidence": "p2p-final-result.json"
+}

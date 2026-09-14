@@ -1,0 +1,766 @@
+{
+  "scope": "Real native CPU model and browser-created conversation; synthetic article input; loopback, not packaged desktop",
+  "observations": [
+    {
+      "label": "short-before-send",
+      "at": "2026-09-14T08:18:26.255248+00:00",
+      "pid": 60152,
+      "conversation_count": 3,
+      "history_digest": "0344151053398cf1536abb7c15b21fb88107b0afbb0d28503dcd929ec5a4afc7",
+      "conversation": {
+        "id": "e7eca168-af96-499e-b9db-f2c0b24718b2",
+        "revision": 1,
+        "providerPeerId": "+noJt8f1is7xOSH/c9TtlB1jj2WgueKgWdf4jixu/EU=",
+        "serviceKey": "+noJt8f1is7xOSH/c9TtlB1jj2WgueKgWdf4jixu/EU=::local-small",
+        "contextIds": [
+          "import:imp_a9c05416cd8902ecd8a081c8002c8eabefcf9413d33907cb984d6e889544fc17"
+        ]
+      },
+      "messages": [],
+      "preview": {
+        "provider_peer_id": "+noJt8f1is7xOSH/c9TtlB1jj2WgueKgWdf4jixu/EU=",
+        "service_id": "local-small",
+        "prompt_sha256": "704fede663e09d726e233b87488cdbc27ef634fcb2fc22b9157462a4fd6eeb71",
+        "context_window": 4096,
+        "input_token_upper_estimate": 1152,
+        "framing_reserve": 1024,
+        "max_output_tokens": 256,
+        "history_messages_omitted": 0,
+        "sources": [
+          {
+            "library_id": "import:imp_a9c05416cd8902ecd8a081c8002c8eabefcf9413d33907cb984d6e889544fc17",
+            "sha256": "4cad4489114684d6fed6be2598661a2490c0387bfc8724cc0d62ddc60efd6033",
+            "text_bytes": 474,
+            "included_bytes": 474,
+            "budget_truncated": false,
+            "extraction_truncated": false
+          }
+        ]
+      },
+      "service": {
+        "ready": true,
+        "publication_enabled": false
+      }
+    },
+    {
+      "label": "short-answer-complete",
+      "at": "2026-09-14T08:19:51.320511+00:00",
+      "pid": 60152,
+      "conversation_count": 3,
+      "history_digest": "2cbbaa84e19ae201f25a24bf4526d203fe39febab546ce39101b4134c1924cad",
+      "conversation": {
+        "id": "e7eca168-af96-499e-b9db-f2c0b24718b2",
+        "revision": 4,
+        "providerPeerId": "+noJt8f1is7xOSH/c9TtlB1jj2WgueKgWdf4jixu/EU=",
+        "serviceKey": "+noJt8f1is7xOSH/c9TtlB1jj2WgueKgWdf4jixu/EU=::local-small",
+        "contextIds": [
+          "import:imp_a9c05416cd8902ecd8a081c8002c8eabefcf9413d33907cb984d6e889544fc17"
+        ]
+      },
+      "messages": [
+        {
+          "id": "question_task_6878bf44c63740b7aa918a7dad0661be",
+          "role": "user",
+          "status": "complete",
+          "taskId": "task_6878bf44c63740b7aa918a7dad0661be",
+          "cost": null,
+          "contextIds": null,
+          "contextBytes": null,
+          "promptSha256": null,
+          "content_digest": "4c25cb5266880497e5735a8dc304e591e6bce7876b925eb34696566019fb4c12",
+          "content_bytes": 101
+        },
+        {
+          "id": "answer_task_6878bf44c63740b7aa918a7dad0661be",
+          "role": "assistant",
+          "status": "complete",
+          "taskId": "task_6878bf44c63740b7aa918a7dad0661be",
+          "cost": 0.0,
+          "contextIds": [
+            "import:imp_a9c05416cd8902ecd8a081c8002c8eabefcf9413d33907cb984d6e889544fc17"
+          ],
+          "contextBytes": [
+            474
+          ],
+          "promptSha256": "704fede663e09d726e233b87488cdbc27ef634fcb2fc22b9157462a4fd6eeb71",
+          "content_digest": "5668efa3e5a3ebec69f73941442815b685ac06b87d3b52663245ac9f43796b16",
+          "content_bytes": 5,
+          "run": {
+            "task_id": "task_6878bf44c63740b7aa918a7dad0661be",
+            "conversation_id": "e7eca168-af96-499e-b9db-f2c0b24718b2",
+            "state": "succeeded",
+            "cancel_requested": false
+          },
+          "order_status": 200,
+          "order": {
+            "task_id": "task_6878bf44c63740b7aa918a7dad0661be",
+            "state": "succeeded",
+            "transport": "local_runtime",
+            "amount": 0.0,
+            "error_code": null
+          }
+        }
+      ],
+      "service": {
+        "ready": true,
+        "publication_enabled": false
+      }
+    },
+    {
+      "label": "long-before-first-send",
+      "at": "2026-09-14T08:26:23.045688+00:00",
+      "pid": 60152,
+      "conversation_count": 4,
+      "history_digest": "7621cd8451d7fd7868bad709804ae51482bc0570c078637612eccf32f87856f6",
+      "conversation": {
+        "id": "994ecc10-4d09-4b7a-a4e8-c7b212700f71",
+        "revision": 1,
+        "providerPeerId": "+noJt8f1is7xOSH/c9TtlB1jj2WgueKgWdf4jixu/EU=",
+        "serviceKey": "+noJt8f1is7xOSH/c9TtlB1jj2WgueKgWdf4jixu/EU=::local-small",
+        "contextIds": [
+          "import:imp_3eae29d75e501bfdb82bf4c51780a192d8535c6a0c143ce08fa9cb50b8774fe5"
+        ]
+      },
+      "messages": [],
+      "preview": {
+        "provider_peer_id": "+noJt8f1is7xOSH/c9TtlB1jj2WgueKgWdf4jixu/EU=",
+        "service_id": "local-small",
+        "prompt_sha256": "325f96ef21f6281565d2dd682118255e4db510de7f85a0874b5c57d38e3eedad",
+        "context_window": 4096,
+        "input_token_upper_estimate": 2808,
+        "framing_reserve": 1024,
+        "max_output_tokens": 256,
+        "history_messages_omitted": 0,
+        "sources": [
+          {
+            "library_id": "import:imp_3eae29d75e501bfdb82bf4c51780a192d8535c6a0c143ce08fa9cb50b8774fe5",
+            "sha256": "52d6e70bbdc84ce731ecb1eed39caad1ef40b356f7bec4367a711ad9557b34db",
+            "text_bytes": 65404,
+            "included_bytes": 746,
+            "budget_truncated": true,
+            "extraction_truncated": false
+          }
+        ]
+      },
+      "service": {
+        "ready": true,
+        "publication_enabled": false
+      }
+    },
+    {
+      "label": "long-first-answer",
+      "at": "2026-09-14T08:26:45.241430+00:00",
+      "pid": 60152,
+      "conversation_count": 4,
+      "history_digest": "2f765699079b3b730763c8fa2f5f34ccd3fbf4db4458f7b10b04358b4ba348d8",
+      "conversation": {
+        "id": "994ecc10-4d09-4b7a-a4e8-c7b212700f71",
+        "revision": 4,
+        "providerPeerId": "+noJt8f1is7xOSH/c9TtlB1jj2WgueKgWdf4jixu/EU=",
+        "serviceKey": "+noJt8f1is7xOSH/c9TtlB1jj2WgueKgWdf4jixu/EU=::local-small",
+        "contextIds": [
+          "import:imp_3eae29d75e501bfdb82bf4c51780a192d8535c6a0c143ce08fa9cb50b8774fe5"
+        ]
+      },
+      "messages": [
+        {
+          "id": "question_task_9b4be5cb9d514b31a38aaf9f6bb98480",
+          "role": "user",
+          "status": "complete",
+          "taskId": "task_9b4be5cb9d514b31a38aaf9f6bb98480",
+          "cost": null,
+          "contextIds": null,
+          "contextBytes": null,
+          "promptSha256": null,
+          "content_digest": "7d57d016d4fcd6fb8d086cb471bfa164ab4a6085f4efbf6f2d578701b0aa1eea",
+          "content_bytes": 1479
+        },
+        {
+          "id": "answer_task_9b4be5cb9d514b31a38aaf9f6bb98480",
+          "role": "assistant",
+          "status": "complete",
+          "taskId": "task_9b4be5cb9d514b31a38aaf9f6bb98480",
+          "cost": 0.0,
+          "contextIds": [
+            "import:imp_3eae29d75e501bfdb82bf4c51780a192d8535c6a0c143ce08fa9cb50b8774fe5"
+          ],
+          "contextBytes": [
+            746
+          ],
+          "promptSha256": "325f96ef21f6281565d2dd682118255e4db510de7f85a0874b5c57d38e3eedad",
+          "content_digest": "a4aab3f1f08004e907d2357fafe74cab56359bcb32e23f52e7eb1d3a9c0a2ad3",
+          "content_bytes": 1,
+          "run": {
+            "task_id": "task_9b4be5cb9d514b31a38aaf9f6bb98480",
+            "conversation_id": "994ecc10-4d09-4b7a-a4e8-c7b212700f71",
+            "state": "succeeded",
+            "cancel_requested": false
+          },
+          "order_status": 200,
+          "order": {
+            "task_id": "task_9b4be5cb9d514b31a38aaf9f6bb98480",
+            "state": "succeeded",
+            "transport": "local_runtime",
+            "amount": 0.0,
+            "error_code": null
+          }
+        }
+      ],
+      "service": {
+        "ready": true,
+        "publication_enabled": false
+      }
+    },
+    {
+      "label": "long-history-before-followup",
+      "at": "2026-09-14T08:27:08.512277+00:00",
+      "pid": 60152,
+      "conversation_count": 4,
+      "history_digest": "2f765699079b3b730763c8fa2f5f34ccd3fbf4db4458f7b10b04358b4ba348d8",
+      "conversation": {
+        "id": "994ecc10-4d09-4b7a-a4e8-c7b212700f71",
+        "revision": 4,
+        "providerPeerId": "+noJt8f1is7xOSH/c9TtlB1jj2WgueKgWdf4jixu/EU=",
+        "serviceKey": "+noJt8f1is7xOSH/c9TtlB1jj2WgueKgWdf4jixu/EU=::local-small",
+        "contextIds": [
+          "import:imp_3eae29d75e501bfdb82bf4c51780a192d8535c6a0c143ce08fa9cb50b8774fe5"
+        ]
+      },
+      "messages": [
+        {
+          "id": "question_task_9b4be5cb9d514b31a38aaf9f6bb98480",
+          "role": "user",
+          "status": "complete",
+          "taskId": "task_9b4be5cb9d514b31a38aaf9f6bb98480",
+          "cost": null,
+          "contextIds": null,
+          "contextBytes": null,
+          "promptSha256": null,
+          "content_digest": "7d57d016d4fcd6fb8d086cb471bfa164ab4a6085f4efbf6f2d578701b0aa1eea",
+          "content_bytes": 1479
+        },
+        {
+          "id": "answer_task_9b4be5cb9d514b31a38aaf9f6bb98480",
+          "role": "assistant",
+          "status": "complete",
+          "taskId": "task_9b4be5cb9d514b31a38aaf9f6bb98480",
+          "cost": 0.0,
+          "contextIds": [
+            "import:imp_3eae29d75e501bfdb82bf4c51780a192d8535c6a0c143ce08fa9cb50b8774fe5"
+          ],
+          "contextBytes": [
+            746
+          ],
+          "promptSha256": "325f96ef21f6281565d2dd682118255e4db510de7f85a0874b5c57d38e3eedad",
+          "content_digest": "a4aab3f1f08004e907d2357fafe74cab56359bcb32e23f52e7eb1d3a9c0a2ad3",
+          "content_bytes": 1,
+          "run": {
+            "task_id": "task_9b4be5cb9d514b31a38aaf9f6bb98480",
+            "conversation_id": "994ecc10-4d09-4b7a-a4e8-c7b212700f71",
+            "state": "succeeded",
+            "cancel_requested": false
+          },
+          "order_status": 200,
+          "order": {
+            "task_id": "task_9b4be5cb9d514b31a38aaf9f6bb98480",
+            "state": "succeeded",
+            "transport": "local_runtime",
+            "amount": 0.0,
+            "error_code": null
+          }
+        }
+      ],
+      "preview": {
+        "provider_peer_id": "+noJt8f1is7xOSH/c9TtlB1jj2WgueKgWdf4jixu/EU=",
+        "service_id": "local-small",
+        "prompt_sha256": "443041a02995a2dcee7d949765c0d5895cc70a4d72848bb0912ca933c82dd503",
+        "context_window": 4096,
+        "input_token_upper_estimate": 2129,
+        "framing_reserve": 1024,
+        "max_output_tokens": 256,
+        "history_messages_omitted": 1,
+        "sources": [
+          {
+            "library_id": "import:imp_3eae29d75e501bfdb82bf4c51780a192d8535c6a0c143ce08fa9cb50b8774fe5",
+            "sha256": "52d6e70bbdc84ce731ecb1eed39caad1ef40b356f7bec4367a711ad9557b34db",
+            "text_bytes": 65404,
+            "included_bytes": 1408,
+            "budget_truncated": true,
+            "extraction_truncated": false
+          }
+        ]
+      },
+      "service": {
+        "ready": true,
+        "publication_enabled": false
+      }
+    },
+    {
+      "label": "long-followup-complete",
+      "at": "2026-09-14T08:27:28.544788+00:00",
+      "pid": 60152,
+      "conversation_count": 4,
+      "history_digest": "a26e3357bcc20ae4b9b3cf0e21440df565b28be1d6a4e7d5f279e4974825ff1a",
+      "conversation": {
+        "id": "994ecc10-4d09-4b7a-a4e8-c7b212700f71",
+        "revision": 7,
+        "providerPeerId": "+noJt8f1is7xOSH/c9TtlB1jj2WgueKgWdf4jixu/EU=",
+        "serviceKey": "+noJt8f1is7xOSH/c9TtlB1jj2WgueKgWdf4jixu/EU=::local-small",
+        "contextIds": [
+          "import:imp_3eae29d75e501bfdb82bf4c51780a192d8535c6a0c143ce08fa9cb50b8774fe5"
+        ]
+      },
+      "messages": [
+        {
+          "id": "question_task_9b4be5cb9d514b31a38aaf9f6bb98480",
+          "role": "user",
+          "status": "complete",
+          "taskId": "task_9b4be5cb9d514b31a38aaf9f6bb98480",
+          "cost": null,
+          "contextIds": null,
+          "contextBytes": null,
+          "promptSha256": null,
+          "content_digest": "7d57d016d4fcd6fb8d086cb471bfa164ab4a6085f4efbf6f2d578701b0aa1eea",
+          "content_bytes": 1479
+        },
+        {
+          "id": "answer_task_9b4be5cb9d514b31a38aaf9f6bb98480",
+          "role": "assistant",
+          "status": "complete",
+          "taskId": "task_9b4be5cb9d514b31a38aaf9f6bb98480",
+          "cost": 0.0,
+          "contextIds": [
+            "import:imp_3eae29d75e501bfdb82bf4c51780a192d8535c6a0c143ce08fa9cb50b8774fe5"
+          ],
+          "contextBytes": [
+            746
+          ],
+          "promptSha256": "325f96ef21f6281565d2dd682118255e4db510de7f85a0874b5c57d38e3eedad",
+          "content_digest": "a4aab3f1f08004e907d2357fafe74cab56359bcb32e23f52e7eb1d3a9c0a2ad3",
+          "content_bytes": 1,
+          "run": {
+            "task_id": "task_9b4be5cb9d514b31a38aaf9f6bb98480",
+            "conversation_id": "994ecc10-4d09-4b7a-a4e8-c7b212700f71",
+            "state": "succeeded",
+            "cancel_requested": false
+          },
+          "order_status": 200,
+          "order": {
+            "task_id": "task_9b4be5cb9d514b31a38aaf9f6bb98480",
+            "state": "succeeded",
+            "transport": "local_runtime",
+            "amount": 0.0,
+            "error_code": null
+          }
+        },
+        {
+          "id": "question_task_640e1bc624f24a9aba5182d8b906a605",
+          "role": "user",
+          "status": "complete",
+          "taskId": "task_640e1bc624f24a9aba5182d8b906a605",
+          "cost": null,
+          "contextIds": null,
+          "contextBytes": null,
+          "promptSha256": null,
+          "content_digest": "3707d883d3e555b16cb1f750b5608c7b45025a3ce52957cd87a70e7e0f0dc335",
+          "content_bytes": 95
+        },
+        {
+          "id": "answer_task_640e1bc624f24a9aba5182d8b906a605",
+          "role": "assistant",
+          "status": "complete",
+          "taskId": "task_640e1bc624f24a9aba5182d8b906a605",
+          "cost": 0.0,
+          "contextIds": [
+            "import:imp_3eae29d75e501bfdb82bf4c51780a192d8535c6a0c143ce08fa9cb50b8774fe5"
+          ],
+          "contextBytes": [
+            1408
+          ],
+          "promptSha256": "443041a02995a2dcee7d949765c0d5895cc70a4d72848bb0912ca933c82dd503",
+          "content_digest": "29cdbb40e5e507ea5d1a546022d1103d564718b4453a973a1927f2e069c7ad6e",
+          "content_bytes": 5,
+          "run": {
+            "task_id": "task_640e1bc624f24a9aba5182d8b906a605",
+            "conversation_id": "994ecc10-4d09-4b7a-a4e8-c7b212700f71",
+            "state": "succeeded",
+            "cancel_requested": false
+          },
+          "order_status": 200,
+          "order": {
+            "task_id": "task_640e1bc624f24a9aba5182d8b906a605",
+            "state": "succeeded",
+            "transport": "local_runtime",
+            "amount": 0.0,
+            "error_code": null
+          }
+        }
+      ],
+      "service": {
+        "ready": true,
+        "publication_enabled": false
+      }
+    },
+    {
+      "label": "cancellation-attempt-already-completed",
+      "at": "2026-09-14T08:28:52.335044+00:00",
+      "pid": 60152,
+      "conversation_count": 4,
+      "history_digest": "d4ab9b1a4c47c0ed2a327a6d8966d9ae47ba501d404d929ab1452a6cd0b056ed",
+      "conversation": {
+        "id": "994ecc10-4d09-4b7a-a4e8-c7b212700f71",
+        "revision": 10,
+        "providerPeerId": "+noJt8f1is7xOSH/c9TtlB1jj2WgueKgWdf4jixu/EU=",
+        "serviceKey": "+noJt8f1is7xOSH/c9TtlB1jj2WgueKgWdf4jixu/EU=::local-small",
+        "contextIds": [
+          "import:imp_3eae29d75e501bfdb82bf4c51780a192d8535c6a0c143ce08fa9cb50b8774fe5"
+        ]
+      },
+      "messages": [
+        {
+          "id": "question_task_9b4be5cb9d514b31a38aaf9f6bb98480",
+          "role": "user",
+          "status": "complete",
+          "taskId": "task_9b4be5cb9d514b31a38aaf9f6bb98480",
+          "cost": null,
+          "contextIds": null,
+          "contextBytes": null,
+          "promptSha256": null,
+          "content_digest": "7d57d016d4fcd6fb8d086cb471bfa164ab4a6085f4efbf6f2d578701b0aa1eea",
+          "content_bytes": 1479
+        },
+        {
+          "id": "answer_task_9b4be5cb9d514b31a38aaf9f6bb98480",
+          "role": "assistant",
+          "status": "complete",
+          "taskId": "task_9b4be5cb9d514b31a38aaf9f6bb98480",
+          "cost": 0.0,
+          "contextIds": [
+            "import:imp_3eae29d75e501bfdb82bf4c51780a192d8535c6a0c143ce08fa9cb50b8774fe5"
+          ],
+          "contextBytes": [
+            746
+          ],
+          "promptSha256": "325f96ef21f6281565d2dd682118255e4db510de7f85a0874b5c57d38e3eedad",
+          "content_digest": "a4aab3f1f08004e907d2357fafe74cab56359bcb32e23f52e7eb1d3a9c0a2ad3",
+          "content_bytes": 1,
+          "run": {
+            "task_id": "task_9b4be5cb9d514b31a38aaf9f6bb98480",
+            "conversation_id": "994ecc10-4d09-4b7a-a4e8-c7b212700f71",
+            "state": "succeeded",
+            "cancel_requested": false
+          },
+          "order_status": 200,
+          "order": {
+            "task_id": "task_9b4be5cb9d514b31a38aaf9f6bb98480",
+            "state": "succeeded",
+            "transport": "local_runtime",
+            "amount": 0.0,
+            "error_code": null
+          }
+        },
+        {
+          "id": "question_task_640e1bc624f24a9aba5182d8b906a605",
+          "role": "user",
+          "status": "complete",
+          "taskId": "task_640e1bc624f24a9aba5182d8b906a605",
+          "cost": null,
+          "contextIds": null,
+          "contextBytes": null,
+          "promptSha256": null,
+          "content_digest": "3707d883d3e555b16cb1f750b5608c7b45025a3ce52957cd87a70e7e0f0dc335",
+          "content_bytes": 95
+        },
+        {
+          "id": "answer_task_640e1bc624f24a9aba5182d8b906a605",
+          "role": "assistant",
+          "status": "complete",
+          "taskId": "task_640e1bc624f24a9aba5182d8b906a605",
+          "cost": 0.0,
+          "contextIds": [
+            "import:imp_3eae29d75e501bfdb82bf4c51780a192d8535c6a0c143ce08fa9cb50b8774fe5"
+          ],
+          "contextBytes": [
+            1408
+          ],
+          "promptSha256": "443041a02995a2dcee7d949765c0d5895cc70a4d72848bb0912ca933c82dd503",
+          "content_digest": "29cdbb40e5e507ea5d1a546022d1103d564718b4453a973a1927f2e069c7ad6e",
+          "content_bytes": 5,
+          "run": {
+            "task_id": "task_640e1bc624f24a9aba5182d8b906a605",
+            "conversation_id": "994ecc10-4d09-4b7a-a4e8-c7b212700f71",
+            "state": "succeeded",
+            "cancel_requested": false
+          },
+          "order_status": 200,
+          "order": {
+            "task_id": "task_640e1bc624f24a9aba5182d8b906a605",
+            "state": "succeeded",
+            "transport": "local_runtime",
+            "amount": 0.0,
+            "error_code": null
+          }
+        },
+        {
+          "id": "question_task_599ea957a83d430da66c0f46c7e60170",
+          "role": "user",
+          "status": "complete",
+          "taskId": "task_599ea957a83d430da66c0f46c7e60170",
+          "cost": null,
+          "contextIds": null,
+          "contextBytes": null,
+          "promptSha256": null,
+          "content_digest": "8c8719f58797bc93d0d74d8906f65b450f62c031bd2e0fad0937861954c58759",
+          "content_bytes": 135
+        },
+        {
+          "id": "answer_task_599ea957a83d430da66c0f46c7e60170",
+          "role": "assistant",
+          "status": "complete",
+          "taskId": "task_599ea957a83d430da66c0f46c7e60170",
+          "cost": 0.0,
+          "contextIds": [
+            "import:imp_3eae29d75e501bfdb82bf4c51780a192d8535c6a0c143ce08fa9cb50b8774fe5"
+          ],
+          "contextBytes": [
+            1408
+          ],
+          "promptSha256": "acddbab800c44105de923eccb304335948ab74475a180bb369a1f7972abe884f",
+          "content_digest": "a0a8b29f1211de69f7888ac5c99b9886913d79f6110a8c21e1aae6e7bb3ee16f",
+          "content_bytes": 1156,
+          "run": {
+            "task_id": "task_599ea957a83d430da66c0f46c7e60170",
+            "conversation_id": "994ecc10-4d09-4b7a-a4e8-c7b212700f71",
+            "state": "succeeded",
+            "cancel_requested": false
+          },
+          "order_status": 200,
+          "order": {
+            "task_id": "task_599ea957a83d430da66c0f46c7e60170",
+            "state": "succeeded",
+            "transport": "local_runtime",
+            "amount": 0.0,
+            "error_code": null
+          }
+        }
+      ],
+      "service": {
+        "ready": true,
+        "publication_enabled": false
+      },
+      "limitation": "Real generation finished before cancellation was attempted; no cancellation request was sent and this does not verify in-progress cancellation."
+    },
+    {
+      "label": "short-after-node-restart",
+      "at": "2026-09-14T08:30:09.645082+00:00",
+      "pid": 23780,
+      "conversation_count": 4,
+      "history_digest": "2cbbaa84e19ae201f25a24bf4526d203fe39febab546ce39101b4134c1924cad",
+      "conversation": {
+        "id": "e7eca168-af96-499e-b9db-f2c0b24718b2",
+        "revision": 4,
+        "providerPeerId": "+noJt8f1is7xOSH/c9TtlB1jj2WgueKgWdf4jixu/EU=",
+        "serviceKey": "+noJt8f1is7xOSH/c9TtlB1jj2WgueKgWdf4jixu/EU=::local-small",
+        "contextIds": [
+          "import:imp_a9c05416cd8902ecd8a081c8002c8eabefcf9413d33907cb984d6e889544fc17"
+        ]
+      },
+      "messages": [
+        {
+          "id": "question_task_6878bf44c63740b7aa918a7dad0661be",
+          "role": "user",
+          "status": "complete",
+          "taskId": "task_6878bf44c63740b7aa918a7dad0661be",
+          "cost": null,
+          "contextIds": null,
+          "contextBytes": null,
+          "promptSha256": null,
+          "content_digest": "4c25cb5266880497e5735a8dc304e591e6bce7876b925eb34696566019fb4c12",
+          "content_bytes": 101
+        },
+        {
+          "id": "answer_task_6878bf44c63740b7aa918a7dad0661be",
+          "role": "assistant",
+          "status": "complete",
+          "taskId": "task_6878bf44c63740b7aa918a7dad0661be",
+          "cost": 0.0,
+          "contextIds": [
+            "import:imp_a9c05416cd8902ecd8a081c8002c8eabefcf9413d33907cb984d6e889544fc17"
+          ],
+          "contextBytes": [
+            474
+          ],
+          "promptSha256": "704fede663e09d726e233b87488cdbc27ef634fcb2fc22b9157462a4fd6eeb71",
+          "content_digest": "5668efa3e5a3ebec69f73941442815b685ac06b87d3b52663245ac9f43796b16",
+          "content_bytes": 5,
+          "run": {
+            "task_id": "task_6878bf44c63740b7aa918a7dad0661be",
+            "conversation_id": "e7eca168-af96-499e-b9db-f2c0b24718b2",
+            "state": "succeeded",
+            "cancel_requested": false
+          },
+          "order_status": 200,
+          "order": {
+            "task_id": "task_6878bf44c63740b7aa918a7dad0661be",
+            "state": "succeeded",
+            "transport": "local_runtime",
+            "amount": 0.0,
+            "error_code": "stored_response_invalid"
+          }
+        }
+      ],
+      "service": {
+        "ready": false,
+        "publication_enabled": false
+      }
+    },
+    {
+      "label": "long-after-node-restart",
+      "at": "2026-09-14T08:30:09.645082+00:00",
+      "pid": 23780,
+      "conversation_count": 4,
+      "history_digest": "d4ab9b1a4c47c0ed2a327a6d8966d9ae47ba501d404d929ab1452a6cd0b056ed",
+      "conversation": {
+        "id": "994ecc10-4d09-4b7a-a4e8-c7b212700f71",
+        "revision": 10,
+        "providerPeerId": "+noJt8f1is7xOSH/c9TtlB1jj2WgueKgWdf4jixu/EU=",
+        "serviceKey": "+noJt8f1is7xOSH/c9TtlB1jj2WgueKgWdf4jixu/EU=::local-small",
+        "contextIds": [
+          "import:imp_3eae29d75e501bfdb82bf4c51780a192d8535c6a0c143ce08fa9cb50b8774fe5"
+        ]
+      },
+      "messages": [
+        {
+          "id": "question_task_9b4be5cb9d514b31a38aaf9f6bb98480",
+          "role": "user",
+          "status": "complete",
+          "taskId": "task_9b4be5cb9d514b31a38aaf9f6bb98480",
+          "cost": null,
+          "contextIds": null,
+          "contextBytes": null,
+          "promptSha256": null,
+          "content_digest": "7d57d016d4fcd6fb8d086cb471bfa164ab4a6085f4efbf6f2d578701b0aa1eea",
+          "content_bytes": 1479
+        },
+        {
+          "id": "answer_task_9b4be5cb9d514b31a38aaf9f6bb98480",
+          "role": "assistant",
+          "status": "complete",
+          "taskId": "task_9b4be5cb9d514b31a38aaf9f6bb98480",
+          "cost": 0.0,
+          "contextIds": [
+            "import:imp_3eae29d75e501bfdb82bf4c51780a192d8535c6a0c143ce08fa9cb50b8774fe5"
+          ],
+          "contextBytes": [
+            746
+          ],
+          "promptSha256": "325f96ef21f6281565d2dd682118255e4db510de7f85a0874b5c57d38e3eedad",
+          "content_digest": "a4aab3f1f08004e907d2357fafe74cab56359bcb32e23f52e7eb1d3a9c0a2ad3",
+          "content_bytes": 1,
+          "run": {
+            "task_id": "task_9b4be5cb9d514b31a38aaf9f6bb98480",
+            "conversation_id": "994ecc10-4d09-4b7a-a4e8-c7b212700f71",
+            "state": "succeeded",
+            "cancel_requested": false
+          },
+          "order_status": 200,
+          "order": {
+            "task_id": "task_9b4be5cb9d514b31a38aaf9f6bb98480",
+            "state": "succeeded",
+            "transport": "local_runtime",
+            "amount": 0.0,
+            "error_code": null
+          }
+        },
+        {
+          "id": "question_task_640e1bc624f24a9aba5182d8b906a605",
+          "role": "user",
+          "status": "complete",
+          "taskId": "task_640e1bc624f24a9aba5182d8b906a605",
+          "cost": null,
+          "contextIds": null,
+          "contextBytes": null,
+          "promptSha256": null,
+          "content_digest": "3707d883d3e555b16cb1f750b5608c7b45025a3ce52957cd87a70e7e0f0dc335",
+          "content_bytes": 95
+        },
+        {
+          "id": "answer_task_640e1bc624f24a9aba5182d8b906a605",
+          "role": "assistant",
+          "status": "complete",
+          "taskId": "task_640e1bc624f24a9aba5182d8b906a605",
+          "cost": 0.0,
+          "contextIds": [
+            "import:imp_3eae29d75e501bfdb82bf4c51780a192d8535c6a0c143ce08fa9cb50b8774fe5"
+          ],
+          "contextBytes": [
+            1408
+          ],
+          "promptSha256": "443041a02995a2dcee7d949765c0d5895cc70a4d72848bb0912ca933c82dd503",
+          "content_digest": "29cdbb40e5e507ea5d1a546022d1103d564718b4453a973a1927f2e069c7ad6e",
+          "content_bytes": 5,
+          "run": {
+            "task_id": "task_640e1bc624f24a9aba5182d8b906a605",
+            "conversation_id": "994ecc10-4d09-4b7a-a4e8-c7b212700f71",
+            "state": "succeeded",
+            "cancel_requested": false
+          },
+          "order_status": 200,
+          "order": {
+            "task_id": "task_640e1bc624f24a9aba5182d8b906a605",
+            "state": "succeeded",
+            "transport": "local_runtime",
+            "amount": 0.0,
+            "error_code": null
+          }
+        },
+        {
+          "id": "question_task_599ea957a83d430da66c0f46c7e60170",
+          "role": "user",
+          "status": "complete",
+          "taskId": "task_599ea957a83d430da66c0f46c7e60170",
+          "cost": null,
+          "contextIds": null,
+          "contextBytes": null,
+          "promptSha256": null,
+          "content_digest": "8c8719f58797bc93d0d74d8906f65b450f62c031bd2e0fad0937861954c58759",
+          "content_bytes": 135
+        },
+        {
+          "id": "answer_task_599ea957a83d430da66c0f46c7e60170",
+          "role": "assistant",
+          "status": "complete",
+          "taskId": "task_599ea957a83d430da66c0f46c7e60170",
+          "cost": 0.0,
+          "contextIds": [
+            "import:imp_3eae29d75e501bfdb82bf4c51780a192d8535c6a0c143ce08fa9cb50b8774fe5"
+          ],
+          "contextBytes": [
+            1408
+          ],
+          "promptSha256": "acddbab800c44105de923eccb304335948ab74475a180bb369a1f7972abe884f",
+          "content_digest": "a0a8b29f1211de69f7888ac5c99b9886913d79f6110a8c21e1aae6e7bb3ee16f",
+          "content_bytes": 1156,
+          "run": {
+            "task_id": "task_599ea957a83d430da66c0f46c7e60170",
+            "conversation_id": "994ecc10-4d09-4b7a-a4e8-c7b212700f71",
+            "state": "succeeded",
+            "cancel_requested": false
+          },
+          "order_status": 200,
+          "order": {
+            "task_id": "task_599ea957a83d430da66c0f46c7e60170",
+            "state": "succeeded",
+            "transport": "local_runtime",
+            "amount": 0.0,
+            "error_code": null
+          }
+        }
+      ],
+      "service": {
+        "ready": false,
+        "publication_enabled": false
+      }
+    }
+  ]
+}

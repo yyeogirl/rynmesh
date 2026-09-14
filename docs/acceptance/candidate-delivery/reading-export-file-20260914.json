@@ -1,0 +1,21 @@
+{
+  "date": "2026-09-14",
+  "environment": "Windows, Chrome, installed wheel 1829eb2, loopback owner API",
+  "new_bytes": 12535,
+  "new_sha256": "c115fc55b2582c5f2502648a249ea7fa12293c4f29ba93185510c6119d37de4f",
+  "new_fields_match_node": [
+    "recommendation_profile",
+    "digest_preferences",
+    "reading_history",
+    "sources",
+    "first_success",
+    "privacy_settings"
+  ],
+  "new_history_items": 2,
+  "prior_bytes": 18622,
+  "prior_sha256": "e4d888012d31756de076ab0014bb55ae687a7335d820da9e22ec09c3a79507f9",
+  "prior_feedback_events": 4,
+  "prior_event_ids_match_checkpoint": true,
+  "prior_profile_digest_matches_checkpoint": true,
+  "limitations": "Checks saved JSON and named stable fields, not a complete traffic/log privacy audit."
+}

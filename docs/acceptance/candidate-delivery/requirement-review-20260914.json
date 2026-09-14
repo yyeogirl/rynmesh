@@ -1,0 +1,1300 @@
+{
+  "scope": "Windows local scope; macOS and public-network checks waived by user",
+  "runtime_commit": "04d94f21fb702ffe0ac9ed596ccb56e681e578f4",
+  "counts": {
+    "passed": 95
+  },
+  "cases": [
+    {
+      "id": "READ01",
+      "scenario": "干净安装、正常网络、无模型与好友",
+      "expected": "无配置看到真实内容并完成打开、收藏；记录耗时，建议启动至完成不超过 3 分钟",
+      "status": "passed",
+      "reason": "空安装环境与空数据节点取得真实推荐、打开并收藏；167.15 秒为启动至首次完成，安装耗时另列。",
+      "evidence": [
+        "docs/acceptance/first-reading-development/README.md",
+        "docs/acceptance/first-reading-development/home-recovery-20260914.md",
+        "docs/acceptance/first-reading-development/public-source-http-20260914.json",
+        "docs/acceptance/first-reading-development/browser-recovery-20260914.md",
+        "docs/acceptance/first-reading-development/browser-checkpoints-20260914.json",
+        "docs/acceptance/first-reading-development/all-sources-recovery-20260914.md",
+        "docs/acceptance/first-reading-development/network-checkpoints-20260914.json",
+        "docs/product-briefs/ACCEPTANCE_SCOPE.md",
+        "docs/acceptance/candidate-delivery/local-case-review-20260914.md",
+        "docs/product-briefs/TRY_CANDIDATE.md"
+      ]
+    },
+    {
+      "id": "READ02",
+      "scenario": "关闭未完成引导后重启",
+      "expected": "应用可用，首页可继续，未错误标记完成",
+      "status": "passed",
+      "reason": "关闭未完成引导后重启仍可继续，未错误完成。",
+      "evidence": [
+        "docs/acceptance/first-reading-development/README.md",
+        "docs/acceptance/first-reading-development/browser-recovery-20260914.md",
+        "docs/acceptance/first-reading-development/browser-checkpoints-20260914.json",
+        "docs/product-briefs/ACCEPTANCE_SCOPE.md",
+        "docs/acceptance/candidate-delivery/local-case-review-20260914.md"
+      ]
+    },
+    {
+      "id": "READ03",
+      "scenario": "收藏并阅读后重启",
+      "expected": "收藏仅一条，阅读位置可恢复",
+      "status": "passed",
+      "reason": "唯一收藏、完整历史摘要及约 16% 阅读位置在重启后保留。",
+      "evidence": [
+        "docs/acceptance/first-reading-development/README.md",
+        "docs/acceptance/device-sync-development/README.md",
+        "docs/acceptance/first-reading-development/home-recovery-20260914.md",
+        "docs/acceptance/first-reading-development/public-source-http-20260914.json",
+        "docs/acceptance/first-reading-development/browser-recovery-20260914.md",
+        "docs/acceptance/first-reading-development/browser-checkpoints-20260914.json",
+        "docs/product-briefs/ACCEPTANCE_SCOPE.md",
+        "docs/acceptance/candidate-delivery/local-case-review-20260914.md"
+      ]
+    },
+    {
+      "id": "READ04",
+      "scenario": "一个来源失败，单独重试",
+      "expected": "显示对应错误与失败次数；正常来源内容保留且不强制重抓",
+      "status": "passed",
+      "reason": "单来源 503、单独重试和恢复 200，其他 14 项健康记录不变。",
+      "evidence": [
+        "docs/acceptance/first-reading-development/README.md",
+        "docs/acceptance/first-reading-development/home-recovery-20260914.md",
+        "docs/acceptance/first-reading-development/public-source-http-20260914.json",
+        "docs/acceptance/first-reading-development/browser-recovery-20260914.md",
+        "docs/acceptance/first-reading-development/browser-checkpoints-20260914.json",
+        "docs/product-briefs/ACCEPTANCE_SCOPE.md",
+        "docs/acceptance/candidate-delivery/local-case-review-20260914.md"
+      ]
+    },
+    {
+      "id": "READ05",
+      "scenario": "全部来源断网，分别准备有缓存和无缓存",
+      "expected": "有缓存可读且有标记；无缓存有恢复入口，联网重试后可用",
+      "status": "passed",
+      "reason": "14 个来源连接全部失败分别验证空目录恢复、缓存阅读与重启。",
+      "evidence": [
+        "docs/acceptance/first-reading-development/README.md",
+        "docs/acceptance/first-reading-development/all-sources-recovery-20260914.md",
+        "docs/acceptance/first-reading-development/network-checkpoints-20260914.json",
+        "docs/product-briefs/ACCEPTANCE_SCOPE.md",
+        "docs/acceptance/candidate-delivery/local-case-review-20260914.md"
+      ]
+    },
+    {
+      "id": "READ06",
+      "scenario": "查看内置和自定义来源",
+      "expected": "所有健康字段真实，从未检查或从未成功有明确文字",
+      "status": "passed",
+      "reason": "实际默认及自定义来源健康字段已有页面/接口核对；新增组件检查覆盖从未检查与首次失败，真实后端状态由 source_recovery 验证。",
+      "evidence": [
+        "docs/acceptance/first-reading-development/README.md",
+        "docs/acceptance/first-reading-development/browser-recovery-20260914.md",
+        "docs/acceptance/first-reading-development/browser-checkpoints-20260914.json",
+        "docs/acceptance/first-reading-development/all-sources-recovery-20260914.md",
+        "docs/acceptance/first-reading-development/network-checkpoints-20260914.json",
+        "tests/test_source_recovery.py",
+        "webapp/src/components/SourceHealthPanel.test.tsx"
+      ]
+    },
+    {
+      "id": "READ07",
+      "scenario": "分别反馈 More/Less/Hide，再撤销一条",
+      "expected": "操作、时间和信号可见；仅撤销指定操作，重新计算排名，重启保持",
+      "status": "passed",
+      "reason": "三种反馈、单项撤销、替代状态、信号解释及重启保留已验证。",
+      "evidence": [
+        "docs/acceptance/first-reading-development/README.md",
+        "docs/acceptance/first-reading-development/browser-recovery-20260914.md",
+        "docs/acceptance/first-reading-development/browser-checkpoints-20260914.json",
+        "docs/product-briefs/ACCEPTANCE_SCOPE.md",
+        "docs/acceptance/candidate-delivery/local-case-review-20260914.md"
+      ]
+    },
+    {
+      "id": "READ08",
+      "scenario": "收藏/反馈写入失败，恢复后重试",
+      "expected": "不伪造成功；恢复后只有一条记录",
+      "status": "passed",
+      "reason": "真实文件占用使收藏/反馈写入失败；释放后原操作重试，记录不重复。",
+      "evidence": [
+        "docs/acceptance/first-reading-development/README.md",
+        "docs/acceptance/first-reading-development/browser-recovery-20260914.md",
+        "docs/acceptance/first-reading-development/browser-checkpoints-20260914.json",
+        "docs/product-briefs/ACCEPTANCE_SCOPE.md",
+        "docs/acceptance/candidate-delivery/local-case-review-20260914.md"
+      ]
+    },
+    {
+      "id": "READ09",
+      "scenario": "完成后再次启动",
+      "expected": "不强制重复引导，能继续阅读并找到连接朋友入口",
+      "status": "passed",
+      "reason": "首次完成后重启不强制引导，继续阅读与好友入口可见。",
+      "evidence": [
+        "docs/acceptance/first-reading-development/README.md",
+        "docs/acceptance/first-reading-development/browser-recovery-20260914.md",
+        "docs/acceptance/first-reading-development/browser-checkpoints-20260914.json",
+        "docs/product-briefs/ACCEPTANCE_SCOPE.md",
+        "docs/acceptance/candidate-delivery/local-case-review-20260914.md"
+      ]
+    },
+    {
+      "id": "READ10",
+      "scenario": "导出/擦除推荐数据，检查日志与网络",
+      "expected": "解释记录纳入相应范围，画像不发给模型或外部服务，日志无私有正文",
+      "status": "passed",
+      "reason": "导出、擦除、画像外发与当前日志边界核对完成；审计详情改为计数，历史日志不自动抹除。",
+      "evidence": [
+        "docs/acceptance/first-reading-development/README.md",
+        "docs/acceptance/first-reading-development/privacy-recovery-20260914.md",
+        "docs/acceptance/first-reading-development/privacy-checkpoints-20260914.json",
+        "docs/acceptance/candidate-delivery/reading-export-file-20260914.md",
+        "docs/acceptance/candidate-delivery/reading-export-file-20260914.json",
+        "docs/acceptance/candidate-delivery/privacy-boundaries-20260914.md"
+      ]
+    },
+    {
+      "id": "SHARE01",
+      "scenario": "A 已安装，B 未安装",
+      "expected": "B 凭邀请文本完成安装/打开、审核、接受和分享，无需手工改配置",
+      "status": "passed",
+      "reason": "已安装 wheel 双节点从邀请文本审核、接受至首次消息和正文分享，macOS 安装分支跳过。",
+      "evidence": [
+        "docs/acceptance/friends-development/README.md",
+        "docs/acceptance/friends-development/product-http-20260914.md",
+        "docs/acceptance/friends-development/product-http-20260914-d.json",
+        "docs/acceptance/friends-development/browser-first-sharing-20260914.md",
+        "docs/acceptance/friends-development/browser-checkpoints-20260914.json",
+        "docs/acceptance/candidate-delivery/two-node-20260914.md"
+      ]
+    },
+    {
+      "id": "SHARE02",
+      "scenario": "粘贴邀请但不确认",
+      "expected": "身份、权限可检查，未向待审核端点请求",
+      "status": "passed",
+      "reason": "邀请方离线时本地审核身份/权限，确认前观察到零好友出站请求、零关系。",
+      "evidence": [
+        "docs/acceptance/friends-development/README.md",
+        "docs/acceptance/friends-development/product-http-20260914.md",
+        "docs/acceptance/friends-development/product-http-20260914-d.json",
+        "docs/acceptance/friends-development/browser-first-sharing-20260914.md",
+        "docs/acceptance/friends-development/browser-checkpoints-20260914.json"
+      ]
+    },
+    {
+      "id": "SHARE03",
+      "scenario": "两个接收者并发接受",
+      "expected": "仅建立一次关系，另一方得到已使用提示",
+      "status": "passed",
+      "reason": "三节点两次接受请求实际重叠，只建立一条关系；另一方明确提示邀请已用。",
+      "evidence": [
+        "docs/acceptance/friends-development/README.md",
+        "docs/acceptance/friends-development/product-http-20260914.md",
+        "docs/acceptance/friends-development/product-http-20260914-d.json",
+        "docs/acceptance/friends-development/invite-attachments-browser-20260914.md",
+        "docs/acceptance/friends-development/invite-attachment-checkpoints-20260914.json"
+      ]
+    },
+    {
+      "id": "SHARE04",
+      "scenario": "过期、取消、重复接受分别测试",
+      "expected": "状态准确且可恢复；同一成功请求重试返回原关系",
+      "status": "passed",
+      "reason": "自然 15 分钟过期、取消、同成功请求重试及新邀请恢复均有页面记录。",
+      "evidence": [
+        "docs/acceptance/friends-development/README.md",
+        "docs/acceptance/friends-development/product-http-20260914.md",
+        "docs/acceptance/friends-development/product-http-20260914-d.json",
+        "docs/acceptance/friends-development/invite-attachments-browser-20260914.md",
+        "docs/acceptance/friends-development/invite-attachment-checkpoints-20260914.json"
+      ]
+    },
+    {
+      "id": "SHARE05",
+      "scenario": "双方互发文本、小附件、内容卡片",
+      "expected": "内容完整；确认前不获取私有正文；超限附件发送前被阻止",
+      "status": "passed",
+      "reason": "双向消息和文章、副本下载同摘要；三份附件在 Chrome 实际落盘，5 MiB+1 发送前阻止。Codex 内置浏览器保存差异不列为通过。",
+      "evidence": [
+        "docs/acceptance/friends-development/README.md",
+        "docs/acceptance/friends-development/product-http-20260914.md",
+        "docs/acceptance/friends-development/product-http-20260914-d.json",
+        "docs/acceptance/friends-development/mailbox-recovery-20260914.md",
+        "docs/acceptance/friends-development/mailbox-quota-http-20260914-b.json",
+        "docs/acceptance/friends-development/product-http-20260914-e.json",
+        "docs/acceptance/friends-development/browser-first-sharing-20260914.md",
+        "docs/acceptance/friends-development/browser-checkpoints-20260914.json",
+        "docs/acceptance/friends-development/invite-attachments-browser-20260914.md",
+        "docs/acceptance/friends-development/invite-attachment-checkpoints-20260914.json",
+        "docs/acceptance/candidate-delivery/two-node-20260914.md"
+      ]
+    },
+    {
+      "id": "SHARE06",
+      "scenario": "B 离线，A 发送可入邮箱消息，B 再上线",
+      "expected": "先显示入队，接收确认后显示送达；重复投递仅一条",
+      "status": "passed",
+      "reason": "接收方停机先显示邮箱未确认；仅邮箱收取后回执更新为送达，重试无重复。",
+      "evidence": [
+        "docs/acceptance/friends-development/README.md",
+        "docs/acceptance/friends-development/product-http-20260914.md",
+        "docs/acceptance/friends-development/product-http-20260914-d.json",
+        "docs/acceptance/friends-development/mailbox-recovery-20260914.md",
+        "docs/acceptance/friends-development/mailbox-quota-http-20260914-b.json",
+        "docs/acceptance/friends-development/product-http-20260914-e.json",
+        "docs/acceptance/friends-development/browser-first-sharing-20260914.md",
+        "docs/acceptance/friends-development/browser-checkpoints-20260914.json"
+      ]
+    },
+    {
+      "id": "SHARE07",
+      "scenario": "邮箱满、消息过期、断网、重启后重试",
+      "expected": "无伪造送达，状态可恢复，不重复分享",
+      "status": "passed",
+      "reason": "真实默认配额第 17 条被拒绝且重启保留；收取后同身份恢复。期限及迟到回执用受控时钟和真实文件邮箱验证。",
+      "evidence": [
+        "docs/acceptance/friends-development/README.md",
+        "docs/acceptance/friends-development/product-http-20260914.md",
+        "docs/acceptance/friends-development/product-http-20260914-d.json",
+        "docs/acceptance/friends-development/mailbox-recovery-20260914.md",
+        "docs/acceptance/friends-development/mailbox-quota-http-20260914-b.json",
+        "docs/acceptance/friends-development/product-http-20260914-e.json",
+        "docs/acceptance/friends-development/browser-first-sharing-20260914.md",
+        "docs/acceptance/friends-development/browser-checkpoints-20260914.json"
+      ]
+    },
+    {
+      "id": "SHARE08",
+      "scenario": "B 在线/离线时 A 分别撤销",
+      "expected": "A 立即拒绝下一次受保护请求，重启或重新发现不复活关系",
+      "status": "passed",
+      "reason": "撤销前受保护请求 200，离线撤销后及重启后均 403，旧关系不复活。",
+      "evidence": [
+        "docs/acceptance/friends-development/README.md",
+        "docs/acceptance/friends-development/product-http-20260914.md",
+        "docs/acceptance/friends-development/product-http-20260914-d.json",
+        "docs/acceptance/friends-development/browser-first-sharing-20260914.md",
+        "docs/acceptance/friends-development/browser-checkpoints-20260914.json",
+        "docs/acceptance/candidate-delivery/two-node-20260914.md"
+      ]
+    },
+    {
+      "id": "SHARE09",
+      "scenario": "撤销后访问私有卡片",
+      "expected": "新的正文获取被拒绝，界面说明已保存副本无法远程收回",
+      "status": "passed",
+      "reason": "撤销确认解释不能收回独立副本，新获取拒绝；保存副本重启后仍可读。",
+      "evidence": [
+        "docs/acceptance/friends-development/README.md",
+        "docs/acceptance/friends-development/product-http-20260914.md",
+        "docs/acceptance/friends-development/product-http-20260914-d.json",
+        "docs/acceptance/friends-development/browser-first-sharing-20260914.md",
+        "docs/acceptance/friends-development/browser-checkpoints-20260914.json",
+        "docs/acceptance/candidate-delivery/two-node-20260914.md"
+      ]
+    },
+    {
+      "id": "SHARE10",
+      "scenario": "检查权限、日志、诊断、导出",
+      "expected": "不获得额外服务/根信任，邀请和关系秘密不泄露",
+      "status": "passed",
+      "reason": "默认分享权限、根信任不扩展、邀请/关系秘密在日志、诊断和允许字段导出中的边界核对完成。",
+      "evidence": [
+        "docs/acceptance/friends-development/README.md",
+        "docs/acceptance/friends-development/product-http-20260914.md",
+        "docs/acceptance/friends-development/product-http-20260914-d.json",
+        "docs/acceptance/candidate-delivery/privacy-boundaries-20260914.md"
+      ]
+    },
+    {
+      "id": "SHARE11",
+      "scenario": "产品双节点 CI 和不同公网出口实机跑全流程",
+      "expected": "全流程通过后才声明完整跨网里程碑，LAN 结果不能替代",
+      "status": "passed",
+      "reason": "最终GitHub Actions 9项全部通过，含产品双节点分享与配额恢复；公网双出口实机按用户明确要求跳过，未声称完整跨公网实测。",
+      "evidence": [
+        "docs/acceptance/friends-development/README.md",
+        "docs/acceptance/friends-development/product-http-20260914.md",
+        "docs/acceptance/friends-development/product-http-20260914-d.json",
+        "docs/acceptance/friends-development/mailbox-recovery-20260914.md",
+        "docs/acceptance/friends-development/mailbox-quota-http-20260914-b.json",
+        "docs/acceptance/friends-development/product-http-20260914-e.json",
+        "docs/acceptance/candidate-delivery/remote-ci-final-20260914.md"
+      ]
+    },
+    {
+      "id": "ASK01",
+      "scenario": "全新安装打开入口",
+      "expected": "无伪造历史，有模型可问答，无模型有设置入口",
+      "status": "passed",
+      "reason": "空节点无示例会话、无模型有管理入口；真实原生模型从 Ask 入口完成问答。",
+      "evidence": [
+        "docs/acceptance/ask-ryn-development/README.md",
+        "docs/acceptance/local-ai-development/runtime-recovery-20260914.md",
+        "docs/product-briefs/TRY_CANDIDATE.md"
+      ]
+    },
+    {
+      "id": "ASK02",
+      "scenario": "页面提问，从侧栏打开，再重启",
+      "expected": "同一会话 ID、相同历史与任务状态，完成的回答可继续",
+      "status": "passed",
+      "reason": "侧栏与主页相同会话身份、任务和原服务绑定，真实问答重启后可读。",
+      "evidence": [
+        "docs/acceptance/ask-ryn-development/README.md",
+        "docs/acceptance/ask-ryn-development/article-browser-20260914.md",
+        "docs/acceptance/ask-ryn-development/browser-checkpoints-20260914.json"
+      ]
+    },
+    {
+      "id": "ASK03",
+      "scenario": "迁移旧会话，重复执行并模拟失败",
+      "expected": "不重复、不丢服务键；失败保留原数据，重试可完成",
+      "status": "passed",
+      "reason": "实际加密 IndexedDB 迁移遇原子写失败保留原件；重试、重复导入及删除后再导入不丢绑定、不重复。",
+      "evidence": [
+        "docs/acceptance/ask-ryn-development/README.md",
+        "docs/acceptance/ask-ryn-development/legacy-migration-browser-20260914.md",
+        "docs/acceptance/ask-ryn-development/migration-checkpoints-20260914.json"
+      ]
+    },
+    {
+      "id": "ASK04",
+      "scenario": "从文章进入问答",
+      "expected": "来源可见，引用对应实际提供材料，并可返回打开",
+      "status": "passed",
+      "reason": "真实短文问答预览与归档来源材料一致，历史可展开并返回；不保证模型主动生成行内引用标号。",
+      "evidence": [
+        "docs/acceptance/ask-ryn-development/README.md",
+        "docs/acceptance/ask-ryn-development/article-browser-20260914.md",
+        "docs/acceptance/ask-ryn-development/browser-checkpoints-20260914.json"
+      ]
+    },
+    {
+      "id": "ASK05",
+      "scenario": "超长正文叠加长历史",
+      "expected": "总预算不越界，截断或删减提示发送前可见",
+      "status": "passed",
+      "reason": "65404 字节材料及真实长历史，预览提示截断/省略，实际归档摘要与 4096 总预算对应。",
+      "evidence": [
+        "docs/acceptance/ask-ryn-development/README.md",
+        "docs/acceptance/ask-ryn-development/article-browser-20260914.md",
+        "docs/acceptance/ask-ryn-development/browser-checkpoints-20260914.json"
+      ]
+    },
+    {
+      "id": "ASK06",
+      "scenario": "从服务 A 切换 B",
+      "expected": "显示 B 接收方；A 历史保持绑定；未经确认 B 收不到旧内容",
+      "status": "passed",
+      "reason": "真实两 Provider 页面切换先确认，新会话无旧内容；旧历史绑定和摘要保持。",
+      "evidence": [
+        "docs/acceptance/ask-ryn-development/README.md",
+        "docs/acceptance/ask-ryn-development/model-switch-recovery-20260914.md",
+        "docs/acceptance/ask-ryn-development/model-switch-checkpoints-20260914.json",
+        "docs/acceptance/ask-ryn-development/running-recovery-20260914.json"
+      ]
+    },
+    {
+      "id": "ASK07",
+      "scenario": "模拟未就绪、runtime_busy、p2p_capacity_exhausted、不可达",
+      "expected": "原因和动作分别正确，不全部显示节点离线",
+      "status": "passed",
+      "reason": "页面验证 busy、not_ready、unreachable 和实际固定端口容量不足，释放会话后恢复推理。",
+      "evidence": [
+        "docs/acceptance/ask-ryn-development/README.md",
+        "docs/acceptance/ask-ryn-development/runtime-error-recovery-20260914.md",
+        "docs/acceptance/ask-ryn-development/error-browser-20260914.md",
+        "docs/acceptance/ask-ryn-development/error-browser-checkpoints-20260914.json",
+        "docs/acceptance/ask-ryn-development/peer-failure-browser-20260914.md",
+        "docs/acceptance/ask-ryn-development/peer-failure-checkpoints-20260914.json",
+        "docs/acceptance/ask-ryn-development/peer-failure-assertions-20260914.json"
+      ]
+    },
+    {
+      "id": "ASK08",
+      "scenario": "生成中取消、超时、重启后重试",
+      "expected": "不提前声称 GPU 已停；核对原任务，不重复发单与结算",
+      "status": "passed",
+      "reason": "真实 CPU 取消/中断与非零开发额度去重；页面实际取消及 120 秒超时、迟到响应、原任务核对与重启。超时页面用零费合成服务，非 GPU 停算证明。",
+      "evidence": [
+        "docs/acceptance/ask-ryn-development/README.md",
+        "docs/acceptance/ask-ryn-development/article-browser-20260914.md",
+        "docs/acceptance/ask-ryn-development/browser-checkpoints-20260914.json",
+        "docs/acceptance/ask-ryn-development/model-switch-recovery-20260914.md",
+        "docs/acceptance/ask-ryn-development/model-switch-checkpoints-20260914.json",
+        "docs/acceptance/ask-ryn-development/running-recovery-20260914.json",
+        "docs/acceptance/ask-ryn-development/peer-failure-browser-20260914.md",
+        "docs/acceptance/ask-ryn-development/peer-failure-checkpoints-20260914.json",
+        "docs/acceptance/ask-ryn-development/peer-failure-assertions-20260914.json",
+        "docs/acceptance/ask-ryn-development/cancel-timeout-browser-20260914.md",
+        "docs/acceptance/ask-ryn-development/cancel-timeout-checkpoints-20260914.json",
+        "docs/acceptance/ask-ryn-development/timeout-browser-checkpoints-20260914.json",
+        "docs/acceptance/ask-ryn-development/full-timeout-observation-20260914.json",
+        "docs/acceptance/ask-ryn-development/cancel-timeout-assertions-20260914.json"
+      ]
+    },
+    {
+      "id": "ASK09",
+      "scenario": "文章含要求泄露数据或执行操作的文字",
+      "expected": "不触发自动授权、切换接收者或执行外部操作；文章按引用处理",
+      "status": "passed",
+      "reason": "恶意引用作为 JSON 数据/用户材料，结构化角色及接收方保持；实际模型订单仍发原本机，结果作为文本归档。",
+      "evidence": [
+        "docs/acceptance/ask-ryn-development/README.md",
+        "docs/acceptance/ask-ryn-development/article-browser-20260914.md",
+        "docs/acceptance/ask-ryn-development/browser-checkpoints-20260914.json",
+        "tests/test_ask_context.py",
+        "rynmesh/ask_ryn/runs.py"
+      ]
+    },
+    {
+      "id": "ASK10",
+      "scenario": "删除/导出会话并检查日志",
+      "expected": "数据范围明确，导出无凭证，普通日志无输入输出正文",
+      "status": "passed",
+      "reason": "真实导出/删除/重启与最终推理日志隔离、诊断和恢复副本范围已对齐。",
+      "evidence": [
+        "docs/acceptance/ask-ryn-development/README.md",
+        "docs/acceptance/ask-ryn-development/export-privacy-browser-20260914.md",
+        "docs/acceptance/ask-ryn-development/export-privacy-checkpoints-20260914.json",
+        "docs/acceptance/candidate-delivery/privacy-boundaries-20260914.md"
+      ]
+    },
+    {
+      "id": "AI01",
+      "scenario": "支持平台的干净桌面，无 Docker",
+      "expected": "不用终端完成模型安装和真实问答",
+      "status": "passed",
+      "reason": "Windows 原生 CPU 模型经产品页面安装恢复与真实问答，不使用 Docker；macOS 桌面跳过。",
+      "evidence": [
+        "docs/acceptance/local-ai-development/README.md",
+        "docs/acceptance/local-ai-development/runtime-recovery-20260914.md"
+      ]
+    },
+    {
+      "id": "AI02",
+      "scenario": "查看推荐并安装",
+      "expected": "来源、许可、大小和空间需求可见，确认后下载",
+      "status": "passed",
+      "reason": "来源、许可、资源需求可见，重试必须重新确认，真实下载安装未绕过固定摘要。",
+      "evidence": [
+        "docs/acceptance/local-ai-development/README.md",
+        "docs/acceptance/local-ai-development/runtime-recovery-20260914.md"
+      ]
+    },
+    {
+      "id": "AI03",
+      "scenario": "下载中断、取消、重启后继续",
+      "expected": "依据验证进度恢复，无重复安装，未完成不标就绪",
+      "status": "passed",
+      "reason": "实际取消保留 5 MiB、节点中断保留 16 MiB，206 从检查点续传，最终正常校验并完成真实问答。",
+      "evidence": [
+        "docs/acceptance/local-ai-development/runtime-install-recovery.md",
+        "docs/acceptance/local-ai-development/model-download-recovery.md",
+        "docs/acceptance/local-ai-development/setup-rollback.md",
+        "docs/acceptance/local-ai-development/windows-managed-recovery.md",
+        "docs/acceptance/local-ai-development/windows-install-recovery.json",
+        "docs/acceptance/local-ai-development/runtime-recovery-20260914.md"
+      ]
+    },
+    {
+      "id": "AI04",
+      "scenario": "校验失败、移走模型、依赖缺失",
+      "expected": "错误明确且可恢复，不发布假健康服务",
+      "status": "passed",
+      "reason": "真实 Windows CPU DLL 缺失返回明确错误且不假健康；Update runtime 实际重新下载修复，自检成功，发布保持关闭。",
+      "evidence": [
+        "docs/acceptance/local-ai-development/README.md",
+        "docs/acceptance/local-ai-development/runtime-install-recovery.md",
+        "docs/acceptance/local-ai-development/model-download-recovery.md",
+        "docs/acceptance/local-ai-development/setup-rollback.md",
+        "docs/acceptance/local-ai-development/runtime-recovery-20260914.md",
+        "docs/acceptance/local-ai-development/lifecycle-browser-20260914.md",
+        "docs/acceptance/local-ai-development/lifecycle-browser-checkpoints-20260914.json",
+        "docs/acceptance/local-ai-development/native-dependency-20260914.md"
+      ]
+    },
+    {
+      "id": "AI05",
+      "scenario": "就绪后重启问答",
+      "expected": "配置保留，重新核对健康，可获得真实回答",
+      "status": "passed",
+      "reason": "真实节点重启保留配置与会话，页面启动模型重新检查健康，原会话可继续真实问答。",
+      "evidence": [
+        "docs/acceptance/local-ai-development/README.md",
+        "docs/acceptance/local-ai-development/runtime-recovery-20260914.md"
+      ]
+    },
+    {
+      "id": "AI06",
+      "scenario": "未授权好友直接请求",
+      "expected": "Provider 拒绝，好友关系本身不开放 AI",
+      "status": "passed",
+      "reason": "真实签名 Provider 请求在未授权时拒绝且模型零调用；真实双节点页面另证好友关系本身不开放 AI。",
+      "evidence": [
+        "docs/acceptance/ai-permissions-development/README.md",
+        "docs/acceptance/ai-permissions-development/windows-two-node-native.json",
+        "tests/test_ai_access_provider.py"
+      ]
+    },
+    {
+      "id": "AI07",
+      "scenario": "仅允许 B 用模型 X，C 未授权",
+      "expected": "B 可发现使用 X；C 及 B 对其他未授权模型的请求被拒绝",
+      "status": "passed",
+      "reason": "真实模型获准 B 调用成功；签名加密三身份集成验证 C 与 B 请求模型 Y 被拒绝。",
+      "evidence": [
+        "docs/acceptance/ai-permissions-development/README.md",
+        "docs/acceptance/ai-permissions-development/windows-two-node-native.json",
+        "tests/test_ai_access_provider.py"
+      ]
+    },
+    {
+      "id": "AI08",
+      "scenario": "B 执行中被撤销，再发新任务",
+      "expected": "新请求立即拒绝，旧任务状态真实且只结算一次",
+      "status": "passed",
+      "reason": "真实任务 running 后撤销，新旧权限拒绝；取消任务释放一次，完成任务各结算一次，不声称立即停算。",
+      "evidence": [
+        "docs/acceptance/ai-permissions-development/README.md",
+        "docs/acceptance/ai-permissions-development/windows-two-node-native.json"
+      ]
+    },
+    {
+      "id": "AI09",
+      "scenario": "重放旧凭证、重启、重新发现好友",
+      "expected": "旧权限不复活，需新的明确授权",
+      "status": "passed",
+      "reason": "重启、旧版本、重新授权和重新好友关系的权限验证均拒绝继承旧授权。",
+      "evidence": [
+        "docs/acceptance/ai-permissions-development/README.md",
+        "docs/acceptance/ai-permissions-development/windows-two-node-native.json",
+        "tests/test_ai_access.py"
+      ]
+    },
+    {
+      "id": "AI10",
+      "scenario": "停止/移除模型后查看历史",
+      "expected": "运行状态和空间更新，会话保留，对应模型入口显示不可用",
+      "status": "passed",
+      "reason": "真实模型停止、占用导致删除失败、释放后删除成功及重启，实际空间与 10 段历史/16 笔订单对应。",
+      "evidence": [
+        "docs/acceptance/local-ai-development/README.md",
+        "docs/acceptance/local-ai-development/runtime-recovery-20260914.md",
+        "docs/acceptance/local-ai-development/lifecycle-browser-20260914.md",
+        "docs/acceptance/local-ai-development/lifecycle-browser-checkpoints-20260914.json"
+      ]
+    },
+    {
+      "id": "SEARCH01",
+      "scenario": "四类数据分别放入不同合成关键词",
+      "expected": "每类均可找到，点击打开正确内容或命中消息",
+      "status": "passed",
+      "reason": "真实四类存储分别查询并从浏览器打开对应文章、好友消息和 Ask 命中。",
+      "evidence": [
+        "docs/acceptance/search-development/README.md",
+        "docs/acceptance/search-development/windows-browser-node.json"
+      ]
+    },
+    {
+      "id": "SEARCH02",
+      "scenario": "中文词组、英文及中英混合查询",
+      "expected": "按约定匹配，不因中文无空格而完全失效，匹配片段正确",
+      "status": "passed",
+      "reason": "中文无空格、英文大小写及中英混合查询和 Unicode 高亮由实际页面及核心检查覆盖。",
+      "evidence": [
+        "docs/acceptance/search-development/README.md",
+        "docs/acceptance/search-development/windows-browser-node.json"
+      ]
+    },
+    {
+      "id": "SEARCH03",
+      "scenario": "切换类型/时间/好友筛选，再返回列表",
+      "expected": "仅保留符合条件结果，关键词、筛选和位置保持",
+      "status": "passed",
+      "reason": "日期/好友/类型/来源组合、清除、打开与返回均已验证，返回恢复 2375px 和筛选值。",
+      "evidence": [
+        "docs/acceptance/search-development/README.md",
+        "docs/acceptance/search-development/windows-browser-node.json",
+        "docs/acceptance/search-development/browser-pagination.json",
+        "docs/acceptance/search-development/keyboard-return-20260914.md",
+        "docs/acceptance/search-development/keyboard-return-checkpoints-20260914.json",
+        "docs/acceptance/search-development/filter-combinations-20260914.md",
+        "docs/acceptance/search-development/filter-combinations-checkpoints-20260914.json"
+      ]
+    },
+    {
+      "id": "SEARCH04",
+      "scenario": "同一内容同时收藏、读过、被分享",
+      "expected": "一个内容结果包含多个来源入口；不同消息不被误合并",
+      "status": "passed",
+      "reason": "文章收藏/历史/分享合并为一个结果；独立消息身份保留，实际双节点下载前后均核对。",
+      "evidence": [
+        "docs/acceptance/search-development/README.md",
+        "docs/acceptance/search-development/windows-browser-node.json",
+        "docs/acceptance/search-development/revocation-browser-20260914.md",
+        "docs/acceptance/search-development/revocation-checkpoints-20260914.json"
+      ]
+    },
+    {
+      "id": "SEARCH05",
+      "scenario": "修改、增加和删除记录",
+      "expected": "索引正常时建议 5 秒内更新；删除后旧索引也不能继续返回正文片段",
+      "status": "passed",
+      "reason": "新增/改名实测更新在建议 5 秒内；旧片段立即过滤，删除直接打开 409，损坏来源隔离。",
+      "evidence": [
+        "docs/acceptance/search-development/README.md",
+        "docs/acceptance/search-development/windows-browser-node.json",
+        "docs/acceptance/search-development/tcp-change-before-scheduling.json",
+        "docs/acceptance/search-development/tcp-change-recovery.json",
+        "docs/acceptance/search-development/tcp-current.json",
+        "docs/acceptance/search-development/source-isolation.md",
+        "docs/acceptance/search-development/source-isolation-http.json",
+        "docs/acceptance/search-development/source-isolation-browser.json",
+        "docs/acceptance/search-development/cache-privacy-20260914.md",
+        "docs/acceptance/search-development/cache-privacy-http-20260914.json"
+      ]
+    },
+    {
+      "id": "SEARCH06",
+      "scenario": "失去好友访问授权，保留旧索引",
+      "expected": "受保护结果与片段立即被权限检查过滤，直接打开也拒绝",
+      "status": "passed",
+      "reason": "保持旧加密索引不变进行真实撤权，受保护结果与直接打开均拒绝；独立副本保留。",
+      "evidence": [
+        "docs/acceptance/search-development/README.md",
+        "docs/acceptance/search-development/windows-browser-node.json",
+        "docs/acceptance/search-development/revocation-browser-20260914.md",
+        "docs/acceptance/search-development/revocation-checkpoints-20260914.json"
+      ]
+    },
+    {
+      "id": "SEARCH07",
+      "scenario": "未获取正文、断网、来源删除分别测试",
+      "expected": "不假装搜过未取得正文；本地数据可搜；不能打开时有真实原因",
+      "status": "passed",
+      "reason": "下载前仅卡片元数据，来源/好友离线后合法本地内容可搜可读；缺失和撤权有明确原因。",
+      "evidence": [
+        "docs/acceptance/search-development/README.md",
+        "docs/acceptance/search-development/windows-browser-node.json",
+        "docs/acceptance/search-development/source-isolation.md",
+        "docs/acceptance/search-development/source-isolation-http.json",
+        "docs/acceptance/search-development/source-isolation-browser.json",
+        "docs/acceptance/search-development/revocation-browser-20260914.md",
+        "docs/acceptance/search-development/revocation-checkpoints-20260914.json",
+        "docs/acceptance/search-development/filter-combinations-20260914.md",
+        "docs/acceptance/search-development/filter-combinations-checkpoints-20260914.json"
+      ]
+    },
+    {
+      "id": "SEARCH08",
+      "scenario": "连续快速输入并使旧请求晚返回",
+      "expected": "页面最终显示最新关键词结果，不被旧响应覆盖",
+      "status": "passed",
+      "reason": "真实延迟首屏及分页响应晚于新查询，页面仍保留新结果；清空和快速输入不被旧响应覆盖。",
+      "evidence": [
+        "docs/acceptance/search-development/README.md",
+        "docs/acceptance/search-development/windows-browser-node.json",
+        "docs/acceptance/search-development/response-order-browser-20260914.md",
+        "docs/acceptance/search-development/response-order-http-20260914.json"
+      ]
+    },
+    {
+      "id": "SEARCH09",
+      "scenario": "索引损坏后重建，期间重启",
+      "expected": "原数据无损，状态可见，重建完成后查询恢复",
+      "status": "passed",
+      "reason": "实际进程在损坏索引重建中终止后恢复 10000 条，1004 个原始文件摘要不变。",
+      "evidence": [
+        "docs/acceptance/search-development/README.md",
+        "docs/acceptance/search-development/windows-browser-node.json",
+        "docs/acceptance/search-development/process-recovery.json"
+      ]
+    },
+    {
+      "id": "SEARCH10",
+      "scenario": "参考桌面、1 万条已索引合成记录，20 次查询",
+      "expected": "记录 p95，建议首屏不超过 2 秒；分页无重复遗漏",
+      "status": "passed",
+      "reason": "声明环境下真实存储 TCP 首屏查询 p95 1.627 秒；完整分页 10000 唯一身份。该计时不含浏览器绘制。",
+      "evidence": [
+        "docs/acceptance/search-development/README.md",
+        "docs/acceptance/search-development/core-performance.json",
+        "docs/acceptance/search-development/windows-browser-node.json",
+        "docs/acceptance/search-development/real-store-scale.json",
+        "docs/acceptance/search-development/real-store-scale-current.json",
+        "docs/acceptance/search-development/tcp-current.json"
+      ]
+    },
+    {
+      "id": "SEARCH11",
+      "scenario": "查询含私有关键词，检查网络和日志",
+      "expected": "搜索不上传关键词或正文，日志只记录必要状态和耗时",
+      "status": "passed",
+      "reason": "真实四类来源在禁止 TCP/UDP 与好友请求时完成本地搜索，POST 私有查询不进入日志/诊断。",
+      "evidence": [
+        "docs/acceptance/search-development/README.md",
+        "docs/acceptance/search-development/windows-browser-node.json",
+        "docs/acceptance/search-development/cache-privacy-20260914.md",
+        "docs/acceptance/search-development/cache-privacy-http-20260914.json",
+        "docs/acceptance/candidate-delivery/privacy-boundaries-20260914.md"
+      ]
+    },
+    {
+      "id": "FOLLOW01",
+      "scenario": "建立好友后不关注，再主动关注",
+      "expected": "默认不订阅，主动关注后显示最近可见内容并可分页",
+      "status": "passed",
+      "reason": "默认未关注及明确关注有页面证据；真实存储/加密通信 23 项分页验证 20+3，无丢失。",
+      "evidence": [
+        "docs/acceptance/friend-feed-development/README.md",
+        "docs/acceptance/friend-feed-development/windows-three-node.json",
+        "tests/test_friend_feed.py"
+      ]
+    },
+    {
+      "id": "FOLLOW02",
+      "scenario": "A 仅向 B 发布，B/C 均关注 A",
+      "expected": "B 可见；C 的列表和直接获取均无权读取",
+      "status": "passed",
+      "reason": "真实三节点仅 B 受众，C 列表为空且直接获取拒绝。",
+      "evidence": [
+        "docs/acceptance/friend-feed-development/README.md",
+        "docs/acceptance/friend-feed-development/windows-three-node.json"
+      ]
+    },
+    {
+      "id": "FOLLOW03",
+      "scenario": "选择全部好友，然后新增好友 D",
+      "expected": "选择时已明确含以后好友；D 按范围有权访问，指定好友发布不会自动扩大",
+      "status": "passed",
+      "reason": "页面组件确认包含现在和以后好友；四个真实密钥身份集成中新加 D 仅能读取全部好友发布。",
+      "evidence": [
+        "docs/acceptance/friend-feed-development/README.md",
+        "docs/acceptance/friend-feed-development/windows-three-node.json",
+        "tests/test_friend_feed.py",
+        "webapp/src/screens/FriendFeed.test.tsx"
+      ]
+    },
+    {
+      "id": "FOLLOW04",
+      "scenario": "收藏/阅读一条私有内容但不发布",
+      "expected": "好友看不到，也不出现自动发布记录",
+      "status": "passed",
+      "reason": "保存文档及草稿不发布，真实节点其他好友列表保持空；发布另行确认。",
+      "evidence": [
+        "docs/acceptance/friend-feed-development/README.md",
+        "docs/acceptance/friend-feed-development/windows-three-node.json"
+      ]
+    },
+    {
+      "id": "FOLLOW05",
+      "scenario": "A 发布，双方前台在线且链路正常",
+      "expected": "建议 60 秒内出现一次；手动刷新可拉取，记录发布到可见耗时",
+      "status": "passed",
+      "reason": "实际页面发布后 51.572 秒内观察到自动更新；手动刷新及后续修订获取已有记录。仅为所记录本机环境。",
+      "evidence": [
+        "docs/acceptance/friend-feed-development/README.md",
+        "docs/acceptance/friend-feed-development/windows-three-node.json"
+      ]
+    },
+    {
+      "id": "FOLLOW06",
+      "scenario": "同一更新重复投递、修订、重启",
+      "expected": "无重复条目，修订显示更新状态，关注与已读状态保持",
+      "status": "passed",
+      "reason": "重复刷新去重、修订变未读、真实三进程重启保留关注/版本/已读；后续页撤权另有集成覆盖。",
+      "evidence": [
+        "docs/acceptance/friend-feed-development/README.md",
+        "docs/acceptance/friend-feed-development/windows-three-node.json",
+        "docs/acceptance/friend-feed-development/audience-recovery-browser-20260914.md",
+        "docs/acceptance/friend-feed-development/audience-recovery-checkpoints-20260914.json"
+      ]
+    },
+    {
+      "id": "FOLLOW07",
+      "scenario": "取消关注后继续发布",
+      "expected": "不自动收取新内容；已有私聊、独立收藏和下载副本不误删",
+      "status": "passed",
+      "reason": "实际取消关注保留副本；补充在取消后发布新条目，工作器零获取、列表为空、关系和副本不变。",
+      "evidence": [
+        "docs/acceptance/friend-feed-development/README.md",
+        "docs/acceptance/friend-feed-development/windows-three-node.json",
+        "docs/acceptance/friend-feed-development/cleanup.md",
+        "docs/acceptance/friend-feed-development/cleanup-http.json",
+        "docs/acceptance/friend-feed-development/cleanup-browser.json",
+        "tests/test_friend_feed.py"
+      ]
+    },
+    {
+      "id": "FOLLOW08",
+      "scenario": "收窄受众、删除好友、停止分享",
+      "expected": "Provider 立即拒绝新获取；接收端联网刷新后更新可见列表",
+      "status": "passed",
+      "reason": "实际页面收窄受众与停止分享，旧新版本获取被拒绝；解析中关系撤销另由真实加密集成验证。",
+      "evidence": [
+        "docs/acceptance/friend-feed-development/README.md",
+        "docs/acceptance/friend-feed-development/windows-three-node.json",
+        "docs/acceptance/friend-feed-development/cleanup.md",
+        "docs/acceptance/friend-feed-development/cleanup-http.json",
+        "docs/acceptance/friend-feed-development/cleanup-browser.json",
+        "docs/acceptance/friend-feed-development/audience-recovery-browser-20260914.md",
+        "docs/acceptance/friend-feed-development/audience-recovery-checkpoints-20260914.json"
+      ]
+    },
+    {
+      "id": "FOLLOW09",
+      "scenario": "撤销时接收端离线",
+      "expected": "有最后同步标记，不承诺远程抹除；重连后执行新权限",
+      "status": "passed",
+      "reason": "Bob 离线跨越收窄，最后检查时间与旧版本保留；重连移除失权条目，独立副本可读。",
+      "evidence": [
+        "docs/acceptance/friend-feed-development/README.md",
+        "docs/acceptance/friend-feed-development/windows-three-node.json",
+        "docs/acceptance/friend-feed-development/audience-recovery-browser-20260914.md",
+        "docs/acceptance/friend-feed-development/audience-recovery-checkpoints-20260914.json"
+      ]
+    },
+    {
+      "id": "FOLLOW10",
+      "scenario": "发布失败、好友离线、无更新",
+      "expected": "草稿可恢复，离线可重试，空状态明确，不显示假发布或假已读",
+      "status": "passed",
+      "reason": "真实文件占用导致发布失败，草稿重启保留并重试同身份成功；离线/空状态不伪造已读。",
+      "evidence": [
+        "docs/acceptance/friend-feed-development/README.md",
+        "docs/acceptance/friend-feed-development/windows-three-node.json",
+        "docs/acceptance/friend-feed-development/audience-recovery-browser-20260914.md",
+        "docs/acceptance/friend-feed-development/audience-recovery-checkpoints-20260914.json"
+      ]
+    },
+    {
+      "id": "OFFLINE01",
+      "scenario": "对支持的文章下载，随后断网并重启",
+      "expected": "本地正文可打开，来源/下载时间可见，无需发外网请求加载正文",
+      "status": "passed",
+      "reason": "页面明确下载，来源进程关闭、节点重启后正文和 PNG 可读，时间与摘要一致。",
+      "evidence": [
+        "docs/acceptance/offline-reading-development/README.md",
+        "docs/acceptance/offline-reading-development/windows-browser.json"
+      ]
+    },
+    {
+      "id": "OFFLINE02",
+      "scenario": "普通收藏但未下载，在断网时打开",
+      "expected": "清楚显示正文未下载，不错误显示可离线",
+      "status": "passed",
+      "reason": "普通收藏初始无下载，读取未提交副本返回未下载；页面不提供离线可读按钮、不自动创建下载。",
+      "evidence": [
+        "docs/acceptance/offline-reading-development/README.md",
+        "docs/acceptance/offline-reading-development/windows-browser.json",
+        "tests/test_offline_reading.py",
+        "webapp/src/screens/OfflineReading.test.tsx"
+      ]
+    },
+    {
+      "id": "OFFLINE03",
+      "scenario": "正文成功、部分图片失败",
+      "expected": "正文可读，图片缺失有标记，不显示完整资源已下载",
+      "status": "passed",
+      "reason": "真实浏览器正文与本地 PNG 可读，缺图有标记；不宣称全部资源完整。",
+      "evidence": [
+        "docs/acceptance/offline-reading-development/README.md",
+        "docs/acceptance/offline-reading-development/windows-browser.json"
+      ]
+    },
+    {
+      "id": "OFFLINE04",
+      "scenario": "中途断网、取消、重启、连续点击下载",
+      "expected": "状态恢复正确，仅一份结果；未校验片段不标可读",
+      "status": "passed",
+      "reason": "真实进程终止恢复、加密检查点重核、取消与迟到写入隔离及页面取消请求状态有对应自动证据。",
+      "evidence": [
+        "docs/acceptance/offline-reading-development/README.md",
+        "docs/acceptance/offline-reading-development/windows-browser.json",
+        "tests/test_offline_reading.py",
+        "webapp/src/screens/OfflineReading.test.tsx"
+      ]
+    },
+    {
+      "id": "OFFLINE05",
+      "scenario": "已有旧版，更新时断网或校验失败",
+      "expected": "旧版仍能读；新版本验证后才替换，并更新下载时间",
+      "status": "passed",
+      "reason": "实际页面来源不可达保留旧正文/时间；集成检查新版本校验后替换，并拒绝旧图片版本；密码页回归保持旧副本。",
+      "evidence": [
+        "docs/acceptance/offline-reading-development/README.md",
+        "docs/acceptance/offline-reading-development/windows-browser.json",
+        "docs/acceptance/offline-reading-development/password-gate-fix-20260914.md",
+        "tests/test_offline_reading.py"
+      ]
+    },
+    {
+      "id": "OFFLINE06",
+      "scenario": "空间不足或超过单项/总预算",
+      "expected": "提示清理/超限，其他下载不静默丢失，应用仍可阅读",
+      "status": "passed",
+      "reason": "真实存储单项/总量与模拟可用空间不足拒绝且旧版可读，页面展示限制及清理动作；未填满实际磁盘。",
+      "evidence": [
+        "docs/acceptance/offline-reading-development/README.md",
+        "docs/acceptance/offline-reading-development/windows-browser.json",
+        "tests/test_offline_reading.py"
+      ]
+    },
+    {
+      "id": "OFFLINE07",
+      "scenario": "单条/全部清理下载",
+      "expected": "对应磁盘空间释放，列表更新；收藏、进度、会话保留，正文索引及时移除",
+      "status": "passed",
+      "reason": "实际页面清理/文件占用失败/重启/原操作恢复，释放已审核字节且保留新副本、收藏和进度，旧全文搜索清除。",
+      "evidence": [
+        "docs/acceptance/offline-reading-development/README.md",
+        "docs/acceptance/offline-reading-development/windows-browser.json",
+        "docs/acceptance/offline-reading-development/cleanup-retry-browser.json",
+        "docs/acceptance/offline-reading-development/cleanup-retry-http.json"
+      ]
+    },
+    {
+      "id": "OFFLINE08",
+      "scenario": "无正文、需登录、已失权内容尝试下载",
+      "expected": "返回实际失败原因，不产生空的成功记录，不绕过授权",
+      "status": "passed",
+      "reason": "空正文、非支持内容、HTTP 拒绝及密码页不产生可读成功记录；真实加密好友版本获取按现权限拒绝。",
+      "evidence": [
+        "docs/acceptance/offline-reading-development/README.md",
+        "docs/acceptance/offline-reading-development/password-gate-fix-20260914.md",
+        "tests/test_offline_reading.py",
+        "tests/test_offline_material.py"
+      ]
+    },
+    {
+      "id": "OFFLINE09",
+      "scenario": "已获授权下载，再撤销好友权限",
+      "expected": "本地副本仍按保存规则可读，界面不承诺远程回收；新版本获取被拒绝",
+      "status": "passed",
+      "reason": "真实加密授权链覆盖保存、更新、撤权后拒绝新旧远程版本、源不可达重启读独立副本；撤销页面说明不远程收回。",
+      "evidence": [
+        "docs/acceptance/offline-reading-development/README.md",
+        "tests/test_offline_material.py"
+      ]
+    },
+    {
+      "id": "OFFLINE10",
+      "scenario": "离线阅读后退出重开，再联网",
+      "expected": "阅读进度保持，外链仅主动打开时访问；无追踪脚本自动执行",
+      "status": "passed",
+      "reason": "实际延迟图片后恢复阅读区域；组件验证保存进度、关闭返回焦点、无自动外站回退、外链仅点击访问。",
+      "evidence": [
+        "docs/acceptance/offline-reading-development/README.md",
+        "docs/acceptance/offline-reading-development/windows-browser.json",
+        "webapp/src/screens/OfflineReading.test.tsx"
+      ]
+    },
+    {
+      "id": "SYNC01",
+      "scenario": "A/B 首次配对，确认前抓取传输行为",
+      "expected": "未确认不传个人数据；过期/重复邀请不能加入额外设备",
+      "status": "passed",
+      "reason": "已安装双节点页面双端审核；真实密钥协议检查未批准、过期、重复邀请和第二设备拒绝。",
+      "evidence": [
+        "docs/acceptance/device-sync-development/README.md",
+        "docs/acceptance/candidate-delivery/two-node-20260914.md",
+        "tests/test_device_sync_pairing.py"
+      ]
+    },
+    {
+      "id": "SYNC02",
+      "scenario": "只选收藏，再分别开启进度与会话",
+      "expected": "仅所选范围同步，未选数据、模型、正文、密钥和好友权限不传",
+      "status": "passed",
+      "reason": "双端范围交集；实际收藏范围同步，集成断言未选会话/进度不读不传，字段投影排除正文和凭证。",
+      "evidence": [
+        "docs/acceptance/device-sync-development/README.md",
+        "docs/acceptance/candidate-delivery/two-node-20260914.md",
+        "tests/test_device_sync_transfer.py",
+        "tests/test_device_sync_records.py"
+      ]
+    },
+    {
+      "id": "SYNC03",
+      "scenario": "两端原有不同数据，首次同步",
+      "expected": "合并不覆盖，重复收藏/消息仅一份，原服务键保留",
+      "status": "passed",
+      "reason": "真实三范围源合并与回执，保留双方原数据和原服务键；重复记录/消息与重启另有集成覆盖。",
+      "evidence": [
+        "docs/acceptance/device-sync-development/README.md",
+        "tests/test_device_sync_transfer.py"
+      ]
+    },
+    {
+      "id": "SYNC04",
+      "scenario": "参考双设备、稳定连接、两端各不超过 1 万条元数据记录",
+      "expected": "新增 100 条合成变更，建议 60 秒内完成确认；记录环境与字节数，大规模首次同步单独计时",
+      "status": "passed",
+      "reason": "已声明回环路由/真实源环境下万条基线 100 次更改及确认 56.831 秒、200 回执、164476 加密 JSON 字节；首次合并另计，不含完整节点后台负载。",
+      "evidence": [
+        "docs/acceptance/device-sync-development/README.md",
+        "docs/acceptance/device-sync-development/scale-smoke-200.json",
+        "docs/acceptance/device-sync-development/scale-initial-before.json",
+        "docs/acceptance/device-sync-development/scale-10000-result.json",
+        "docs/acceptance/device-sync-development/scale-compact-59s.json",
+        "docs/acceptance/device-sync-development/source-v3-storage.md",
+        "docs/acceptance/device-sync-development/scale-v3-fresh-result.json",
+        "docs/acceptance/device-sync-development/source-v4-scale.md",
+        "docs/acceptance/device-sync-development/scale-v4-10000-result.json",
+        "docs/acceptance/device-sync-development/scale-v4-10000-resumed.json",
+        "docs/acceptance/device-sync-development/scale-v4-10000-cached.json"
+      ]
+    },
+    {
+      "id": "SYNC05",
+      "scenario": "离线修改→中途断开→重启→重连，重复/乱序投递",
+      "expected": "变化补齐，原数据无损，不重复；接收成功前不显示已同步",
+      "status": "passed",
+      "reason": "丢响应、重启、乱序、重复和本地新写入组合保留原数据，来源未落盘不确认；实际双节点状态对应。",
+      "evidence": [
+        "docs/acceptance/device-sync-development/README.md",
+        "tests/test_device_sync_transfer.py",
+        "tests/test_device_sync_records.py"
+      ]
+    },
+    {
+      "id": "SYNC06",
+      "scenario": "收藏新增/取消并发，随后明确重新收藏",
+      "expected": "按表中规则合并，旧记录不复活，新明确操作可恢复",
+      "status": "passed",
+      "reason": "并发取消优先、旧快照不复活，观察结果后明确再收藏恢复；真实因果存储与来源检查覆盖。",
+      "evidence": [
+        "docs/acceptance/device-sync-development/README.md",
+        "tests/test_device_sync_records.py"
+      ]
+    },
+    {
+      "id": "SYNC07",
+      "scenario": "先后及并发修改阅读位置，并让 B 时钟偏差一天",
+      "expected": "先后操作按因果顺序；并发保留选择，时钟差不造成静默覆盖",
+      "status": "passed",
+      "reason": "因果算法不使用机器时间选择，向前重读有效；页面明确选 20% 后双端收敛并重启保留，不默认选最大值。",
+      "evidence": [
+        "docs/acceptance/device-sync-development/README.md",
+        "tests/test_device_sync_records.py"
+      ]
+    },
+    {
+      "id": "SYNC08",
+      "scenario": "同一会话两端离线继续，另测删除与新增并发",
+      "expected": "分支完整可见；删除冲突进入待处理项，不混入主历史或静默丢弃",
+      "status": "passed",
+      "reason": "实际页面完整展开分支，删除冲突独立恢复；保留、再次保留与丢弃确认/取消/重启都有对应证据。",
+      "evidence": [
+        "docs/acceptance/device-sync-development/README.md",
+        "docs/acceptance/device-sync-development/recovery-replacement-browser.json",
+        "docs/acceptance/device-sync-development/recovery-discard-browser.json"
+      ]
+    },
+    {
+      "id": "SYNC09",
+      "scenario": "目标空间不足、写入失败后恢复",
+      "expected": "不错误确认，源记录保留，重试可完成",
+      "status": "passed",
+      "reason": "真实加密传输中源/副本分别写入失败不发回执；保留待确认并原请求重试成功。",
+      "evidence": [
+        "docs/acceptance/device-sync-development/README.md",
+        "tests/test_device_sync_transfer.py"
+      ]
+    },
+    {
+      "id": "SYNC10",
+      "scenario": "暂停/关闭会话同步，随后恢复",
+      "expected": "暂停期间不继续传相应数据，旧副本保留；恢复后正确补齐",
+      "status": "passed",
+      "reason": "安装候选实际暂停/恢复/关闭收藏范围；新增会话范围集成覆盖停传、旧报文拒绝、旧历史保留、恢复补齐无重复。",
+      "evidence": [
+        "docs/acceptance/device-sync-development/README.md",
+        "docs/acceptance/candidate-delivery/sync-policy-20260914.md",
+        "tests/test_device_sync_transfer.py"
+      ]
+    },
+    {
+      "id": "SYNC11",
+      "scenario": "移除设备，重放旧凭证并重新发现",
+      "expected": "后续同步拒绝，须重新审核配对；界面说明旧副本无法自动收回",
+      "status": "passed",
+      "reason": "安装候选移除后双端重启仍撤销，后续修改不传；集成拒绝旧认证批次并要求重新配对。",
+      "evidence": [
+        "docs/acceptance/device-sync-development/README.md",
+        "docs/acceptance/candidate-delivery/sync-policy-20260914.md"
+      ]
+    },
+    {
+      "id": "SYNC12",
+      "scenario": "B 无模型/权限时打开同步的旧会话",
+      "expected": "历史可读；新提问被明确阻止或提示选择，不静默换 Provider",
+      "status": "passed",
+      "reason": "同步历史在未安装原模型时可读，绑定和材料保留；页面提示不可用，不自行换 Provider。",
+      "evidence": [
+        "docs/acceptance/device-sync-development/README.md"
+      ]
+    },
+    {
+      "id": "SYNC13",
+      "scenario": "擦除会话范围，并检查本地恢复项及旧同步消息",
+      "expected": "本地对应数据与恢复项被擦除，旧投递不复活；远端未确认删除明确显示未完成",
+      "status": "passed",
+      "reason": "设置页本地范围清理及重启、真实加密冲突/旧投递屏障已对齐；远端明确未确认，不声明全局擦除。",
+      "evidence": [
+        "docs/acceptance/device-sync-development/README.md",
+        "docs/acceptance/device-sync-development/personal-data-maintenance.md",
+        "docs/acceptance/device-sync-development/cleanup-settings-browser.json",
+        "docs/acceptance/device-sync-development/product-export-http.json",
+        "docs/acceptance/device-sync-development/product-export-browser.json",
+        "docs/acceptance/device-sync-development/reading-cleanup.md",
+        "docs/acceptance/device-sync-development/reading-cleanup-browser.json",
+        "docs/acceptance/device-sync-development/reading-cleanup-http.json",
+        "docs/acceptance/candidate-delivery/mainflow-and-erasure-review-20260914.md"
+      ]
+    },
+    {
+      "id": "G01",
+      "scenario": "干净安装",
+      "expected": "全新数据目录，无历史、无模型、无好友时有正确入口和空状态",
+      "status": "passed",
+      "reason": "当前安装 wheel 另起全新空数据节点，实际页面逐一核对八入口及无模型/好友/历史的空状态。",
+      "evidence": [
+        "docs/acceptance/candidate-delivery/fresh-entry-states-20260914.md"
+      ]
+    },
+    {
+      "id": "G02",
+      "scenario": "完整流程",
+      "expected": "从实际页面入口完成用户任务，无需手工改配置文件或数据库",
+      "status": "passed",
+      "reason": "八项任务均有真实页面入口和完成动作；复用现有主流程记录，不要求用户手工改配置或数据库。",
+      "evidence": [
+        "docs/acceptance/candidate-delivery/mainflow-and-erasure-review-20260914.md"
+      ]
+    },
+    {
+      "id": "G03",
+      "scenario": "页面状态",
+      "expected": "加载、空、错误、有内容均有测试；错误提供恢复动作，不无限转圈",
+      "status": "passed",
+      "reason": "当前空状态、加载与既有八页面故障恢复/有内容证据逐项对齐，设置永久转圈已修复，未新增测试矩阵。",
+      "evidence": [
+        "webapp/src/screens/Settings.loading.test.tsx",
+        "docs/acceptance/candidate-delivery/fresh-entry-states-20260914.md"
+      ]
+    },
+    {
+      "id": "G04",
+      "scenario": "重启恢复",
+      "expected": "已保存数据仍在，中途操作可恢复或明确失败，不伪造完成",
+      "status": "passed",
+      "reason": "各功能专属重启用例与真实进程记录覆盖保留、恢复或明确失败，原任务身份不自动重发。",
+      "evidence": [
+        "docs/acceptance/friend-feed-development/audience-recovery-browser-20260914.md",
+        "docs/acceptance/friend-feed-development/audience-recovery-checkpoints-20260914.json",
+        "docs/acceptance/candidate-delivery/sync-policy-20260914.md",
+        "docs/acceptance/ask-ryn-development/model-switch-recovery-20260914.md"
+      ]
+    },
+    {
+      "id": "G05",
+      "scenario": "重复与并发",
+      "expected": "连点、重试、重复投递不产生重复记录或结算；并发符合各文档规则",
+      "status": "passed",
+      "reason": "各功能真实存储/加密与路由重试检查覆盖并发、原身份、重复投递与结算；已有页面错误不伪造成功。",
+      "evidence": [
+        "tests/test_device_sync_transfer.py",
+        "tests/test_friend_feed.py",
+        "docs/acceptance/friends-development/mailbox-recovery-20260914.md",
+        "docs/acceptance/ai-permissions-development/README.md"
+      ]
+    },
+    {
+      "id": "G06",
+      "scenario": "权限与隐私",
+      "expected": "未授权请求由节点拒绝；私有内容、会话和秘密不进入普通日志、诊断或公开注册信息",
+      "status": "passed",
+      "reason": "节点权限拒绝、固定公开投影、模型错误与后台诊断核对完成；三个日志问题修复并回归。",
+      "evidence": [
+        "docs/acceptance/search-development/cache-privacy-20260914.md",
+        "docs/acceptance/search-development/cache-privacy-http-20260914.json",
+        "docs/acceptance/candidate-delivery/privacy-boundaries-20260914.md"
+      ]
+    },
+    {
+      "id": "G07",
+      "scenario": "可访问性",
+      "expected": "主要流程可仅用键盘完成；弹窗焦点正确；状态不只靠颜色表达",
+      "status": "passed",
+      "reason": "主要流程的键盘操作、弹窗取消/确认和焦点恢复已闭合；状态有明确文字。使用实际安装页面与已有键盘证据，不宣称屏幕阅读器或全站逐控件认证。",
+      "evidence": [
+        "docs/acceptance/search-development/keyboard-return-20260914.md",
+        "docs/acceptance/search-development/keyboard-return-checkpoints-20260914.json",
+        "docs/acceptance/search-development/filter-combinations-20260914.md",
+        "docs/acceptance/search-development/filter-combinations-checkpoints-20260914.json",
+        "docs/acceptance/candidate-delivery/keyboard-final-20260914.md"
+      ]
+    },
+    {
+      "id": "G08",
+      "scenario": "数据维护",
+      "expected": "新数据纳入明确的导出/擦除范围；秘密不默认导出；升级保留原数据",
+      "status": "passed",
+      "reason": "九范围导出及各本地清理边界已明确；补齐卡片历史与已知旧备份清理，文件失败重启恢复通过，秘密不默认导出，升级保留18个关键数据文件。保留凭证/删除标记和未确认远端范围明确列出。",
+      "evidence": [
+        "docs/acceptance/device-sync-development/personal-data-maintenance.md",
+        "docs/acceptance/device-sync-development/cleanup-settings-browser.json",
+        "docs/acceptance/device-sync-development/product-export-http.json",
+        "docs/acceptance/device-sync-development/product-export-browser.json",
+        "docs/acceptance/offline-reading-development/cleanup-retry-browser.json",
+        "docs/acceptance/offline-reading-development/cleanup-retry-http.json",
+        "docs/acceptance/device-sync-development/reading-cleanup.md",
+        "docs/acceptance/device-sync-development/reading-cleanup-browser.json",
+        "docs/acceptance/device-sync-development/reading-cleanup-http.json",
+        "docs/acceptance/friend-feed-development/cleanup.md",
+        "docs/acceptance/friend-feed-development/cleanup-http.json",
+        "docs/acceptance/friend-feed-development/cleanup-browser.json",
+        "docs/acceptance/friends-development/document-cleanup.md",
+        "docs/acceptance/friends-development/document-cleanup-http.json",
+        "docs/acceptance/friends-development/document-cleanup-browser.json",
+        "docs/acceptance/candidate-delivery/data-scope-final-20260914.md"
+      ]
+    },
+    {
+      "id": "G09",
+      "scenario": "故障隔离",
+      "expected": "搜索、AI、好友或同步失败不使整个应用和已可用阅读一起失效",
+      "status": "passed",
+      "reason": "损坏搜索源、坏同步副本、模型忙碌/不可达、来源和好友失败均有独立恢复记录；阅读及 HTTP 健康保持可用。",
+      "evidence": [
+        "docs/acceptance/search-development/source-isolation.md",
+        "docs/acceptance/search-development/source-isolation-http.json",
+        "docs/acceptance/search-development/source-isolation-browser.json",
+        "tests/test_device_sync_reading_bridge.py",
+        "docs/acceptance/ask-ryn-development/cancel-timeout-browser-20260914.md"
+      ]
+    },
+    {
+      "id": "G10",
+      "scenario": "发布证据",
+      "expected": "记录提交、平台、环境、步骤、预期/实际结果、耗时及限制；只声明实测范围",
+      "status": "passed",
+      "reason": "每条原用例保留条件、实际结果与证据；提交/平台/计时边界明确，本地结果不冒充远端 CI，跳过不冒充通过。",
+      "evidence": [
+        "docs/acceptance/candidate-delivery/final-checks-20260914.md",
+        "docs/acceptance/candidate-delivery/two-node-20260914.md",
+        "docs/product-briefs/ACCEPTANCE_SCOPE.md"
+      ]
+    }
+  ],
+  "ci_commit": "25aa0b8"
+}

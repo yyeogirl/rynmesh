@@ -24,7 +24,7 @@ jobs:
         with:
           python-version: "3.12"
       - name: Install
-        run: python -m pip install -e ".[dev]"
+        run: python -m pip install -e ".[dev,documents]"
       - name: Tests
         run: python -m pytest tests/ -q
       - name: Lint
@@ -43,10 +43,91 @@ jobs:
           cache: npm
           cache-dependency-path: webapp/package-lock.json
       - run: npm ci
+      - name: Tests
+        run: npm test
       - name: Typecheck
         run: npx tsc -b
       - name: Build
         run: npm run build
+
+  llm-e2e:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+      - run: python -m pip install -e .
+      - name: Deterministic strict P2P private LLM flow
+        run: python scripts/llm_e2e.py run
+      - name: Deterministic encrypted-relay private LLM flow
+        run: python scripts/llm_e2e.py relay-run
+      - name: Deterministic peer-message mailbox flow
+        run: python scripts/llm_e2e.py mailbox-run
+      - name: Clean up isolated E2E stack
+        if: always()
+        run: python scripts/llm_e2e.py down
+
+  friend-product-e2e:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+      - run: python -m pip install -e ".[documents]"
+      - name: First sharing through fresh nodes and an HTTP mailbox
+        run: |
+          python scripts/friend_product_e2e.py \
+            --work-root "$RUNNER_TEMP/friend-product" \
+            --output "$RUNNER_TEMP/friend-product-result.json"
+      - name: Default mailbox quota and recovery without duplicate messages
+        run: |
+          python scripts/friend_product_e2e.py --scenario mailbox-quota \
+            --work-root "$RUNNER_TEMP/friend-quota" \
+            --output "$RUNNER_TEMP/friend-quota-result.json"
+      - name: Show bounded acceptance evidence
+        if: always()
+        run: |
+          if test -f "$RUNNER_TEMP/friend-product-result.json"; then
+            cat "$RUNNER_TEMP/friend-product-result.json"
+          fi
+          if test -f "$RUNNER_TEMP/friend-quota-result.json"; then
+            cat "$RUNNER_TEMP/friend-quota-result.json"
+          fi
+
+  peer-transit-e2e:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+      - run: python -m pip install -e ".[dev]"
+      - name: Three-node direct ICE peer-transit acceptance
+        run: |
+          python scripts/run_peer_transit_acceptance.py \
+            --size-mib 8 --concurrent 3 --timeout 120 \
+            --work-root "$RUNNER_TEMP/peer-transit" \
+            --output "$RUNNER_TEMP/peer-transit-report.json" \
+            --evidence "$RUNNER_TEMP/peer-transit-evidence.json"
+          python scripts/audit_peer_transit.py \
+            "$RUNNER_TEMP/peer-transit-evidence.json"
+          python scripts/audit_peer_transit.py --report --min-concurrent 3 \
+            "$RUNNER_TEMP/peer-transit-report.json"
+      - name: Persistent worker soak smoke
+        run: |
+          mkdir -p "$RUNNER_TEMP/peer-transit-soak"
+          python scripts/run_peer_transit_soak.py \
+            --duration-seconds 10 --interval-seconds 0.5 --payload-kib 4 \
+            --work-root "$RUNNER_TEMP/peer-transit-soak" \
+            --progress "$RUNNER_TEMP/peer-transit-soak/progress.json" \
+            > "$RUNNER_TEMP/peer-transit-soak/stdout.log" \
+            2> "$RUNNER_TEMP/peer-transit-soak/stderr.log"
+          python scripts/audit_peer_transit.py --soak-report \
+            --require-duration-seconds 10 --min-sessions 3 \
+            "$RUNNER_TEMP/peer-transit-soak/progress.json"
 
   packaged-node:
     # The release form: the node must serve its own UI with no dev server.
@@ -103,9 +184,18 @@ jobs:
       - run: npm ci
       - name: Build self-contained node sidecar
         run: ./src-tauri/scripts/build-sidecar.sh
+      - name: Fetch pinned llama.cpp runtime
+        run: ./src-tauri/scripts/fetch-llama-runtime.sh
+      - name: Verify bundled runtime starts
+        run: ./src-tauri/resources/llama/llama-server --version
       - name: Start bundled node sidecar
         run: |
           sidecar="$(find src-tauri/binaries -type f -name 'rynmesh-peer-*' -print -quit)"
           ./src-tauri/scripts/verify-sidecar.sh "$sidecar"
+      - name: Node finds the bundled runtime
+        run: |
+          sidecar="$(find src-tauri/binaries -type f -name 'rynmesh-peer-*' -print -quit)"
+          RYNMESH_LLAMA_DIR="$PWD/src-tauri/resources/llama" \
+            ./src-tauri/scripts/verify-sidecar.sh "$sidecar" --check-llm
       - name: Compile desktop shell
         run: cargo check --manifest-path src-tauri/Cargo.toml

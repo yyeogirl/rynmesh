@@ -1,0 +1,123 @@
+{
+  "scope": "Windows loopback production owner HTTP APIs and real native model; not browser or packaged desktop",
+  "observations": [
+    {
+      "action": "observe",
+      "at": "2026-09-14T06:44:54.316118+00:00",
+      "task_id": "task_235eeba1c5144bafa9e13a7d1e097abd",
+      "conversation_id": "recovery-8bb8a4712aa4462b80a5b17c5efa49ae",
+      "history_digest": "57ca100d042175359cee2df305475afe5407a5548c9a072522eb3f318aaa4987",
+      "state": "succeeded",
+      "message_count": 2,
+      "node_pid": 35868,
+      "answer_nonempty": true,
+      "arithmetic_match": true,
+      "transport": "local_runtime",
+      "amount": 0.0,
+      "duplicate_request_preserved_history": true,
+      "binding_preserved": true,
+      "configured": true,
+      "ready": true,
+      "publication_enabled": false,
+      "runtime": {
+        "installed": true,
+        "running": true,
+        "status": "running",
+        "release": "b10774"
+      },
+      "browser_conversation": {
+        "conversation_id": "86149b11-8078-4479-8d0c-f9f4c63bad32",
+        "history_digest": "54e35a50386574e5cee555a031bba10a26cfb166bf179dd0cd26cef4bd09942e",
+        "message_count": 2,
+        "answer_correct": true,
+        "amount": 0,
+        "transport": "local_runtime",
+        "binding_preserved": true,
+        "scope": "API inspection of the separately observed browser-created conversation"
+      }
+    },
+    {
+      "action": "verify-restart",
+      "at": "2026-09-14T06:45:52.207715+00:00",
+      "task_id": "task_235eeba1c5144bafa9e13a7d1e097abd",
+      "conversation_id": "recovery-8bb8a4712aa4462b80a5b17c5efa49ae",
+      "history_digest": "57ca100d042175359cee2df305475afe5407a5548c9a072522eb3f318aaa4987",
+      "state": "succeeded",
+      "message_count": 2,
+      "node_pid": 41120,
+      "answer_nonempty": true,
+      "arithmetic_match": true,
+      "transport": "local_runtime",
+      "amount": 0.0,
+      "duplicate_request_preserved_history": true,
+      "binding_preserved": true,
+      "configured": true,
+      "ready": false,
+      "publication_enabled": false,
+      "runtime": {
+        "installed": true,
+        "running": false,
+        "status": "stopped",
+        "release": "b10774"
+      },
+      "browser_conversation": {
+        "conversation_id": "86149b11-8078-4479-8d0c-f9f4c63bad32",
+        "history_digest": "54e35a50386574e5cee555a031bba10a26cfb166bf179dd0cd26cef4bd09942e",
+        "message_count": 2,
+        "answer_correct": true,
+        "amount": 0,
+        "transport": "local_runtime",
+        "binding_preserved": true,
+        "scope": "API inspection of the separately observed browser-created conversation"
+      }
+    },
+    {
+      "action": "verify-followup",
+      "at": "2026-09-14T06:49:49.525520+00:00",
+      "task_id": "task_235eeba1c5144bafa9e13a7d1e097abd",
+      "conversation_id": "recovery-8bb8a4712aa4462b80a5b17c5efa49ae",
+      "history_digest": "57ca100d042175359cee2df305475afe5407a5548c9a072522eb3f318aaa4987",
+      "state": "succeeded",
+      "message_count": 2,
+      "node_pid": 41120,
+      "answer_nonempty": true,
+      "arithmetic_match": true,
+      "transport": "local_runtime",
+      "amount": 0.0,
+      "duplicate_request_preserved_history": true,
+      "binding_preserved": true,
+      "configured": true,
+      "ready": true,
+      "publication_enabled": false,
+      "runtime": {
+        "installed": true,
+        "running": true,
+        "status": "running",
+        "release": "b10774"
+      },
+      "browser_conversation": {
+        "conversation_id": "86149b11-8078-4479-8d0c-f9f4c63bad32",
+        "history_digest": "6f70524fea5d6c5c13d6b6220522df0f9e5a8a307a3ec2646f8618b66fafe310",
+        "message_count": 4,
+        "answer_correct": true,
+        "amount": 0,
+        "transport": "local_runtime",
+        "binding_preserved": true,
+        "new_inference_after_restart": true,
+        "scope": "API inspection of the separately observed browser-created conversation"
+      }
+    },
+    {
+      "action": "stop-through-browser",
+      "at": "2026-09-14T06:51:30.567249+00:00",
+      "configured": true,
+      "ready": false,
+      "publication_enabled": false,
+      "runtime_running": false,
+      "health_status": 200,
+      "browser_conversation_message_count": 4,
+      "history_retained": true,
+      "ui_build": "index-DPwKlihB.js"
+    }
+  ]
+}

@@ -2,9 +2,10 @@
 from __future__ import annotations
 
 import json
-import os
 from pathlib import Path
 from typing import Any
+
+from .atomic_io import atomic_write_json
 
 _DEFAULTS: dict[str, Any] = {
     "pending_version": None,
@@ -35,10 +36,7 @@ class UpdateState:
             self.data = dict(_DEFAULTS)
 
     def save(self) -> None:
-        self.path.parent.mkdir(parents=True, exist_ok=True)
-        tmp = self.path.with_suffix(".json.tmp")
-        tmp.write_text(json.dumps(self.data, indent=2))
-        os.replace(tmp, self.path)
+        atomic_write_json(self.path, self.data, indent=2, sort_keys=False)
 
     def set(self, **kw: Any) -> None:
         self.data.update(kw)

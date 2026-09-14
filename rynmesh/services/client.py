@@ -3,14 +3,17 @@
 Usage shape (sync, polls for result):
 
     from rynmesh.store import RynmeshStore
-    from rynmesh.services.client import request_llm
+    from rynmesh.services.client import request_embedding
     store = RynmeshStore()
-    out = request_llm(store, provider_peer_id=PROVIDER_PID, prompt="hello",
-                      network_id="rynmesh-home-qa", timeout_s=20)
-    print(out["text"])
+    out = request_embedding(store, provider_peer_id=PROVIDER_PID,
+                             text="hello", network_id="rynmesh-home-qa")
 
 The helpers wrap submit_work_order + list_work_results polling and JSON-
 decode the result payload that the worker emitted into result.message.
+
+Note: request_llm is retired. Plaintext prompts must not ride registry work
+orders; use the encrypted private task protocol via the node API instead
+(POST /api/local/llm/orders — see rynmesh/llm_package/).
 """
 from __future__ import annotations
 
@@ -23,7 +26,6 @@ from rynmesh.store import RynmeshStore
 
 from .embeddings import OPERATION as EMBED_OP
 from .image import OPERATION as IMAGE_OP
-from .llm import OPERATION as LLM_OP
 
 
 def _await_result(
@@ -102,12 +104,11 @@ def request_llm(
     timeout_s: float = 20.0,
     poll_interval_s: float = 0.5,
 ) -> dict[str, Any]:
-    res = _submit_and_await(
-        store, provider_peer_id=provider_peer_id, operation=LLM_OP,
-        params={"prompt": prompt, "max_tokens": max_tokens},
-        network_id=network_id, timeout_s=timeout_s, poll_interval_s=poll_interval_s,
+    del store, provider_peer_id, prompt, max_tokens, network_id, timeout_s, poll_interval_s
+    raise RuntimeError(
+        "legacy plaintext LLM work orders are disabled; submit through the local "
+        "/api/local/llm/orders private task endpoint"
     )
-    return _decode_payload(res)
 
 
 def request_embedding(

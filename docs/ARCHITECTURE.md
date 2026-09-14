@@ -122,7 +122,15 @@ Current screens include:
 - Publish: user-approved publishing flow
 - Item Detail: manifest, provenance, safety receipts, credits, and fetch actions
 - Peers: discovered peers and trust/reputation signals
+- Services: a task-first catalog with dedicated Private AI chat, video-rendering,
+  and secure-web connection experiences; advanced package/provider controls
+  remain available at `/services/manage`
 - Settings: registry, trusted roots, model provider, safety policy, ranking policy, storage
+
+The Services route and storage boundaries are specified in
+[`SERVICES_UI_ARCHITECTURE.md`](SERVICES_UI_ARCHITECTURE.md). In particular,
+`/chat` remains direct peer messaging; language-model conversations are nested
+under `/services/private-ai/chat` and use encrypted device-local persistence.
 
 ### AI Curator
 
@@ -404,6 +412,32 @@ Credit events also penalize harmful behavior:
 - illegal content
 
 Credits produce a `distribution_weight`, which can be used by nodes and registries to rank content. This creates immediate incentive without requiring a token sale.
+
+## Background Workers
+
+Module: `rynmesh.background_workers`
+
+Every peer node owns one `BackgroundWorkerRegistry` (`app.state.background_workers`), created in `create_app` and started/stopped as a unit by the `lifespan` handler in `rynmesh/peer_http.py`. Service packages (the LLM package, the node itself) register their repeatable jobs as a `BackgroundWorkerSpec` — a name, a sync or async `run_once`, a `BackoffPolicy`, an optional `initial_delay_s`, and an optional `error_sink` — instead of spawning their own detached `asyncio.create_task` loop.
+
+Currently registered workers:
+
+| worker | policy | initial delay | error field |
+|---|---|---|---|
+| `llm.relay-poll` | busy 1s / idle up to 10s / error up to 30s | 1s | `app.state.llm_relay_error` |
+| `llm.publish-refresh` | busy/idle 30s / error up to 120s | 1s | `app.state.llm_publication_error` |
+| `updates.poll` | `BackoffPolicy.fixed(RYNMESH_UPDATE_POLL_S)`, default 1800s | same as the interval, so a boot never checks for an update before the crash-loop rollback window (`_confirm_after_grace`, still an ad-hoc task) has closed | `app.state.update_error` |
+| `recap.daily` | `BackoffPolicy.fixed(900)` | 20s | `app.state.recap_error` |
+
+`_confirm_after_grace` (one-shot) and `_discover` (delay computed from the digest service's own `next_refresh_unix`, which the fixed/idle policy model cannot express) remain ad-hoc `asyncio.create_task` loops in the lifespan; adopting `_discover` needs a dynamic-delay policy and is tracked as follow-up work.
+
+### Supervision contract
+
+- **Crash recovery**: a worker task that raises anything — `Exception`, a bare `BaseException`, or simply returns (which `_run` never does by design, so it is treated as a bug) — is recorded as a crash: `status()[name]["crash_class"]` gets the exception's class name (never its message), `restarts` increments, and the worker is respawned after `policy.error_max_s`. A normal `Exception` raised from inside `run_once` is handled one level up, in `_run`'s own try/except, and backs off along the busy → idle/error schedule without counting as a crash or a restart.
+- **Bounded `stop()`**: `stop()` cancels every worker task and pending restart timer, then waits at most `stop_timeout_s` (default 5.0s) via `asyncio.wait`. It returns `{"stopped": [...], "abandoned": [...]}` and logs a warning naming anything abandoned. A sync worker stuck inside `asyncio.to_thread` (a hung socket call, a wedged disk write) cannot actually be killed — that OS thread keeps running and leaks until it eventually returns on its own. `stop()` only bounds how long the node *waits* for it; it cannot terminate it.
+- **Status is metadata-only**: `status()` (and the `workers` block on `GET /api/local/node/status`) exposes only names, timestamps, counters, and exception *class names* — never a prompt, a response, a file path, or any other value a worker's own body handled. The same rule applies to whatever an `error_sink` writes to `app.state`, and to the `worker_errors` block (below) that surfaces those sink values.
+- **`status()` is a best-effort diagnostics snapshot, not a consistent one**: it is safe to call from any thread — `GET /api/local/node/status` is a sync route, so Starlette runs it in its threadpool while the event loop thread concurrently mutates `_states`/`_tasks` — but there is deliberately no lock across the async paths (a lock there would add contention to every worker's hot loop for a diagnostics-only read). `status()` builds each worker's row from a set of locals captured once per worker so a single row cannot tear mid-construction, but there is no guarantee that rows are mutually consistent with each other, or that any one row reflects a single instant — a row can legitimately mix, e.g., a `last_success_at` from just before a concurrent update with a `restarts` count from just after.
+- **Registration**: `register(spec, *, replace=False)` can be called before or after `start()`; a duplicate name without `replace=True` raises `ValueError`, and `replace=True` cancels the running task (and any pending restart timer) for that name before installing and spawning the replacement.
+- **`worker_errors` on `GET /api/local/node/status`**: the two ad-hoc error fields (`app.state.update_error`, `app.state.recap_error`) that `updates.poll`'s and `recap.daily`'s `error_sink`s write are otherwise unread. The status route surfaces them under a `worker_errors` key (`{"updates.poll": ..., "recap.daily": ...}`) next to `workers` so an operator can see a sink write without reading process state directly. Each value is the same sanitized, class-name-only string `status()` itself carries — `""` when healthy.
 
 ## Overlay Network Fabric & VPN Egress (`net.egress`)
 

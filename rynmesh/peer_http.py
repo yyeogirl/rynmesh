@@ -23,9 +23,10 @@ from urllib.parse import quote, urlencode, urlparse
 
 from . import recommendation_service
 from . import transport_plugins as _transport_plugins  # noqa: F401 — registers reality/meek/ech
+from .background_workers import BackgroundWorkerRegistry, BackgroundWorkerSpec, BackoffPolicy
 from .credits import CreditEvent, CreditLedgerError
 from .crypto import SignedPayload
-from .recommendation_profile import RecommendationProfileStore, starter_items
+from .recommendation_profile import RecommendationProfileStore
 from .registry import RegistryError
 from .store import RynmeshStore, StoreError
 from .transport import Transport, TransportError, get_transport
@@ -261,6 +262,39 @@ class HttpPeerClient:
             raise PeerTransportError("peer_response_not_object")
         return payload
 
+    def post_json(
+        self, path: str, payload: dict[str, Any], *, max_bytes: int = MAX_JSON_BYTES,
+        headers: dict[str, str] | None = None,
+    ) -> dict[str, Any]:
+        """POST one JSON object through the configured bounded Transport."""
+        post = getattr(self.transport, "post_bytes", None)
+        if not callable(post):
+            raise PeerTransportError("peer_transport_post_unsupported")
+        body = json.dumps(
+            payload, separators=(",", ":"), sort_keys=True, ensure_ascii=False,
+        ).encode("utf-8")
+        try:
+            raw = post(
+                self.endpoint + path,
+                body,
+                timeout_s=self.timeout_s,
+                max_bytes=max_bytes,
+                headers={**(headers or {}), "Content-Type": "application/json"},
+            )
+        except TransportError as exc:
+            if exc.reason == "too_large":
+                raise PeerTransportError("peer_response_too_large") from exc
+            # Keep plugin exception text out of the public error surface: a
+            # third-party transport may include request/response bytes there.
+            raise PeerTransportError(f"peer_http_error:{exc.reason}") from exc
+        try:
+            value = json.loads(raw.decode("utf-8") or "{}")
+        except (UnicodeDecodeError, json.JSONDecodeError) as exc:
+            raise PeerTransportError("peer_invalid_json") from exc
+        if not isinstance(value, dict):
+            raise PeerTransportError("peer_response_not_object")
+        return value
+
     def _bytes(self, path: str, *, max_bytes: int) -> bytes:
         try:
             return self.transport.get_bytes(
@@ -399,6 +433,11 @@ def create_app(store: RynmeshStore | None = None):
 
     @asynccontextmanager
     async def lifespan(lifespan_app):
+        # Background workers run their bodies in threads (`asyncio.to_thread`),
+        # and the mailbox poll worker publishes to the SSE queues from there.
+        # `asyncio.Queue` is not thread-safe, so the fan-out needs a handle on
+        # the loop that owns those queues.
+        lifespan_app.state.loop = _asyncio.get_running_loop()
         updater.on_startup()  # may os.execv away on crash-loop rollback
         if os.environ.get("RYNMESH_AUTO_REGISTER", "").strip().lower() in {"1", "true", "yes"}:
             network_id = (
@@ -418,38 +457,30 @@ def create_app(store: RynmeshStore | None = None):
             await _asyncio.sleep(grace)
             updater.mark_serving()
 
-        async def _poll():
-            interval = int(os.environ.get("RYNMESH_UPDATE_POLL_S", "1800") or 1800)
-            while True:
-                await _asyncio.sleep(interval)
-                try:
-                    res = await _asyncio.to_thread(updater.check)
-                    if res.get("available") and updater.status()["autoUpdate"]:
-                        await _asyncio.to_thread(updater.apply, updater.check_manifest())
-                except Exception:
-                    pass
+        def _update_poll_once() -> bool:
+            res = updater.check()
+            if res.get("available") and updater.status()["autoUpdate"]:
+                updater.apply(updater.check_manifest())
+                return True
+            return False
 
-        async def _recap_daily():
+        def _recap_once() -> bool:
             """Send the recap once per day, at the configured UTC hour.
 
             Deliberately a poll rather than a timer: the machine sleeps, and a
             laptop that was closed at the send hour should still get its recap
             when it wakes rather than skipping the day.
             """
-            await _asyncio.sleep(20)
-            while True:
-                try:
-                    stored = dict(_settings.get().get("recap", {}) or {})
-                    if stored.get("enabled") and stored.get("smtp_host"):
-                        now = time.time()
-                        hour = int(stored.get("send_hour_utc", 13))
-                        last = float(stored.get("last_sent_unix", 0) or 0)
-                        due = _dt.now(_UTC).hour >= hour and (now - last) > 20 * 3600
-                        if due:
-                            await _asyncio.to_thread(_send_recap_now)
-                except Exception:
-                    pass
-                await _asyncio.sleep(900)
+            stored = dict(_settings.get().get("recap", {}) or {})
+            if stored.get("enabled") and stored.get("smtp_host"):
+                now = time.time()
+                hour = int(stored.get("send_hour_utc", 13))
+                last = float(stored.get("last_sent_unix", 0) or 0)
+                due = _dt.now(_UTC).hour >= hour and (now - last) > 20 * 3600
+                if due:
+                    _send_recap_now()
+                    return True
+            return False
 
         async def _discover():
             service = getattr(lifespan_app.state, "digest_service", None)
@@ -489,19 +520,67 @@ def create_app(store: RynmeshStore | None = None):
                 )
                 await _asyncio.sleep(delay)
 
-        confirm_task = _asyncio.create_task(_confirm_after_grace())
-        poll_task = _asyncio.create_task(_poll())
-        discovery_task = _asyncio.create_task(_discover())
-        recap_task = _asyncio.create_task(_recap_daily())
-        yield
-        confirm_task.cancel()
-        poll_task.cancel()
-        discovery_task.cancel()
-        recap_task.cancel()
+        registry = lifespan_app.state.background_workers
+        update_poll_interval = float(
+            int(os.environ.get("RYNMESH_UPDATE_POLL_S", "1800") or 1800)
+        )
+        registry.register(
+            BackgroundWorkerSpec(
+                name="updates.poll",
+                run_once=_update_poll_once,
+                policy=BackoffPolicy.fixed(update_poll_interval),
+                # Preserves today's sleep-then-check order: a boot must not
+                # trigger an update check while the crash-loop rollback
+                # window (`_confirm_after_grace`) is still open.
+                initial_delay_s=update_poll_interval,
+                error_sink=lambda value: setattr(lifespan_app.state, "update_error", value),
+            ),
+            # `stop()` never removes a spec from the registry's own bookkeeping
+            # (only its task), so a process that re-enters this lifespan on the
+            # same app (startup -> shutdown -> startup) must be able to
+            # re-register without raising "already registered".
+            replace=True,
+        )
+        registry.register(
+            BackgroundWorkerSpec(
+                name="recap.daily",
+                run_once=_recap_once,
+                policy=BackoffPolicy.fixed(900.0),
+                initial_delay_s=20.0,
+                error_sink=lambda value: setattr(lifespan_app.state, "recap_error", value),
+            ),
+            replace=True,
+        )
+        await registry.start()
+        tasks = (
+            _asyncio.create_task(_confirm_after_grace()),
+            _asyncio.create_task(_discover()),
+        )
+        try:
+            yield
+        finally:
+            await registry.stop()
+            for task in tasks:
+                task.cancel()
+            await _asyncio.gather(*tasks, return_exceptions=True)
+            # A custom lifespan replaces Starlette's `on_shutdown` handling, so
+            # the LLM routes' own hook has to be called from here; without it
+            # an owned `llama-server` child outlives the node.
+            llm_shutdown = getattr(lifespan_app.state, "llm_shutdown", None)
+            if callable(llm_shutdown):
+                await _asyncio.to_thread(llm_shutdown)
+            lifespan_app.state.loop = None
 
     app = FastAPI(title="Rynmesh Peer", version="0.1", lifespan=lifespan)
+    app.state.background_workers = BackgroundWorkerRegistry()
+    # Set by the lifespan; until then there is no loop and no SSE subscriber.
+    app.state.loop = None
     started_at = time.monotonic()
     app.state.registration_error = ""
+    app.state.llm_publication_error = ""
+    app.state.llm_relay_error = ""
+    app.state.update_error = ""
+    app.state.recap_error = ""
     app.state.publish_drafts = {}
     app.add_middleware(
         CORSMiddleware,
@@ -1077,6 +1156,11 @@ def create_app(store: RynmeshStore | None = None):
             "pending_recs": 0,
             "version": f"ryn-node {RYNMESH_VERSION}",
             "uptime_seconds": int(time.monotonic() - started_at),
+            "workers": app.state.background_workers.status(),
+            "worker_errors": {
+                "updates.poll": app.state.update_error,
+                "recap.daily": app.state.recap_error,
+            },
         }
 
     @app.get("/api/local/registry/status")
@@ -1355,6 +1439,8 @@ def create_app(store: RynmeshStore | None = None):
             return events
         return []
 
+    from .device_sync.records import SyncError
+    from .first_run_routes import install_first_run
     from .services import ask as ask_service
     from .services import model_provider as model_provider_module
     from .services import recap as recap_service
@@ -1387,6 +1473,14 @@ def create_app(store: RynmeshStore | None = None):
 
     def _audit() -> AssistantAuditStore:
         return app.state.assistant_audit
+
+    install_first_run(
+        app, store=active_store, home=active_store.home,
+        workers=app.state.background_workers, local_control=local_control,
+        discovery=lambda: app.state.digest_service,
+        consumption=lambda: app.state.consumption_store,
+        profile=lambda: _recommendation_profile, audit=lambda: app.state.assistant_audit,
+    )
 
     def _preferred_model() -> str:
         """The owner's explicit choice, if they've made one."""
@@ -1676,34 +1770,55 @@ def create_app(store: RynmeshStore | None = None):
     @app.get("/api/local/consumption")
     def local_consumption(request: FastAPIRequest) -> list[dict[str, Any]]:
         local_control(request)
-        return app.state.consumption_store.list()
+        try:
+            return app.state.consumption_store.list()
+        except (OSError, ValueError):
+            raise HTTPException(status_code=503, detail="reading_history_unavailable") from None
 
     @app.post("/api/local/consumption")
     async def local_consumption_record(request: FastAPIRequest) -> dict[str, Any]:
         local_control(request)
         body = await request.json()
+        if not isinstance(body, dict):
+            raise HTTPException(status_code=400, detail="consumption_not_object")
         try:
-            record = app.state.consumption_store.record(
+            record = await _asyncio.to_thread(
+                app.state.consumption_store.record,
                 body.get("item", {}),
                 str(body.get("action", "")),
                 progress=body.get("progress"),
+                content_version=body.get("content_version"),
+                expected_sync_revision=body.get("expected_sync_revision"),
             )
             action = str(body.get("action", ""))
+            if action == "opened":
+                app.state.first_run.record("first_item_opened")
+            elif action == "bookmark":
+                app.state.first_run.record("first_signal_recorded")
             if action in {"opened", "bookmark", "completed"}:
                 _audit().append(
                     "fetch" if action == "opened" else "rec",
-                    f"Content {action}: {record['item'].get('title', record['item_id'])}",
+                    f"Content {action}",
                     details={"action": action, "stored_locally": True},
                     item_id=record["item_id"],
                 )
             return record
         except ConsumptionError as exc:
             raise HTTPException(status_code=400, detail=str(exc)) from exc
+        except SyncError as exc:
+            if str(exc) == "sync_revision_conflict":
+                raise HTTPException(status_code=409, detail=str(exc)) from None
+            raise HTTPException(status_code=503, detail="reading_history_unavailable") from None
+        except OSError:
+            raise HTTPException(status_code=503, detail="reading_history_unavailable") from None
 
     @app.delete("/api/local/consumption")
     def local_consumption_clear(request: FastAPIRequest) -> dict[str, bool]:
         local_control(request)
-        app.state.consumption_store.clear()
+        try:
+            app.state.consumption_store.clear()
+        except (OSError, ValueError):
+            raise HTTPException(status_code=503, detail="reading_history_unavailable") from None
         _audit().append("verify", "Reading history cleared", details={"scope": "history"})
         return {"ok": True}
 
@@ -1721,7 +1836,7 @@ def create_app(store: RynmeshStore | None = None):
         _audit().append(
             "rec",
             "Recommendation direction updated",
-            details={"interests": result["interests"], "avoids": result["avoids"]},
+            details={"interest_count": len(result["interests"]), "avoid_count": len(result["avoids"])},
         )
         return result
 
@@ -1729,6 +1844,8 @@ def create_app(store: RynmeshStore | None = None):
     async def local_digest_feedback(request: FastAPIRequest) -> dict[str, Any]:
         local_control(request)
         body = await request.json()
+        if not isinstance(body, dict):
+            raise HTTPException(status_code=400, detail="feedback_not_object")
         try:
             result = _digest_service().feedback(
                 str(body.get("item_id", "")), str(body.get("action", ""))
@@ -1743,6 +1860,8 @@ def create_app(store: RynmeshStore | None = None):
             return result
         except DigestError as exc:
             raise HTTPException(status_code=400, detail=str(exc)) from exc
+        except (OSError, ValueError):
+            raise HTTPException(status_code=503, detail="recommendation_feedback_unavailable") from None
 
     @app.post("/api/local/recommendations")
     async def local_recommendations(request: FastAPIRequest) -> list[dict[str, Any]]:
@@ -1754,40 +1873,11 @@ def create_app(store: RynmeshStore | None = None):
         now_unix = time.time()
         items = network_content(control_network_id())
         items.extend(_digest_service().recommendation_items())
-        has_starters = False
-        if not any(
-            str(item.get("fetch_status", "")) not in {"local", "fetched_full"}
-            and str(item.get("safety_outcome", "")) != "blocked"
-            for item in items
-        ):
-            items.extend(
-                starter_items(
-                    _recommendation_profile.get(),
-                    seed_key=active_store.peer_id,
-                    now_unix=now_unix,
-                )
-            )
-            has_starters = True
         profile_signals = _recommendation_profile.signals()
-        recommendations = recommendation_service.recommend_from_items(
-            items,
-            now_unix=now_unix,
-            query=str(body.get("query", "") or ""),
-            limit=int(body.get("limit", 6) or 6),
-            profile=profile_signals,
-        )
-        if recommendations or body.get("query") or has_starters:
-            return recommendations
-        items.extend(
-            starter_items(
-                _recommendation_profile.get(),
-                seed_key=active_store.peer_id,
-                now_unix=now_unix,
-            )
-        )
         return recommendation_service.recommend_from_items(
             items,
             now_unix=now_unix,
+            query=str(body.get("query", "") or ""),
             limit=int(body.get("limit", 6) or 6),
             profile=profile_signals,
         )
@@ -1811,8 +1901,8 @@ def create_app(store: RynmeshStore | None = None):
             "rec",
             "Recommendation profile updated",
             details={
-                "topics": profile["topics"],
-                "platforms": profile["platforms"],
+                "topic_count": len(profile["topics"]),
+                "platform_count": len(profile["platforms"]),
                 "has_direction": bool(profile["direction"]),
             },
         )
@@ -1825,13 +1915,6 @@ def create_app(store: RynmeshStore | None = None):
         content_id = str(body.get("contentId", "") or "")
         candidates = network_content(control_network_id())
         candidates.extend(_digest_service().recommendation_items())
-        candidates.extend(
-            starter_items(
-                _recommendation_profile.get(),
-                seed_key=active_store.peer_id,
-                now_unix=time.time(),
-            )
-        )
         item = next(
             (candidate for candidate in candidates if candidate.get("content_id") == content_id),
             None,
@@ -1840,6 +1923,8 @@ def create_app(store: RynmeshStore | None = None):
             raise HTTPException(status_code=404, detail="recommendation_content_not_found")
         try:
             profile = _recommendation_profile.feedback(item, str(body.get("action", "")))
+            if str(body.get("action", "")) != "neutral":
+                app.state.first_run.record("first_signal_recorded")
             _digest_service().build(now_unix=time.time())
             _audit().append(
                 "rec",
@@ -2038,6 +2123,7 @@ def create_app(store: RynmeshStore | None = None):
             "reading_history": app.state.consumption_store.list(),
             "sources": _digest_service().list_sources(),
             "assistant_audit": _audit().list(),
+            "first_success": app.state.first_run.export(),
             "privacy_settings": {
                 "ai_provider": stored["ai_provider"],
                 "ai_model": stored["ai_model"],
@@ -2052,7 +2138,7 @@ def create_app(store: RynmeshStore | None = None):
         body = await request.json()
         requested = body.get("scopes", []) if isinstance(body, dict) else []
         scopes = {str(scope) for scope in requested if str(scope)}
-        allowed = {"history", "profile", "cache", "audit"}
+        allowed = {"history", "profile", "cache", "audit", "onboarding"}
         if not scopes or not scopes.issubset(allowed):
             raise HTTPException(status_code=400, detail="privacy_erase_scopes_invalid")
         if "history" in scopes:
@@ -2065,7 +2151,9 @@ def create_app(store: RynmeshStore | None = None):
             app.state.reader_cache.clear()
         if "audit" in scopes:
             _audit().clear()
-        else:
+        if "onboarding" in scopes:
+            app.state.first_run.store.reset()
+        if "audit" not in scopes:
             _audit().append(
                 "verify",
                 "Personal assistant data erased",
@@ -2172,10 +2260,15 @@ def create_app(store: RynmeshStore | None = None):
     from .services.messaging_store import MessagingStore as _MsgStore
     from .services.peer_messenger import PeerMessenger as _PeerMessenger
 
-    _msg_priv = _peer_box.load_or_create_messaging_key(_home / "messaging.x25519")
-    _msg_store = _MsgStore(_home)
+    # Beside the identity key, not $RYNMESH_HOME: the store owns the peer id
+    # these messages are sealed to, and `register_node` advertises this key.
+    _msg_priv = _peer_box.load_or_create_messaging_key(active_store.home / "messaging.x25519")
+    # Beside the key that decrypts them, for the same reason: history belongs to
+    # the identity the store owns, not to whatever $RYNMESH_HOME happens to say.
+    _msg_store = _MsgStore(active_store.home)
     _pubkey_cache: dict[str, str] = {}  # peer_id -> x25519 pub (TOFU)
     _msg_subscribers: list = []  # asyncio.Queue per SSE client
+    app.state.message_subscribers = _msg_subscribers
 
     def _resolve_endpoint(peer_id: str) -> str:
         discovered = (
@@ -2205,7 +2298,15 @@ def create_app(store: RynmeshStore | None = None):
         _pubkey_cache[peer_id] = pub
         return pub
 
+    from . import mailbox_routes as _mailbox_routes
+
+    _resolve_pubkey = _mailbox_routes.with_registry_fallback(
+        _resolve_pubkey, store=active_store, cache=_pubkey_cache, network_id=control_network_id
+    )
+
     def _transport(peer_id: str, header: dict) -> int:
+        if os.environ.get("RYNMESH_MESSAGING_FORCE_MAILBOX", "").strip() == "1":
+            return 0  # test/E2E aid: skip direct delivery so the mailbox path runs
         ep = _resolve_endpoint(peer_id)
         if not ep:
             return 0
@@ -2227,14 +2328,107 @@ def create_app(store: RynmeshStore | None = None):
         resolve_pubkey=_resolve_pubkey,
         transport=_transport,
         now=lambda: _dt.now(_UTC).isoformat(timespec="seconds"),
+        fallback=_mailbox_routes.peer_message_fallback(app, store=active_store),
+    )
+
+    _mailbox = _mailbox_routes.install_mailbox(
+        app, store=active_store, messaging_key=_msg_priv, home=_home,
+        resolve_pubkey=_resolve_pubkey, workers=app.state.background_workers,
+        local_control=local_control,
     )
 
     def _publish(record: dict) -> None:
+        """Fan one record out to every SSE subscriber, from any thread.
+
+        The direct `/api/peer/msg` route calls this on the event loop; the
+        mailbox poll worker calls it from the thread `asyncio.to_thread` ran it
+        in. `asyncio.Queue.put_nowait` is not thread-safe — off-loop it wakes a
+        waiting getter through a non-thread-safe `call_soon`, which can leave
+        the record sitting in the queue unnoticed — so an off-loop caller hands
+        the put to the loop instead.
+        """
+
+        try:
+            _asyncio.get_running_loop()
+            on_loop = True
+        except RuntimeError:
+            on_loop = False
+        loop = getattr(app.state, "loop", None)
         for q in list(_msg_subscribers):
             try:
-                q.put_nowait(record)
+                if on_loop or loop is None:
+                    q.put_nowait(record)
+                else:
+                    loop.call_soon_threadsafe(q.put_nowait, record)
             except Exception:
                 pass
+
+    _mailbox_routes.install_peer_message_relay(
+        _mailbox, _messenger, _publish, pubkey_cache=_pubkey_cache
+    )
+
+    from .friends.routes import install_friends
+
+    install_friends(
+        app, store=active_store, home=_home, workers=app.state.background_workers,
+        local_control=local_control, messaging_key=_msg_priv,
+    )
+
+    from .device_sync.routes import install_device_sync
+
+    install_device_sync(app, store=active_store, home=_home, workers=app.state.background_workers,
+        local_control=local_control, messaging_key=_msg_priv,
+        reading=lambda: app.state.consumption_store, conversations=lambda: app.state.ask_ryn.conversations)
+
+    from .friend_feed.routes import install_friend_feed
+
+    install_friend_feed(app, home=active_store.home, messaging_key=_msg_priv,
+        friends=lambda: app.state.friends.service, content=lambda: app.state.friends.content,
+        local_control=local_control, workers=app.state.background_workers)
+
+    from .offline_reading.routes import install_offline_reading
+
+    install_offline_reading(app, home=active_store.home, messaging_key=_msg_priv,
+        consumption=lambda: app.state.consumption_store, imports=lambda: app.state.friends.content.imports,
+        native=lambda: active_store, local_control=local_control, workers=app.state.background_workers)
+
+    from .ai_access.routes import install_ai_access
+    from .ask_ryn.routes import install_ask_ryn
+
+    install_ai_access(
+        app, home=active_store.home, local_control=local_control,
+        relationship=lambda rid: app.state.friends.service.store.relationship(rid),
+        friends=lambda: app.state.friends.service, workers=app.state.background_workers,
+    )
+
+    install_ask_ryn(
+        app, store=active_store, home=_home, workers=app.state.background_workers,
+        local_control=local_control, messaging_key=_msg_priv,
+    )
+
+    from .local_search.routes import install_local_search
+    from .local_search.sources import LocalSearchSources
+
+    install_local_search(app, store=active_store, home=_home, workers=app.state.background_workers,
+        local_control=local_control, messaging_key=_msg_priv,
+        source=lambda: LocalSearchSources(consumption=lambda: app.state.consumption_store,
+            imports=lambda: app.state.friends.content.imports, reader=lambda: app.state.reader_cache,
+            friends=lambda: app.state.friends.service, conversations=lambda: app.state.ask_ryn.conversations,
+            store=lambda: active_store, offline=lambda: app.state.offline_reading.service).snapshot())
+
+    from .ask_ryn.cleanup_routes import install_conversation_cleanup
+
+    install_conversation_cleanup(app, store=active_store, home=_home,
+        workers=app.state.background_workers, local_control=local_control)
+
+    from .services.reading_cleanup_routes import install_reading_cleanup
+
+    install_reading_cleanup(app, store=active_store, home=_home,
+        workers=app.state.background_workers, local_control=local_control)
+
+    from .privacy_export.routes import install_privacy_export
+
+    install_privacy_export(app, local_control=local_control)
 
     @app.get("/api/peer/pubkey")
     def peer_pubkey() -> dict:
@@ -2247,7 +2441,8 @@ def create_app(store: RynmeshStore | None = None):
         if fp and header.get("from"):
             _pubkey_cache.setdefault(str(header["from"]), str(fp))  # TOFU
         record = _messenger.receive(header)
-        _publish(record)
+        if not record.get("duplicate"):  # a retried POST must not double the stream
+            _publish(record)
         return {"ok": True, "msg_id": record["msg_id"]}
 
     @app.post("/api/local/messages/send")
@@ -2306,6 +2501,20 @@ def create_app(store: RynmeshStore | None = None):
         # '/' which Starlette can't route in a path.
         return _messenger.history(peer_id)
 
+    # Private LLM tasks use discovery metadata from the existing registry, then
+    # send signed end-to-end ciphertext directly between the two Ryn nodes.
+    # The model runtime is never exposed as a peer endpoint.
+    from .llm_package.routes import install_llm_routes as _install_llm_routes
+
+    app.state.ask_ryn.orders = _install_llm_routes(
+        app,
+        store=active_store,
+        home=active_store.home,
+        messaging_key=_msg_priv,
+        resolve_endpoint=_resolve_endpoint,
+        resolve_pubkey=_resolve_pubkey,
+    )
+
     # ---- bundled web UI -------------------------------------------------
     # A packaged install serves the built webapp from the node itself, so the
     # whole product is one process on one port — no dev server, no npm.
@@ -2349,7 +2558,8 @@ def _mount_webui(app: Any) -> bool:
                 # hand them index.html and let the router resolve them. Missing
                 # assets must still 404 — otherwise a broken <script> src
                 # silently returns HTML and the app fails with a parse error.
-                if exc.status_code == 404 and not path.startswith("assets/"):
+                request_path = str(scope.get("path") or path).lstrip("/")
+                if exc.status_code == 404 and not request_path.startswith("assets/"):
                     return _no_store(FileResponse(directory / "index.html"))
                 raise
             if path in ("", ".", "index.html"):

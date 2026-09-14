@@ -19,6 +19,7 @@ The node, web interface, recommendation agent, peer protocol, registry, and comm
 - A self-hosted web interface served by the node daemon
 - Signed content manifests, provenance chains, and safety receipts
 - Direct peer HTTP transport with registry-assisted discovery and NAT-safe relay jobs
+- Direct ICE/UDP file transfer with automatic ordinary-peer transit fallback; TURN is not used
 - Content publishing for video, images, audio, documents, slides, datasets, and other files
 - MCP tools for Codex-, Claude-, and other MCP-compatible AI operators
 - Non-transferable Rynmesh Credits for distribution reputation
@@ -111,6 +112,27 @@ rynmesh-registry
 
 The registry stores signed peer records, work-order mailbox messages, and optional relay blobs. Nodes verify signatures and content hashes locally.
 
+## Three-node P2P peer transit
+
+`rynmesh-transit` sends directly over ICE/UDP when possible and can use another
+ordinary Rynmesh peer as a single encrypted transit hop when the direct route is
+unavailable or degraded. Both legs are host/server-reflexive P2P connections;
+the registry carries signed signaling only, and TURN candidates fail closed.
+
+```bash
+# Peer 3
+rynmesh-transit worker --role target --network-id my-network
+# Peer 2
+rynmesh-transit worker --role transit --network-id my-network
+# Peer 1: direct first, peer 2 on hard failure
+rynmesh-transit send-file-adaptive artifact.bin \
+  --target-peer "<peer-3-id>" --relay-peer "<peer-2-id>" \
+  --network-id my-network
+```
+
+See [the design and acceptance contract](docs/P2P_PEER_TRANSIT.md) and
+[operator runbook](docs/P2P_PEER_TRANSIT_RUNBOOK.md).
+
 ## MCP server
 
 ```bash
@@ -118,6 +140,46 @@ rynmesh-mcp
 ```
 
 See [Architecture](docs/ARCHITECTURE.md), [Product milestones](docs/PRODUCT_MILESTONES.md), and [Contributing](CONTRIBUTING.md) for deeper project context.
+
+## Optional local LLM provider packages
+
+The desktop node and recommendation assistant do not require Docker or a local
+model. Operators who choose to provide private inference can connect an existing
+loopback OpenAI-compatible or Ollama service, or let Rynmesh manage one: managed
+mode downloads a verified GGUF model and runs it with the bundled llama.cpp
+runtime built into the desktop app, or a managed download of the pinned release
+on a `pip`-installed node. Docker is an opt-in runtime for server operators who
+prefer container isolation, selected with `--runtime docker`:
+
+```bash
+rynmesh-llm detect
+rynmesh-llm setup --mode openai-compatible --base-url http://127.0.0.1:8080
+# Managed local model, bundled/downloaded native runtime (default):
+rynmesh-llm setup --mode managed --profile balanced --yes
+# Managed local model, opt-in Docker runtime (server nodes):
+rynmesh-llm setup --mode managed --runtime docker --yes
+```
+
+Provider/Consumer task bodies travel as signed end-to-end ciphertext directly
+between Ryn nodes, with a dedicated ciphertext-only relay fallback. The registry
+receives discovery and body-free coordination only. Rynmesh Credits remain
+non-transferable reputation; development Task Balance is a separate simulated
+ledger and is not real money or a production payment system.
+
+Run the isolated two-node automated demonstration with:
+
+```bash
+python scripts/llm_e2e.py run
+python scripts/llm_e2e.py down
+```
+
+See [Local LLM runbook](docs/LOCAL_LLM_RUNBOOK.md),
+[design and boundaries](docs/LOCAL_LLM_SERVICE_MVP.md), and
+[P0 evidence](docs/LOCAL_LLM_P0_EVIDENCE.md). Developers and AI agents should
+start with the [current development handoff](docs/LOCAL_LLM_DEVELOPMENT_STATUS.md)
+before continuing this feature. The user-facing catalog, typed service routes,
+local conversation storage, and extension rules are documented in the
+[Services UI architecture](docs/SERVICES_UI_ARCHITECTURE.md).
 
 ## Verify a checkout
 

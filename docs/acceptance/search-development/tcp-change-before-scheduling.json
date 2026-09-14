@@ -1,0 +1,12 @@
+{
+  "recorded_at": "2026-09-11T04:34:02.896840+00:00",
+  "scope": "Actual TCP HTTP against the dedicated 10k-record node, with its automatic index worker; not a packaged desktop test",
+  "conversation_id": "flow-43421e79f2e44215b0a2c79ae2ab5de7",
+  "create_visible_seconds": 2.305736100010108,
+  "rename_visible_seconds": 6.93042129999958,
+  "old_title_hidden_on_first_query": true,
+  "deleted_title_hidden_on_first_query": true,
+  "deleted_result_open_status": 409,
+  "deleted_result_open_error": "search_result_unavailable",
+  "temporary_conversation_deleted": true
+}

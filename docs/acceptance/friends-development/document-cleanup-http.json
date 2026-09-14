@@ -1,0 +1,13 @@
+{
+  "verified_at": "2026-09-11T15:49:26.799034+00:00",
+  "environment": "Windows independent loopback node",
+  "pending_http_read_denied": true,
+  "pending_same_copy_save_denied": true,
+  "new_independent_document_preserved": true,
+  "original_job_completed": true,
+  "same_id_saved_after_completion": true,
+  "completed_request_replay_kept_recreated_copy": true,
+  "recreated_body_hash_matches": true,
+  "bookmark_retained": true,
+  "remote_erasure_confirmed": false
+}

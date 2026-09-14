@@ -2,9 +2,10 @@
 from __future__ import annotations
 
 import json
-import os
 from pathlib import Path
 from typing import Any
+
+from .atomic_io import atomic_write_json
 
 _DEFAULTS: dict[str, Any] = {
     # Daily recap email config (nested dict; see services/recap.py).
@@ -110,8 +111,5 @@ class SettingsStore:
                         except (TypeError, ValueError):
                             continue
                 data[k] = merged
-        self.path.parent.mkdir(parents=True, exist_ok=True)
-        tmp = self.path.with_suffix(".json.tmp")
-        tmp.write_text(json.dumps(data, indent=2))
-        os.replace(tmp, self.path)
+        atomic_write_json(self.path, data, indent=2, sort_keys=False)
         return data

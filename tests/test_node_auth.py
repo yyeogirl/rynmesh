@@ -7,6 +7,7 @@ from __future__ import annotations
 
 import base64
 import json
+import os
 import stat
 import time
 
@@ -78,7 +79,8 @@ def test_token_is_persisted_and_stable(auth):
 def test_token_file_is_owner_only(auth):
     auth.token()
     mode = stat.S_IMODE(auth.token_path.stat().st_mode)
-    assert mode == 0o600, f"token readable beyond owner: {oct(mode)}"
+    if os.name != "nt":
+        assert mode == 0o600, f"token readable beyond owner: {oct(mode)}"
 
 
 def test_rotate_token_changes_it_and_kills_sessions(auth):

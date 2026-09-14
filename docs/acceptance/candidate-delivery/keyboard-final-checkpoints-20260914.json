@@ -1,0 +1,32 @@
+{
+  "implementation_commit": "04d94f21fb702ffe0ac9ed596ccb56e681e578f4",
+  "environment": "Windows installed wheel; browser keyboard events; loopback nodes; no screen reader claim",
+  "nodes": [
+    {
+      "port": 18990,
+      "active_friends": 0,
+      "device_states": [
+        "revoked",
+        "revoked"
+      ],
+      "subscriptions_enabled": 0,
+      "timeline_entries": 0
+    },
+    {
+      "port": 18991,
+      "active_friends": 0,
+      "device_states": [
+        "revoked",
+        "revoked"
+      ],
+      "subscriptions_enabled": 0,
+      "timeline_entries": 0
+    }
+  ],
+  "model_node": {
+    "configured": true,
+    "ready": false,
+    "online": false,
+    "publication_enabled": false
+  }
+}

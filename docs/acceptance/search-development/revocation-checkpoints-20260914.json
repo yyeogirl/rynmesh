@@ -1,0 +1,593 @@
+{
+  "scope": "Chrome and two existing independent Windows loopback nodes; real prior browser pairing",
+  "checkpoints": [
+    {
+      "label": "metadata-only",
+      "at": "2026-09-14T11:51:52.881598+00:00",
+      "index_sha256": "8c85931621d30d27cc541baf6d40a6c201052095e1d2e6185b11a6034ed71547",
+      "friends": [
+        {
+          "peer_id": "Hgrcmc6hOapgKiChYwrKSBIPeORSKNh2ZVkFFHveIEI=",
+          "relationship_id": "d25d5d17f0fa446fbde505ef4cfb635c",
+          "status": "active"
+        }
+      ],
+      "queries": {
+        "protected_messages": {
+          "total": 2,
+          "partial": false,
+          "index": {
+            "state": "ready",
+            "indexed_count": 4,
+            "error_code": ""
+          },
+          "results": [
+            {
+              "id": "message:Hgrcmc6hOapgKiChYwrKSBIPeORSKNh2ZVkFFHveIEI=:c3dcf03eda414cc6a0c5094c594e465c",
+              "kinds": [
+                "chat"
+              ],
+              "body_state": "available"
+            },
+            {
+              "id": "message:Hgrcmc6hOapgKiChYwrKSBIPeORSKNh2ZVkFFHveIEI=:35279d65e2364e7c945ecc7e8ab3c1e3",
+              "kinds": [
+                "chat",
+                "share"
+              ],
+              "body_state": "available"
+            }
+          ]
+        },
+        "article_metadata": {
+          "total": 1,
+          "partial": false,
+          "index": {
+            "state": "ready",
+            "indexed_count": 4,
+            "error_code": ""
+          },
+          "results": [
+            {
+              "id": "card:9c51990275994a7288bfc194a0d3051f",
+              "kinds": [
+                "share"
+              ],
+              "body_state": "not_downloaded"
+            }
+          ]
+        },
+        "saved_body": {
+          "total": 0,
+          "partial": false,
+          "index": {
+            "state": "ready",
+            "indexed_count": 4,
+            "error_code": ""
+          },
+          "results": []
+        },
+        "friend_filtered_body": {
+          "total": 0,
+          "partial": false,
+          "index": {
+            "state": "ready",
+            "indexed_count": 4,
+            "error_code": ""
+          },
+          "results": []
+        }
+      },
+      "opens": {
+        "message:Hgrcmc6hOapgKiChYwrKSBIPeORSKNh2ZVkFFHveIEI=:c3dcf03eda414cc6a0c5094c594e465c": {
+          "status": 200,
+          "body_sha256": "e4f23869e205d41baa2997e9865e0bd8cbd2c815be79abbd40fcaa98a8adb302"
+        },
+        "message:Hgrcmc6hOapgKiChYwrKSBIPeORSKNh2ZVkFFHveIEI=:35279d65e2364e7c945ecc7e8ab3c1e3": {
+          "status": 200,
+          "body_sha256": "c20a3ce3e358d6c669f72536a0628ba630d042870ae0f34905bd61cea2f03a13"
+        },
+        "card:9c51990275994a7288bfc194a0d3051f": {
+          "status": 200,
+          "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      "cards": [
+        {
+          "card_id": "9c51990275994a7288bfc194a0d3051f",
+          "dir": "in",
+          "fetch_state": "available",
+          "fetched_library_id": null,
+          "sha256_verified": null
+        }
+      ]
+    },
+    {
+      "label": "before-revoke",
+      "at": "2026-09-14T11:52:59.930635+00:00",
+      "index_sha256": "fbc3ffbef7809ffbd4cf523aed22124061148723250b5d17a70e6d69e2544df4",
+      "friends": [
+        {
+          "peer_id": "Hgrcmc6hOapgKiChYwrKSBIPeORSKNh2ZVkFFHveIEI=",
+          "relationship_id": "d25d5d17f0fa446fbde505ef4cfb635c",
+          "status": "active"
+        }
+      ],
+      "queries": {
+        "protected_messages": {
+          "total": 2,
+          "partial": false,
+          "index": {
+            "state": "ready",
+            "indexed_count": 4,
+            "error_code": ""
+          },
+          "results": [
+            {
+              "id": "message:Hgrcmc6hOapgKiChYwrKSBIPeORSKNh2ZVkFFHveIEI=:c3dcf03eda414cc6a0c5094c594e465c",
+              "kinds": [
+                "chat"
+              ],
+              "body_state": "available"
+            },
+            {
+              "id": "message:Hgrcmc6hOapgKiChYwrKSBIPeORSKNh2ZVkFFHveIEI=:35279d65e2364e7c945ecc7e8ab3c1e3",
+              "kinds": [
+                "chat",
+                "share"
+              ],
+              "body_state": "available"
+            }
+          ]
+        },
+        "article_metadata": {
+          "total": 1,
+          "partial": false,
+          "index": {
+            "state": "ready",
+            "indexed_count": 4,
+            "error_code": ""
+          },
+          "results": [
+            {
+              "id": "content:import:imp_5ba6d82d3a07d0bffa05c7cc307e828d558c40f7a65ed1ea45b4d3ab8746aa36",
+              "kinds": [
+                "history",
+                "saved",
+                "share"
+              ],
+              "body_state": "available"
+            }
+          ]
+        },
+        "saved_body": {
+          "total": 1,
+          "partial": false,
+          "index": {
+            "state": "ready",
+            "indexed_count": 4,
+            "error_code": ""
+          },
+          "results": [
+            {
+              "id": "content:import:imp_5ba6d82d3a07d0bffa05c7cc307e828d558c40f7a65ed1ea45b4d3ab8746aa36",
+              "kinds": [
+                "history",
+                "saved",
+                "share"
+              ],
+              "body_state": "available"
+            }
+          ]
+        },
+        "friend_filtered_body": {
+          "total": 1,
+          "partial": false,
+          "index": {
+            "state": "ready",
+            "indexed_count": 4,
+            "error_code": ""
+          },
+          "results": [
+            {
+              "id": "content:import:imp_5ba6d82d3a07d0bffa05c7cc307e828d558c40f7a65ed1ea45b4d3ab8746aa36",
+              "kinds": [
+                "history",
+                "saved",
+                "share"
+              ],
+              "body_state": "available"
+            }
+          ]
+        }
+      },
+      "opens": {
+        "message:Hgrcmc6hOapgKiChYwrKSBIPeORSKNh2ZVkFFHveIEI=:c3dcf03eda414cc6a0c5094c594e465c": {
+          "status": 200,
+          "body_sha256": "e4f23869e205d41baa2997e9865e0bd8cbd2c815be79abbd40fcaa98a8adb302"
+        },
+        "message:Hgrcmc6hOapgKiChYwrKSBIPeORSKNh2ZVkFFHveIEI=:35279d65e2364e7c945ecc7e8ab3c1e3": {
+          "status": 200,
+          "body_sha256": "c20a3ce3e358d6c669f72536a0628ba630d042870ae0f34905bd61cea2f03a13"
+        },
+        "content:import:imp_5ba6d82d3a07d0bffa05c7cc307e828d558c40f7a65ed1ea45b4d3ab8746aa36": {
+          "status": 200,
+          "body_sha256": "0ebfb63e29fdd1f4ffe4185c54c7656dfdc06e1bcccedffec03d3154ef14760a"
+        }
+      },
+      "cards": [
+        {
+          "card_id": "9c51990275994a7288bfc194a0d3051f",
+          "dir": "in",
+          "fetch_state": "fetched",
+          "fetched_library_id": "import:imp_5ba6d82d3a07d0bffa05c7cc307e828d558c40f7a65ed1ea45b4d3ab8746aa36",
+          "sha256_verified": true
+        }
+      ]
+    },
+    {
+      "label": "revoked-frozen-index",
+      "at": "2026-09-14T11:54:15.137770+00:00",
+      "index_sha256": "fbc3ffbef7809ffbd4cf523aed22124061148723250b5d17a70e6d69e2544df4",
+      "friends": [
+        {
+          "peer_id": "Hgrcmc6hOapgKiChYwrKSBIPeORSKNh2ZVkFFHveIEI=",
+          "relationship_id": "d25d5d17f0fa446fbde505ef4cfb635c",
+          "status": "revoked"
+        }
+      ],
+      "queries": {
+        "protected_messages": {
+          "total": 0,
+          "partial": true,
+          "index": {
+            "state": "building",
+            "indexed_count": 4,
+            "error_code": "search_source_unavailable"
+          },
+          "results": []
+        },
+        "article_metadata": {
+          "total": 0,
+          "partial": true,
+          "index": {
+            "state": "building",
+            "indexed_count": 4,
+            "error_code": "search_source_unavailable"
+          },
+          "results": []
+        },
+        "saved_body": {
+          "total": 0,
+          "partial": true,
+          "index": {
+            "state": "building",
+            "indexed_count": 4,
+            "error_code": "search_source_unavailable"
+          },
+          "results": []
+        },
+        "friend_filtered_body": {
+          "total": 0,
+          "partial": true,
+          "index": {
+            "state": "building",
+            "indexed_count": 4,
+            "error_code": "search_source_unavailable"
+          },
+          "results": []
+        }
+      },
+      "opens": {
+        "message:Hgrcmc6hOapgKiChYwrKSBIPeORSKNh2ZVkFFHveIEI=:c3dcf03eda414cc6a0c5094c594e465c": {
+          "status": 409,
+          "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "message:Hgrcmc6hOapgKiChYwrKSBIPeORSKNh2ZVkFFHveIEI=:35279d65e2364e7c945ecc7e8ab3c1e3": {
+          "status": 409,
+          "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "content:import:imp_5ba6d82d3a07d0bffa05c7cc307e828d558c40f7a65ed1ea45b4d3ab8746aa36": {
+          "status": 200,
+          "body_sha256": "0ebfb63e29fdd1f4ffe4185c54c7656dfdc06e1bcccedffec03d3154ef14760a"
+        }
+      },
+      "cards": [
+        {
+          "card_id": "9c51990275994a7288bfc194a0d3051f",
+          "dir": "in",
+          "fetch_state": "fetched",
+          "fetched_library_id": "import:imp_5ba6d82d3a07d0bffa05c7cc307e828d558c40f7a65ed1ea45b4d3ab8746aa36",
+          "sha256_verified": true
+        }
+      ]
+    },
+    {
+      "label": "after-unlock",
+      "at": "2026-09-14T11:55:09.642832+00:00",
+      "index_sha256": "9e687357851db6ef6e48fb123b13b7bedf9fba185457a5a234210dbf367a9830",
+      "friends": [
+        {
+          "peer_id": "Hgrcmc6hOapgKiChYwrKSBIPeORSKNh2ZVkFFHveIEI=",
+          "relationship_id": "d25d5d17f0fa446fbde505ef4cfb635c",
+          "status": "revoked"
+        }
+      ],
+      "queries": {
+        "protected_messages": {
+          "total": 0,
+          "partial": false,
+          "index": {
+            "state": "ready",
+            "indexed_count": 1,
+            "error_code": ""
+          },
+          "results": []
+        },
+        "article_metadata": {
+          "total": 1,
+          "partial": false,
+          "index": {
+            "state": "ready",
+            "indexed_count": 1,
+            "error_code": ""
+          },
+          "results": [
+            {
+              "id": "content:import:imp_5ba6d82d3a07d0bffa05c7cc307e828d558c40f7a65ed1ea45b4d3ab8746aa36",
+              "kinds": [
+                "saved",
+                "history"
+              ],
+              "body_state": "available"
+            }
+          ]
+        },
+        "saved_body": {
+          "total": 1,
+          "partial": false,
+          "index": {
+            "state": "ready",
+            "indexed_count": 1,
+            "error_code": ""
+          },
+          "results": [
+            {
+              "id": "content:import:imp_5ba6d82d3a07d0bffa05c7cc307e828d558c40f7a65ed1ea45b4d3ab8746aa36",
+              "kinds": [
+                "saved",
+                "history"
+              ],
+              "body_state": "available"
+            }
+          ]
+        },
+        "friend_filtered_body": {
+          "total": 0,
+          "partial": false,
+          "index": {
+            "state": "ready",
+            "indexed_count": 1,
+            "error_code": ""
+          },
+          "results": []
+        }
+      },
+      "opens": {
+        "content:import:imp_5ba6d82d3a07d0bffa05c7cc307e828d558c40f7a65ed1ea45b4d3ab8746aa36": {
+          "status": 200,
+          "body_sha256": "0ebfb63e29fdd1f4ffe4185c54c7656dfdc06e1bcccedffec03d3154ef14760a"
+        },
+        "message:Hgrcmc6hOapgKiChYwrKSBIPeORSKNh2ZVkFFHveIEI=:c3dcf03eda414cc6a0c5094c594e465c": {
+          "status": 409,
+          "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "message:Hgrcmc6hOapgKiChYwrKSBIPeORSKNh2ZVkFFHveIEI=:35279d65e2364e7c945ecc7e8ab3c1e3": {
+          "status": 409,
+          "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      "cards": [
+        {
+          "card_id": "9c51990275994a7288bfc194a0d3051f",
+          "dir": "in",
+          "fetch_state": "fetched",
+          "fetched_library_id": "import:imp_5ba6d82d3a07d0bffa05c7cc307e828d558c40f7a65ed1ea45b4d3ab8746aa36",
+          "sha256_verified": true
+        }
+      ]
+    },
+    {
+      "label": "recovered",
+      "at": "2026-09-14T11:55:27.125180+00:00",
+      "index_sha256": "9e687357851db6ef6e48fb123b13b7bedf9fba185457a5a234210dbf367a9830",
+      "friends": [
+        {
+          "peer_id": "Hgrcmc6hOapgKiChYwrKSBIPeORSKNh2ZVkFFHveIEI=",
+          "relationship_id": "d25d5d17f0fa446fbde505ef4cfb635c",
+          "status": "revoked"
+        }
+      ],
+      "queries": {
+        "protected_messages": {
+          "total": 0,
+          "partial": false,
+          "index": {
+            "state": "ready",
+            "indexed_count": 1,
+            "error_code": ""
+          },
+          "results": []
+        },
+        "article_metadata": {
+          "total": 1,
+          "partial": false,
+          "index": {
+            "state": "ready",
+            "indexed_count": 1,
+            "error_code": ""
+          },
+          "results": [
+            {
+              "id": "content:import:imp_5ba6d82d3a07d0bffa05c7cc307e828d558c40f7a65ed1ea45b4d3ab8746aa36",
+              "kinds": [
+                "saved",
+                "history"
+              ],
+              "body_state": "available"
+            }
+          ]
+        },
+        "saved_body": {
+          "total": 1,
+          "partial": false,
+          "index": {
+            "state": "ready",
+            "indexed_count": 1,
+            "error_code": ""
+          },
+          "results": [
+            {
+              "id": "content:import:imp_5ba6d82d3a07d0bffa05c7cc307e828d558c40f7a65ed1ea45b4d3ab8746aa36",
+              "kinds": [
+                "saved",
+                "history"
+              ],
+              "body_state": "available"
+            }
+          ]
+        },
+        "friend_filtered_body": {
+          "total": 0,
+          "partial": false,
+          "index": {
+            "state": "ready",
+            "indexed_count": 1,
+            "error_code": ""
+          },
+          "results": []
+        }
+      },
+      "opens": {
+        "content:import:imp_5ba6d82d3a07d0bffa05c7cc307e828d558c40f7a65ed1ea45b4d3ab8746aa36": {
+          "status": 200,
+          "body_sha256": "0ebfb63e29fdd1f4ffe4185c54c7656dfdc06e1bcccedffec03d3154ef14760a"
+        },
+        "message:Hgrcmc6hOapgKiChYwrKSBIPeORSKNh2ZVkFFHveIEI=:c3dcf03eda414cc6a0c5094c594e465c": {
+          "status": 409,
+          "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "message:Hgrcmc6hOapgKiChYwrKSBIPeORSKNh2ZVkFFHveIEI=:35279d65e2364e7c945ecc7e8ab3c1e3": {
+          "status": 409,
+          "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      "cards": [
+        {
+          "card_id": "9c51990275994a7288bfc194a0d3051f",
+          "dir": "in",
+          "fetch_state": "fetched",
+          "fetched_library_id": "import:imp_5ba6d82d3a07d0bffa05c7cc307e828d558c40f7a65ed1ea45b4d3ab8746aa36",
+          "sha256_verified": true
+        }
+      ]
+    },
+    {
+      "label": "restarted",
+      "at": "2026-09-14T11:56:34.776015+00:00",
+      "index_sha256": "172ecda5304ad543eb898ecf117f5a282a7e6739395f515f18767565f6e841a4",
+      "friends": [
+        {
+          "peer_id": "Hgrcmc6hOapgKiChYwrKSBIPeORSKNh2ZVkFFHveIEI=",
+          "relationship_id": "d25d5d17f0fa446fbde505ef4cfb635c",
+          "status": "revoked"
+        }
+      ],
+      "queries": {
+        "protected_messages": {
+          "total": 0,
+          "partial": false,
+          "index": {
+            "state": "ready",
+            "indexed_count": 1,
+            "error_code": ""
+          },
+          "results": []
+        },
+        "article_metadata": {
+          "total": 1,
+          "partial": false,
+          "index": {
+            "state": "ready",
+            "indexed_count": 1,
+            "error_code": ""
+          },
+          "results": [
+            {
+              "id": "content:import:imp_5ba6d82d3a07d0bffa05c7cc307e828d558c40f7a65ed1ea45b4d3ab8746aa36",
+              "kinds": [
+                "saved",
+                "history"
+              ],
+              "body_state": "available"
+            }
+          ]
+        },
+        "saved_body": {
+          "total": 1,
+          "partial": false,
+          "index": {
+            "state": "ready",
+            "indexed_count": 1,
+            "error_code": ""
+          },
+          "results": [
+            {
+              "id": "content:import:imp_5ba6d82d3a07d0bffa05c7cc307e828d558c40f7a65ed1ea45b4d3ab8746aa36",
+              "kinds": [
+                "saved",
+                "history"
+              ],
+              "body_state": "available"
+            }
+          ]
+        },
+        "friend_filtered_body": {
+          "total": 0,
+          "partial": false,
+          "index": {
+            "state": "ready",
+            "indexed_count": 1,
+            "error_code": ""
+          },
+          "results": []
+        }
+      },
+      "opens": {
+        "content:import:imp_5ba6d82d3a07d0bffa05c7cc307e828d558c40f7a65ed1ea45b4d3ab8746aa36": {
+          "status": 200,
+          "body_sha256": "0ebfb63e29fdd1f4ffe4185c54c7656dfdc06e1bcccedffec03d3154ef14760a"
+        },
+        "message:Hgrcmc6hOapgKiChYwrKSBIPeORSKNh2ZVkFFHveIEI=:c3dcf03eda414cc6a0c5094c594e465c": {
+          "status": 409,
+          "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "message:Hgrcmc6hOapgKiChYwrKSBIPeORSKNh2ZVkFFHveIEI=:35279d65e2364e7c945ecc7e8ab3c1e3": {
+          "status": 409,
+          "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      "cards": [
+        {
+          "card_id": "9c51990275994a7288bfc194a0d3051f",
+          "dir": "in",
+          "fetch_state": "fetched",
+          "fetched_library_id": "import:imp_5ba6d82d3a07d0bffa05c7cc307e828d558c40f7a65ed1ea45b4d3ab8746aa36",
+          "sha256_verified": true
+        }
+      ]
+    }
+  ],
+  "packaged_desktop": false,
+  "public_nat": false
+}

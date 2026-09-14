@@ -104,6 +104,11 @@ milestone, priority, area, size, acceptance criteria, and whether design review
 is required. Large work should be split into independently testable issues
 before implementation begins.
 
+[`docs/TESTING_STRATEGY.md`](docs/TESTING_STRATEGY.md) defines the evidence a
+change ships with, what a user-facing feature needs beyond working code, and
+the gate each milestone must clear. Read it before opening a pull request: a
+review will ask for what it lists.
+
 ### Claiming work
 
 1. Choose an available issue labeled `good first issue` or `help wanted` from
@@ -154,8 +159,11 @@ request remains In progress or In review.
    ```bash
    ./.venv/bin/python -m pytest tests/ -q
    ./.venv/bin/python -m ruff check rynmesh/ tests/
-   cd webapp && npm run build
+   cd webapp && npm test && npm run build
    ```
+
+   During webapp development, use `npm run test:watch` from `webapp/` to rerun
+   the relevant component and interaction tests as files change.
 4. **Open a PR** against `main` with what changed and why, plus how you verified
    it. Screenshots for UI work.
 5. **CI runs backend, webapp, packaged-node, and desktop checks.** Green CI plus

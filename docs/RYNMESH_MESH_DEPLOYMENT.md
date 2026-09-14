@@ -250,3 +250,46 @@ your local node's web UI is bound).
   installed (venv vs `/usr/local/bin`). The unit sets `NoNewPrivileges=true`,
   which is fine because the peer binds port 8791 (>1024) and needs no extra
   capabilities.
+
+---
+
+## 9. Registry Mailbox Storage
+
+A registry also carries store-and-forward mail for peers that cannot reach each
+other directly (`docs/PEER_MAILBOX.md`). The spool lives under
+`$RYNMESH_REGISTRY_DIR/mailbox`, sharded by a hash of the recipient's peer id,
+one JSON file per pending message at mode 0600 in 0700 directories.
+
+**What the operator can and cannot see.** Bodies are **ciphertext only**, sealed
+to the recipient's X25519 messaging key, so the operator cannot read mail. The
+envelope around them is *not* encrypted, and that is what routing needs: the
+operator sees the sender and recipient peer ids, the message `kind` (a plaintext
+routing label such as `peer.message.v1`), the message id, the created/expiry
+timestamps, and the size of each message. That is enough to build a traffic
+graph — who talks to whom, how often, and in which kind of exchange — so the
+registry is a metadata observer even though it is never a party to the content.
+
+**What the operator can do.** A hostile registry cannot forge, alter, or read
+mail (every envelope is Ed25519-signed by its sender and sealed to its
+recipient), but it *can* withhold, delay, or reorder messages, and nothing in
+the protocol lets a client detect that. Clients must therefore treat mailbox
+delivery as best-effort with an expiry, never as a guarantee, and must not
+depend on the order two messages arrive in.
+
+**Admission control is the network key.** Everything below is a per-box quota,
+not an identity check: any peer holding `RYNMESH_NETWORK_KEY` may deposit. The
+key is what decides who can use the mailbox at all; the quotas only stop one
+such peer from crowding out the others.
+
+Sizing is bounded by construction: 64 KiB per envelope, 256 pending messages per
+recipient, **16 pending per (sender, recipient) pair** so one peer cannot fill
+someone else's box, 120 deposits per minute per sender, and a maximum 24-hour
+TTL (one hour by default). The worst case is therefore about 16 MiB of pending
+mail per recipient, plus up to 2048 ack tombstones per box (a few hundred bytes
+each, so well under 1 MiB) — call it ~17 MiB per active recipient. Expired
+messages and tombstones are swept lazily — on poll, and every 50th deposit — and
+the tombstone count is additionally capped, oldest evicted first. A registry that
+goes completely idle reclaims disk late but never serves expired mail. No extra
+configuration or open port is needed: the routes are
+`POST /api/v1/mailbox/{deposit,poll}` on the registry's existing listener,
+hidden as 404 to callers without `RYNMESH_NETWORK_KEY`.

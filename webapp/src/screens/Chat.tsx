@@ -13,6 +13,9 @@ interface MessageRecord {
   ts?: string;
   kind?: string;
   delivered?: boolean;
+  // "direct" when the peer took it on the wire, "mailbox" when the node handed
+  // it to the network mailbox instead, absent when neither route accepted it.
+  via?: "direct" | "mailbox";
   attachment?: { filename: string; mime: string; size?: number };
 }
 
@@ -221,6 +224,15 @@ export default function Chat() {
                         <span className="chat-meta">
                           {formatTime(record.ts)}
                           {out && record.delivered ? <span className="chat-check"> ✓</span> : null}
+                          {out && !record.delivered && record.via === "mailbox" ? (
+                            <span
+                              className="chat-queued"
+                              title="Queued via the network mailbox; delivered when the peer comes online"
+                            >
+                              {" "}
+                              queued
+                            </span>
+                          ) : null}
                         </span>
                       </div>
                     );

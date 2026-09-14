@@ -16,6 +16,8 @@ from urllib.error import HTTPError, URLError
 from urllib.parse import quote, urlparse
 from urllib.request import Request, urlopen
 
+from .atomic_io import atomic_write_json
+
 RYNMESH_RELAY_USER_AGENT = "RynmeshRelay/0.1"
 DEFAULT_MAX_RELAY_BLOB_BYTES = 10 * 1024 * 1024 * 1024
 DEFAULT_RELAY_DIRECT_UPLOAD_MAX_BYTES = 768 * 1024
@@ -271,10 +273,11 @@ class FileRelayStore:
             uploader_peer_id=str(uploader_peer_id or ""),
             metadata=dict(metadata or {}),
         )
-        self._meta_path(normalized_hash).write_text(
-            json.dumps(record.to_dict(), indent=2, sort_keys=True),
-            encoding="utf-8",
-        )
+        # The blob content itself was already committed above via its own
+        # unique-tmp-name + rename; the small metadata record gets the same
+        # durability treatment so a crash between the two never leaves a
+        # zero-length or truncated `.json` sidecar next to a good blob.
+        atomic_write_json(self._meta_path(normalized_hash), record.to_dict(), indent=2, sort_keys=True)
         return record
 
     def _blob_path(self, content_hash: str) -> Path:
@@ -349,9 +352,11 @@ class HttpRelayClient:
         normalized_hash = normalize_content_hash(normalized_hash)
         dest = Path(destination).expanduser()
         dest.parent.mkdir(parents=True, exist_ok=True)
+        from .transport import network_key_header
+
         req = Request(
             f"{self.base_url}/api/v1/relay/blobs/{quote(normalized_hash, safe=':')}",
-            headers={"user-agent": RYNMESH_RELAY_USER_AGENT},
+            headers={"user-agent": RYNMESH_RELAY_USER_AGENT, **network_key_header()},
             method="GET",
         )
         digest = hashlib.sha256()
@@ -451,9 +456,11 @@ class HttpRelayClient:
 
     def blob_info(self, content_hash: str) -> dict[str, Any]:
         normalized_hash = normalize_content_hash(content_hash)
+        from .transport import network_key_header
+
         req = Request(
             f"{self.base_url}/api/v1/relay/meta/{quote(normalized_hash, safe=':')}",
-            headers={"user-agent": RYNMESH_RELAY_USER_AGENT},
+            headers={"user-agent": RYNMESH_RELAY_USER_AGENT, **network_key_header()},
             method="GET",
         )
         try:
@@ -488,12 +495,16 @@ class HttpRelayClient:
             kwargs["context"] = _https_context()
         conn = connection_cls(parsed.hostname, parsed.port, **kwargs)
         try:
+            from .transport import network_key_header
+
             conn.putrequest("POST", path, skip_host=True)
             conn.putheader("Host", parsed.netloc)
             conn.putheader("User-Agent", RYNMESH_RELAY_USER_AGENT)
             conn.putheader("Content-Type", media_type or "application/octet-stream")
             conn.putheader("Content-Length", str(source.stat().st_size))
             conn.putheader("X-Rynmesh-Expected-Hash", normalize_content_hash(expected_hash))
+            for name, value in network_key_header().items():
+                conn.putheader(name, value)
             if filename:
                 conn.putheader("X-Rynmesh-Filename", filename)
             if uploader_peer_id:
@@ -652,6 +663,8 @@ class HttpRelayClient:
         return self._post_json("/api/v1/relay/blobs/assemble", payload)
 
     def _post_json(self, path: str, payload: dict[str, Any]) -> dict[str, Any]:
+        from .transport import network_key_header
+
         target = f"{self.base_url}{path}"
         data = json.dumps(payload, separators=(",", ":")).encode("utf-8")
         req = Request(
@@ -660,6 +673,7 @@ class HttpRelayClient:
             headers={
                 "content-type": "application/json",
                 "user-agent": RYNMESH_RELAY_USER_AGENT,
+                **network_key_header(),
             },
             method="POST",
         )

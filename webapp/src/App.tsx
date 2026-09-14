@@ -14,6 +14,7 @@ import {
 import { ConfirmDialog, Hash, IconButton, LoadingPanel, NavIcons, PeerPill, Toast, Chip } from "./components/ui";
 import { RynLockup, RynMark, RynWordmark } from "./brand/RynBrand";
 import OnboardingTour, { ONBOARDING_VERSION } from "./components/OnboardingTour";
+import FirstSuccessFlow from "./components/FirstSuccessFlow";
 import type { AppOutletContext } from "./appContext";
 import type { NodeClient } from "./domain/nodeClient";
 import { digestApi, type DiscoveryStatus } from "./domain/digestClient";
@@ -21,15 +22,24 @@ import { makeFixtureNodeClient } from "./domain/fixtureNodeClient";
 import { makeLiveNodeClient } from "./domain/liveNodeClient";
 import { nodeControlBaseUrl } from "./domain/nodeUrl";
 import { installNotificationNavigation, sendDiscoveryNotification } from "./domain/notifications";
-import type { ConfirmRequest, NodeSettings, NodeStatus, Peer, RegistryStatus, ToastMessage } from "./domain/types";
+import type { ConfirmRequest, FirstSuccessStatus, NodeSettings, NodeStatus, Peer, RegistryStatus, ToastMessage } from "./domain/types";
 import Home from "./screens/Home";
 import Digest from "./screens/Digest";
 import Explore from "./screens/Explore";
 import ItemDetail from "./screens/ItemDetail";
-import SearchAsk from "./screens/SearchAsk";
+import AskRyn, { AskRynQuickPanel } from "./screens/AskRyn";
 import Publish from "./screens/Publish";
 import Peers from "./screens/Peers";
+import Friends from "./screens/Friends";
+import Devices from "./screens/Devices";
+import Search from "./screens/Search";
+import FriendFeed from "./screens/FriendFeed";
+import OfflineReading from "./screens/OfflineReading";
+import Reading from "./screens/Reading";
 import Services from "./screens/Services";
+import ServicesCatalog from "./screens/ServicesCatalog";
+import VideoRendering from "./screens/VideoRendering";
+import SecureWebAccess from "./screens/SecureWebAccess";
 import Chat from "./screens/Chat";
 import Settings from "./screens/Settings";
 import UnlockGate from "./screens/components/UnlockGate";
@@ -37,10 +47,15 @@ import UnlockGate from "./screens/components/UnlockGate";
 const navItems = [
   { path: "/", label: "Home", icon: NavIcons.home },
   { path: "/digest", label: "For You", icon: NavIcons.digest },
+  { path: "/reading", label: "My reading", icon: NavIcons.digest },
   { path: "/explore", label: "Explore", icon: NavIcons.explore },
-  { path: "/search-ask", label: "Search & Ask", icon: NavIcons.searchAsk },
+  { path: "/search", label: "Search", icon: NavIcons.searchAsk },
+  { path: "/ask", label: "Ask Ryn", icon: NavIcons.searchAsk },
   { path: "/publish", label: "Publish", icon: NavIcons.publish },
   { path: "/peers", label: "Peers", icon: NavIcons.peers },
+  { path: "/friends", label: "Friends", icon: Users },
+  { path: "/friend-updates", label: "Friend updates", icon: Users },
+  { path: "/offline", label: "Offline reading", icon: NavIcons.publish },
   { path: "/services", label: "Services", icon: NavIcons.services },
   { path: "/chat", label: "Chat", icon: NavIcons.chat },
   { path: "/settings", label: "Settings", icon: NavIcons.settings },
@@ -71,11 +86,14 @@ export default function App() {
   const [booting, setBooting] = useState(true);
   const [aiOpen, setAiOpen] = useState(false);
   const [tourOpen, setTourOpen] = useState(false);
-  const tourEvaluated = useRef(false);
+  const [firstSuccess, setFirstSuccess] = useState<FirstSuccessStatus | null>(null);
+  const [firstSuccessOpen, setFirstSuccessOpen] = useState(false);
+  const firstSuccessEvaluated = useRef(false);
   const [confirmRequest, setConfirmRequest] = useState<ConfirmRequest | null>(null);
   const [toast, setToast] = useState<ToastMessage | null>(null);
   const [discovery, setDiscovery] = useState<DiscoveryStatus | null>(null);
   const lastUnread = useRef(0);
+  const firstSuccessEnabled = import.meta.env.VITE_RYN_FIRST_SUCCESS_V1_ENABLED !== "0";
 
   const notify = useCallback((tone: ToastMessage["tone"], text: string) => {
     const message = { id: crypto.randomUUID(), tone, text };
@@ -87,25 +105,27 @@ export default function App() {
 
   const refreshShell = useCallback(async () => {
     try {
-      const [nodeStatus, registryStatus, peerList, nodeSettings] = await Promise.all([
+      const [nodeStatus, registryStatus, peerList, nodeSettings, successStatus] = await Promise.all([
         client.getNodeStatus(),
         client.getRegistryStatus(),
         client.listPeers(),
         client.getSettings(),
+        firstSuccessEnabled ? client.getFirstSuccess().catch(() => null) : Promise.resolve(null),
       ]);
       setNode(nodeStatus);
       setRegistry(registryStatus);
       setPeers(peerList);
       setSettings(nodeSettings);
-      if (!tourEvaluated.current) {
-        tourEvaluated.current = true;
-        setTourOpen(nodeSettings.onboarding_version < ONBOARDING_VERSION);
+      if (successStatus) setFirstSuccess(successStatus);
+      if (successStatus && !firstSuccessEvaluated.current) {
+        firstSuccessEvaluated.current = true;
+        setFirstSuccessOpen(!successStatus.completed && !successStatus.dismissed);
       }
       setOffline(false);
     } catch {
       setOffline(true);
     }
-  }, [client]);
+  }, [client, firstSuccessEnabled]);
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", "dark");
@@ -182,7 +202,14 @@ export default function App() {
     node,
     registry,
     peers,
+    firstSuccess,
+    openFirstSuccess: () => setFirstSuccessOpen(true),
     refreshShell,
+    refreshFirstSuccess: async () => {
+      const next = await client.getFirstSuccess();
+      setFirstSuccess(next);
+      return next;
+    },
     confirm: setConfirmRequest,
     notify,
   };
@@ -207,7 +234,7 @@ export default function App() {
           <Outlet context={context} />
         </main>
         <aside className="ai-panel" aria-hidden={!aiOpen}>
-          {aiOpen ? <AISidePanel /> : null}
+          {aiOpen ? <AskRynQuickPanel context={context} /> : null}
         </aside>
       </div>
       <ConfirmDialog request={confirmRequest} onCancel={() => setConfirmRequest(null)} />
@@ -223,6 +250,14 @@ export default function App() {
             setSettings(updated);
             setTourOpen(false);
           }}
+        />
+      ) : null}
+      {firstSuccessOpen && firstSuccess ? (
+        <FirstSuccessFlow
+          client={client}
+          status={firstSuccess}
+          onStatusChange={setFirstSuccess}
+          onClose={() => setFirstSuccessOpen(false)}
         />
       ) : null}
     </div>
@@ -287,7 +322,7 @@ function TopBar({
           </span>
         ) : null}
         <IconButton icon={CircleHelp} label="Open getting started guide" onClick={onOpenTour} />
-        <IconButton icon={aiOpen ? PanelRightClose : Sparkles} label="Toggle AI curator panel" active={aiOpen} onClick={onToggleAi} />
+        <IconButton icon={aiOpen ? PanelRightClose : Sparkles} label="Toggle Ask Ryn panel" active={aiOpen} onClick={onToggleAi} />
       </div>
     </header>
   );
@@ -335,31 +370,6 @@ function Sidebar({ node, peers, unreadRecommendations }: { node: NodeStatus; pee
   );
 }
 
-function AISidePanel() {
-  return (
-    <div className="ai-side-inner">
-      <div>
-        <span className="eyebrow">AI curator</span>
-        <h2>Node-mediated review</h2>
-        <p>
-          The curator only receives evidence that the local Ryn node provides. It can recommend,
-          compare, and suggest searches, but cannot publish or trust roots.
-        </p>
-      </div>
-      <div className="ai-policy-list">
-        <span>Network access</span>
-        <Chip tone="ok">via node</Chip>
-        <span>Cloud model</span>
-        <Chip tone="muted">disabled</Chip>
-        <span>Fetch on suggest</span>
-        <Chip tone="warn">confirm full</Chip>
-        <span>Safety policy</span>
-        <Chip tone="info">standard</Chip>
-      </div>
-    </div>
-  );
-}
-
 function OfflineBanner({ onRetry }: { onRetry: () => Promise<void> }) {
   return (
     <div className="offline-banner">
@@ -397,16 +407,32 @@ export function AppRoutes() {
           <Route index element={<Home />} />
           <Route path="digest" element={<Digest />} />
           <Route path="explore" element={<Explore />} />
+          <Route path="search" element={<Search />} />
+          <Route path="friend-updates" element={<FriendFeed />} />
+          <Route path="offline" element={<OfflineReading />} />
+          <Route path="reading" element={<Reading />} />
           <Route path="items/:contentId" element={<ItemDetail />} />
           <Route path="recommendations" element={<Navigate replace to="/digest" />} />
-          <Route path="search-ask" element={<SearchAsk />} />
+          <Route path="ask" element={<AskRyn />} />
+          <Route path="search-ask" element={<LegacyAskRedirect />} />
           <Route path="publish" element={<Publish />} />
           <Route path="peers" element={<Peers />} />
-          <Route path="services" element={<Services />} />
+          <Route path="friends" element={<Friends />} />
+          <Route path="devices" element={<Devices />} />
+          <Route path="services" element={<ServicesCatalog />} />
+          <Route path="services/manage" element={<Services />} />
+          <Route path="services/private-ai/chat" element={<LegacyAskRedirect />} />
+          <Route path="services/video-rendering" element={<VideoRendering />} />
+          <Route path="services/secure-web-access" element={<SecureWebAccess />} />
           <Route path="chat" element={<Chat />} />
           <Route path="settings" element={<Settings />} />
         </Route>
       </Routes>
     </UnlockGate>
   );
+}
+
+function LegacyAskRedirect() {
+  const location = useLocation();
+  return <Navigate replace to={`/ask${location.search}`} />;
 }

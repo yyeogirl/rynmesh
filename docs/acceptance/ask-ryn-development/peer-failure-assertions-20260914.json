@@ -1,0 +1,83 @@
+{
+  "scope": "Actual browser submissions, real CPU model and direct host ICE; no public NAT or GPU claim",
+  "new_tasks": [
+    {
+      "task_id": "task_0e305e5ddafd4a10bb63cb64927e604b",
+      "state": "succeeded",
+      "error_code": null,
+      "transport": "peer_http_direct",
+      "events": [
+        "hold",
+        "settle"
+      ],
+      "provider_earning_count": 1
+    },
+    {
+      "task_id": "task_79a80590dab946bfba63ffac18aed28e",
+      "state": "failed",
+      "error_code": "direct_transport_failed",
+      "transport": null,
+      "events": [
+        "hold",
+        "release"
+      ],
+      "provider_earning_count": 0
+    },
+    {
+      "task_id": "task_a57f5248710449c98e14b75ed08f292a",
+      "state": "failed",
+      "error_code": "delivery_or_processing_failed",
+      "transport": null,
+      "events": [
+        "hold",
+        "release"
+      ],
+      "provider_earning_count": 0
+    },
+    {
+      "task_id": "task_f7623ac161234d4a9fb66b71fec1da0c",
+      "state": "succeeded",
+      "error_code": null,
+      "transport": "ice_udp_direct",
+      "events": [
+        "hold",
+        "settle"
+      ],
+      "provider_earning_count": 1
+    },
+    {
+      "task_id": "task_34fc78914cb4437e8a3db83938386d6d",
+      "state": "failed",
+      "error_code": "p2p_capacity_exhausted",
+      "transport": null,
+      "events": [
+        "hold",
+        "release"
+      ],
+      "provider_earning_count": 0
+    }
+  ],
+  "old_conversations_unchanged": true,
+  "final_restart_unchanged": true,
+  "provider_interruption": {
+    "task_id": "task_79a80590dab946bfba63ffac18aed28e",
+    "observed_state": "running",
+    "at": "2026-09-14T09:46:25.754276+00:00",
+    "provider_pid": 64324
+  },
+  "provider_recovery": {
+    "task_id": "task_79a80590dab946bfba63ffac18aed28e",
+    "state": "failed",
+    "provider_peer_id": null,
+    "service_id": null,
+    "amount": null,
+    "transport": null,
+    "error_code": null,
+    "last_error_code": "provider_restarted_before_completion"
+  },
+  "ice_holder": {
+    "candidate_count": 2,
+    "port": 18961,
+    "state": "released_and_rebound"
+  }
+}

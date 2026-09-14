@@ -1,0 +1,51 @@
+{
+  "environment": "Windows loopback node and in-app browser, no model, synthetic public origin",
+  "node_port": 18870,
+  "source_port": 18871,
+  "before_restart": {
+    "state": "partial",
+    "body_sha256": "141c73ba71e488e7a16d9ba56e53dd2164d2e9bacdf30229fbefc5afd3953e9b",
+    "downloaded_at": 1789106721.84374,
+    "job_id": "b7cf1f99621f4f369396ee15a5ec61db",
+    "image_states": [
+      "verified",
+      "missing"
+    ],
+    "search_matches": 1,
+    "download_bytes": 14896
+  },
+  "browser_before_restart": {
+    "empty_downloads_observed": true,
+    "explicit_download_clicked": true,
+    "partial_state_observed": true,
+    "body_opened": true,
+    "saved_image_and_missing_image_marker_observed": true
+  },
+  "after_restart_without_source": {
+    "source_port_refused": true,
+    "state": "failed",
+    "error_code": "offline_source_unreachable",
+    "same_body_hash": true,
+    "same_download_time": true,
+    "same_job_id": true,
+    "browser_body_and_saved_image_opened": true
+  },
+  "before_clear_consumption_sha256": "bc5c9e003d6d93f56454ebfeb816627a738571447368435cab2d20d70b7ca90a",
+  "after_browser_clear": {
+    "state": "cleared",
+    "download_bytes": 0,
+    "body_search_matches": 0,
+    "bookmark_title_matches": 1,
+    "consumption_unchanged": true,
+    "browser_review_and_confirmation_used": true
+  },
+  "confirmation_focus_recheck": {
+    "new_build": "index-ZoKIc54G.js",
+    "focused_button": "Cancel",
+    "browser_observed": true
+  },
+  "shutdown": {
+    "18870_closed": true,
+    "18871_closed": true
+  }
+}

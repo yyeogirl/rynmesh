@@ -1,0 +1,13 @@
+{
+  "at": "2026-09-14T06:35:54.944792+00:00",
+  "asset": "llama-b10774-bin-win-cpu-x64.zip",
+  "expected_size": 18380733,
+  "expected_sha256": "04f25dd148fda9d66efd91e96c637126220273fec62cdf5007367722c11bc744",
+  "http_status": 200,
+  "content_length": "18380733",
+  "content_range": null,
+  "bytes": 18380733,
+  "sha256": "04f25dd148fda9d66efd91e96c637126220273fec62cdf5007367722c11bc744",
+  "verified": true,
+  "elapsed_seconds": 18.98399999999674
+}

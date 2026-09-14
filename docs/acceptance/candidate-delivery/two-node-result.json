@@ -1,0 +1,72 @@
+{
+  "installed_commit": "1829eb20296cb3d5ceb23e6409d57ae686a3e6a9",
+  "environment": "Windows; two independent installed-package nodes; Chrome; loopback",
+  "nodes": {
+    "A": {
+      "devices": [
+        {
+          "status": "active",
+          "effective_scopes": [
+            "bookmarks"
+          ],
+          "sync": {
+            "state": "confirmed",
+            "pending": 0,
+            "last_success_at": 1789391970,
+            "error_code": "",
+            "conflicts": 0
+          }
+        }
+      ],
+      "copies": [
+        {
+          "sha256": "e1e70bc70c59bafec2ef91f083983a8a2739c2f626a2d0c3c05649bf7f28d3d8",
+          "bytes": 3403
+        }
+      ],
+      "friend_statuses": [
+        "revoked"
+      ]
+    },
+    "B": {
+      "devices": [
+        {
+          "status": "active",
+          "effective_scopes": [
+            "bookmarks"
+          ],
+          "sync": {
+            "state": "confirmed",
+            "pending": 0,
+            "last_success_at": 1789391977,
+            "error_code": "",
+            "conflicts": 0
+          }
+        }
+      ],
+      "copies": [
+        {
+          "sha256": "e1e70bc70c59bafec2ef91f083983a8a2739c2f626a2d0c3c05649bf7f28d3d8",
+          "bytes": 3403
+        }
+      ],
+      "friend_statuses": [
+        "revoked"
+      ]
+    }
+  },
+  "browser_result": {
+    "device_review_both_sides": true,
+    "synced_bookmark_visible_on_B": true,
+    "friend_invitation_review": true,
+    "message_confirmed_delivered": true,
+    "card_metadata_before_download": true,
+    "saved_copy_reopened_after_revocation": true
+  },
+  "launcher_sha256": {
+    "Start-Ryn.ps1": "e67f02c9c4460e3e2f4a925a8c742febd55643a55028055a85b07ebfeb8650da",
+    "Stop-Ryn.ps1": "8c645a628433ad747297229f7fcc965ce46960ba916655b3b697d62992d70ccf",
+    "Start-Second-Ryn.cmd": "038de9af21c6d7b294b89910ebbe50c462c3f26e0e9729091a29e77a4a6b9523",
+    "Stop-Second-Ryn.cmd": "d0dbca47fefc9b60e90bad85906ebf781df3d07324ad53af7b8abdc67978fbe0"
+  }
+}

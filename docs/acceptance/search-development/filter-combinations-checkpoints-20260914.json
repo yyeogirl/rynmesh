@@ -1,0 +1,29 @@
+{
+  "candidate": "b6a9b3d",
+  "scope": "Chrome and an existing Windows node with a genuinely paired friend; counterpart stopped",
+  "friend_peer_id": "OU7a2f/AMXG4X64YM4A+Ctxe2auP+CtaviqlFhlGkSc=",
+  "message_id": "e1dd15ea76ad445db79973dec056e059",
+  "counterpart_listening": false,
+  "revoked_friend_excluded_from_options": true,
+  "initial_generic_date_fill_persisted": false,
+  "effective_date_input": "native date segments via arrow keys and sequential key presses",
+  "cases": [
+    {"label":"matching-day","from":"2026-09-14","through":"2026-09-14","type":"chat","count":1,"alert":null},
+    {"label":"nonmatching-day","from":"2026-09-15","through":"2026-09-15","type":"chat","count":0,"alert":null},
+    {"label":"invalid-range","from":"2026-09-16","through":"2026-09-15","type":"chat","count":0,"alert":"Check the dates and filters, then try again."},
+    {"label":"recovered-range","from":"2026-09-14","through":"2026-09-14","type":"chat","count":1,"alert":null},
+    {"label":"saved-excludes-message","from":"2026-09-14","through":"2026-09-14","type":"saved","count":0,"alert":null},
+    {"label":"share-includes-incoming","from":"2026-09-14","through":"2026-09-14","type":"share","count":1,"alert":null},
+    {"label":"returned","from":"2026-09-14","through":"2026-09-14","type":"share","count":1,"alert":null}
+  ],
+  "keyword_friend_and_recent_sort_retained_until_clear": true,
+  "opened_focus_id": "friend-message-e1dd15ea76ad445db79973dec056e059",
+  "scroll_top_before_and_after": 0,
+  "clear_restored_empty_filters_and_keyword": true,
+  "clear_sort": "relevance",
+  "clear_result_count": 0,
+  "clear_explanation_visible": true,
+  "browser_warnings_or_errors": 0,
+  "product_modified": false,
+  "packaged_desktop": false
+}

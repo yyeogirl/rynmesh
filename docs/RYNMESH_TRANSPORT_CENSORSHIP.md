@@ -148,9 +148,13 @@ points* more easily than peer-to-peer flows:
 
 **Done (this change):** `rynmesh/transport.py` introduces the `Transport`
 interface and a default, **zero-dependency** `StdlibHttpsTransport`.
-`HttpPeerClient` now performs all wire I/O through it, so the wire format is
-swappable without touching peer logic. The application trust model (signed,
-content-addressed objects) is unchanged and remains the real "private protocol."
+`HttpPeerClient` now performs all peer GET, bounded download, and JSON POST I/O
+through it, so the wire format is swappable without touching peer logic. The
+Private AI direct task, settlement, and cancellation POSTs use this same client;
+selecting `camouflage`, `fronted`, `cdn-ws`, `reality`, `meek`, or `ech` therefore
+applies to both discovery reads and service writes. The application trust model
+(signed, content-addressed objects plus encrypted LLM envelopes) is unchanged
+and remains the real "private protocol."
 
 What the default transport already does:
 
@@ -174,6 +178,14 @@ What the default transport already does:
   ECH — see note below. Pure stdlib (`socket` + `ssl` + `http.client`).
 - **Plugin registry:** `register_transport(name, factory)` + `RYNMESH_TRANSPORT`
   let heavier transports drop in by name.
+- **Bounded POST responses:** `Transport.post_bytes(...)` enforces a caller-set
+  response limit just like GET/download. Required mesh authentication is added
+  after caller headers, so a service call cannot accidentally replace it.
+- **Meek POST envelope:** write requests use the versioned
+  `rynmesh.transport.request.v1` JSON envelope inside the outer bridge POST. The
+  encrypted application body is base64 encoded in the envelope; it is never
+  exposed as an outer CDN header. A Rynmesh meek relay must understand this
+  envelope before `RYNMESH_TRANSPORT=meek` can carry write traffic.
 
 > **On ECH (Encrypted Client Hello):** ECH is the standards-track way to encrypt
 > the SNI entirely. It is **not yet usable from Python** — it needs OpenSSL

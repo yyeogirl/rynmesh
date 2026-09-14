@@ -1,0 +1,18 @@
+{
+  "installed_commit": "f486fb76d417fab96d97fcdcbeb5c8762b931b38",
+  "installed_wheel": "../candidate-f486fb7/rynmesh-0.6.2-py3-none-any.whl",
+  "installed_sha256": "3566631ff662e3d9dc19fcbe4ef7b99f4000361c529ffd16da87c06595c44fcb",
+  "node_status_http": [
+    200,
+    200
+  ],
+  "ui_asset": "index-DhKuxa6a.js",
+  "bundled_ui_files": 18,
+  "critical_files_preserved": 18,
+  "data_directories": [
+    "user-data",
+    "second-user-data"
+  ],
+  "desktop_acceptance": "macOS skipped by user",
+  "public_network_acceptance": "skipped by user"
+}

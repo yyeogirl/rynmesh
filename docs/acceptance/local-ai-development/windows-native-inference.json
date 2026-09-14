@@ -1,0 +1,214 @@
+{
+  "recorded_at": "2026-09-11T02:11:32.183474+00:00",
+  "scope": "Windows AMD64 browser plus real native llama.cpp; not packaged desktop acceptance",
+  "node_home": "D:\\code\\rynmesh-local-ai-acceptance-c124bb62d6654226903a51badd14d528",
+  "conversation_id": "dcc5a48a-6c98-46c8-bcac-2601129b629b",
+  "provider_peer_id": "31QPVqwHR8puKwMvslGKIWcZC9eYhFZCt+H8D6qi4YA=",
+  "service_key": "31QPVqwHR8puKwMvslGKIWcZC9eYhFZCt+H8D6qi4YA=::local-small",
+  "publication_enabled": false,
+  "model_sha256": "sha256:74a4da8c9fdbcd15bd1f6d01d621410d31c6fc00986f5eb687824e7b93d7a9db",
+  "expected_model_sha256": "sha256:74a4da8c9fdbcd15bd1f6d01d621410d31c6fc00986f5eb687824e7b93d7a9db",
+  "runtime": {
+    "installed": true,
+    "running": true,
+    "status": "running",
+    "release": "b10774"
+  },
+  "messages": [
+    {
+      "id": "question_task_6d9807f2fd7743df8b8651a091b4de03",
+      "role": "user",
+      "content": "用中文回答：2+3是多少？只回答结果。",
+      "status": "complete",
+      "taskId": "task_6d9807f2fd7743df8b8651a091b4de03",
+      "order_state": "succeeded",
+      "transports": [
+        "local_runtime",
+        "local"
+      ]
+    },
+    {
+      "id": "answer_task_6d9807f2fd7743df8b8651a091b4de03",
+      "role": "assistant",
+      "content": "2+3=5",
+      "status": "complete",
+      "taskId": "task_6d9807f2fd7743df8b8651a091b4de03",
+      "cost": 0.0,
+      "order_state": "succeeded",
+      "transports": [
+        "local_runtime",
+        "local"
+      ]
+    }
+  ],
+  "model_answer_is_synthetic": false,
+  "updated_at": "2026-09-11T02:41:15.992510+00:00",
+  "observed_process_restarts": [
+    {
+      "before_node_pid": 35788,
+      "after_node_pid": 35528,
+      "node_and_runtime_stopped": true,
+      "history_and_binding_preserved": true,
+      "runtime_restarted_from_ui_without_download": true
+    },
+    {
+      "before_node_pid": 35528,
+      "after_node_pid": 22240,
+      "node_and_runtime_stopped": true,
+      "runtime_restarted_from_ui_without_download": true
+    },
+    {
+      "before_node_pid": 22240,
+      "after_node_pid": 34548,
+      "node_and_runtime_stopped": true,
+      "runtime_restarted_from_ui_without_download": true
+    }
+  ],
+  "ui_observations": {
+    "native_runtime_detected_in_explicit_node_home": true,
+    "completed_orders_show_local_runtime": true,
+    "sharing_remained_off": true
+  },
+  "original_conversation_retests": [
+    {
+      "id": "question_task_6d9807f2fd7743df8b8651a091b4de03",
+      "role": "user",
+      "content": "用中文回答：2+3是多少？只回答结果。",
+      "status": "complete",
+      "taskId": "task_6d9807f2fd7743df8b8651a091b4de03"
+    },
+    {
+      "id": "answer_task_6d9807f2fd7743df8b8651a091b4de03",
+      "role": "assistant",
+      "content": "2+3=5",
+      "status": "complete",
+      "taskId": "task_6d9807f2fd7743df8b8651a091b4de03",
+      "cost": 0.0,
+      "promptSha256": "44c7a5c962aa7f2a1cbe3d325c14a382121200838545248c51a2396341a551ce"
+    },
+    {
+      "id": "question_task_322dc750bac54ed4a74efc9d68a02d19",
+      "role": "user",
+      "content": "把上次得到的结果乘以2，只回答数字。",
+      "status": "complete",
+      "taskId": "task_322dc750bac54ed4a74efc9d68a02d19"
+    },
+    {
+      "id": "answer_task_322dc750bac54ed4a74efc9d68a02d19",
+      "role": "assistant",
+      "content": "2+3=5",
+      "status": "complete",
+      "taskId": "task_322dc750bac54ed4a74efc9d68a02d19",
+      "cost": 0.0,
+      "promptSha256": "f70f1304c1c2f326c223f338a3cace8d6f2914970e3553d5517b202744b022eb"
+    },
+    {
+      "id": "question_task_2fabba6c36bc4fb4b5350f599476ed76",
+      "role": "user",
+      "content": "把上次得到的结果乘以2，只回答数字。",
+      "status": "complete",
+      "taskId": "task_2fabba6c36bc4fb4b5350f599476ed76"
+    },
+    {
+      "id": "answer_task_2fabba6c36bc4fb4b5350f599476ed76",
+      "role": "assistant",
+      "content": "2+3=5",
+      "status": "complete",
+      "taskId": "task_2fabba6c36bc4fb4b5350f599476ed76",
+      "cost": 0.0,
+      "promptSha256": "50fb5e5f8cf42fe91daa4808b8f9124704d5699c0dd619d21845707138ab284b"
+    },
+    {
+      "id": "question_task_711139240a1b4fb8ac6f3fa2744b8d6d",
+      "role": "user",
+      "content": "把上次得到的结果乘以2，只回答数字。",
+      "status": "complete",
+      "taskId": "task_711139240a1b4fb8ac6f3fa2744b8d6d"
+    },
+    {
+      "id": "answer_task_711139240a1b4fb8ac6f3fa2744b8d6d",
+      "role": "assistant",
+      "content": "2+3=5",
+      "status": "complete",
+      "taskId": "task_711139240a1b4fb8ac6f3fa2744b8d6d",
+      "cost": 0.0,
+      "promptSha256": "de8bb420c9b9210476c44adfa4ca671fc1398b61b72c27eacb63f4b993aacc15"
+    }
+  ],
+  "fresh_structured_conversation": {
+    "conversation_id": "255cbd4e-c47f-40d1-b2d3-0a2fdec49087",
+    "service_key": "31QPVqwHR8puKwMvslGKIWcZC9eYhFZCt+H8D6qi4YA=::local-small",
+    "messages": [
+      {
+        "id": "question_task_285857c229c8462caa60ec17fd1e84f3",
+        "role": "user",
+        "content": "用中文回答：2+3是多少？只回答结果。",
+        "createdAt": "2026-09-11T02:39:17.487016+00:00",
+        "status": "complete",
+        "taskId": "task_285857c229c8462caa60ec17fd1e84f3"
+      },
+      {
+        "id": "answer_task_285857c229c8462caa60ec17fd1e84f3",
+        "role": "assistant",
+        "content": "5",
+        "createdAt": "2026-09-11T02:39:17.487016+00:00",
+        "status": "complete",
+        "taskId": "task_285857c229c8462caa60ec17fd1e84f3",
+        "inputTokens": 86,
+        "outputTokens": 2,
+        "cost": 0.0,
+        "contextIds": [],
+        "contextBytes": [],
+        "promptSha256": "f2447fcf4329def31618a39160c15166588670c1e59550522d97104b4dfdfbc3"
+      },
+      {
+        "id": "question_task_eb832547a6bf47138348ba34cceeacf6",
+        "role": "user",
+        "content": "把上次得到的结果乘以2，只回答数字。",
+        "createdAt": "2026-09-11T02:40:00.938912+00:00",
+        "status": "complete",
+        "taskId": "task_eb832547a6bf47138348ba34cceeacf6"
+      },
+      {
+        "id": "answer_task_eb832547a6bf47138348ba34cceeacf6",
+        "role": "assistant",
+        "content": "10",
+        "createdAt": "2026-09-11T02:40:00.938912+00:00",
+        "status": "complete",
+        "taskId": "task_eb832547a6bf47138348ba34cceeacf6",
+        "inputTokens": 109,
+        "outputTokens": 3,
+        "cost": 0.0,
+        "contextIds": [],
+        "contextBytes": [],
+        "promptSha256": "a761ba61c3bd55a769bffbd8af6d29155e58bf095db713442a045ba807d4648c"
+      }
+    ],
+    "prompt_binding_checks": [
+      {
+        "task_id": "task_285857c229c8462caa60ec17fd1e84f3",
+        "prompt_format": "chat_messages_v1",
+        "stored_prompt_digest_matches": true
+      },
+      {
+        "task_id": "task_eb832547a6bf47138348ba34cceeacf6",
+        "prompt_format": "chat_messages_v1",
+        "stored_prompt_digest_matches": true
+      }
+    ],
+    "expected_answers": [
+      "5",
+      "10"
+    ],
+    "actual_answers": [
+      "5",
+      "10"
+    ]
+  },
+  "limitations": [
+    "Original conversation containing repeated wrong answers still repeated 2+3=5 after changing the prompt format.",
+    "The fresh two-turn case does not establish general model reasoning quality.",
+    "No packaged desktop, other architecture, real GPU inference or public cross-NAT acceptance.",
+    "No complete friend-AI permissions or interrupted installation acceptance."
+  ]
+}

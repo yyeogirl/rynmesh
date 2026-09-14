@@ -29,6 +29,7 @@ classifiers = [
 ]
 
 dependencies = [
+    "aioice>=0.10.2,<1.0.0",
     "certifi>=2024.0.0",
     "cryptography>=48.0.1,<49.0.0; sys_platform == 'darwin' and platform_machine == 'x86_64'",
     "cryptography>=48.0.1; sys_platform != 'darwin' or platform_machine != 'x86_64'",
@@ -40,9 +41,17 @@ dependencies = [
 # PDF rendering for the daily recap email. Optional: without it the recap
 # still sends, just without the attachment.
 recap = ["reportlab>=4.0.0"]
+# Text extraction from user PDFs, used by the sandboxed document helper.
+# Optional: without it a PDF import reports `unsupported` rather than failing,
+# and plain text and Markdown are unaffected. pypdf is pure Python (BSD-3),
+# so it adds no build step to the desktop sidecar.
+documents = ["pypdf>=5.0.0"]
 dev = [
     "pytest>=7.0.0",
-    "ruff>=0.1.0",
+    # Bounded deliberately: an unpinned linter means CI enforces a different
+    # rulebook than any developer's checkout, and a new release can turn a
+    # green tree red with no code change. Raise the ceiling on purpose.
+    "ruff>=0.12,<0.17",
     "httpx>=0.27.0",  # required by starlette.testclient (test_peer_http_*)
 ]
 # REALITY-style TLS fingerprint mimicry (defeats GFW active probing).
@@ -50,17 +59,35 @@ dev = [
 reality = [
     "curl_cffi>=0.7.0",
 ]
+gpu-provider = [
+    "accelerate>=1.10,<2",
+    "beautifulsoup4>=4.12,<5",
+    "bitsandbytes>=0.47,<1",
+    "diffusers>=0.35,<0.36",
+    "ftfy>=6.3,<7",
+    "imageio>=2.37,<3",
+    "imageio-ffmpeg>=0.6,<1",
+    "protobuf>=6,<7",
+    "safetensors>=0.6,<1",
+    "sentencepiece>=0.2,<1",
+    "transformers>=4.57,<4.58",
+]
 
 [project.scripts]
 rynmesh-mcp = "rynmesh.mcp_server:main"
 rynmesh-peer = "rynmesh.peer_http:main"
 rynmesh-registry = "rynmesh.registry_http:main"
 rynmesh-signal50-veo-worker = "rynmesh.signal50_service:main"
-rynmesh-llm-worker = "rynmesh.services.llm:main"
 rynmesh-image-worker = "rynmesh.services.image:main"
 rynmesh-embeddings-worker = "rynmesh.services.embeddings:main"
 rynmesh-egress-worker = "rynmesh.services.net_egress:main"
 rynmesh-egress = "rynmesh.services.net_egress_client:main"
+rynmesh-llm = "rynmesh.llm_package.cli:main"
+rynmesh-transformers-llm = "rynmesh.llm_runtime_server:main"
+rynmesh-video = "rynmesh.video_package.cli:client_main"
+rynmesh-video-provider = "rynmesh.video_package.cli:server_main"
+rynmesh-provider-gateway = "rynmesh.provider_gateway:main"
+rynmesh-transit = "rynmesh.peer_transit_service:main"
 rynmesh-publish = "rynmesh.tools.publish_release:main"
 rynmesh-vpn = "rynmesh.services.vpn_cli:main"
 
@@ -94,3 +121,12 @@ line-length = 100
 [tool.ruff.lint]
 select = ["E", "F", "W", "I", "N", "B", "C4"]
 ignore = ["E501", "N818", "N815"]
+
+[tool.ruff.lint.isort]
+# Stated rather than inferred. Ruff normally decides `rynmesh` is first-party
+# by finding the directory next to this file, which silently stops working for
+# a file being checked from outside the tree (the route-package generator's
+# tests check freshly generated files in a temp directory) and has changed
+# between ruff releases. Naming it here makes the grouping identical for every
+# file, every working directory, and every ruff version.
+known-first-party = ["rynmesh"]

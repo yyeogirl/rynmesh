@@ -29,6 +29,9 @@
     "active": true,
     "targets": "all",
     "externalBin": ["binaries/rynmesh-peer"],
+    "resources": {
+      "resources/llama/": "llama/"
+    },
     "macOS": {
       "signingIdentity": "-",
       "entitlements": "sidecar/rynmesh-peer.entitlements.plist"

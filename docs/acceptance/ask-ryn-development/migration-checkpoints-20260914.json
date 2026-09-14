@@ -1,0 +1,462 @@
+{
+  "scope": "Real encrypted browser legacy input and production node migration UI; synthetic history, no model inference",
+  "observations": [
+    {
+      "label": "migration-write-failed",
+      "at": "2026-09-14T08:55:07.340859+00:00",
+      "pid": 63424,
+      "node_conversation_count": 7,
+      "original_histories": {
+        "running-c538a28727c74150b11a5a04ff42384f": "0b0be62d40fc45c933600657a9faf799f89772d10885d1653b67a264c96d256b",
+        "running-d376c91c5c6343d6891ac04bdb464609": "ab71f19c8a4097dc8a29d3fa61930d295306eec527b385c45cab1bac0c4cda95",
+        "252332ed-b325-4998-9837-5b585bd6b3f3": "756f9ae3c31b59c52485f108fda658365bbc35831b92dc31a4e1dfbca0ce6d4b",
+        "994ecc10-4d09-4b7a-a4e8-c7b212700f71": "d4ab9b1a4c47c0ed2a327a6d8966d9ae47ba501d404d929ab1452a6cd0b056ed",
+        "e7eca168-af96-499e-b9db-f2c0b24718b2": "2cbbaa84e19ae201f25a24bf4526d203fe39febab546ce39101b4134c1924cad",
+        "86149b11-8078-4479-8d0c-f9f4c63bad32": "3c1b46f96759d08301459e065e8667339615f5ecb8afc81973b17c4bf980bf86",
+        "recovery-8bb8a4712aa4462b80a5b17c5efa49ae": "5653ba412789a2cd78a5710cb1841255396e1aa427820b4f1b6f4a561634eafc"
+      },
+      "migrated": [],
+      "order_ids": [
+        "task_184cacbe8ef04e1b9f759e8e2276ffcf",
+        "task_235eeba1c5144bafa9e13a7d1e097abd",
+        "task_599ea957a83d430da66c0f46c7e60170",
+        "task_640e1bc624f24a9aba5182d8b906a605",
+        "task_6878bf44c63740b7aa918a7dad0661be",
+        "task_6d3243c7292e4294984a297d8fcc9e0c",
+        "task_9b4be5cb9d514b31a38aaf9f6bb98480",
+        "task_a6ccac2aa7f34051ab9868b7c4c9563f",
+        "task_bc999cf7b51b46e885d3e9e77a64dcff",
+        "task_f5a09bdeef9c4a47a2a8540844ab8954"
+      ],
+      "node_file_contains_fixture_plaintext": false
+    },
+    {
+      "label": "migration-retry-succeeded",
+      "at": "2026-09-14T08:55:32.254012+00:00",
+      "pid": 63424,
+      "node_conversation_count": 9,
+      "original_histories": {
+        "running-c538a28727c74150b11a5a04ff42384f": "0b0be62d40fc45c933600657a9faf799f89772d10885d1653b67a264c96d256b",
+        "running-d376c91c5c6343d6891ac04bdb464609": "ab71f19c8a4097dc8a29d3fa61930d295306eec527b385c45cab1bac0c4cda95",
+        "252332ed-b325-4998-9837-5b585bd6b3f3": "756f9ae3c31b59c52485f108fda658365bbc35831b92dc31a4e1dfbca0ce6d4b",
+        "994ecc10-4d09-4b7a-a4e8-c7b212700f71": "d4ab9b1a4c47c0ed2a327a6d8966d9ae47ba501d404d929ab1452a6cd0b056ed",
+        "e7eca168-af96-499e-b9db-f2c0b24718b2": "2cbbaa84e19ae201f25a24bf4526d203fe39febab546ce39101b4134c1924cad",
+        "86149b11-8078-4479-8d0c-f9f4c63bad32": "3c1b46f96759d08301459e065e8667339615f5ecb8afc81973b17c4bf980bf86",
+        "recovery-8bb8a4712aa4462b80a5b17c5efa49ae": "5653ba412789a2cd78a5710cb1841255396e1aa427820b4f1b6f4a561634eafc"
+      },
+      "migrated": [
+        {
+          "id": "migration-acceptance-20260914-one",
+          "serviceKey": "legacy-provider-one::legacy-model-one",
+          "providerPeerId": "legacy-provider-one",
+          "createdAt": "2026-09-01T00:00:00Z",
+          "updatedAt": "2026-09-02T00:00:00Z",
+          "revision": 1,
+          "digest": "17bb892f7d78dbbf2bad13747cee9300eb22634b9e2a48bd27a5140e5c6e5620",
+          "title_digest": "c71be99c4ccb6c39f43f16b58f5ee6c9eaba735cc4883677659e5023224f5cee",
+          "messages": [
+            {
+              "id": "migration-acceptance-20260914-one-question",
+              "role": "user",
+              "status": "complete",
+              "taskId": "legacy-task-one",
+              "createdAt": "2026-09-01T00:00:00Z",
+              "cost": null,
+              "content_digest": "09330bc36e6abec81b0cd71a50129d106678fff72d0c11259b19d6f516b5481e"
+            },
+            {
+              "id": "migration-acceptance-20260914-one-answer",
+              "role": "assistant",
+              "status": "complete",
+              "taskId": "legacy-task-one",
+              "createdAt": "2026-09-02T00:00:00Z",
+              "cost": 0,
+              "content_digest": "93abdeabb38e415008976366c00ceba90370e2b431148cf20196191a46fef535"
+            }
+          ]
+        },
+        {
+          "id": "migration-acceptance-20260914-two",
+          "serviceKey": "legacy-provider-two::legacy-model-two",
+          "providerPeerId": "legacy-provider-two",
+          "createdAt": "2026-09-01T00:00:00Z",
+          "updatedAt": "2026-09-02T00:00:00Z",
+          "revision": 1,
+          "digest": "6a36230c7b02de8559af8600280a3926353aa4e03de4f9d0a1c02590a3bc9316",
+          "title_digest": "08048809c6f296e83e389e71f7ac0f3c7db4517370dd514ff2ce336710237eca",
+          "messages": [
+            {
+              "id": "migration-acceptance-20260914-two-question",
+              "role": "user",
+              "status": "complete",
+              "taskId": "legacy-task-two",
+              "createdAt": "2026-09-01T00:00:00Z",
+              "cost": null,
+              "content_digest": "0ec778ecac1ee71d72af667fdc8b8c3f4d7261140647d5408b824734ce1fc607"
+            },
+            {
+              "id": "migration-acceptance-20260914-two-answer",
+              "role": "assistant",
+              "status": "complete",
+              "taskId": "legacy-task-two",
+              "createdAt": "2026-09-02T00:00:00Z",
+              "cost": 0,
+              "content_digest": "278ad83a7a0a39aa9bb73337689c66c21725c0a2432333a8d967da6e432644c8"
+            }
+          ]
+        }
+      ],
+      "order_ids": [
+        "task_184cacbe8ef04e1b9f759e8e2276ffcf",
+        "task_235eeba1c5144bafa9e13a7d1e097abd",
+        "task_599ea957a83d430da66c0f46c7e60170",
+        "task_640e1bc624f24a9aba5182d8b906a605",
+        "task_6878bf44c63740b7aa918a7dad0661be",
+        "task_6d3243c7292e4294984a297d8fcc9e0c",
+        "task_9b4be5cb9d514b31a38aaf9f6bb98480",
+        "task_a6ccac2aa7f34051ab9868b7c4c9563f",
+        "task_bc999cf7b51b46e885d3e9e77a64dcff",
+        "task_f5a09bdeef9c4a47a2a8540844ab8954"
+      ],
+      "node_file_contains_fixture_plaintext": false
+    },
+    {
+      "label": "repeated-import-kept-node-edit",
+      "at": "2026-09-14T08:56:07.247691+00:00",
+      "pid": 63424,
+      "node_conversation_count": 9,
+      "original_histories": {
+        "running-c538a28727c74150b11a5a04ff42384f": "0b0be62d40fc45c933600657a9faf799f89772d10885d1653b67a264c96d256b",
+        "running-d376c91c5c6343d6891ac04bdb464609": "ab71f19c8a4097dc8a29d3fa61930d295306eec527b385c45cab1bac0c4cda95",
+        "252332ed-b325-4998-9837-5b585bd6b3f3": "756f9ae3c31b59c52485f108fda658365bbc35831b92dc31a4e1dfbca0ce6d4b",
+        "994ecc10-4d09-4b7a-a4e8-c7b212700f71": "d4ab9b1a4c47c0ed2a327a6d8966d9ae47ba501d404d929ab1452a6cd0b056ed",
+        "e7eca168-af96-499e-b9db-f2c0b24718b2": "2cbbaa84e19ae201f25a24bf4526d203fe39febab546ce39101b4134c1924cad",
+        "86149b11-8078-4479-8d0c-f9f4c63bad32": "3c1b46f96759d08301459e065e8667339615f5ecb8afc81973b17c4bf980bf86",
+        "recovery-8bb8a4712aa4462b80a5b17c5efa49ae": "5653ba412789a2cd78a5710cb1841255396e1aa427820b4f1b6f4a561634eafc"
+      },
+      "migrated": [
+        {
+          "id": "migration-acceptance-20260914-one",
+          "serviceKey": "legacy-provider-one::legacy-model-one",
+          "providerPeerId": "legacy-provider-one",
+          "createdAt": "2026-09-01T00:00:00Z",
+          "updatedAt": "2026-09-02T00:00:00Z",
+          "revision": 2,
+          "digest": "09c3d344d25d2272ddc800297012a01dce8d6ab6762968318386433d56b2b9f2",
+          "title_digest": "8f31294a6136eae98e501c69045e4a361e5fd962e6c56fdc20062a772620c8f4",
+          "messages": [
+            {
+              "id": "migration-acceptance-20260914-one-question",
+              "role": "user",
+              "status": "complete",
+              "taskId": "legacy-task-one",
+              "createdAt": "2026-09-01T00:00:00Z",
+              "cost": null,
+              "content_digest": "09330bc36e6abec81b0cd71a50129d106678fff72d0c11259b19d6f516b5481e"
+            },
+            {
+              "id": "migration-acceptance-20260914-one-answer",
+              "role": "assistant",
+              "status": "complete",
+              "taskId": "legacy-task-one",
+              "createdAt": "2026-09-02T00:00:00Z",
+              "cost": 0,
+              "content_digest": "93abdeabb38e415008976366c00ceba90370e2b431148cf20196191a46fef535"
+            }
+          ]
+        },
+        {
+          "id": "migration-acceptance-20260914-two",
+          "serviceKey": "legacy-provider-two::legacy-model-two",
+          "providerPeerId": "legacy-provider-two",
+          "createdAt": "2026-09-01T00:00:00Z",
+          "updatedAt": "2026-09-02T00:00:00Z",
+          "revision": 1,
+          "digest": "6a36230c7b02de8559af8600280a3926353aa4e03de4f9d0a1c02590a3bc9316",
+          "title_digest": "08048809c6f296e83e389e71f7ac0f3c7db4517370dd514ff2ce336710237eca",
+          "messages": [
+            {
+              "id": "migration-acceptance-20260914-two-question",
+              "role": "user",
+              "status": "complete",
+              "taskId": "legacy-task-two",
+              "createdAt": "2026-09-01T00:00:00Z",
+              "cost": null,
+              "content_digest": "0ec778ecac1ee71d72af667fdc8b8c3f4d7261140647d5408b824734ce1fc607"
+            },
+            {
+              "id": "migration-acceptance-20260914-two-answer",
+              "role": "assistant",
+              "status": "complete",
+              "taskId": "legacy-task-two",
+              "createdAt": "2026-09-02T00:00:00Z",
+              "cost": 0,
+              "content_digest": "278ad83a7a0a39aa9bb73337689c66c21725c0a2432333a8d967da6e432644c8"
+            }
+          ]
+        }
+      ],
+      "order_ids": [
+        "task_184cacbe8ef04e1b9f759e8e2276ffcf",
+        "task_235eeba1c5144bafa9e13a7d1e097abd",
+        "task_599ea957a83d430da66c0f46c7e60170",
+        "task_640e1bc624f24a9aba5182d8b906a605",
+        "task_6878bf44c63740b7aa918a7dad0661be",
+        "task_6d3243c7292e4294984a297d8fcc9e0c",
+        "task_9b4be5cb9d514b31a38aaf9f6bb98480",
+        "task_a6ccac2aa7f34051ab9868b7c4c9563f",
+        "task_bc999cf7b51b46e885d3e9e77a64dcff",
+        "task_f5a09bdeef9c4a47a2a8540844ab8954"
+      ],
+      "node_file_contains_fixture_plaintext": false
+    },
+    {
+      "label": "deleted-copy-not-restored-old-notice",
+      "at": "2026-09-14T08:57:06.097371+00:00",
+      "pid": 63424,
+      "node_conversation_count": 8,
+      "original_histories": {
+        "running-c538a28727c74150b11a5a04ff42384f": "0b0be62d40fc45c933600657a9faf799f89772d10885d1653b67a264c96d256b",
+        "running-d376c91c5c6343d6891ac04bdb464609": "ab71f19c8a4097dc8a29d3fa61930d295306eec527b385c45cab1bac0c4cda95",
+        "252332ed-b325-4998-9837-5b585bd6b3f3": "756f9ae3c31b59c52485f108fda658365bbc35831b92dc31a4e1dfbca0ce6d4b",
+        "994ecc10-4d09-4b7a-a4e8-c7b212700f71": "d4ab9b1a4c47c0ed2a327a6d8966d9ae47ba501d404d929ab1452a6cd0b056ed",
+        "e7eca168-af96-499e-b9db-f2c0b24718b2": "2cbbaa84e19ae201f25a24bf4526d203fe39febab546ce39101b4134c1924cad",
+        "86149b11-8078-4479-8d0c-f9f4c63bad32": "3c1b46f96759d08301459e065e8667339615f5ecb8afc81973b17c4bf980bf86",
+        "recovery-8bb8a4712aa4462b80a5b17c5efa49ae": "5653ba412789a2cd78a5710cb1841255396e1aa427820b4f1b6f4a561634eafc"
+      },
+      "migrated": [
+        {
+          "id": "migration-acceptance-20260914-one",
+          "serviceKey": "legacy-provider-one::legacy-model-one",
+          "providerPeerId": "legacy-provider-one",
+          "createdAt": "2026-09-01T00:00:00Z",
+          "updatedAt": "2026-09-02T00:00:00Z",
+          "revision": 2,
+          "digest": "09c3d344d25d2272ddc800297012a01dce8d6ab6762968318386433d56b2b9f2",
+          "title_digest": "8f31294a6136eae98e501c69045e4a361e5fd962e6c56fdc20062a772620c8f4",
+          "messages": [
+            {
+              "id": "migration-acceptance-20260914-one-question",
+              "role": "user",
+              "status": "complete",
+              "taskId": "legacy-task-one",
+              "createdAt": "2026-09-01T00:00:00Z",
+              "cost": null,
+              "content_digest": "09330bc36e6abec81b0cd71a50129d106678fff72d0c11259b19d6f516b5481e"
+            },
+            {
+              "id": "migration-acceptance-20260914-one-answer",
+              "role": "assistant",
+              "status": "complete",
+              "taskId": "legacy-task-one",
+              "createdAt": "2026-09-02T00:00:00Z",
+              "cost": 0,
+              "content_digest": "93abdeabb38e415008976366c00ceba90370e2b431148cf20196191a46fef535"
+            }
+          ]
+        }
+      ],
+      "order_ids": [
+        "task_184cacbe8ef04e1b9f759e8e2276ffcf",
+        "task_235eeba1c5144bafa9e13a7d1e097abd",
+        "task_599ea957a83d430da66c0f46c7e60170",
+        "task_640e1bc624f24a9aba5182d8b906a605",
+        "task_6878bf44c63740b7aa918a7dad0661be",
+        "task_6d3243c7292e4294984a297d8fcc9e0c",
+        "task_9b4be5cb9d514b31a38aaf9f6bb98480",
+        "task_a6ccac2aa7f34051ab9868b7c4c9563f",
+        "task_bc999cf7b51b46e885d3e9e77a64dcff",
+        "task_f5a09bdeef9c4a47a2a8540844ab8954"
+      ],
+      "node_file_contains_fixture_plaintext": false
+    },
+    {
+      "label": "migration-state-after-restart",
+      "at": "2026-09-14T09:00:13.300071+00:00",
+      "pid": 55932,
+      "node_conversation_count": 8,
+      "original_histories": {
+        "running-c538a28727c74150b11a5a04ff42384f": "0b0be62d40fc45c933600657a9faf799f89772d10885d1653b67a264c96d256b",
+        "running-d376c91c5c6343d6891ac04bdb464609": "ab71f19c8a4097dc8a29d3fa61930d295306eec527b385c45cab1bac0c4cda95",
+        "252332ed-b325-4998-9837-5b585bd6b3f3": "756f9ae3c31b59c52485f108fda658365bbc35831b92dc31a4e1dfbca0ce6d4b",
+        "994ecc10-4d09-4b7a-a4e8-c7b212700f71": "d4ab9b1a4c47c0ed2a327a6d8966d9ae47ba501d404d929ab1452a6cd0b056ed",
+        "e7eca168-af96-499e-b9db-f2c0b24718b2": "2cbbaa84e19ae201f25a24bf4526d203fe39febab546ce39101b4134c1924cad",
+        "86149b11-8078-4479-8d0c-f9f4c63bad32": "3c1b46f96759d08301459e065e8667339615f5ecb8afc81973b17c4bf980bf86",
+        "recovery-8bb8a4712aa4462b80a5b17c5efa49ae": "5653ba412789a2cd78a5710cb1841255396e1aa427820b4f1b6f4a561634eafc"
+      },
+      "migrated": [
+        {
+          "id": "migration-acceptance-20260914-one",
+          "serviceKey": "legacy-provider-one::legacy-model-one",
+          "providerPeerId": "legacy-provider-one",
+          "createdAt": "2026-09-01T00:00:00Z",
+          "updatedAt": "2026-09-02T00:00:00Z",
+          "revision": 2,
+          "digest": "09c3d344d25d2272ddc800297012a01dce8d6ab6762968318386433d56b2b9f2",
+          "title_digest": "8f31294a6136eae98e501c69045e4a361e5fd962e6c56fdc20062a772620c8f4",
+          "messages": [
+            {
+              "id": "migration-acceptance-20260914-one-question",
+              "role": "user",
+              "status": "complete",
+              "taskId": "legacy-task-one",
+              "createdAt": "2026-09-01T00:00:00Z",
+              "cost": null,
+              "content_digest": "09330bc36e6abec81b0cd71a50129d106678fff72d0c11259b19d6f516b5481e"
+            },
+            {
+              "id": "migration-acceptance-20260914-one-answer",
+              "role": "assistant",
+              "status": "complete",
+              "taskId": "legacy-task-one",
+              "createdAt": "2026-09-02T00:00:00Z",
+              "cost": 0,
+              "content_digest": "93abdeabb38e415008976366c00ceba90370e2b431148cf20196191a46fef535"
+            }
+          ]
+        }
+      ],
+      "order_ids": [
+        "task_184cacbe8ef04e1b9f759e8e2276ffcf",
+        "task_235eeba1c5144bafa9e13a7d1e097abd",
+        "task_599ea957a83d430da66c0f46c7e60170",
+        "task_640e1bc624f24a9aba5182d8b906a605",
+        "task_6878bf44c63740b7aa918a7dad0661be",
+        "task_6d3243c7292e4294984a297d8fcc9e0c",
+        "task_9b4be5cb9d514b31a38aaf9f6bb98480",
+        "task_a6ccac2aa7f34051ab9868b7c4c9563f",
+        "task_bc999cf7b51b46e885d3e9e77a64dcff",
+        "task_f5a09bdeef9c4a47a2a8540844ab8954"
+      ],
+      "node_file_contains_fixture_plaintext": false
+    },
+    {
+      "label": "repeated-after-restart-correct-notice",
+      "at": "2026-09-14T09:00:36.586481+00:00",
+      "pid": 55932,
+      "node_conversation_count": 8,
+      "original_histories": {
+        "running-c538a28727c74150b11a5a04ff42384f": "0b0be62d40fc45c933600657a9faf799f89772d10885d1653b67a264c96d256b",
+        "running-d376c91c5c6343d6891ac04bdb464609": "ab71f19c8a4097dc8a29d3fa61930d295306eec527b385c45cab1bac0c4cda95",
+        "252332ed-b325-4998-9837-5b585bd6b3f3": "756f9ae3c31b59c52485f108fda658365bbc35831b92dc31a4e1dfbca0ce6d4b",
+        "994ecc10-4d09-4b7a-a4e8-c7b212700f71": "d4ab9b1a4c47c0ed2a327a6d8966d9ae47ba501d404d929ab1452a6cd0b056ed",
+        "e7eca168-af96-499e-b9db-f2c0b24718b2": "2cbbaa84e19ae201f25a24bf4526d203fe39febab546ce39101b4134c1924cad",
+        "86149b11-8078-4479-8d0c-f9f4c63bad32": "3c1b46f96759d08301459e065e8667339615f5ecb8afc81973b17c4bf980bf86",
+        "recovery-8bb8a4712aa4462b80a5b17c5efa49ae": "5653ba412789a2cd78a5710cb1841255396e1aa427820b4f1b6f4a561634eafc"
+      },
+      "migrated": [
+        {
+          "id": "migration-acceptance-20260914-one",
+          "serviceKey": "legacy-provider-one::legacy-model-one",
+          "providerPeerId": "legacy-provider-one",
+          "createdAt": "2026-09-01T00:00:00Z",
+          "updatedAt": "2026-09-02T00:00:00Z",
+          "revision": 2,
+          "digest": "09c3d344d25d2272ddc800297012a01dce8d6ab6762968318386433d56b2b9f2",
+          "title_digest": "8f31294a6136eae98e501c69045e4a361e5fd962e6c56fdc20062a772620c8f4",
+          "messages": [
+            {
+              "id": "migration-acceptance-20260914-one-question",
+              "role": "user",
+              "status": "complete",
+              "taskId": "legacy-task-one",
+              "createdAt": "2026-09-01T00:00:00Z",
+              "cost": null,
+              "content_digest": "09330bc36e6abec81b0cd71a50129d106678fff72d0c11259b19d6f516b5481e"
+            },
+            {
+              "id": "migration-acceptance-20260914-one-answer",
+              "role": "assistant",
+              "status": "complete",
+              "taskId": "legacy-task-one",
+              "createdAt": "2026-09-02T00:00:00Z",
+              "cost": 0,
+              "content_digest": "93abdeabb38e415008976366c00ceba90370e2b431148cf20196191a46fef535"
+            }
+          ]
+        }
+      ],
+      "order_ids": [
+        "task_184cacbe8ef04e1b9f759e8e2276ffcf",
+        "task_235eeba1c5144bafa9e13a7d1e097abd",
+        "task_599ea957a83d430da66c0f46c7e60170",
+        "task_640e1bc624f24a9aba5182d8b906a605",
+        "task_6878bf44c63740b7aa918a7dad0661be",
+        "task_6d3243c7292e4294984a297d8fcc9e0c",
+        "task_9b4be5cb9d514b31a38aaf9f6bb98480",
+        "task_a6ccac2aa7f34051ab9868b7c4c9563f",
+        "task_bc999cf7b51b46e885d3e9e77a64dcff",
+        "task_f5a09bdeef9c4a47a2a8540844ab8954"
+      ],
+      "node_file_contains_fixture_plaintext": false
+    },
+    {
+      "label": "chat-entry-same-migration-result",
+      "at": "2026-09-14T09:01:50.822400+00:00",
+      "pid": 55932,
+      "node_conversation_count": 8,
+      "original_histories": {
+        "running-c538a28727c74150b11a5a04ff42384f": "0b0be62d40fc45c933600657a9faf799f89772d10885d1653b67a264c96d256b",
+        "running-d376c91c5c6343d6891ac04bdb464609": "ab71f19c8a4097dc8a29d3fa61930d295306eec527b385c45cab1bac0c4cda95",
+        "252332ed-b325-4998-9837-5b585bd6b3f3": "756f9ae3c31b59c52485f108fda658365bbc35831b92dc31a4e1dfbca0ce6d4b",
+        "994ecc10-4d09-4b7a-a4e8-c7b212700f71": "d4ab9b1a4c47c0ed2a327a6d8966d9ae47ba501d404d929ab1452a6cd0b056ed",
+        "e7eca168-af96-499e-b9db-f2c0b24718b2": "2cbbaa84e19ae201f25a24bf4526d203fe39febab546ce39101b4134c1924cad",
+        "86149b11-8078-4479-8d0c-f9f4c63bad32": "3c1b46f96759d08301459e065e8667339615f5ecb8afc81973b17c4bf980bf86",
+        "recovery-8bb8a4712aa4462b80a5b17c5efa49ae": "5653ba412789a2cd78a5710cb1841255396e1aa427820b4f1b6f4a561634eafc"
+      },
+      "migrated": [
+        {
+          "id": "migration-acceptance-20260914-one",
+          "serviceKey": "legacy-provider-one::legacy-model-one",
+          "providerPeerId": "legacy-provider-one",
+          "createdAt": "2026-09-01T00:00:00Z",
+          "updatedAt": "2026-09-02T00:00:00Z",
+          "revision": 2,
+          "digest": "09c3d344d25d2272ddc800297012a01dce8d6ab6762968318386433d56b2b9f2",
+          "title_digest": "8f31294a6136eae98e501c69045e4a361e5fd962e6c56fdc20062a772620c8f4",
+          "messages": [
+            {
+              "id": "migration-acceptance-20260914-one-question",
+              "role": "user",
+              "status": "complete",
+              "taskId": "legacy-task-one",
+              "createdAt": "2026-09-01T00:00:00Z",
+              "cost": null,
+              "content_digest": "09330bc36e6abec81b0cd71a50129d106678fff72d0c11259b19d6f516b5481e"
+            },
+            {
+              "id": "migration-acceptance-20260914-one-answer",
+              "role": "assistant",
+              "status": "complete",
+              "taskId": "legacy-task-one",
+              "createdAt": "2026-09-02T00:00:00Z",
+              "cost": 0,
+              "content_digest": "93abdeabb38e415008976366c00ceba90370e2b431148cf20196191a46fef535"
+            }
+          ]
+        }
+      ],
+      "order_ids": [
+        "task_184cacbe8ef04e1b9f759e8e2276ffcf",
+        "task_235eeba1c5144bafa9e13a7d1e097abd",
+        "task_599ea957a83d430da66c0f46c7e60170",
+        "task_640e1bc624f24a9aba5182d8b906a605",
+        "task_6878bf44c63740b7aa918a7dad0661be",
+        "task_6d3243c7292e4294984a297d8fcc9e0c",
+        "task_9b4be5cb9d514b31a38aaf9f6bb98480",
+        "task_a6ccac2aa7f34051ab9868b7c4c9563f",
+        "task_bc999cf7b51b46e885d3e9e77a64dcff",
+        "task_f5a09bdeef9c4a47a2a8540844ab8954"
+      ],
+      "node_file_contains_fixture_plaintext": false
+    }
+  ],
+  "browser_original_observations": {
+    "method": "Actual preparation-page UI, inspected before migration, after failed write, with node stopped, and after page/node reload",
+    "storage": "encrypted",
+    "fixture_copies": 2,
+    "ciphertext_records": 2,
+    "raw_records_contain_message_text": false,
+    "same_digest_at_each_observation": "db7588d7cd07c69a418b2cb82a6b1cc131765c7e1e251907e9b513e82850fe3a"
+  }
+}

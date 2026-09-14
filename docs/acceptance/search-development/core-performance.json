@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "scope": "Synthetic source list and encrypted core index only; not product SEARCH10 acceptance",
+  "platform": "Windows-11-10.0.28120-SP0",
+  "python": "3.12.10",
+  "dataset": {
+    "rows": 10000,
+    "generator": "tests/test_local_search.py::test_ten_thousand_record_query_measurement",
+    "queries": [
+      "城市",
+      "Python",
+      "中文检索",
+      "阅读 guide",
+      "testing"
+    ],
+    "repetitions": 4,
+    "page_size": 20
+  },
+  "cold_build_seconds": 0.9382825999928173,
+  "query_p95_seconds": 0.3848660999792628,
+  "p95_definition": "nearest-rank 95th percentile, sorted sample 19 of 20",
+  "measurement_includes": "current synthetic source validation; excludes production stores, HTTP and UI"
+}

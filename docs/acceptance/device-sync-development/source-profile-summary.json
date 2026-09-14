@@ -1,0 +1,23 @@
+{
+  "recorded_on": "2026-09-11",
+  "purpose": "Identify remaining source-write work after the 10000-record measurement missed its target",
+  "scope": "Three normal alternating bookmark/unbookmark writes on an isolated copy of the measured synthetic source; validation cache warmed first",
+  "source_bytes": 10756640,
+  "profiled_total_seconds": 2.479,
+  "cumulative_seconds": {
+    "ConsumptionStore._document": 1.595,
+    "ReadingState.__init__": 1.330,
+    "fingerprint_90036_calls": 1.071,
+    "ConsumptionStore._save_document": 0.843,
+    "atomic_write_bytes": 0.487,
+    "fsync": 0.466,
+    "ReadingState.key_30018_calls": 0.349,
+    "read_json": 0.263
+  },
+  "limits": [
+    "cProfile adds overhead and this diagnostic overlapped the later backend test run; it is not acceptance timing",
+    "Cumulative timings overlap and must not be added together",
+    "No production/source code changed after measurement; the original measured source was preserved",
+    "Further optimization must preserve validation, atomic durability and current-policy source receipts"
+  ]
+}

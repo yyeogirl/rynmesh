@@ -1,0 +1,1582 @@
+{
+  "version": 1,
+  "baseline": "094f03ac673b84e571052c2dda1910b67e7b98e8",
+  "cases": [
+    {
+      "id": "READ01",
+      "document": "01-first-reading.md",
+      "scenario": "干净安装、正常网络、无模型与好友",
+      "expected": "无配置看到真实内容并完成打开、收藏；记录耗时，建议启动至完成不超过 3 分钟",
+      "status": "passed",
+      "actual": "Implementation and automated recovery checks are in progress; packaged desktop acceptance has not been performed. 2026-09-14: a new unseeded Windows node with desktop public-source defaults and no model obtained 30 real items (11/14 sources healthy). The first Reddit reader result had no body and received no reading credit; a BBC article returned 18 blocks, then reading and bookmarking completed over real TCP. Packaged desktop and browser interaction remain untested in this run. 2026-09-14 browser follow-up: Fresh unseeded Windows production-node browser run: real public content ready at 26.80 seconds; actual open and bookmark completed at 167.15 seconds from initial node startup, including an intentional unfinished-guide restart. No model or friends configured. This is not installation or packaged-desktop timing. 2026-09-14 all-source failure acceptance exposed synthetic starter cards counted as available recommendations in an empty node. The endpoint now returns only real candidates and rejects starter feedback; browser after restart showed zero available recommendations and an actionable empty state. 2026-09-14 scoped review: this individual case passes for the authorized Windows installed-wheel/browser scope, reusing its cited production-browser and persistence evidence. macOS and public-network checks are waived. Common gates remain separately tracked; this is not an all-product completion claim. 2026-09-14 requirement review: 空安装环境与空数据节点取得真实推荐、打开并收藏；167.15 秒为启动至首次完成，安装耗时另列。",
+      "evidence": [
+        "docs/acceptance/first-reading-development/README.md",
+        "docs/acceptance/first-reading-development/home-recovery-20260914.md",
+        "docs/acceptance/first-reading-development/public-source-http-20260914.json",
+        "docs/acceptance/first-reading-development/browser-recovery-20260914.md",
+        "docs/acceptance/first-reading-development/browser-checkpoints-20260914.json",
+        "docs/acceptance/first-reading-development/all-sources-recovery-20260914.md",
+        "docs/acceptance/first-reading-development/network-checkpoints-20260914.json",
+        "docs/product-briefs/ACCEPTANCE_SCOPE.md",
+        "docs/acceptance/candidate-delivery/local-case-review-20260914.md",
+        "docs/product-briefs/TRY_CANDIDATE.md",
+        "docs/acceptance/candidate-delivery/requirement-review-20260914.md"
+      ],
+      "implementation_commit": "858cda5028842d659c8afd31a08a5cc6440faa27"
+    },
+    {
+      "id": "READ02",
+      "document": "01-first-reading.md",
+      "scenario": "关闭未完成引导后重启",
+      "expected": "应用可用，首页可继续，未错误标记完成",
+      "status": "passed",
+      "actual": "Implementation and automated recovery checks are in progress; packaged desktop acceptance has not been performed. 2026-09-14 browser follow-up: Browser Continue later before opening preserved incomplete state; node restart offered Continue first reading. Resuming opened a real article without crediting an earlier failed/absent action. Packaged desktop remains untested. 2026-09-14 scoped review: this individual case passes for the authorized Windows installed-wheel/browser scope, reusing its cited production-browser and persistence evidence. macOS and public-network checks are waived. Common gates remain separately tracked; this is not an all-product completion claim. 2026-09-14 requirement review: 关闭未完成引导后重启仍可继续，未错误完成。",
+      "evidence": [
+        "docs/acceptance/first-reading-development/README.md",
+        "docs/acceptance/first-reading-development/browser-recovery-20260914.md",
+        "docs/acceptance/first-reading-development/browser-checkpoints-20260914.json",
+        "docs/product-briefs/ACCEPTANCE_SCOPE.md",
+        "docs/acceptance/candidate-delivery/local-case-review-20260914.md",
+        "docs/acceptance/candidate-delivery/requirement-review-20260914.md"
+      ],
+      "implementation_commit": "858cda5028842d659c8afd31a08a5cc6440faa27"
+    },
+    {
+      "id": "READ03",
+      "document": "01-first-reading.md",
+      "scenario": "收藏并阅读后重启",
+      "expected": "收藏仅一条，阅读位置可恢复",
+      "status": "passed",
+      "actual": "Implementation and automated recovery checks are in progress; packaged desktop acceptance has not been performed. The new My reading entry also restores synced positions. Two loopback nodes retained one saved item and 26.08% after receiver restart; the final browser build restored scrollTop 1798 with a scrollable range of 6895 pixels. This is not packaged desktop acceptance. 2026-09-14: the real public-source HTTP run saved one BBC article twice without duplicates, stored progress 0.37, restarted the node to a different PID, and recovered the exact history record and matching cached body hash. This proves storage/API recovery, not desktop scroll restoration. 2026-09-14 browser follow-up: Actual browser My reading found one saved public article at 16%; process restart retained the exact history digest and reopening visibly restored the middle of the article. Final restart retained the same bookmarked record and approximately 16% position. Ordinary reading view now supports save/remove with confirmed receipts. 2026-09-14 scoped review: this individual case passes for the authorized Windows installed-wheel/browser scope, reusing its cited production-browser and persistence evidence. macOS and public-network checks are waived. Common gates remain separately tracked; this is not an all-product completion claim. 2026-09-14 requirement review: 唯一收藏、完整历史摘要及约 16% 阅读位置在重启后保留。",
+      "evidence": [
+        "docs/acceptance/first-reading-development/README.md",
+        "docs/acceptance/device-sync-development/README.md",
+        "docs/acceptance/first-reading-development/home-recovery-20260914.md",
+        "docs/acceptance/first-reading-development/public-source-http-20260914.json",
+        "docs/acceptance/first-reading-development/browser-recovery-20260914.md",
+        "docs/acceptance/first-reading-development/browser-checkpoints-20260914.json",
+        "docs/product-briefs/ACCEPTANCE_SCOPE.md",
+        "docs/acceptance/candidate-delivery/local-case-review-20260914.md",
+        "docs/acceptance/candidate-delivery/requirement-review-20260914.md"
+      ],
+      "implementation_commit": "858cda5028842d659c8afd31a08a5cc6440faa27"
+    },
+    {
+      "id": "READ04",
+      "document": "01-first-reading.md",
+      "scenario": "一个来源失败，单独重试",
+      "expected": "显示对应错误与失败次数；正常来源内容保留且不强制重抓",
+      "status": "passed",
+      "actual": "Implementation and automated recovery checks are in progress; packaged desktop acceptance has not been performed. 2026-09-14: retrying one genuinely failed YouTube source updated its check time and failure count from 2 to 3 while all 13 other source-health records remained unchanged and 30 items remained available. The source still failed; successful network recovery and UI interaction are not claimed. 2026-09-14 browser follow-up: Browser added an independent HTTP source, then retried real 503 and recovery to 200. Cached item, failure count and check/success times were visible; all 14 other source-health records stayed exactly unchanged on both targeted retries. Reading data survived. Packaged desktop remains untested. 2026-09-14 scoped review: this individual case passes for the authorized Windows installed-wheel/browser scope, reusing its cited production-browser and persistence evidence. macOS and public-network checks are waived. Common gates remain separately tracked; this is not an all-product completion claim. 2026-09-14 requirement review: 单来源 503、单独重试和恢复 200，其他 14 项健康记录不变。",
+      "evidence": [
+        "docs/acceptance/first-reading-development/README.md",
+        "docs/acceptance/first-reading-development/home-recovery-20260914.md",
+        "docs/acceptance/first-reading-development/public-source-http-20260914.json",
+        "docs/acceptance/first-reading-development/browser-recovery-20260914.md",
+        "docs/acceptance/first-reading-development/browser-checkpoints-20260914.json",
+        "docs/product-briefs/ACCEPTANCE_SCOPE.md",
+        "docs/acceptance/candidate-delivery/local-case-review-20260914.md",
+        "docs/acceptance/candidate-delivery/requirement-review-20260914.md"
+      ],
+      "implementation_commit": "858cda5028842d659c8afd31a08a5cc6440faa27"
+    },
+    {
+      "id": "READ05",
+      "document": "01-first-reading.md",
+      "scenario": "全部来源断网，分别准备有缓存和无缓存",
+      "expected": "有缓存可读且有标记；无缓存有恢复入口，联网重试后可用",
+      "status": "passed",
+      "actual": "Implementation and automated recovery checks are in progress; packaged desktop acceptance has not been performed. 2026-09-14 actual browser with a fresh production node and per-process HTTPS fault proxy: all 14 default sources failed with no cache, no history and an incomplete first-success state; UI offered retry. Restoring genuine TLS and clicking Refresh recovered all 14 sources and 30 real recommendations; opened and saved a public article. Blocking all 14 again retained 30 recommendations, 13 cached sources and original success times. Browser reopened the body while blocked, restarted the node with the exact saved history retained and reopened again; only one upstream article request occurred across three opens. Final online refresh recovered 13/14 sources, kept 30 recommendations and one saved record; Hacker News remained genuinely unavailable. Browser source-failure evidence does not prove packaged desktop, full-device offline resources or the common gates. 2026-09-14 scoped review: this individual case passes for the authorized Windows installed-wheel/browser scope, reusing its cited production-browser and persistence evidence. macOS and public-network checks are waived. Common gates remain separately tracked; this is not an all-product completion claim. 2026-09-14 requirement review: 14 个来源连接全部失败分别验证空目录恢复、缓存阅读与重启。",
+      "evidence": [
+        "docs/acceptance/first-reading-development/README.md",
+        "docs/acceptance/first-reading-development/all-sources-recovery-20260914.md",
+        "docs/acceptance/first-reading-development/network-checkpoints-20260914.json",
+        "docs/product-briefs/ACCEPTANCE_SCOPE.md",
+        "docs/acceptance/candidate-delivery/local-case-review-20260914.md",
+        "docs/acceptance/candidate-delivery/requirement-review-20260914.md"
+      ],
+      "implementation_commit": "858cda5028842d659c8afd31a08a5cc6440faa27"
+    },
+    {
+      "id": "READ06",
+      "document": "01-first-reading.md",
+      "scenario": "查看内置和自定义来源",
+      "expected": "所有健康字段真实，从未检查或从未成功有明确文字",
+      "status": "passed",
+      "actual": "Implementation and automated recovery checks are in progress; packaged desktop acceptance has not been performed. 2026-09-14 browser follow-up: Browser default/custom source health matched API during 200/503/recovery: counts, times, failures and cached status. Never-checked and never-successful branches remain unverified in this browser run. 2026-09-14 actual empty-node source failure showed Last success: Never for all 14 built-in sources; cached failure retained real last-success times. Never-checked and all corresponding custom-source branches remain incompletely verified. 2026-09-14 requirement review: 实际默认及自定义来源健康字段已有页面/接口核对；新增组件检查覆盖从未检查与首次失败，真实后端状态由 source_recovery 验证。",
+      "evidence": [
+        "docs/acceptance/first-reading-development/README.md",
+        "docs/acceptance/first-reading-development/browser-recovery-20260914.md",
+        "docs/acceptance/first-reading-development/browser-checkpoints-20260914.json",
+        "docs/acceptance/first-reading-development/all-sources-recovery-20260914.md",
+        "docs/acceptance/first-reading-development/network-checkpoints-20260914.json",
+        "tests/test_source_recovery.py",
+        "webapp/src/components/SourceHealthPanel.test.tsx",
+        "docs/acceptance/candidate-delivery/requirement-review-20260914.md"
+      ],
+      "implementation_commit": "858cda5028842d659c8afd31a08a5cc6440faa27"
+    },
+    {
+      "id": "READ07",
+      "document": "01-first-reading.md",
+      "scenario": "分别反馈 More/Less/Hide，再撤销一条",
+      "expected": "操作、时间和信号可见；仅撤销指定操作，重新计算排名，重启保持",
+      "status": "passed",
+      "actual": "Implementation and automated recovery checks are in progress; packaged desktop acceptance has not been performed. 2026-09-14 browser follow-up: Browser More/Less/Hide displayed time and signal explanations; undo changed only the selected event. A later successful Less replaced the earlier More for that item. Four resulting events including undone/replaced states survived node restart exactly. 2026-09-14 scoped review: this individual case passes for the authorized Windows installed-wheel/browser scope, reusing its cited production-browser and persistence evidence. macOS and public-network checks are waived. Common gates remain separately tracked; this is not an all-product completion claim. 2026-09-14 requirement review: 三种反馈、单项撤销、替代状态、信号解释及重启保留已验证。",
+      "evidence": [
+        "docs/acceptance/first-reading-development/README.md",
+        "docs/acceptance/first-reading-development/browser-recovery-20260914.md",
+        "docs/acceptance/first-reading-development/browser-checkpoints-20260914.json",
+        "docs/product-briefs/ACCEPTANCE_SCOPE.md",
+        "docs/acceptance/candidate-delivery/local-case-review-20260914.md",
+        "docs/acceptance/candidate-delivery/requirement-review-20260914.md"
+      ],
+      "implementation_commit": "858cda5028842d659c8afd31a08a5cc6440faa27"
+    },
+    {
+      "id": "READ08",
+      "document": "01-first-reading.md",
+      "scenario": "收藏/反馈写入失败，恢复后重试",
+      "expected": "不伪造成功；恢复后只有一条记录",
+      "status": "passed",
+      "actual": "Implementation and automated recovery checks are in progress; packaged desktop acceptance has not been performed. 2026-09-14 browser follow-up: Real Windows file-share locks independently blocked consumption and profile atomic replacement. Browser reported unconfirmed saves and kept prior state. After release, retries produced one bookmarked record and one additional successful feedback event; unrelated events unchanged. Both datasets survived node restart exactly. This does not complete the packaged-platform/common gates. 2026-09-14 scoped review: this individual case passes for the authorized Windows installed-wheel/browser scope, reusing its cited production-browser and persistence evidence. macOS and public-network checks are waived. Common gates remain separately tracked; this is not an all-product completion claim. 2026-09-14 requirement review: 真实文件占用使收藏/反馈写入失败；释放后原操作重试，记录不重复。",
+      "evidence": [
+        "docs/acceptance/first-reading-development/README.md",
+        "docs/acceptance/first-reading-development/browser-recovery-20260914.md",
+        "docs/acceptance/first-reading-development/browser-checkpoints-20260914.json",
+        "docs/product-briefs/ACCEPTANCE_SCOPE.md",
+        "docs/acceptance/candidate-delivery/local-case-review-20260914.md",
+        "docs/acceptance/candidate-delivery/requirement-review-20260914.md"
+      ],
+      "implementation_commit": "858cda5028842d659c8afd31a08a5cc6440faa27"
+    },
+    {
+      "id": "READ09",
+      "document": "01-first-reading.md",
+      "scenario": "完成后再次启动",
+      "expected": "不强制重复引导，能继续阅读并找到连接朋友入口",
+      "status": "passed",
+      "actual": "Implementation and automated recovery checks are in progress; packaged desktop acceptance has not been performed. 2026-09-14 browser follow-up: After final process restart, browser Home showed real recommendations, Continue reading and Friends without forced onboarding. Completion screen had offered Connect a friend. Packaged desktop remains untested. 2026-09-14 scoped review: this individual case passes for the authorized Windows installed-wheel/browser scope, reusing its cited production-browser and persistence evidence. macOS and public-network checks are waived. Common gates remain separately tracked; this is not an all-product completion claim. 2026-09-14 requirement review: 首次完成后重启不强制引导，继续阅读与好友入口可见。",
+      "evidence": [
+        "docs/acceptance/first-reading-development/README.md",
+        "docs/acceptance/first-reading-development/browser-recovery-20260914.md",
+        "docs/acceptance/first-reading-development/browser-checkpoints-20260914.json",
+        "docs/product-briefs/ACCEPTANCE_SCOPE.md",
+        "docs/acceptance/candidate-delivery/local-case-review-20260914.md",
+        "docs/acceptance/candidate-delivery/requirement-review-20260914.md"
+      ],
+      "implementation_commit": "858cda5028842d659c8afd31a08a5cc6440faa27"
+    },
+    {
+      "id": "READ10",
+      "document": "01-first-reading.md",
+      "scenario": "导出/擦除推荐数据，检查日志与网络",
+      "expected": "解释记录纳入相应范围，画像不发给模型或外部服务，日志无私有正文",
+      "status": "passed",
+      "actual": "Implementation and automated recovery checks are in progress; packaged desktop acceptance has not been performed. 2026-09-14 actual Windows browser/production-node follow-up: JSON export includes four feedback events with matching explanation and undo fields. Export failure after stopping the node now shows a focused error; keyboard retry after restart requests a new download. Reset cancellation and real profile write failure preserved all events; releasing the file lock and retrying cleared feedback while retaining exact reading history, cache and source catalog. Restart retained zero feedback, and the browser still showed the saved article at 16%. Forwarded unauthenticated export returned 401; checked identity keys and 12 cached body blocks were absent from export or the applicable audit/public-node fields. A recording-provider test verified raw profile/feedback canaries are excluded from generated summary requests. Browser download persistence, old backup/interrupted-file recovery, all logs/diagnostics/network traffic and packaged desktop remain unverified; no full privacy pass is claimed. 2026-09-14 Chrome installed-candidate export saved a 12535-byte JSON file; six stable field groups match the node. An earlier 18622-byte download contains all four recorded feedback IDs and the exact recorded profile digest. Download persistence is now verified; broader log/network privacy audit remains open. 2026-09-14 requirement review: 导出落盘、解释字段、画像重置及模型请求边界已有证据；完整日志/诊断与外发路径审计尚未闭合。 2026-09-14 closing review: 导出、擦除、画像外发与当前日志边界核对完成；审计详情改为计数，历史日志不自动抹除。",
+      "evidence": [
+        "docs/acceptance/first-reading-development/README.md",
+        "docs/acceptance/first-reading-development/privacy-recovery-20260914.md",
+        "docs/acceptance/first-reading-development/privacy-checkpoints-20260914.json",
+        "docs/acceptance/candidate-delivery/reading-export-file-20260914.md",
+        "docs/acceptance/candidate-delivery/reading-export-file-20260914.json",
+        "docs/acceptance/candidate-delivery/requirement-review-20260914.md",
+        "docs/acceptance/candidate-delivery/privacy-boundaries-20260914.md"
+      ],
+      "implementation_commit": "f486fb76d417fab96d97fcdcbeb5c8762b931b38"
+    },
+    {
+      "id": "SHARE01",
+      "document": "02-pair-and-share.md",
+      "scenario": "A 已安装，B 未安装",
+      "expected": "B 凭邀请文本完成安装/打开、审核、接受和分享，无需手工改配置",
+      "status": "passed",
+      "actual": "Pairing, messages, content cards, explicit private document downloads and revocation have automated and local-browser evidence; recovery/privacy integration, packaged desktop and public-network acceptance remain incomplete. 2026-09-14: Fresh-node HTTP pairing and first sharing passed without seeded relations or cards. Desktop installation/opening and invitation text/QR interaction remain unproven. 2026-09-14 fresh-node browser follow-up: Fresh unseeded nodes completed browser create/copy invitation, offline acceptance failure and same-invite retry, pairing, messages and content sharing. Package installation remains untested. 2026-09-14: Installed wheel/Chrome follow-up: two independent nodes completed invitation review, acceptance, confirmed first message, article-card sharing, explicit copy download and revocation. Native desktop installation and public-network gates remain pending. 2026-09-14 requirement review: 已安装 wheel 双节点从邀请文本审核、接受至首次消息和正文分享，macOS 安装分支跳过。",
+      "evidence": [
+        "docs/acceptance/friends-development/README.md",
+        "docs/acceptance/friends-development/product-http-20260914.md",
+        "docs/acceptance/friends-development/product-http-20260914-d.json",
+        "docs/acceptance/friends-development/browser-first-sharing-20260914.md",
+        "docs/acceptance/friends-development/browser-checkpoints-20260914.json",
+        "docs/acceptance/candidate-delivery/two-node-20260914.md",
+        "docs/acceptance/candidate-delivery/requirement-review-20260914.md"
+      ],
+      "implementation_commit": "858cda5028842d659c8afd31a08a5cc6440faa27"
+    },
+    {
+      "id": "SHARE02",
+      "document": "02-pair-and-share.md",
+      "scenario": "粘贴邀请但不确认",
+      "expected": "身份、权限可检查，未向待审核端点请求",
+      "status": "passed",
+      "actual": "Pairing, messages, content cards, explicit private document downloads and revocation have automated and local-browser evidence; recovery/privacy integration, packaged desktop and public-network acceptance remain incomplete. 2026-09-14: Local invite inspection succeeded while the inviter process was stopped, exposed the signed identity and three sharing permissions, and created no relation. Existing route tests separately assert no outbound request during inspection; browser review remains untested in this run. 2026-09-14 fresh-node browser follow-up: Browser review while inviter was stopped showed identity, endpoint and permissions; before confirmation the observed friend-service outgoing request count and relationships were zero. 2026-09-14 requirement review: 邀请方离线时本地审核身份/权限，确认前观察到零好友出站请求、零关系。",
+      "evidence": [
+        "docs/acceptance/friends-development/README.md",
+        "docs/acceptance/friends-development/product-http-20260914.md",
+        "docs/acceptance/friends-development/product-http-20260914-d.json",
+        "docs/acceptance/friends-development/browser-first-sharing-20260914.md",
+        "docs/acceptance/friends-development/browser-checkpoints-20260914.json",
+        "docs/acceptance/candidate-delivery/requirement-review-20260914.md"
+      ],
+      "implementation_commit": "858cda5028842d659c8afd31a08a5cc6440faa27"
+    },
+    {
+      "id": "SHARE03",
+      "document": "02-pair-and-share.md",
+      "scenario": "两个接收者并发接受",
+      "expected": "仅建立一次关系，另一方得到已使用提示",
+      "status": "passed",
+      "actual": "Prior TCP concurrent-acceptance evidence retained. 2026-09-14 browser follow-up: three unseeded loopback nodes, both receiving pages reviewed and confirmed one invitation. Outbound starts overlapped before either inviter response ended; only A/C established the same relationship, B saw invite-used. C repeating acceptance preserved the relationship; B recovered with a new invitation and sent its first confirmed message. Relationships/messages persisted after restart. Packaged/platform, public-network and common gates remain incomplete. 2026-09-14 requirement review: 三节点两次接受请求实际重叠，只建立一条关系；另一方明确提示邀请已用。",
+      "evidence": [
+        "docs/acceptance/friends-development/README.md",
+        "docs/acceptance/friends-development/product-http-20260914.md",
+        "docs/acceptance/friends-development/product-http-20260914-d.json",
+        "docs/acceptance/friends-development/invite-attachments-browser-20260914.md",
+        "docs/acceptance/friends-development/invite-attachment-checkpoints-20260914.json",
+        "docs/acceptance/candidate-delivery/requirement-review-20260914.md"
+      ],
+      "implementation_commit": "858cda5028842d659c8afd31a08a5cc6440faa27"
+    },
+    {
+      "id": "SHARE04",
+      "document": "02-pair-and-share.md",
+      "scenario": "过期、取消、重复接受分别测试",
+      "expected": "状态准确且可恢复；同一成功请求重试返回原关系",
+      "status": "passed",
+      "actual": "Prior cancelled/one-minute expiry TCP evidence retained. 2026-09-14 browser follow-up: cancelled invitation rejected with recovery guidance, untouched standard 15-minute invitation naturally expired and was rejected on review, successful recipient repeated acceptance without another relationship, and unsuccessful recipient recovered with a replacement invite. Fixed owner list incorrectly retaining active after expiration; read-only expiry projection preserves used/cancelled and persisted history. Actual node list corrected after restart. No browser clock override or shortened TTL. Packaged/common gates remain incomplete. 2026-09-14 requirement review: 自然 15 分钟过期、取消、同成功请求重试及新邀请恢复均有页面记录。",
+      "evidence": [
+        "docs/acceptance/friends-development/README.md",
+        "docs/acceptance/friends-development/product-http-20260914.md",
+        "docs/acceptance/friends-development/product-http-20260914-d.json",
+        "docs/acceptance/friends-development/invite-attachments-browser-20260914.md",
+        "docs/acceptance/friends-development/invite-attachment-checkpoints-20260914.json",
+        "docs/acceptance/candidate-delivery/requirement-review-20260914.md"
+      ],
+      "implementation_commit": "858cda5028842d659c8afd31a08a5cc6440faa27"
+    },
+    {
+      "id": "SHARE05",
+      "document": "02-pair-and-share.md",
+      "scenario": "双方互发文本、小附件、内容卡片",
+      "expected": "内容完整；确认前不获取私有正文；超限附件发送前被阻止",
+      "status": "passed",
+      "actual": "Prior browser bidirectional text/content-card evidence retained: recipient had zero documents/private fetches before explicit Download and read; message and body identities matched. 2026-09-14 attachment follow-up used real browser file choosers on fresh nodes: 5 MiB+1 rejected before sending with zero messages; 71-byte text, 2048-byte binary and exact 5 MiB binary were delivered and receiver-confirmed. Text and exact-5-MiB files were saved with matching hashes. Reverse 2048-byte binary is correct at the receiving node and owner HTTP download, but no expected saved file was found after browser clicks and node/page restart. That save remains unverified; do not count transport success as saved-file success. Packaged/platform, cross-network and common gates remain incomplete. Chrome comparison: the same received 2048-byte attachment saved after one normal click, with exact original SHA-256; all three files now verified on disk. This adds ordinary Windows Chrome evidence; the in-app-browser difference and packaged/platform gates remain unresolved. 2026-09-14: Installed wheel/Chrome follow-up: first message was confirmed delivered; receiver saw card metadata before explicitly downloading a 3403-byte body, whose hash matches the sender copy. Attachments were not repeated in this run. 2026-09-14 requirement review: 双向消息和文章、副本下载同摘要；三份附件在 Chrome 实际落盘，5 MiB+1 发送前阻止。Codex 内置浏览器保存差异不列为通过。",
+      "evidence": [
+        "docs/acceptance/friends-development/README.md",
+        "docs/acceptance/friends-development/product-http-20260914.md",
+        "docs/acceptance/friends-development/product-http-20260914-d.json",
+        "docs/acceptance/friends-development/mailbox-recovery-20260914.md",
+        "docs/acceptance/friends-development/mailbox-quota-http-20260914-b.json",
+        "docs/acceptance/friends-development/product-http-20260914-e.json",
+        "docs/acceptance/friends-development/browser-first-sharing-20260914.md",
+        "docs/acceptance/friends-development/browser-checkpoints-20260914.json",
+        "docs/acceptance/friends-development/invite-attachments-browser-20260914.md",
+        "docs/acceptance/friends-development/invite-attachment-checkpoints-20260914.json",
+        "docs/acceptance/candidate-delivery/two-node-20260914.md",
+        "docs/acceptance/candidate-delivery/requirement-review-20260914.md"
+      ],
+      "implementation_commit": "858cda5028842d659c8afd31a08a5cc6440faa27"
+    },
+    {
+      "id": "SHARE06",
+      "document": "02-pair-and-share.md",
+      "scenario": "B 离线，A 发送可入邮箱消息，B 再上线",
+      "expected": "先显示入队，接收确认后显示送达；重复投递仅一条",
+      "status": "passed",
+      "actual": "Pairing, messages, content cards, explicit private document downloads and revocation have automated and local-browser evidence; recovery/privacy integration, packaged desktop and public-network acceptance remain incomplete. 2026-09-14: With the receiver stopped, the sender reported mailbox and delivered=false. The sender then stopped so the receiver could only consume the real HTTP Registry mailbox; after sender restart the signed receipt changed its status to delivered. Repeating the send retained one received message. 2026-09-14 mailbox recovery: Concurrent initial delivery/background retry previously spent multiple mailbox slots for the same logical item; bounded outgoing file locks now re-read and persist the current result around one attempt. Six concurrent same-ID message/card requests each used one envelope in the final controlled check. The original real HTTP first-sharing scenario passed again. 2026-09-14 fresh-node browser follow-up: Browser offline send displayed mailbox/unconfirmed; recipient received with sender stopped, sender restart collected receipt; both had exactly three distinct messages. 2026-09-14 requirement review: 接收方停机先显示邮箱未确认；仅邮箱收取后回执更新为送达，重试无重复。",
+      "evidence": [
+        "docs/acceptance/friends-development/README.md",
+        "docs/acceptance/friends-development/product-http-20260914.md",
+        "docs/acceptance/friends-development/product-http-20260914-d.json",
+        "docs/acceptance/friends-development/mailbox-recovery-20260914.md",
+        "docs/acceptance/friends-development/mailbox-quota-http-20260914-b.json",
+        "docs/acceptance/friends-development/product-http-20260914-e.json",
+        "docs/acceptance/friends-development/browser-first-sharing-20260914.md",
+        "docs/acceptance/friends-development/browser-checkpoints-20260914.json",
+        "docs/acceptance/candidate-delivery/requirement-review-20260914.md"
+      ],
+      "implementation_commit": "858cda5028842d659c8afd31a08a5cc6440faa27"
+    },
+    {
+      "id": "SHARE07",
+      "document": "02-pair-and-share.md",
+      "scenario": "邮箱满、消息过期、断网、重启后重试",
+      "expected": "无伪造送达，状态可恢复，不重复分享",
+      "status": "passed",
+      "actual": "Pairing, messages, content cards, explicit private document downloads and revocation have automated and local-browser evidence; recovery/privacy integration, packaged desktop and public-network acceptance remain incomplete. 2026-09-14: Sender and receiver process restarts preserved an unconfirmed mailbox message, followed by one confirmed delivery. This run does not prove mailbox quota exhaustion or message-expiry recovery. 2026-09-14 mailbox recovery: Real HTTP default quota run stored 16 envelopes and refused message 17 with sender_quota and delivered=false. Sender restart preserved the error, receiver return plus same-ID manual retry delivered exactly 17 messages, and another receiver restart preserved deduplication. Controlled file-mailbox tests also covered recipient_full, original-deadline enforcement at minute 61 after a minute-59 retry, and a late valid receipt resolving expired/unconfirmed to delivered. Desktop, different-egress and full-hour real-clock scope remain unproven. 2026-09-14 fresh-node browser follow-up: Browser restart recovery retained message identities and honest delivery states. Fixed stale friend/card/message polling load errors without hiding unconfirmed action errors; 238 frontend tests passed. Other failure branches retain prior separate evidence. 2026-09-14 requirement review: 真实默认配额第 17 条被拒绝且重启保留；收取后同身份恢复。期限及迟到回执用受控时钟和真实文件邮箱验证。",
+      "evidence": [
+        "docs/acceptance/friends-development/README.md",
+        "docs/acceptance/friends-development/product-http-20260914.md",
+        "docs/acceptance/friends-development/product-http-20260914-d.json",
+        "docs/acceptance/friends-development/mailbox-recovery-20260914.md",
+        "docs/acceptance/friends-development/mailbox-quota-http-20260914-b.json",
+        "docs/acceptance/friends-development/product-http-20260914-e.json",
+        "docs/acceptance/friends-development/browser-first-sharing-20260914.md",
+        "docs/acceptance/friends-development/browser-checkpoints-20260914.json",
+        "docs/acceptance/candidate-delivery/requirement-review-20260914.md"
+      ],
+      "implementation_commit": "858cda5028842d659c8afd31a08a5cc6440faa27"
+    },
+    {
+      "id": "SHARE08",
+      "document": "02-pair-and-share.md",
+      "scenario": "B 在线/离线时 A 分别撤销",
+      "expected": "A 立即拒绝下一次受保护请求，重启或重新发现不复活关系",
+      "status": "passed",
+      "actual": "Pairing, messages, content cards, explicit private document downloads and revocation have automated and local-browser evidence; recovery/privacy integration, packaged desktop and public-network acceptance remain incomplete. 2026-09-14: Direct old-credential probing found a real defect: rejected card-fetch authentication escaped as HTTP 500. Catching FriendError now returns 403; the final real-process run verified 200 before revocation, 403 immediately afterward with the other peer offline, and 403 after sender restart. 2026-09-14 fresh-node browser follow-up: Browser revoked while recipient offline; real old-credential private fetch returned 200 before, 403 after and 403 after sender restart. Recipient later processed notice. 2026-09-14: Installed wheel/Chrome follow-up: page-confirmed revocation left both friend records revoked. Independent device pairing stayed active. This run did not replay credentials or restart after revocation. 2026-09-14 requirement review: 撤销前受保护请求 200，离线撤销后及重启后均 403，旧关系不复活。",
+      "evidence": [
+        "docs/acceptance/friends-development/README.md",
+        "docs/acceptance/friends-development/product-http-20260914.md",
+        "docs/acceptance/friends-development/product-http-20260914-d.json",
+        "docs/acceptance/friends-development/browser-first-sharing-20260914.md",
+        "docs/acceptance/friends-development/browser-checkpoints-20260914.json",
+        "docs/acceptance/candidate-delivery/two-node-20260914.md",
+        "docs/acceptance/candidate-delivery/requirement-review-20260914.md"
+      ],
+      "implementation_commit": "858cda5028842d659c8afd31a08a5cc6440faa27"
+    },
+    {
+      "id": "SHARE09",
+      "document": "02-pair-and-share.md",
+      "scenario": "撤销后访问私有卡片",
+      "expected": "新的正文获取被拒绝，界面说明已保存副本无法远程收回",
+      "status": "passed",
+      "actual": "Pairing, messages, content cards, explicit private document downloads and revocation have automated and local-browser evidence; recovery/privacy integration, packaged desktop and public-network acceptance remain incomplete. 2026-09-14: The final real-process run denied new private-card fetching after revocation while the previously saved body remained readable. The copy warning is still backed by earlier browser/component evidence, not new desktop evidence. 2026-09-14 fresh-node browser follow-up: Browser removal confirmation explained saved copies cannot be recalled. New private fetch rejected after revocation; recipient still opened its saved body after restart with unchanged digest. 2026-09-14: Installed wheel/Chrome follow-up: revocation dialog explained saved copies cannot be recalled; recipient reopened the saved copy after both friend records became revoked. The run did not request a new private version. 2026-09-14 requirement review: 撤销确认解释不能收回独立副本，新获取拒绝；保存副本重启后仍可读。",
+      "evidence": [
+        "docs/acceptance/friends-development/README.md",
+        "docs/acceptance/friends-development/product-http-20260914.md",
+        "docs/acceptance/friends-development/product-http-20260914-d.json",
+        "docs/acceptance/friends-development/browser-first-sharing-20260914.md",
+        "docs/acceptance/friends-development/browser-checkpoints-20260914.json",
+        "docs/acceptance/candidate-delivery/two-node-20260914.md",
+        "docs/acceptance/candidate-delivery/requirement-review-20260914.md"
+      ],
+      "implementation_commit": "858cda5028842d659c8afd31a08a5cc6440faa27"
+    },
+    {
+      "id": "SHARE10",
+      "document": "02-pair-and-share.md",
+      "scenario": "检查权限、日志、诊断、导出",
+      "expected": "不获得额外服务/根信任，邀请和关系秘密不泄露",
+      "status": "passed",
+      "actual": "Pairing, messages, content cards, explicit private document downloads and revocation have automated and local-browser evidence; recovery/privacy integration, packaged desktop and public-network acceptance remain incomplete. 2026-09-14: Real paired relationships exposed only friend.message, friend.attachment.small and friend.content-card. This is a limited permission check, not the outstanding full log/diagnostic/export privacy audit. 2026-09-14 requirement review: 权限仅三项分享能力已验证；邀请/关系秘密在全部日志、诊断和导出边界的统一审计尚未闭合。 2026-09-14 closing review: 默认分享权限、根信任不扩展、邀请/关系秘密在日志、诊断和允许字段导出中的边界核对完成。",
+      "evidence": [
+        "docs/acceptance/friends-development/README.md",
+        "docs/acceptance/friends-development/product-http-20260914.md",
+        "docs/acceptance/friends-development/product-http-20260914-d.json",
+        "docs/acceptance/candidate-delivery/requirement-review-20260914.md",
+        "docs/acceptance/candidate-delivery/privacy-boundaries-20260914.md"
+      ],
+      "implementation_commit": "f486fb76d417fab96d97fcdcbeb5c8762b931b38"
+    },
+    {
+      "id": "SHARE11",
+      "document": "02-pair-and-share.md",
+      "scenario": "产品双节点 CI 和不同公网出口实机跑全流程",
+      "expected": "全流程通过后才声明完整跨网里程碑，LAN 结果不能替代",
+      "status": "passed",
+      "actual": "Pairing, messages, content cards, explicit private document downloads and revocation have automated and local-browser evidence; recovery/privacy integration, packaged desktop and public-network acceptance remain incomplete. 2026-09-14: Added the friend-product-e2e GitHub Actions job. Its command passed locally through real node processes and HTTP Registry mailbox; workflow YAML parsed. GitHub Actions and different-public-egress hardware execution have not been performed. 2026-09-14 mailbox recovery: The same CI job now also runs the real-default-mailbox-quota scenario. Both commands passed locally; YAML parsed. GitHub Actions execution is still pending. 2026-09-14 requirement review: 产品双节点与配额 CI 命令已有本地实际通过结果；GitHub Actions 未执行，公网部分由用户跳过。 2026-09-14 final scoped acceptance: 最终GitHub Actions 9项全部通过，含产品双节点分享与配额恢复；公网双出口实机按用户明确要求跳过，未声称完整跨公网实测。",
+      "evidence": [
+        "docs/acceptance/friends-development/README.md",
+        "docs/acceptance/friends-development/product-http-20260914.md",
+        "docs/acceptance/friends-development/product-http-20260914-d.json",
+        "docs/acceptance/friends-development/mailbox-recovery-20260914.md",
+        "docs/acceptance/friends-development/mailbox-quota-http-20260914-b.json",
+        "docs/acceptance/friends-development/product-http-20260914-e.json",
+        "docs/acceptance/candidate-delivery/requirement-review-20260914.md",
+        "docs/acceptance/candidate-delivery/remote-ci-final-20260914.md"
+      ],
+      "implementation_commit": "04d94f21fb702ffe0ac9ed596ccb56e681e578f4"
+    },
+    {
+      "id": "ASK01",
+      "document": "03-ask-ryn.md",
+      "scenario": "全新安装打开入口",
+      "expected": "无伪造历史，有模型可问答，无模型有设置入口",
+      "status": "passed",
+      "actual": "Development checks cover unified entry, encrypted history, reviewed article context and node-owned run archiving. Real-model and complete product acceptance remain outstanding. 2026-09-14 requirement review: 空节点无示例会话、无模型有管理入口；真实原生模型从 Ask 入口完成问答。",
+      "evidence": [
+        "docs/acceptance/ask-ryn-development/README.md",
+        "docs/acceptance/local-ai-development/runtime-recovery-20260914.md",
+        "docs/product-briefs/TRY_CANDIDATE.md",
+        "docs/acceptance/candidate-delivery/requirement-review-20260914.md"
+      ],
+      "implementation_commit": "858cda5028842d659c8afd31a08a5cc6440faa27"
+    },
+    {
+      "id": "ASK02",
+      "document": "03-ask-ryn.md",
+      "scenario": "页面提问，从侧栏打开，再重启",
+      "expected": "同一会话 ID、相同历史与任务状态，完成的回答可继续",
+      "status": "passed",
+      "actual": "Development checks cover unified entry, encrypted history, reviewed article context and node-owned run archiving. Real-model and complete product acceptance remain outstanding. 2026-09-14 article browser follow-up: Two new real-model browser conversations opened from the sidebar with the same ID. Node restart preserved exact history digests, task IDs and original service bindings; saved answers and excerpts remained readable with the model stopped. 2026-09-14 requirement review: 侧栏与主页相同会话身份、任务和原服务绑定，真实问答重启后可读。",
+      "evidence": [
+        "docs/acceptance/ask-ryn-development/README.md",
+        "docs/acceptance/ask-ryn-development/article-browser-20260914.md",
+        "docs/acceptance/ask-ryn-development/browser-checkpoints-20260914.json",
+        "docs/acceptance/candidate-delivery/requirement-review-20260914.md"
+      ],
+      "implementation_commit": "858cda5028842d659c8afd31a08a5cc6440faa27"
+    },
+    {
+      "id": "ASK03",
+      "document": "03-ask-ryn.md",
+      "scenario": "迁移旧会话，重复执行并模拟失败",
+      "expected": "不重复、不丢服务键；失败保留原数据，重试可完成",
+      "status": "passed",
+      "actual": "Development checks cover unified entry, encrypted history, reviewed article context and node-owned run archiving. Real-model and complete product acceptance remain outstanding. 2026-09-14 real-browser legacy migration: two explicitly synthetic encrypted IndexedDB records imported through production UI. Actual Windows atomic replacement failure retained both browser originals and imported none; release/retry preserved providers, service keys, original timestamps, all message digests and task IDs. Reimport kept node rename, did not duplicate, and did not restore deleted history; all persisted across node/page reload. Fixed success counts that included already-imported/deleted/unknown receipts; both UI entry points now report exact outcomes. 241 frontend tests passed. Browser corruption/upgrade blocking and packaged-platform paths remain unverified. 2026-09-14 requirement review: 实际加密 IndexedDB 迁移遇原子写失败保留原件；重试、重复导入及删除后再导入不丢绑定、不重复。",
+      "evidence": [
+        "docs/acceptance/ask-ryn-development/README.md",
+        "docs/acceptance/ask-ryn-development/legacy-migration-browser-20260914.md",
+        "docs/acceptance/ask-ryn-development/migration-checkpoints-20260914.json",
+        "docs/acceptance/candidate-delivery/requirement-review-20260914.md"
+      ],
+      "implementation_commit": "858cda5028842d659c8afd31a08a5cc6440faa27"
+    },
+    {
+      "id": "ASK04",
+      "document": "03-ask-ryn.md",
+      "scenario": "从文章进入问答",
+      "expected": "来源可见，引用对应实际提供材料，并可返回打开",
+      "status": "passed",
+      "actual": "Development checks cover unified entry, encrypted history, reviewed article context and node-owned run archiving. Real-model and complete product acceptance remain outstanding. 2026-09-14 article browser follow-up: Browser article entry displayed source and recipient before actual native-model inference. The short answer was factually correct but omitted the requested inline citation marker; the application supplied-source viewer retained exact 474-byte material. Fixed missing source viewer in archived history, including model-unavailable and source-retry regression. 2026-09-14 requirement review: 真实短文问答预览与归档来源材料一致，历史可展开并返回；不保证模型主动生成行内引用标号。",
+      "evidence": [
+        "docs/acceptance/ask-ryn-development/README.md",
+        "docs/acceptance/ask-ryn-development/article-browser-20260914.md",
+        "docs/acceptance/ask-ryn-development/browser-checkpoints-20260914.json",
+        "docs/acceptance/candidate-delivery/requirement-review-20260914.md"
+      ],
+      "implementation_commit": "858cda5028842d659c8afd31a08a5cc6440faa27"
+    },
+    {
+      "id": "ASK05",
+      "document": "03-ask-ryn.md",
+      "scenario": "超长正文叠加长历史",
+      "expected": "总预算不越界，截断或删减提示发送前可见",
+      "status": "passed",
+      "actual": "Development checks cover unified entry, encrypted history, reviewed article context and node-owned run archiving. Real-model and complete product acceptance remain outstanding. 2026-09-14 article browser follow-up: Real 65404-byte article and actual long-question history: first preview included 746 bytes with explicit truncation and budget 4088/4096; follow-up omitted one history message, included 1408 bytes, budget 3409/4096. Actual model answers completed and archived prompt digests/byte limits exactly matched both previews. 2026-09-14 requirement review: 65404 字节材料及真实长历史，预览提示截断/省略，实际归档摘要与 4096 总预算对应。",
+      "evidence": [
+        "docs/acceptance/ask-ryn-development/README.md",
+        "docs/acceptance/ask-ryn-development/article-browser-20260914.md",
+        "docs/acceptance/ask-ryn-development/browser-checkpoints-20260914.json",
+        "docs/acceptance/candidate-delivery/requirement-review-20260914.md"
+      ],
+      "implementation_commit": "858cda5028842d659c8afd31a08a5cc6440faa27"
+    },
+    {
+      "id": "ASK06",
+      "document": "03-ask-ryn.md",
+      "scenario": "从服务 A 切换 B",
+      "expected": "显示 B 接收方；A 历史保持绑定；未经确认 B 收不到旧内容",
+      "status": "passed",
+      "actual": "Development checks cover unified entry, encrypted history, reviewed article context and node-owned run archiving. Real-model and complete product acceptance remain outstanding. 2026-09-14 two-node switch/recovery follow-up: Two actual native-model nodes: browser pairing and separate AI grant, reviewed recipient switch, cancel with no new order, then a separate empty friend conversation. No old messages/context copied; friend returned a real answer with one settlement. All pre-existing conversation digests on both nodes remained unchanged through switch and restart. 2026-09-14 requirement review: 真实两 Provider 页面切换先确认，新会话无旧内容；旧历史绑定和摘要保持。",
+      "evidence": [
+        "docs/acceptance/ask-ryn-development/README.md",
+        "docs/acceptance/ask-ryn-development/model-switch-recovery-20260914.md",
+        "docs/acceptance/ask-ryn-development/model-switch-checkpoints-20260914.json",
+        "docs/acceptance/ask-ryn-development/running-recovery-20260914.json",
+        "docs/acceptance/candidate-delivery/requirement-review-20260914.md"
+      ],
+      "implementation_commit": "858cda5028842d659c8afd31a08a5cc6440faa27"
+    },
+    {
+      "id": "ASK07",
+      "document": "03-ask-ryn.md",
+      "scenario": "模拟未就绪、runtime_busy、p2p_capacity_exhausted、不可达",
+      "expected": "原因和动作分别正确，不全部显示节点离线",
+      "status": "passed",
+      "actual": "2026-09-14 Windows local browser evidence now covers runtime busy, model not ready, runtime/Provider unreachable, and real fixed-port ICE capacity exhaustion. Releasing the occupied ICE session allowed real host-direct encrypted UDP inference with no relay. Fixed runtime/preflight error-code loss, p2p receipt persistence, and auto transport losing the attempted route. Model settings, refresh, explicit new requests and original-task checks were exercised; no duplicate orders or ledger events. Synthetic HTTP fault cases and real CPU/ICE cases are distinguished in the records. Packaged desktop and public-network acceptance remain outstanding. 2026-09-14 requirement review: 页面验证 busy、not_ready、unreachable 和实际固定端口容量不足，释放会话后恢复推理。",
+      "evidence": [
+        "docs/acceptance/ask-ryn-development/README.md",
+        "docs/acceptance/ask-ryn-development/runtime-error-recovery-20260914.md",
+        "docs/acceptance/ask-ryn-development/error-browser-20260914.md",
+        "docs/acceptance/ask-ryn-development/error-browser-checkpoints-20260914.json",
+        "docs/acceptance/ask-ryn-development/peer-failure-browser-20260914.md",
+        "docs/acceptance/ask-ryn-development/peer-failure-checkpoints-20260914.json",
+        "docs/acceptance/ask-ryn-development/peer-failure-assertions-20260914.json",
+        "docs/acceptance/candidate-delivery/requirement-review-20260914.md"
+      ],
+      "implementation_commit": "858cda5028842d659c8afd31a08a5cc6440faa27"
+    },
+    {
+      "id": "ASK08",
+      "document": "03-ask-ryn.md",
+      "scenario": "生成中取消、超时、重启后重试",
+      "expected": "不提前声称 GPU 已停；核对原任务，不重复发单与结算",
+      "status": "passed",
+      "actual": "Real native CPU tasks were observed running before Owner API cancellation and deliberate consumer/Provider interruption. Original tasks recovered without resubmission, with one release and no earnings; explicit recovery tasks settled once. Fixed Provider startup retaining ghost running orders. Browser follow-up used a clearly synthetic delayed HTTP runtime: Stop generating was clicked after a running task was observed; UI first reported cancellation requested without claiming immediate computation stop. Another task hit the unchanged 120-second timeout after 120.140248 seconds; its delayed response at 125 seconds was rejected. Browser original-task checks and node restart preserved messages, task identities, states and ledger events; only explicit new input created the successful recovery task. These browser cancel/timeout calls used zero-fee self service. The real CPU attempt finished before Stop could be clicked and is not cancellation evidence. Nonzero-fee full timeout, packaged platforms and public networks remain unverified. 2026-09-14 requirement review: 真实 CPU 取消/中断与非零开发额度去重；页面实际取消及 120 秒超时、迟到响应、原任务核对与重启。超时页面用零费合成服务，非 GPU 停算证明。",
+      "evidence": [
+        "docs/acceptance/ask-ryn-development/README.md",
+        "docs/acceptance/ask-ryn-development/article-browser-20260914.md",
+        "docs/acceptance/ask-ryn-development/browser-checkpoints-20260914.json",
+        "docs/acceptance/ask-ryn-development/model-switch-recovery-20260914.md",
+        "docs/acceptance/ask-ryn-development/model-switch-checkpoints-20260914.json",
+        "docs/acceptance/ask-ryn-development/running-recovery-20260914.json",
+        "docs/acceptance/ask-ryn-development/peer-failure-browser-20260914.md",
+        "docs/acceptance/ask-ryn-development/peer-failure-checkpoints-20260914.json",
+        "docs/acceptance/ask-ryn-development/peer-failure-assertions-20260914.json",
+        "docs/acceptance/ask-ryn-development/cancel-timeout-browser-20260914.md",
+        "docs/acceptance/ask-ryn-development/cancel-timeout-checkpoints-20260914.json",
+        "docs/acceptance/ask-ryn-development/timeout-browser-checkpoints-20260914.json",
+        "docs/acceptance/ask-ryn-development/full-timeout-observation-20260914.json",
+        "docs/acceptance/ask-ryn-development/cancel-timeout-assertions-20260914.json",
+        "docs/acceptance/candidate-delivery/requirement-review-20260914.md"
+      ],
+      "implementation_commit": "858cda5028842d659c8afd31a08a5cc6440faa27"
+    },
+    {
+      "id": "ASK09",
+      "document": "03-ask-ryn.md",
+      "scenario": "文章含要求泄露数据或执行操作的文字",
+      "expected": "不触发自动授权、切换接收者或执行外部操作；文章按引用处理",
+      "status": "passed",
+      "actual": "Development checks cover unified entry, encrypted history, reviewed article context and node-owned run archiving. Real-model and complete product acceptance remain outstanding. 2026-09-14 article browser follow-up: Synthetic hostile article text was included as untrusted material. Real browser questions retained the original local recipient and actual local-runtime orders; no complete network/permission audit was performed. 2026-09-14 requirement review: 恶意引用作为 JSON 数据/用户材料，结构化角色及接收方保持；实际模型订单仍发原本机，结果作为文本归档。",
+      "evidence": [
+        "docs/acceptance/ask-ryn-development/README.md",
+        "docs/acceptance/ask-ryn-development/article-browser-20260914.md",
+        "docs/acceptance/ask-ryn-development/browser-checkpoints-20260914.json",
+        "tests/test_ask_context.py",
+        "rynmesh/ask_ryn/runs.py",
+        "docs/acceptance/candidate-delivery/requirement-review-20260914.md"
+      ],
+      "implementation_commit": "858cda5028842d659c8afd31a08a5cc6440faa27"
+    },
+    {
+      "id": "ASK10",
+      "document": "03-ask-ryn.md",
+      "scenario": "删除/导出会话并检查日志",
+      "expected": "数据范围明确，导出无凭证，普通日志无输入输出正文",
+      "status": "passed",
+      "actual": "2026-09-14: Windows loopback browser export included the latest unsent draft, and the actual downloaded JSON matched the owner response. Export failure after stopping the node retained the draft; retry after restart succeeded. Browser-confirmed ordinary deletion removed one conversation from history and export, with 404 and deletion preserved after restart; separate draft, other conversation and all six order identities/states remained. Identity/messaging private key and control-token file contents and base64/hex forms were absent from export and captured operation logs; sampled input/output bodies were absent from those logs. Fixed export/save ordering, failure/retry feedback, duplicate-click guard and no-store Ask response headers. Full inference logging, recovery-copy cases and packaged/platform gates remain incomplete. 2026-09-14 requirement review: 实际下载、删除、重启、已检查密钥和操作日志已有证据；完整推理日志/诊断与恢复副本边界待统一核对。 2026-09-14 closing review: 真实导出/删除/重启与最终推理日志隔离、诊断和恢复副本范围已对齐。",
+      "evidence": [
+        "docs/acceptance/ask-ryn-development/README.md",
+        "docs/acceptance/ask-ryn-development/export-privacy-browser-20260914.md",
+        "docs/acceptance/ask-ryn-development/export-privacy-checkpoints-20260914.json",
+        "docs/acceptance/candidate-delivery/requirement-review-20260914.md",
+        "docs/acceptance/candidate-delivery/privacy-boundaries-20260914.md"
+      ],
+      "implementation_commit": "f486fb76d417fab96d97fcdcbeb5c8762b931b38"
+    },
+    {
+      "id": "AI01",
+      "document": "04-ai-setup-and-permissions.md",
+      "scenario": "支持平台的干净桌面，无 Docker",
+      "expected": "不用终端完成模型安装和真实问答",
+      "status": "passed",
+      "actual": "Local-only inference and installation review are implemented. Windows native installation is being exercised; full desktop and model recovery acceptance is incomplete. 2026-09-14 requirement review: Windows 原生 CPU 模型经产品页面安装恢复与真实问答，不使用 Docker；macOS 桌面跳过。",
+      "evidence": [
+        "docs/acceptance/local-ai-development/README.md",
+        "docs/acceptance/local-ai-development/runtime-recovery-20260914.md",
+        "docs/acceptance/candidate-delivery/requirement-review-20260914.md"
+      ],
+      "implementation_commit": "858cda5028842d659c8afd31a08a5cc6440faa27"
+    },
+    {
+      "id": "AI02",
+      "document": "04-ai-setup-and-permissions.md",
+      "scenario": "查看推荐并安装",
+      "expected": "来源、许可、大小和空间需求可见，确认后下载",
+      "status": "passed",
+      "actual": "Local-only inference and installation review are implemented. Windows native installation is being exercised; full desktop and model recovery acceptance is incomplete. 2026-09-14: real production browser retained source/license/resources and required fresh confirmation before retry; normal native installation completed and publishing remained off. 2026-09-14 requirement review: 来源、许可、资源需求可见，重试必须重新确认，真实下载安装未绕过固定摘要。",
+      "evidence": [
+        "docs/acceptance/local-ai-development/README.md",
+        "docs/acceptance/local-ai-development/runtime-recovery-20260914.md",
+        "docs/acceptance/candidate-delivery/requirement-review-20260914.md"
+      ],
+      "implementation_commit": "858cda5028842d659c8afd31a08a5cc6440faa27"
+    },
+    {
+      "id": "AI03",
+      "document": "04-ai-setup-and-permissions.md",
+      "scenario": "下载中断、取消、重启后继续",
+      "expected": "依据验证进度恢复，无重复安装，未完成不标就绪",
+      "status": "passed",
+      "actual": "Backend recovery and rollback regressions pass. Windows production-browser acceptance retained 5 MiB after real download cancellation and 16 MiB after node termination, with equal hashes across restarts and real source 206 responses from both saved offsets. A discovered form-reset defect is fixed: managed profile, package and port return on reload, consent is renewed, and legacy jobs cannot silently retry a default API. The full real-model download is still running; final verification, inference and packaged desktop recovery remain pending. 2026-09-14: completed the genuine previously resumed model download through runtime verification and real inference; no bypass model/runtime was copied into the installer. Packaged desktop remains untested. 2026-09-14 requirement review: 实际取消保留 5 MiB、节点中断保留 16 MiB，206 从检查点续传，最终正常校验并完成真实问答。",
+      "evidence": [
+        "docs/acceptance/local-ai-development/runtime-install-recovery.md",
+        "docs/acceptance/local-ai-development/model-download-recovery.md",
+        "docs/acceptance/local-ai-development/setup-rollback.md",
+        "docs/acceptance/local-ai-development/windows-managed-recovery.md",
+        "docs/acceptance/local-ai-development/windows-install-recovery.json",
+        "docs/acceptance/local-ai-development/runtime-recovery-20260914.md",
+        "docs/acceptance/candidate-delivery/requirement-review-20260914.md"
+      ],
+      "implementation_commit": "858cda5028842d659c8afd31a08a5cc6440faa27"
+    },
+    {
+      "id": "AI04",
+      "document": "04-ai-setup-and-permissions.md",
+      "scenario": "校验失败、移走模型、依赖缺失",
+      "expected": "错误明确且可恢复，不发布假健康服务",
+      "status": "passed",
+      "actual": "Incomplete extraction cannot be reused; resumable downloads and rollback checks have prior evidence. 2026-09-14: browser retry recovered from the persisted runtime checksum failure with unchanged official pins; old discarded bytes do not establish its cause. Lifecycle follow-up: moving the real model or native executable prevented startup and kept readiness/publication false. Model restored from its held original; missing native executable recovered through browser Update runtime, then real model became ready and self-test controls completed without an error. Errors now persist with recovery actions and focus. Model checksum and all 10 prior conversations/16 orders were preserved. DLL/CUDA, insufficient disk space and packaged-platform acceptance remain incomplete. 2026-09-14 requirement review: 校验失败、真实模型及可执行文件缺失与恢复已验证；运行时依赖缺失分支仍须补齐。CPU 路径不要求 CUDA。 2026-09-14 closing review: 真实 Windows CPU DLL 缺失返回明确错误且不假健康；Update runtime 实际重新下载修复，自检成功，发布保持关闭。",
+      "evidence": [
+        "docs/acceptance/local-ai-development/README.md",
+        "docs/acceptance/local-ai-development/runtime-install-recovery.md",
+        "docs/acceptance/local-ai-development/model-download-recovery.md",
+        "docs/acceptance/local-ai-development/setup-rollback.md",
+        "docs/acceptance/local-ai-development/runtime-recovery-20260914.md",
+        "docs/acceptance/local-ai-development/lifecycle-browser-20260914.md",
+        "docs/acceptance/local-ai-development/lifecycle-browser-checkpoints-20260914.json",
+        "docs/acceptance/candidate-delivery/requirement-review-20260914.md",
+        "docs/acceptance/local-ai-development/native-dependency-20260914.md"
+      ],
+      "implementation_commit": "f486fb76d417fab96d97fcdcbeb5c8762b931b38"
+    },
+    {
+      "id": "AI05",
+      "document": "04-ai-setup-and-permissions.md",
+      "scenario": "就绪后重启问答",
+      "expected": "配置保留，重新核对健康，可获得真实回答",
+      "status": "passed",
+      "actual": "Local-only inference and installation review are implemented. Windows native installation is being exercised; full desktop and model recovery acceptance is incomplete. 2026-09-14: real browser question succeeded, node restarted to a different PID, exact history/binding survived; browser Start runtime restored health and another question in the original conversation returned correctly at zero cost. 2026-09-14 requirement review: 真实节点重启保留配置与会话，页面启动模型重新检查健康，原会话可继续真实问答。",
+      "evidence": [
+        "docs/acceptance/local-ai-development/README.md",
+        "docs/acceptance/local-ai-development/runtime-recovery-20260914.md",
+        "docs/acceptance/candidate-delivery/requirement-review-20260914.md"
+      ],
+      "implementation_commit": "858cda5028842d659c8afd31a08a5cc6440faa27"
+    },
+    {
+      "id": "AI06",
+      "document": "04-ai-setup-and-permissions.md",
+      "scenario": "未授权好友直接请求",
+      "expected": "Provider 拒绝，好友关系本身不开放 AI",
+      "status": "passed",
+      "actual": "Owner UI, encrypted friend discovery and frozen Ask permission versions are implemented. Two independent loopback nodes using a real native model verified granted inference, in-flight revocation, old-version rejection, exactly-once development settlement and revocation/history persistence after restart. Packaged desktop, cross-NAT and remaining full-flow acceptance are not complete. 2026-09-14 requirement review: 真实签名 Provider 请求在未授权时拒绝且模型零调用；真实双节点页面另证好友关系本身不开放 AI。",
+      "evidence": [
+        "docs/acceptance/ai-permissions-development/README.md",
+        "docs/acceptance/ai-permissions-development/windows-two-node-native.json",
+        "tests/test_ai_access_provider.py",
+        "docs/acceptance/candidate-delivery/requirement-review-20260914.md"
+      ],
+      "implementation_commit": "858cda5028842d659c8afd31a08a5cc6440faa27"
+    },
+    {
+      "id": "AI07",
+      "document": "04-ai-setup-and-permissions.md",
+      "scenario": "仅允许 B 用模型 X，C 未授权",
+      "expected": "B 可发现使用 X；C 及 B 对其他未授权模型的请求被拒绝",
+      "status": "passed",
+      "actual": "Owner UI, encrypted friend discovery and frozen Ask permission versions are implemented. Two independent loopback nodes using a real native model verified granted inference, in-flight revocation, old-version rejection, exactly-once development settlement and revocation/history persistence after restart. Packaged desktop, cross-NAT and remaining full-flow acceptance are not complete. 2026-09-14 requirement review: 真实模型获准 B 调用成功；签名加密三身份集成验证 C 与 B 请求模型 Y 被拒绝。",
+      "evidence": [
+        "docs/acceptance/ai-permissions-development/README.md",
+        "docs/acceptance/ai-permissions-development/windows-two-node-native.json",
+        "tests/test_ai_access_provider.py",
+        "docs/acceptance/candidate-delivery/requirement-review-20260914.md"
+      ],
+      "implementation_commit": "858cda5028842d659c8afd31a08a5cc6440faa27"
+    },
+    {
+      "id": "AI08",
+      "document": "04-ai-setup-and-permissions.md",
+      "scenario": "B 执行中被撤销，再发新任务",
+      "expected": "新请求立即拒绝，旧任务状态真实且只结算一次",
+      "status": "passed",
+      "actual": "Owner UI, encrypted friend discovery and frozen Ask permission versions are implemented. Two independent loopback nodes using a real native model verified granted inference, in-flight revocation, old-version rejection, exactly-once development settlement and revocation/history persistence after restart. Packaged desktop, cross-NAT and remaining full-flow acceptance are not complete. 2026-09-14 requirement review: 真实任务 running 后撤销，新旧权限拒绝；取消任务释放一次，完成任务各结算一次，不声称立即停算。",
+      "evidence": [
+        "docs/acceptance/ai-permissions-development/README.md",
+        "docs/acceptance/ai-permissions-development/windows-two-node-native.json",
+        "docs/acceptance/candidate-delivery/requirement-review-20260914.md"
+      ],
+      "implementation_commit": "858cda5028842d659c8afd31a08a5cc6440faa27"
+    },
+    {
+      "id": "AI09",
+      "document": "04-ai-setup-and-permissions.md",
+      "scenario": "重放旧凭证、重启、重新发现好友",
+      "expected": "旧权限不复活，需新的明确授权",
+      "status": "passed",
+      "actual": "Owner UI, encrypted friend discovery and frozen Ask permission versions are implemented. Two independent loopback nodes using a real native model verified granted inference, in-flight revocation, old-version rejection, exactly-once development settlement and revocation/history persistence after restart. Packaged desktop, cross-NAT and remaining full-flow acceptance are not complete. 2026-09-14 requirement review: 重启、旧版本、重新授权和重新好友关系的权限验证均拒绝继承旧授权。",
+      "evidence": [
+        "docs/acceptance/ai-permissions-development/README.md",
+        "docs/acceptance/ai-permissions-development/windows-two-node-native.json",
+        "tests/test_ai_access.py",
+        "docs/acceptance/candidate-delivery/requirement-review-20260914.md"
+      ],
+      "implementation_commit": "858cda5028842d659c8afd31a08a5cc6440faa27"
+    },
+    {
+      "id": "AI10",
+      "document": "04-ai-setup-and-permissions.md",
+      "scenario": "停止/移除模型后查看历史",
+      "expected": "运行状态和空间更新，会话保留，对应模型入口显示不可用",
+      "status": "passed",
+      "actual": "2026-09-14: prior browser stop/history evidence retained. Lifecycle follow-up: cancelling deletion left the model ready. Actual Windows file lock caused deletion to fail: runtime stopped, model retained at 491400032 bytes, no false zero-space result. After releasing the lock, browser-confirmed retry removed the selected model file; UI reports missing/0 MiB, readiness false, shared native runtime and private manifest preserved. Restart retained all 10 complete conversation records and all 16 order identities/states; an original conversation remained readable with its provider binding. Added actual selected-model size and accurate removal scope/result text. Packaged/platform and common gates remain incomplete. 2026-09-14 requirement review: 真实模型停止、占用导致删除失败、释放后删除成功及重启，实际空间与 10 段历史/16 笔订单对应。",
+      "evidence": [
+        "docs/acceptance/local-ai-development/README.md",
+        "docs/acceptance/local-ai-development/runtime-recovery-20260914.md",
+        "docs/acceptance/local-ai-development/lifecycle-browser-20260914.md",
+        "docs/acceptance/local-ai-development/lifecycle-browser-checkpoints-20260914.json",
+        "docs/acceptance/candidate-delivery/requirement-review-20260914.md"
+      ],
+      "implementation_commit": "858cda5028842d659c8afd31a08a5cc6440faa27"
+    },
+    {
+      "id": "SEARCH01",
+      "document": "05-search-and-retrieve.md",
+      "scenario": "四类数据分别放入不同合成关键词",
+      "expected": "每类均可找到，点击打开正确内容或命中消息",
+      "status": "passed",
+      "actual": "Four real local stores, owner-only POST queries and current-source checks are implemented. Store/route/component and real-node browser checks provide partial evidence; scale timing and process recovery are recorded separately. Full permission/privacy, keyboard, offline and packaged desktop acceptance remain unfinished. 2026-09-14 requirement review: 真实四类存储分别查询并从浏览器打开对应文章、好友消息和 Ask 命中。",
+      "evidence": [
+        "docs/acceptance/search-development/README.md",
+        "docs/acceptance/search-development/windows-browser-node.json",
+        "docs/acceptance/candidate-delivery/requirement-review-20260914.md"
+      ],
+      "implementation_commit": "858cda5028842d659c8afd31a08a5cc6440faa27"
+    },
+    {
+      "id": "SEARCH02",
+      "document": "05-search-and-retrieve.md",
+      "scenario": "中文词组、英文及中英混合查询",
+      "expected": "按约定匹配，不因中文无空格而完全失效，匹配片段正确",
+      "status": "passed",
+      "actual": "Four real local stores, owner-only POST queries and current-source checks are implemented. Store/route/component and real-node browser checks provide partial evidence; scale timing and process recovery are recorded separately. Full permission/privacy, keyboard, offline and packaged desktop acceptance remain unfinished. 2026-09-14 requirement review: 中文无空格、英文大小写及中英混合查询和 Unicode 高亮由实际页面及核心检查覆盖。",
+      "evidence": [
+        "docs/acceptance/search-development/README.md",
+        "docs/acceptance/search-development/windows-browser-node.json",
+        "docs/acceptance/candidate-delivery/requirement-review-20260914.md"
+      ],
+      "implementation_commit": "858cda5028842d659c8afd31a08a5cc6440faa27"
+    },
+    {
+      "id": "SEARCH03",
+      "document": "05-search-and-retrieve.md",
+      "scenario": "切换类型/时间/好友筛选，再返回列表",
+      "expected": "仅保留符合条件结果，关键词、筛选和位置保持",
+      "status": "passed",
+      "actual": "Browser loaded 40 rows, opened second-page article and returned with 40 rows and keyword preserved. Component test restores .app-main scrollTop=1600; exact browser pixels, full keyboard and packaged desktop remain unverified. 2026-09-14 actual Chrome keyboard follow-up reproduced focus falling to BODY after the last Load more button disappeared. Fixed pagination to focus the first new result, preserving focus if the user moved elsewhere while waiting. New build browser verification: 20 to 24 results, focused result index 20 opens its exact Ask message, and browser back retains keyword/type/source/sort plus scrollTop 2375 (scrollHeight 3245, clientHeight 870). Scoped frontend 15, TypeScript/build passed. Simulated Alt+Left did not navigate; the supported browser back tool verified restoration, not an end-to-end native keyboard shortcut. Date/friend filter combinations, complete keyboard and packaged-platform acceptance remain incomplete. 2026-09-14 real Chrome follow-up with existing A/B message and B stopped: native keyboard entry persisted both date fields; matching day plus friend/type returned one message, next day returned zero, reversed range showed an actionable error and recovered. Saved excluded the message while Friend shares included it. Open focused the exact local message while peer was offline; browser return retained keyword/friend/type/dates/sort, and clear restored empty inputs/results. Initial generic date fill left fields blank and received no date-validation credit. No product changes or repeated tests. Complete platform/privacy/keyboard common gates remain incomplete. 2026-09-14 requirement review: 日期/好友/类型/来源组合、清除、打开与返回均已验证，返回恢复 2375px 和筛选值。",
+      "evidence": [
+        "docs/acceptance/search-development/README.md",
+        "docs/acceptance/search-development/windows-browser-node.json",
+        "docs/acceptance/search-development/browser-pagination.json",
+        "docs/acceptance/search-development/keyboard-return-20260914.md",
+        "docs/acceptance/search-development/keyboard-return-checkpoints-20260914.json",
+        "docs/acceptance/search-development/filter-combinations-20260914.md",
+        "docs/acceptance/search-development/filter-combinations-checkpoints-20260914.json",
+        "docs/acceptance/candidate-delivery/requirement-review-20260914.md"
+      ],
+      "implementation_commit": "858cda5028842d659c8afd31a08a5cc6440faa27"
+    },
+    {
+      "id": "SEARCH04",
+      "document": "05-search-and-retrieve.md",
+      "scenario": "同一内容同时收藏、读过、被分享",
+      "expected": "一个内容结果包含多个来源入口；不同消息不被误合并",
+      "status": "passed",
+      "actual": "Four real local stores, owner-only POST queries and current-source checks are implemented. Store/route/component and real-node browser checks provide partial evidence; scale timing and process recovery are recorded separately. Full permission/privacy, keyboard, offline and packaged desktop acceptance remain unfinished. 2026-09-14 actual Chrome/two-node follow-up: reused real prior A/C pairing, shared an article through the UI, searched only card metadata before an explicit receiver download, then found one saved/history/share result. Holding the old encrypted index file unchanged through sender-initiated revocation still filtered both protected message results and rejected their direct opens with 409. Independent saved body remained 200 with the same digest; after index recovery and receiver restart with sender/source offline, saved/history search and browser reading remained available, while old message URLs showed access removed. No product code changed and existing performance/unit checks were not repeated. Evidence covers online loopback notification, not public-NAT latency, packaged desktops or complete common gates. 2026-09-14 requirement review: 文章收藏/历史/分享合并为一个结果；独立消息身份保留，实际双节点下载前后均核对。",
+      "evidence": [
+        "docs/acceptance/search-development/README.md",
+        "docs/acceptance/search-development/windows-browser-node.json",
+        "docs/acceptance/search-development/revocation-browser-20260914.md",
+        "docs/acceptance/search-development/revocation-checkpoints-20260914.json",
+        "docs/acceptance/candidate-delivery/requirement-review-20260914.md"
+      ],
+      "implementation_commit": "858cda5028842d659c8afd31a08a5cc6440faa27"
+    },
+    {
+      "id": "SEARCH05",
+      "document": "05-search-and-retrieve.md",
+      "scenario": "修改、增加和删除记录",
+      "expected": "索引正常时建议 5 秒内更新；删除后旧索引也不能继续返回正文片段",
+      "status": "passed",
+      "actual": "Original TCP rename took 6.930s. After reducing worker completion delay to 1s, two TCP samples created in 4.095/2.326s and renamed in 4.108/4.827s. Old title/deleted snippets hidden on first query; deleted direct-open denied with 409. Broader mutation paths and general gates remain pending. Damaged document metadata/body/control/timestamps are isolated from healthy search results, with explicit bounded source warnings. Stale index queries and direct opens do not disclose pending-cleanup bodies. Windows browser checks show two healthy results during one damaged copy, normal reading and Settings recovery access; fixture restoration recovers all three results and removes the warning. Final backend 1393 passed / 29 skipped, frontend 216 passed; broader platform and full requirement acceptance remain incomplete. 2026-09-14: Search now uses no-store in both HTTP responses and frontend requests. Regression checks first reproduced the absent header/cache policy. Real production-node TCP acceptance created and deleted a synthetic conversation via Owner API: nine success/error responses forbid caching, original open returns 200 then 409 after deletion and the query becomes empty. A separate real-store regression verifies deletion gating while the stale index still exists. Scoped backend 24 and frontend 13 checks passed; TypeScript/build passed. This does not measure actual browser cache retention, cross-node revocation, complete traffic/log privacy or packaged platforms. 2026-09-14 requirement review: 新增/改名实测更新在建议 5 秒内；旧片段立即过滤，删除直接打开 409，损坏来源隔离。",
+      "evidence": [
+        "docs/acceptance/search-development/README.md",
+        "docs/acceptance/search-development/windows-browser-node.json",
+        "docs/acceptance/search-development/tcp-change-before-scheduling.json",
+        "docs/acceptance/search-development/tcp-change-recovery.json",
+        "docs/acceptance/search-development/tcp-current.json",
+        "docs/acceptance/search-development/source-isolation.md",
+        "docs/acceptance/search-development/source-isolation-http.json",
+        "docs/acceptance/search-development/source-isolation-browser.json",
+        "docs/acceptance/search-development/cache-privacy-20260914.md",
+        "docs/acceptance/search-development/cache-privacy-http-20260914.json",
+        "docs/acceptance/candidate-delivery/requirement-review-20260914.md"
+      ],
+      "implementation_commit": "858cda5028842d659c8afd31a08a5cc6440faa27"
+    },
+    {
+      "id": "SEARCH06",
+      "document": "05-search-and-retrieve.md",
+      "scenario": "失去好友访问授权，保留旧索引",
+      "expected": "受保护结果与片段立即被权限检查过滤，直接打开也拒绝",
+      "status": "passed",
+      "actual": "Four real local stores, owner-only POST queries and current-source checks are implemented. Store/route/component and real-node browser checks provide partial evidence; scale timing and process recovery are recorded separately. Full permission/privacy, keyboard, offline and packaged desktop acceptance remain unfinished. 2026-09-14 actual Chrome/two-node follow-up: reused real prior A/C pairing, shared an article through the UI, searched only card metadata before an explicit receiver download, then found one saved/history/share result. Holding the old encrypted index file unchanged through sender-initiated revocation still filtered both protected message results and rejected their direct opens with 409. Independent saved body remained 200 with the same digest; after index recovery and receiver restart with sender/source offline, saved/history search and browser reading remained available, while old message URLs showed access removed. No product code changed and existing performance/unit checks were not repeated. Evidence covers online loopback notification, not public-NAT latency, packaged desktops or complete common gates. 2026-09-14 requirement review: 保持旧加密索引不变进行真实撤权，受保护结果与直接打开均拒绝；独立副本保留。",
+      "evidence": [
+        "docs/acceptance/search-development/README.md",
+        "docs/acceptance/search-development/windows-browser-node.json",
+        "docs/acceptance/search-development/revocation-browser-20260914.md",
+        "docs/acceptance/search-development/revocation-checkpoints-20260914.json",
+        "docs/acceptance/candidate-delivery/requirement-review-20260914.md"
+      ],
+      "implementation_commit": "858cda5028842d659c8afd31a08a5cc6440faa27"
+    },
+    {
+      "id": "SEARCH07",
+      "document": "05-search-and-retrieve.md",
+      "scenario": "未获取正文、断网、来源删除分别测试",
+      "expected": "不假装搜过未取得正文；本地数据可搜；不能打开时有真实原因",
+      "status": "passed",
+      "actual": "Four real local stores, owner-only POST queries and current-source checks are implemented. Store/route/component and real-node browser checks provide partial evidence; scale timing and process recovery are recorded separately. Full permission/privacy, keyboard, offline and packaged desktop acceptance remain unfinished. Damaged document metadata/body/control/timestamps are isolated from healthy search results, with explicit bounded source warnings. Stale index queries and direct opens do not disclose pending-cleanup bodies. Windows browser checks show two healthy results during one damaged copy, normal reading and Settings recovery access; fixture restoration recovers all three results and removes the warning. Final backend 1393 passed / 29 skipped, frontend 216 passed; broader platform and full requirement acceptance remain incomplete. 2026-09-14 actual Chrome/two-node follow-up: reused real prior A/C pairing, shared an article through the UI, searched only card metadata before an explicit receiver download, then found one saved/history/share result. Holding the old encrypted index file unchanged through sender-initiated revocation still filtered both protected message results and rejected their direct opens with 409. Independent saved body remained 200 with the same digest; after index recovery and receiver restart with sender/source offline, saved/history search and browser reading remained available, while old message URLs showed access removed. No product code changed and existing performance/unit checks were not repeated. Evidence covers online loopback notification, not public-NAT latency, packaged desktops or complete common gates. 2026-09-14 real Chrome follow-up with existing A/B message and B stopped: native keyboard entry persisted both date fields; matching day plus friend/type returned one message, next day returned zero, reversed range showed an actionable error and recovered. Saved excluded the message while Friend shares included it. Open focused the exact local message while peer was offline; browser return retained keyword/friend/type/dates/sort, and clear restored empty inputs/results. Initial generic date fill left fields blank and received no date-validation credit. No product changes or repeated tests. Complete platform/privacy/keyboard common gates remain incomplete. 2026-09-14 requirement review: 下载前仅卡片元数据，来源/好友离线后合法本地内容可搜可读；缺失和撤权有明确原因。",
+      "evidence": [
+        "docs/acceptance/search-development/README.md",
+        "docs/acceptance/search-development/windows-browser-node.json",
+        "docs/acceptance/search-development/source-isolation.md",
+        "docs/acceptance/search-development/source-isolation-http.json",
+        "docs/acceptance/search-development/source-isolation-browser.json",
+        "docs/acceptance/search-development/revocation-browser-20260914.md",
+        "docs/acceptance/search-development/revocation-checkpoints-20260914.json",
+        "docs/acceptance/search-development/filter-combinations-20260914.md",
+        "docs/acceptance/search-development/filter-combinations-checkpoints-20260914.json",
+        "docs/acceptance/candidate-delivery/requirement-review-20260914.md"
+      ],
+      "implementation_commit": "858cda5028842d659c8afd31a08a5cc6440faa27"
+    },
+    {
+      "id": "SEARCH08",
+      "document": "05-search-and-retrieve.md",
+      "scenario": "连续快速输入并使旧请求晚返回",
+      "expected": "页面最终显示最新关键词结果，不被旧响应覆盖",
+      "status": "passed",
+      "actual": "Four real local stores, owner-only POST queries and current-source checks are implemented. Store/route/component and real-node browser checks provide partial evidence; scale timing and process recovery are recorded separately. Full permission/privacy, keyboard, offline and packaged desktop acceptance remain unfinished. 2026-09-14 actual Chrome and production-node response-delay transport: older first-page and pagination responses were held for 33.359 and 36.547 seconds, completing after a newer query; the page retained one new result and no old results. Clearing during a held next-page request stayed empty after its 29.922-second late response. Three rapid input changes (~156 ms in one browser operation) produced only one final query. Eight actual 200 responses, timing verifier and Ruff passed; no product implementation changes or repeated scale tests. Server send completion is not claimed as browser consumption of an aborted first-page response; pagination has no equivalent abort signal and the page still discarded its stale result. Delayed errors, keyboard and packaged-platform gates remain unverified. 2026-09-14 requirement review: 真实延迟首屏及分页响应晚于新查询，页面仍保留新结果；清空和快速输入不被旧响应覆盖。",
+      "evidence": [
+        "docs/acceptance/search-development/README.md",
+        "docs/acceptance/search-development/windows-browser-node.json",
+        "docs/acceptance/search-development/response-order-browser-20260914.md",
+        "docs/acceptance/search-development/response-order-http-20260914.json",
+        "docs/acceptance/candidate-delivery/requirement-review-20260914.md"
+      ],
+      "implementation_commit": "858cda5028842d659c8afd31a08a5cc6440faa27"
+    },
+    {
+      "id": "SEARCH09",
+      "document": "05-search-and-retrieve.md",
+      "scenario": "索引损坏后重建，期间重启",
+      "expected": "原数据无损，状态可见，重建完成后查询恢复",
+      "status": "passed",
+      "actual": "Corrupted dedicated index, terminated actual child while rebuilding, then actual node worker recovered 10000 rows in 2.809s. All 1004 source-file hashes unchanged. Not packaged-desktop or hardware power-loss evidence; general gates remain pending. 2026-09-14 requirement review: 实际进程在损坏索引重建中终止后恢复 10000 条，1004 个原始文件摘要不变。",
+      "evidence": [
+        "docs/acceptance/search-development/README.md",
+        "docs/acceptance/search-development/windows-browser-node.json",
+        "docs/acceptance/search-development/process-recovery.json",
+        "docs/acceptance/candidate-delivery/requirement-review-20260914.md"
+      ],
+      "implementation_commit": "858cda5028842d659c8afd31a08a5cc6440faa27"
+    },
+    {
+      "id": "SEARCH10",
+      "document": "05-search-and-retrieve.md",
+      "scenario": "参考桌面、1 万条已索引合成记录，20 次查询",
+      "expected": "记录 p95，建议首屏不超过 2 秒；分页无重复遗漏",
+      "status": "passed",
+      "actual": "10k synthetic records in real stores: cold build 2.072s; repaired ASGI p95 1.336s and latest loopback TCP p95 1.627s over 20 queries, zero false partial responses. Complete pagination returned 10000 unique identities. Browser paint timing and packaged desktop remain pending. 2026-09-14 requirement review: 声明环境下真实存储 TCP 首屏查询 p95 1.627 秒；完整分页 10000 唯一身份。该计时不含浏览器绘制。",
+      "evidence": [
+        "docs/acceptance/search-development/README.md",
+        "docs/acceptance/search-development/core-performance.json",
+        "docs/acceptance/search-development/windows-browser-node.json",
+        "docs/acceptance/search-development/real-store-scale.json",
+        "docs/acceptance/search-development/real-store-scale-current.json",
+        "docs/acceptance/search-development/tcp-current.json",
+        "docs/acceptance/candidate-delivery/requirement-review-20260914.md"
+      ],
+      "implementation_commit": "858cda5028842d659c8afd31a08a5cc6440faa27"
+    },
+    {
+      "id": "SEARCH11",
+      "document": "05-search-and-retrieve.md",
+      "scenario": "查询含私有关键词，检查网络和日志",
+      "expected": "搜索不上传关键词或正文，日志只记录必要状态和耗时",
+      "status": "passed",
+      "actual": "Four real local stores, owner-only POST queries and current-source checks are implemented. Store/route/component and real-node browser checks provide partial evidence; scale timing and process recovery are recorded separately. Full permission/privacy, keyboard, offline and packaged desktop acceptance remain unfinished. 2026-09-14: Search now uses no-store in both HTTP responses and frontend requests. Regression checks first reproduced the absent header/cache policy. Real production-node TCP acceptance created and deleted a synthetic conversation via Owner API: nine success/error responses forbid caching, original open returns 200 then 409 after deletion and the query becomes empty. A separate real-store regression verifies deletion gating while the stale index still exists. Scoped backend 24 and frontend 13 checks passed; TypeScript/build passed. This does not measure actual browser cache retention, cross-node revocation, complete traffic/log privacy or packaged platforms. 2026-09-14 requirement review: POST 查询、no-store、当前源权限重核已有证据；搜索外发与日志/诊断路径统一隐私审计仍待闭合。 2026-09-14 closing review: 真实四类来源在禁止 TCP/UDP 与好友请求时完成本地搜索，POST 私有查询不进入日志/诊断。",
+      "evidence": [
+        "docs/acceptance/search-development/README.md",
+        "docs/acceptance/search-development/windows-browser-node.json",
+        "docs/acceptance/search-development/cache-privacy-20260914.md",
+        "docs/acceptance/search-development/cache-privacy-http-20260914.json",
+        "docs/acceptance/candidate-delivery/requirement-review-20260914.md",
+        "docs/acceptance/candidate-delivery/privacy-boundaries-20260914.md"
+      ],
+      "implementation_commit": "f486fb76d417fab96d97fcdcbeb5c8762b931b38"
+    },
+    {
+      "id": "FOLLOW01",
+      "document": "06-follow-friends.md",
+      "scenario": "建立好友后不关注，再主动关注",
+      "expected": "默认不订阅，主动关注后显示最近可见内容并可分页",
+      "status": "passed",
+      "actual": "Default no subscription and explicit follow verified in Bob browser; recent-list pagination covered by 23-item real-store test. Browser pagination and general gates pending. 2026-09-14 requirement review: 默认未关注及明确关注有页面证据；真实存储/加密通信 23 项分页验证 20+3，无丢失。",
+      "evidence": [
+        "docs/acceptance/friend-feed-development/README.md",
+        "docs/acceptance/friend-feed-development/windows-three-node.json",
+        "tests/test_friend_feed.py",
+        "docs/acceptance/candidate-delivery/requirement-review-20260914.md"
+      ],
+      "implementation_commit": "858cda5028842d659c8afd31a08a5cc6440faa27"
+    },
+    {
+      "id": "FOLLOW02",
+      "document": "06-follow-friends.md",
+      "scenario": "A 仅向 B 发布，B/C 均关注 A",
+      "expected": "B 可见；C 的列表和直接获取均无权读取",
+      "status": "passed",
+      "actual": "Three actual independent loopback nodes: B-only publication appeared for Bob, Carol list remained empty and direct fetch was denied. Current encrypted denial maps to Owner 409; packaged/privacy/network gates pending. 2026-09-14 requirement review: 真实三节点仅 B 受众，C 列表为空且直接获取拒绝。",
+      "evidence": [
+        "docs/acceptance/friend-feed-development/README.md",
+        "docs/acceptance/friend-feed-development/windows-three-node.json",
+        "docs/acceptance/candidate-delivery/requirement-review-20260914.md"
+      ],
+      "implementation_commit": "858cda5028842d659c8afd31a08a5cc6440faa27"
+    },
+    {
+      "id": "FOLLOW03",
+      "document": "06-follow-friends.md",
+      "scenario": "选择全部好友，然后新增好友 D",
+      "expected": "选择时已明确含以后好友；D 按范围有权访问，指定好友发布不会自动扩大",
+      "status": "passed",
+      "actual": "Four synthetic identities with real friendship crypto test require explicit all-friends confirmation; later friend sees all-friends publication but not selected-friend one. Fourth actual node and browser confirmation path pending. 2026-09-14 requirement review: 页面组件确认包含现在和以后好友；四个真实密钥身份集成中新加 D 仅能读取全部好友发布。",
+      "evidence": [
+        "docs/acceptance/friend-feed-development/README.md",
+        "docs/acceptance/friend-feed-development/windows-three-node.json",
+        "tests/test_friend_feed.py",
+        "webapp/src/screens/FriendFeed.test.tsx",
+        "docs/acceptance/candidate-delivery/requirement-review-20260914.md"
+      ],
+      "implementation_commit": "858cda5028842d659c8afd31a08a5cc6440faa27"
+    },
+    {
+      "id": "FOLLOW04",
+      "document": "06-follow-friends.md",
+      "scenario": "收藏/阅读一条私有内容但不发布",
+      "expected": "好友看不到，也不出现自动发布记录",
+      "status": "passed",
+      "actual": "Actual nodes kept Bob/Carol lists empty while Author saved a private draft; browser publish was a separate confirmed operation. Broader no-auto-publish/privacy gates pending. 2026-09-14 requirement review: 保存文档及草稿不发布，真实节点其他好友列表保持空；发布另行确认。",
+      "evidence": [
+        "docs/acceptance/friend-feed-development/README.md",
+        "docs/acceptance/friend-feed-development/windows-three-node.json",
+        "docs/acceptance/candidate-delivery/requirement-review-20260914.md"
+      ],
+      "implementation_commit": "858cda5028842d659c8afd31a08a5cc6440faa27"
+    },
+    {
+      "id": "FOLLOW05",
+      "document": "06-follow-friends.md",
+      "scenario": "A 发布，双方前台在线且链路正常",
+      "expected": "建议 60 秒内出现一次；手动刷新可拉取，记录发布到可见耗时",
+      "status": "passed",
+      "actual": "Browser publish automatically appeared at Bob by first observation 51.572s later (upper bound only). Subsequent API audience revision observed by both nodes in 1.703s after response. More subscribers/networks and full desktop pending. 2026-09-14 requirement review: 实际页面发布后 51.572 秒内观察到自动更新；手动刷新及后续修订获取已有记录。仅为所记录本机环境。",
+      "evidence": [
+        "docs/acceptance/friend-feed-development/README.md",
+        "docs/acceptance/friend-feed-development/windows-three-node.json",
+        "docs/acceptance/candidate-delivery/requirement-review-20260914.md"
+      ],
+      "implementation_commit": "858cda5028842d659c8afd31a08a5cc6440faa27"
+    },
+    {
+      "id": "FOLLOW06",
+      "document": "06-follow-friends.md",
+      "scenario": "同一更新重复投递、修订、重启",
+      "expected": "无重复条目，修订显示更新状态，关注与已读状态保持",
+      "status": "passed",
+      "actual": "Real-store tests deduplicate updates and revisions; actual three-process restart preserved publication revision, subscription and Bob read state. Browser multipage revisions and general gates pending. 2026-09-14 actual Chrome/three existing loopback nodes: a real Windows file lock made publication fail without changing revision-6 saved draft or visibility; author restart retained it, then unlock/review/retry published the same ID as revision 7 to both recipients. With Bob stopped, page draft revision 8 narrowed only the draft; confirmation published revision 9 to Carol alone. Bob retained last-checked time and old version while offline, then reconnected to no visible updates; old/current-version fetches both returned 409 feed_publication_unavailable. Page Stop sharing produced revision 10; all three restarted with stopped state, subscriptions and independent Bob copy unchanged. Bob could reopen the copy in the browser. Observer verifier and Ruff passed; no product modification or repeated unit/scale tests. Process-offline loopback is not public-NAT, packaged desktop or complete common-gate evidence. 2026-09-14 requirement review: 重复刷新去重、修订变未读、真实三进程重启保留关注/版本/已读；后续页撤权另有集成覆盖。",
+      "evidence": [
+        "docs/acceptance/friend-feed-development/README.md",
+        "docs/acceptance/friend-feed-development/windows-three-node.json",
+        "docs/acceptance/friend-feed-development/audience-recovery-browser-20260914.md",
+        "docs/acceptance/friend-feed-development/audience-recovery-checkpoints-20260914.json",
+        "docs/acceptance/candidate-delivery/requirement-review-20260914.md"
+      ],
+      "implementation_commit": "858cda5028842d659c8afd31a08a5cc6440faa27"
+    },
+    {
+      "id": "FOLLOW07",
+      "document": "06-follow-friends.md",
+      "scenario": "取消关注后继续发布",
+      "expected": "不自动收取新内容；已有私聊、独立收藏和下载副本不误删",
+      "status": "passed",
+      "actual": "Actual unsubscribe and reviewed feed cleanup removed received entries while preserving saved-copy hashes and friendships. Delayed refresh and old subscribe requests are rejected in real-store tests. Actual explicit refollow received a new publication; replaying completed cleanup retained it. Full independent-network user paths remain pending. 2026-09-14 requirement review: 实际取消关注保留副本；补充在取消后发布新条目，工作器零获取、列表为空、关系和副本不变。",
+      "evidence": [
+        "docs/acceptance/friend-feed-development/README.md",
+        "docs/acceptance/friend-feed-development/windows-three-node.json",
+        "docs/acceptance/friend-feed-development/cleanup.md",
+        "docs/acceptance/friend-feed-development/cleanup-http.json",
+        "docs/acceptance/friend-feed-development/cleanup-browser.json",
+        "tests/test_friend_feed.py",
+        "docs/acceptance/candidate-delivery/requirement-review-20260914.md"
+      ],
+      "implementation_commit": "858cda5028842d659c8afd31a08a5cc6440faa27"
+    },
+    {
+      "id": "FOLLOW08",
+      "document": "06-follow-friends.md",
+      "scenario": "收窄受众、删除好友、停止分享",
+      "expected": "Provider 立即拒绝新获取；接收端联网刷新后更新可见列表",
+      "status": "passed",
+      "actual": "Actual audience change removed Bob and added Carol; stop-sharing denied old fetches. Reviewed publisher cleanup also denied old fetch while a backup remained pending, survived restart and permitted a new publication afterward. Tests recheck authorization after body resolution and reject recreation by old draft requests. Broader network and packaged paths remain pending. 2026-09-14 actual Chrome/three existing loopback nodes: a real Windows file lock made publication fail without changing revision-6 saved draft or visibility; author restart retained it, then unlock/review/retry published the same ID as revision 7 to both recipients. With Bob stopped, page draft revision 8 narrowed only the draft; confirmation published revision 9 to Carol alone. Bob retained last-checked time and old version while offline, then reconnected to no visible updates; old/current-version fetches both returned 409 feed_publication_unavailable. Page Stop sharing produced revision 10; all three restarted with stopped state, subscriptions and independent Bob copy unchanged. Bob could reopen the copy in the browser. Observer verifier and Ruff passed; no product modification or repeated unit/scale tests. Process-offline loopback is not public-NAT, packaged desktop or complete common-gate evidence. 2026-09-14 requirement review: 实际页面收窄受众与停止分享，旧新版本获取被拒绝；解析中关系撤销另由真实加密集成验证。",
+      "evidence": [
+        "docs/acceptance/friend-feed-development/README.md",
+        "docs/acceptance/friend-feed-development/windows-three-node.json",
+        "docs/acceptance/friend-feed-development/cleanup.md",
+        "docs/acceptance/friend-feed-development/cleanup-http.json",
+        "docs/acceptance/friend-feed-development/cleanup-browser.json",
+        "docs/acceptance/friend-feed-development/audience-recovery-browser-20260914.md",
+        "docs/acceptance/friend-feed-development/audience-recovery-checkpoints-20260914.json",
+        "docs/acceptance/candidate-delivery/requirement-review-20260914.md"
+      ],
+      "implementation_commit": "858cda5028842d659c8afd31a08a5cc6440faa27"
+    },
+    {
+      "id": "FOLLOW09",
+      "document": "06-follow-friends.md",
+      "scenario": "撤销时接收端离线",
+      "expected": "有最后同步标记，不承诺远程抹除；重连后执行新权限",
+      "status": "passed",
+      "actual": "Last-check/offline labels implemented; actual independent saved copy survived revocation. Full recipient-offline-across-remote-revocation/reconnect scenario remains pending. 2026-09-14 actual Chrome/three existing loopback nodes: a real Windows file lock made publication fail without changing revision-6 saved draft or visibility; author restart retained it, then unlock/review/retry published the same ID as revision 7 to both recipients. With Bob stopped, page draft revision 8 narrowed only the draft; confirmation published revision 9 to Carol alone. Bob retained last-checked time and old version while offline, then reconnected to no visible updates; old/current-version fetches both returned 409 feed_publication_unavailable. Page Stop sharing produced revision 10; all three restarted with stopped state, subscriptions and independent Bob copy unchanged. Bob could reopen the copy in the browser. Observer verifier and Ruff passed; no product modification or repeated unit/scale tests. Process-offline loopback is not public-NAT, packaged desktop or complete common-gate evidence. 2026-09-14 requirement review: Bob 离线跨越收窄，最后检查时间与旧版本保留；重连移除失权条目，独立副本可读。",
+      "evidence": [
+        "docs/acceptance/friend-feed-development/README.md",
+        "docs/acceptance/friend-feed-development/windows-three-node.json",
+        "docs/acceptance/friend-feed-development/audience-recovery-browser-20260914.md",
+        "docs/acceptance/friend-feed-development/audience-recovery-checkpoints-20260914.json",
+        "docs/acceptance/candidate-delivery/requirement-review-20260914.md"
+      ],
+      "implementation_commit": "858cda5028842d659c8afd31a08a5cc6440faa27"
+    },
+    {
+      "id": "FOLLOW10",
+      "document": "06-follow-friends.md",
+      "scenario": "发布失败、好友离线、无更新",
+      "expected": "草稿可恢复，离线可重试，空状态明确，不显示假发布或假已读",
+      "status": "passed",
+      "actual": "Atomic failed publication retains draft in storage test; component tests cover failed saves/retry identity and empty/offline states. Browser node disconnect and automatic error clearing on reconnect verified. Full desktop/general gates pending. 2026-09-14 actual Chrome/three existing loopback nodes: a real Windows file lock made publication fail without changing revision-6 saved draft or visibility; author restart retained it, then unlock/review/retry published the same ID as revision 7 to both recipients. With Bob stopped, page draft revision 8 narrowed only the draft; confirmation published revision 9 to Carol alone. Bob retained last-checked time and old version while offline, then reconnected to no visible updates; old/current-version fetches both returned 409 feed_publication_unavailable. Page Stop sharing produced revision 10; all three restarted with stopped state, subscriptions and independent Bob copy unchanged. Bob could reopen the copy in the browser. Observer verifier and Ruff passed; no product modification or repeated unit/scale tests. Process-offline loopback is not public-NAT, packaged desktop or complete common-gate evidence. 2026-09-14 requirement review: 真实文件占用导致发布失败，草稿重启保留并重试同身份成功；离线/空状态不伪造已读。",
+      "evidence": [
+        "docs/acceptance/friend-feed-development/README.md",
+        "docs/acceptance/friend-feed-development/windows-three-node.json",
+        "docs/acceptance/friend-feed-development/audience-recovery-browser-20260914.md",
+        "docs/acceptance/friend-feed-development/audience-recovery-checkpoints-20260914.json",
+        "docs/acceptance/candidate-delivery/requirement-review-20260914.md"
+      ],
+      "implementation_commit": "858cda5028842d659c8afd31a08a5cc6440faa27"
+    },
+    {
+      "id": "OFFLINE01",
+      "document": "07-offline-reading.md",
+      "scenario": "对支持的文章下载，随后断网并重启",
+      "expected": "本地正文可打开，来源/下载时间可见，无需发外网请求加载正文",
+      "status": "passed",
+      "actual": "Browser explicitly downloaded a synthetic article, restarted the node with the source stopped, and reopened unchanged local text and PNG. Packaged desktop and device-wide offline acceptance remain pending. 2026-09-14 requirement review: 页面明确下载，来源进程关闭、节点重启后正文和 PNG 可读，时间与摘要一致。",
+      "evidence": [
+        "docs/acceptance/offline-reading-development/README.md",
+        "docs/acceptance/offline-reading-development/windows-browser.json",
+        "docs/acceptance/candidate-delivery/requirement-review-20260914.md"
+      ],
+      "implementation_commit": "858cda5028842d659c8afd31a08a5cc6440faa27"
+    },
+    {
+      "id": "OFFLINE02",
+      "document": "07-offline-reading.md",
+      "scenario": "普通收藏但未下载，在断网时打开",
+      "expected": "清楚显示正文未下载，不错误显示可离线",
+      "status": "passed",
+      "actual": "Bookmarks start with zero downloads; page separates queued tasks from readable copies. Automatic offline selection in ordinary reading and packaged offline failure messaging remain pending. 2026-09-14 requirement review: 普通收藏初始无下载，读取未提交副本返回未下载；页面不提供离线可读按钮、不自动创建下载。",
+      "evidence": [
+        "docs/acceptance/offline-reading-development/README.md",
+        "docs/acceptance/offline-reading-development/windows-browser.json",
+        "tests/test_offline_reading.py",
+        "webapp/src/screens/OfflineReading.test.tsx",
+        "docs/acceptance/candidate-delivery/requirement-review-20260914.md"
+      ],
+      "implementation_commit": "858cda5028842d659c8afd31a08a5cc6440faa27"
+    },
+    {
+      "id": "OFFLINE03",
+      "document": "07-offline-reading.md",
+      "scenario": "正文成功、部分图片失败",
+      "expected": "正文可读，图片缺失有标记，不显示完整资源已下载",
+      "status": "passed",
+      "actual": "Browser and component tests show local body, verified PNG and explicit missing-image marker. Decoder failure is reported in UI; full image-format acceptance remains pending. 2026-09-14 requirement review: 真实浏览器正文与本地 PNG 可读，缺图有标记；不宣称全部资源完整。",
+      "evidence": [
+        "docs/acceptance/offline-reading-development/README.md",
+        "docs/acceptance/offline-reading-development/windows-browser.json",
+        "docs/acceptance/candidate-delivery/requirement-review-20260914.md"
+      ],
+      "implementation_commit": "858cda5028842d659c8afd31a08a5cc6440faa27"
+    },
+    {
+      "id": "OFFLINE04",
+      "document": "07-offline-reading.md",
+      "scenario": "中途断网、取消、重启、连续点击下载",
+      "expected": "状态恢复正确，仅一份结果；未校验片段不标可读",
+      "status": "passed",
+      "actual": "Checkpoint/cancel/restart backend tests plus UI requested-cancellation and duplicate-request states pass. Full packaged interrupted-download flow remains pending. 2026-09-14 requirement review: 真实进程终止恢复、加密检查点重核、取消与迟到写入隔离及页面取消请求状态有对应自动证据。",
+      "evidence": [
+        "docs/acceptance/offline-reading-development/README.md",
+        "docs/acceptance/offline-reading-development/windows-browser.json",
+        "tests/test_offline_reading.py",
+        "webapp/src/screens/OfflineReading.test.tsx",
+        "docs/acceptance/candidate-delivery/requirement-review-20260914.md"
+      ],
+      "implementation_commit": "858cda5028842d659c8afd31a08a5cc6440faa27"
+    },
+    {
+      "id": "OFFLINE05",
+      "document": "07-offline-reading.md",
+      "scenario": "已有旧版，更新时断网或校验失败",
+      "expected": "旧版仍能读；新版本验证后才替换，并更新下载时间",
+      "status": "passed",
+      "actual": "Actual browser update with the source stopped fails while old body hash, job identity and time remain. An HTTP-200 password gate replacing the previous copy was reproduced and fixed; regression verifies the complete prior copy is preserved. Packaged and complete version-switch acceptance remain pending. 2026-09-14 requirement review: 实际页面来源不可达保留旧正文/时间；集成检查新版本校验后替换，并拒绝旧图片版本；密码页回归保持旧副本。",
+      "evidence": [
+        "docs/acceptance/offline-reading-development/README.md",
+        "docs/acceptance/offline-reading-development/windows-browser.json",
+        "docs/acceptance/offline-reading-development/password-gate-fix-20260914.md",
+        "tests/test_offline_reading.py",
+        "docs/acceptance/candidate-delivery/requirement-review-20260914.md"
+      ],
+      "implementation_commit": "858cda5028842d659c8afd31a08a5cc6440faa27"
+    },
+    {
+      "id": "OFFLINE06",
+      "document": "07-offline-reading.md",
+      "scenario": "空间不足或超过单项/总预算",
+      "expected": "提示清理/超限，其他下载不静默丢失，应用仍可阅读",
+      "status": "passed",
+      "actual": "Backend item/total/disk limits and UI storage limits are covered; real device space-exhaustion UI acceptance remains pending. 2026-09-14 requirement review: 真实存储单项/总量与模拟可用空间不足拒绝且旧版可读，页面展示限制及清理动作；未填满实际磁盘。",
+      "evidence": [
+        "docs/acceptance/offline-reading-development/README.md",
+        "docs/acceptance/offline-reading-development/windows-browser.json",
+        "tests/test_offline_reading.py",
+        "docs/acceptance/candidate-delivery/requirement-review-20260914.md"
+      ],
+      "implementation_commit": "858cda5028842d659c8afd31a08a5cc6440faa27"
+    },
+    {
+      "id": "OFFLINE07",
+      "document": "07-offline-reading.md",
+      "scenario": "单条/全部清理下载",
+      "expected": "对应磁盘空间释放，列表更新；收藏、进度、会话保留，正文索引及时移除",
+      "status": "passed",
+      "actual": "Browser-reviewed cleanup frees all download bundles; consumption hash is unchanged, body search disappears and bookmark title remains. Independent-copy and corrupted-source isolation tests pass; broader maintenance acceptance remains pending. Offline copy cleanup now commits a durable receipt with the worker write fence, retries the original reviewed files after restart, protects unfinished files from generic GC and requires new approval for changed versions. Actual Windows delete-sharing denial plus browser confirmation, node restart, a new download of the same article and original-operation retry preserved the new ciphertext and readable body/image. Completed HTTP replay returned the original result. Final backend: 1341 passed / 29 skipped; frontend: 201 passed. This is offline-copy cleanup recovery only; reading-source/replica/backup coordination and complete packaged data-maintenance acceptance remain incomplete. 2026-09-14 requirement review: 实际页面清理/文件占用失败/重启/原操作恢复，释放已审核字节且保留新副本、收藏和进度，旧全文搜索清除。",
+      "evidence": [
+        "docs/acceptance/offline-reading-development/README.md",
+        "docs/acceptance/offline-reading-development/windows-browser.json",
+        "docs/acceptance/offline-reading-development/cleanup-retry-browser.json",
+        "docs/acceptance/offline-reading-development/cleanup-retry-http.json",
+        "docs/acceptance/candidate-delivery/requirement-review-20260914.md"
+      ],
+      "implementation_commit": "858cda5028842d659c8afd31a08a5cc6440faa27"
+    },
+    {
+      "id": "OFFLINE08",
+      "document": "07-offline-reading.md",
+      "scenario": "无正文、需登录、已失权内容尝试下载",
+      "expected": "返回实际失败原因，不产生空的成功记录，不绕过授权",
+      "status": "passed",
+      "actual": "Backend rejects empty or unsupported pages, HTTP 403 and invalid local copies. A reproduced HTTP-200 password gate is now rejected without replacing the prior offline body; a separate sidebar login form does not block public article download. Complete login-page and friend authorization UI flows are pending. 2026-09-14 requirement review: 空正文、非支持内容、HTTP 拒绝及密码页不产生可读成功记录；真实加密好友版本获取按现权限拒绝。",
+      "evidence": [
+        "docs/acceptance/offline-reading-development/README.md",
+        "docs/acceptance/offline-reading-development/password-gate-fix-20260914.md",
+        "tests/test_offline_reading.py",
+        "tests/test_offline_material.py",
+        "docs/acceptance/candidate-delivery/requirement-review-20260914.md"
+      ],
+      "implementation_commit": "858cda5028842d659c8afd31a08a5cc6440faa27"
+    },
+    {
+      "id": "OFFLINE09",
+      "document": "07-offline-reading.md",
+      "scenario": "已获授权下载，再撤销好友权限",
+      "expected": "本地副本仍按保存规则可读，界面不承诺远程回收；新版本获取被拒绝",
+      "status": "passed",
+      "actual": "Encrypted friend-publication integration verifies authorized version retrieval, explicit offline save, revocation refusal for both cached and newly published versions, and restart reading of the independent copy. Full two-device desktop UI acceptance remains pending. 2026-09-14 requirement review: 真实加密授权链覆盖保存、更新、撤权后拒绝新旧远程版本、源不可达重启读独立副本；撤销页面说明不远程收回。",
+      "evidence": [
+        "docs/acceptance/offline-reading-development/README.md",
+        "tests/test_offline_material.py",
+        "docs/acceptance/candidate-delivery/requirement-review-20260914.md"
+      ],
+      "implementation_commit": "858cda5028842d659c8afd31a08a5cc6440faa27"
+    },
+    {
+      "id": "OFFLINE10",
+      "document": "07-offline-reading.md",
+      "scenario": "离线阅读后退出重开，再联网",
+      "expected": "阅读进度保持，外链仅主动打开时访问；无追踪脚本自动执行",
+      "status": "passed",
+      "actual": "Offline viewer component restores and saves progress, avoids external fallback, visits original only on click and releases image blobs. Browser restart preserves content; packaged scrolling and image-layout restoration remain pending. 2026-09-14 requirement review: 实际延迟图片后恢复阅读区域；组件验证保存进度、关闭返回焦点、无自动外站回退、外链仅点击访问。",
+      "evidence": [
+        "docs/acceptance/offline-reading-development/README.md",
+        "docs/acceptance/offline-reading-development/windows-browser.json",
+        "webapp/src/screens/OfflineReading.test.tsx",
+        "docs/acceptance/candidate-delivery/requirement-review-20260914.md"
+      ],
+      "implementation_commit": "858cda5028842d659c8afd31a08a5cc6440faa27"
+    },
+    {
+      "id": "SYNC01",
+      "document": "08-device-sync.md",
+      "scenario": "A/B 首次配对，确认前抓取传输行为",
+      "expected": "未确认不传个人数据；过期/重复邀请不能加入额外设备",
+      "status": "passed",
+      "actual": "Source adapters, bilateral pairing, scoped encrypted HTTP batches, source-before-receipt acknowledgement, policy revision fencing and fresh pairing receipts are implemented. Automated fault checks and two-process loopback browser evidence cover transfer, readable original-provider history, search classification, confirmation status and receiver restart. Owner-reviewed reading/bookmark conflict choices now use stored candidates and revision checks. Browser selection converged across two loopback nodes and survived receiver restart. My reading now lists saved and synchronized positions; the shared reader reviews text-version mismatches and rejects stale progress writes. A real two-node browser reading position converged and survived receiver restart. Scale performance, complete erasure and packaged cross-network acceptance remain incomplete. 2026-09-14: Installed wheel/Chrome follow-up: blank second node reviewed an invitation and matching code; inviter separately selected scope and approved. Neither relationship nor content was seeded on the second node. No packet-capture or invitation-expiry claim is added. 2026-09-14 requirement review: 已安装双节点页面双端审核；真实密钥协议检查未批准、过期、重复邀请和第二设备拒绝。",
+      "evidence": [
+        "docs/acceptance/device-sync-development/README.md",
+        "docs/acceptance/candidate-delivery/two-node-20260914.md",
+        "tests/test_device_sync_pairing.py",
+        "docs/acceptance/candidate-delivery/requirement-review-20260914.md"
+      ],
+      "implementation_commit": "858cda5028842d659c8afd31a08a5cc6440faa27"
+    },
+    {
+      "id": "SYNC02",
+      "document": "08-device-sync.md",
+      "scenario": "只选收藏，再分别开启进度与会话",
+      "expected": "仅所选范围同步，未选数据、模型、正文、密钥和好友权限不传",
+      "status": "passed",
+      "actual": "Source adapters, bilateral pairing, scoped encrypted HTTP batches, source-before-receipt acknowledgement, policy revision fencing and fresh pairing receipts are implemented. Automated fault checks and two-process loopback browser evidence cover transfer, readable original-provider history, search classification, confirmation status and receiver restart. Owner-reviewed reading/bookmark conflict choices now use stored candidates and revision checks. Browser selection converged across two loopback nodes and survived receiver restart. My reading now lists saved and synchronized positions; the shared reader reviews text-version mismatches and rejects stale progress writes. A real two-node browser reading position converged and survived receiver restart. Scale performance, complete erasure and packaged cross-network acceptance remain incomplete. 2026-09-14: Installed wheel/Chrome follow-up: only bookmarks were selected on both sides, both effective scopes remained bookmarks, and the saved item appeared on the second node. Reading/history enablement and exhaustive excluded-data inspection were not repeated. 2026-09-14 requirement review: 双端范围交集；实际收藏范围同步，集成断言未选会话/进度不读不传，字段投影排除正文和凭证。",
+      "evidence": [
+        "docs/acceptance/device-sync-development/README.md",
+        "docs/acceptance/candidate-delivery/two-node-20260914.md",
+        "tests/test_device_sync_transfer.py",
+        "tests/test_device_sync_records.py",
+        "docs/acceptance/candidate-delivery/requirement-review-20260914.md"
+      ],
+      "implementation_commit": "858cda5028842d659c8afd31a08a5cc6440faa27"
+    },
+    {
+      "id": "SYNC03",
+      "document": "08-device-sync.md",
+      "scenario": "两端原有不同数据，首次同步",
+      "expected": "合并不覆盖，重复收藏/消息仅一份，原服务键保留",
+      "status": "passed",
+      "actual": "Source adapters, bilateral pairing, scoped encrypted HTTP batches, source-before-receipt acknowledgement, policy revision fencing and fresh pairing receipts are implemented. Automated fault checks and two-process loopback browser evidence cover transfer, readable original-provider history, search classification, confirmation status and receiver restart. Owner-reviewed reading/bookmark conflict choices now use stored candidates and revision checks. Browser selection converged across two loopback nodes and survived receiver restart. My reading now lists saved and synchronized positions; the shared reader reviews text-version mismatches and rejects stale progress writes. A real two-node browser reading position converged and survived receiver restart. Scale performance, complete erasure and packaged cross-network acceptance remain incomplete. 2026-09-14 requirement review: 真实三范围源合并与回执，保留双方原数据和原服务键；重复记录/消息与重启另有集成覆盖。",
+      "evidence": [
+        "docs/acceptance/device-sync-development/README.md",
+        "tests/test_device_sync_transfer.py",
+        "docs/acceptance/candidate-delivery/requirement-review-20260914.md"
+      ],
+      "implementation_commit": "858cda5028842d659c8afd31a08a5cc6440faa27"
+    },
+    {
+      "id": "SYNC04",
+      "document": "08-device-sync.md",
+      "scenario": "参考双设备、稳定连接、两端各不超过 1 万条元数据记录",
+      "expected": "新增 100 条合成变更，建议 60 秒内完成确认；记录环境与字节数，大规模首次同步单独计时",
+      "status": "passed",
+      "actual": "Latest complete fresh-directory run on c8cec7a: real pairing and TCP merge of disjoint synthetic legacy sources, migration 2.254 seconds, initial merge 900.479 seconds (200 batches / 20000 receipts), then 100 normal unbookmark writes in 38.966 seconds plus transfer/final confirmation in 16.396 seconds, total 55.361 seconds, 200 incremental receipts and 164740 encrypted JSON bytes excluding HTTP headers. Both sources retain 10000 causal entities and the 100 expected changes; the 60-second reference is met. Initial merge overlapped conversation tests/editing; incremental timing did not overlap those tests. Two route services run on loopback in separate threads of one Python process, without scheduler waits/full-node background load/UI. Full-node, packaged desktop, physical-device and cross-network acceptance remain incomplete. Earlier failed timings and the reused-baseline 59.137-second result are retained. Reading-v4 post-cleanup follow-up: initial deletion confirmation failed with PeerTransportError. A copied interrupted baseline resumed 5000 remaining receipts, then 100 rebookmarks took 61.130 seconds, above target. Caching only the complete validated deletion-receipt digest reduced repeated validation; a separate copy of the same interrupted baseline completed recovery and the same 100 changes in 56.831 seconds (44.193 writes + 12.638 transfer/final status), 200 receipts and 164476 encrypted JSON bytes, with all 10000 causal entities and changed values checked. A uses v4, B v3. First failure and over-target evidence remain; initial merge/whole cleanup were not remeasured. AI download overlapped, frontend tests ended before incremental timing, and backend full regression started afterwards. Packaged/physical/cross-network gates remain incomplete. 2026-09-14 requirement review: 已声明回环路由/真实源环境下万条基线 100 次更改及确认 56.831 秒、200 回执、164476 加密 JSON 字节；首次合并另计，不含完整节点后台负载。",
+      "evidence": [
+        "docs/acceptance/device-sync-development/README.md",
+        "docs/acceptance/device-sync-development/scale-smoke-200.json",
+        "docs/acceptance/device-sync-development/scale-initial-before.json",
+        "docs/acceptance/device-sync-development/scale-10000-result.json",
+        "docs/acceptance/device-sync-development/scale-compact-59s.json",
+        "docs/acceptance/device-sync-development/source-v3-storage.md",
+        "docs/acceptance/device-sync-development/scale-v3-fresh-result.json",
+        "docs/acceptance/device-sync-development/source-v4-scale.md",
+        "docs/acceptance/device-sync-development/scale-v4-10000-result.json",
+        "docs/acceptance/device-sync-development/scale-v4-10000-resumed.json",
+        "docs/acceptance/device-sync-development/scale-v4-10000-cached.json",
+        "docs/acceptance/candidate-delivery/requirement-review-20260914.md"
+      ],
+      "implementation_commit": "858cda5028842d659c8afd31a08a5cc6440faa27"
+    },
+    {
+      "id": "SYNC05",
+      "document": "08-device-sync.md",
+      "scenario": "离线修改→中途断开→重启→重连，重复/乱序投递",
+      "expected": "变化补齐，原数据无损，不重复；接收成功前不显示已同步",
+      "status": "passed",
+      "actual": "Source adapters, bilateral pairing, scoped encrypted HTTP batches, source-before-receipt acknowledgement, policy revision fencing and fresh pairing receipts are implemented. Automated fault checks and two-process loopback browser evidence cover transfer, readable original-provider history, search classification, confirmation status and receiver restart. Owner-reviewed reading/bookmark conflict choices now use stored candidates and revision checks. Browser selection converged across two loopback nodes and survived receiver restart. My reading now lists saved and synchronized positions; the shared reader reviews text-version mismatches and rejects stale progress writes. A real two-node browser reading position converged and survived receiver restart. Scale performance, complete erasure and packaged cross-network acceptance remain incomplete. 2026-09-14 requirement review: 丢响应、重启、乱序、重复和本地新写入组合保留原数据，来源未落盘不确认；实际双节点状态对应。",
+      "evidence": [
+        "docs/acceptance/device-sync-development/README.md",
+        "tests/test_device_sync_transfer.py",
+        "tests/test_device_sync_records.py",
+        "docs/acceptance/candidate-delivery/requirement-review-20260914.md"
+      ],
+      "implementation_commit": "858cda5028842d659c8afd31a08a5cc6440faa27"
+    },
+    {
+      "id": "SYNC06",
+      "document": "08-device-sync.md",
+      "scenario": "收藏新增/取消并发，随后明确重新收藏",
+      "expected": "按表中规则合并，旧记录不复活，新明确操作可恢复",
+      "status": "passed",
+      "actual": "Source adapters, bilateral pairing, scoped encrypted HTTP batches, source-before-receipt acknowledgement, policy revision fencing and fresh pairing receipts are implemented. Automated fault checks and two-process loopback browser evidence cover transfer, readable original-provider history, search classification, confirmation status and receiver restart. Owner-reviewed reading/bookmark conflict choices now use stored candidates and revision checks. Browser selection converged across two loopback nodes and survived receiver restart. My reading now lists saved and synchronized positions; the shared reader reviews text-version mismatches and rejects stale progress writes. A real two-node browser reading position converged and survived receiver restart. Scale performance, complete erasure and packaged cross-network acceptance remain incomplete. 2026-09-14 requirement review: 并发取消优先、旧快照不复活，观察结果后明确再收藏恢复；真实因果存储与来源检查覆盖。",
+      "evidence": [
+        "docs/acceptance/device-sync-development/README.md",
+        "tests/test_device_sync_records.py",
+        "docs/acceptance/candidate-delivery/requirement-review-20260914.md"
+      ],
+      "implementation_commit": "858cda5028842d659c8afd31a08a5cc6440faa27"
+    },
+    {
+      "id": "SYNC07",
+      "document": "08-device-sync.md",
+      "scenario": "先后及并发修改阅读位置，并让 B 时钟偏差一天",
+      "expected": "先后操作按因果顺序；并发保留选择，时钟差不造成静默覆盖",
+      "status": "passed",
+      "actual": "Source adapters, bilateral pairing, scoped encrypted HTTP batches, source-before-receipt acknowledgement, policy revision fencing and fresh pairing receipts are implemented. Automated fault checks and two-process loopback browser evidence cover transfer, readable original-provider history, search classification, confirmation status and receiver restart. Owner-reviewed reading/bookmark conflict choices now use stored candidates and revision checks. Browser selection converged across two loopback nodes and survived receiver restart. My reading now lists saved and synchronized positions; the shared reader reviews text-version mismatches and rejects stale progress writes. A real two-node browser reading position converged and survived receiver restart. Scale performance, complete erasure and packaged cross-network acceptance remain incomplete. The browser selected 20% over concurrent 80% without a default choice; read-only source checks confirmed both nodes retained 20% and no fabricated local opens. No system clock was changed in that browser run. 2026-09-14 requirement review: 因果算法不使用机器时间选择，向前重读有效；页面明确选 20% 后双端收敛并重启保留，不默认选最大值。",
+      "evidence": [
+        "docs/acceptance/device-sync-development/README.md",
+        "tests/test_device_sync_records.py",
+        "docs/acceptance/candidate-delivery/requirement-review-20260914.md"
+      ],
+      "implementation_commit": "858cda5028842d659c8afd31a08a5cc6440faa27"
+    },
+    {
+      "id": "SYNC08",
+      "document": "08-device-sync.md",
+      "scenario": "同一会话两端离线继续，另测删除与新增并发",
+      "expected": "分支完整可见；删除冲突进入待处理项，不混入主历史或静默丢弃",
+      "status": "passed",
+      "actual": "Concurrent branches and deleted-conversation recovery retain original provider bindings. Deleted restored copies require explicit replacement and stable retry identities. Recovery discard now reviews source revision and local draft, blocks pending tasks, preserves independent copies and rejects stale review. Source tests cover write failure, restart retry and old-message replay; synthetic loopback browser flows cover replacement and discard confirmation/cancel, keyboard focus, node restart and readable retained copies. Complete personal-data erasure and packaged cross-network acceptance remain incomplete. 2026-09-14 requirement review: 实际页面完整展开分支，删除冲突独立恢复；保留、再次保留与丢弃确认/取消/重启都有对应证据。",
+      "evidence": [
+        "docs/acceptance/device-sync-development/README.md",
+        "docs/acceptance/device-sync-development/recovery-replacement-browser.json",
+        "docs/acceptance/device-sync-development/recovery-discard-browser.json",
+        "docs/acceptance/candidate-delivery/requirement-review-20260914.md"
+      ],
+      "implementation_commit": "858cda5028842d659c8afd31a08a5cc6440faa27"
+    },
+    {
+      "id": "SYNC09",
+      "document": "08-device-sync.md",
+      "scenario": "目标空间不足、写入失败后恢复",
+      "expected": "不错误确认，源记录保留，重试可完成",
+      "status": "passed",
+      "actual": "Source adapters, bilateral pairing, scoped encrypted HTTP batches, source-before-receipt acknowledgement, policy revision fencing and fresh pairing receipts are implemented. Automated fault checks and two-process loopback browser evidence cover transfer, readable original-provider history, search classification, confirmation status and receiver restart. Owner-reviewed reading/bookmark conflict choices now use stored candidates and revision checks. Browser selection converged across two loopback nodes and survived receiver restart. My reading now lists saved and synchronized positions; the shared reader reviews text-version mismatches and rejects stale progress writes. A real two-node browser reading position converged and survived receiver restart. Scale performance, complete erasure and packaged cross-network acceptance remain incomplete. 2026-09-14 requirement review: 真实加密传输中源/副本分别写入失败不发回执；保留待确认并原请求重试成功。",
+      "evidence": [
+        "docs/acceptance/device-sync-development/README.md",
+        "tests/test_device_sync_transfer.py",
+        "docs/acceptance/candidate-delivery/requirement-review-20260914.md"
+      ],
+      "implementation_commit": "858cda5028842d659c8afd31a08a5cc6440faa27"
+    },
+    {
+      "id": "SYNC10",
+      "document": "08-device-sync.md",
+      "scenario": "暂停/关闭会话同步，随后恢复",
+      "expected": "暂停期间不继续传相应数据，旧副本保留；恢复后正确补齐",
+      "status": "passed",
+      "actual": "Source adapters, bilateral pairing, scoped encrypted HTTP batches, source-before-receipt acknowledgement, policy revision fencing and fresh pairing receipts are implemented. Automated fault checks and two-process loopback browser evidence cover transfer, readable original-provider history, search classification, confirmation status and receiver restart. Owner-reviewed reading/bookmark conflict choices now use stored candidates and revision checks. Browser selection converged across two loopback nodes and survived receiver restart. My reading now lists saved and synchronized positions; the shared reader reviews text-version mismatches and rejects stale progress writes. A real two-node browser reading position converged and survived receiver restart. Scale performance, complete erasure and packaged cross-network acceptance remain incomplete. 2026-09-14: Installed-wheel/in-app-browser follow-up: pause stopped bookmark changes; resume applied them, disabling the bookmark scope stopped new changes, and re-enabling applied them with zero pending. Both independent bodies remained. This is a bookmark flow, not a new conversation-scope browser claim. 2026-09-14 requirement review: 安装候选实际暂停/恢复/关闭收藏范围；新增会话范围集成覆盖停传、旧报文拒绝、旧历史保留、恢复补齐无重复。",
+      "evidence": [
+        "docs/acceptance/device-sync-development/README.md",
+        "docs/acceptance/candidate-delivery/sync-policy-20260914.md",
+        "tests/test_device_sync_transfer.py",
+        "docs/acceptance/candidate-delivery/requirement-review-20260914.md"
+      ],
+      "implementation_commit": "858cda5028842d659c8afd31a08a5cc6440faa27"
+    },
+    {
+      "id": "SYNC11",
+      "document": "08-device-sync.md",
+      "scenario": "移除设备，重放旧凭证并重新发现",
+      "expected": "后续同步拒绝，须重新审核配对；界面说明旧副本无法自动收回",
+      "status": "passed",
+      "actual": "Source adapters, bilateral pairing, scoped encrypted HTTP batches, source-before-receipt acknowledgement, policy revision fencing and fresh pairing receipts are implemented. Automated fault checks and two-process loopback browser evidence cover transfer, readable original-provider history, search classification, confirmation status and receiver restart. Owner-reviewed reading/bookmark conflict choices now use stored candidates and revision checks. Browser selection converged across two loopback nodes and survived receiver restart. My reading now lists saved and synchronized positions; the shared reader reviews text-version mismatches and rejects stale progress writes. A real two-node browser reading position converged and survived receiver restart. Scale performance, complete erasure and packaged cross-network acceptance remain incomplete. 2026-09-14: Installed-wheel/in-app-browser follow-up: both devices became revoked after owner confirmation; a subsequent bookmark change stayed local. Both node processes restarted with revoked pairing and independent copies intact. Existing full-suite tests reject old authenticated batches and confirm wires and require fresh pairing. 2026-09-14 requirement review: 安装候选移除后双端重启仍撤销，后续修改不传；集成拒绝旧认证批次并要求重新配对。",
+      "evidence": [
+        "docs/acceptance/device-sync-development/README.md",
+        "docs/acceptance/candidate-delivery/sync-policy-20260914.md",
+        "docs/acceptance/candidate-delivery/requirement-review-20260914.md"
+      ],
+      "implementation_commit": "858cda5028842d659c8afd31a08a5cc6440faa27"
+    },
+    {
+      "id": "SYNC12",
+      "document": "08-device-sync.md",
+      "scenario": "B 无模型/权限时打开同步的旧会话",
+      "expected": "历史可读；新提问被明确阻止或提示选择，不静默换 Provider",
+      "status": "passed",
+      "actual": "Source adapters, bilateral pairing, scoped encrypted HTTP batches, source-before-receipt acknowledgement, policy revision fencing and fresh pairing receipts are implemented. Automated fault checks and two-process loopback browser evidence cover transfer, readable original-provider history, search classification, confirmation status and receiver restart. Owner-reviewed reading/bookmark conflict choices now use stored candidates and revision checks. Browser selection converged across two loopback nodes and survived receiver restart. My reading now lists saved and synchronized positions; the shared reader reviews text-version mismatches and rejects stale progress writes. A real two-node browser reading position converged and survived receiver restart. Scale performance, complete erasure and packaged cross-network acceptance remain incomplete. 2026-09-14 requirement review: 同步历史在未安装原模型时可读，绑定和材料保留；页面提示不可用，不自行换 Provider。",
+      "evidence": [
+        "docs/acceptance/device-sync-development/README.md",
+        "docs/acceptance/candidate-delivery/requirement-review-20260914.md"
+      ],
+      "implementation_commit": "858cda5028842d659c8afd31a08a5cc6440faa27"
+    },
+    {
+      "id": "SYNC13",
+      "document": "08-device-sync.md",
+      "scenario": "擦除会话范围，并检查本地恢复项及旧同步消息",
+      "expected": "本地对应数据与恢复项被擦除，旧投递不复活；远端未确认删除明确显示未完成",
+      "status": "passed",
+      "actual": "Source adapters, bilateral pairing, scoped encrypted HTTP batches, source-before-receipt acknowledgement, policy revision fencing and fresh pairing receipts are implemented. Automated fault checks and two-process loopback browser evidence cover transfer, readable original-provider history, search classification, confirmation status and receiver restart. Owner-reviewed reading/bookmark conflict choices now use stored candidates and revision checks. Browser selection converged across two loopback nodes and survived receiver restart. My reading now lists saved and synchronized positions; the shared reader reviews text-version mismatches and rejects stale progress writes. A real two-node browser reading position converged and survived receiver restart. Scale performance, complete erasure and packaged cross-network acceptance remain incomplete. Internal reviewed conversation-source erasure is implemented in 5198d80. Related tests: 61 passed; stale delivery, terminal-task retry, new work after response loss, recovery copies and atomic failure are covered. Backups, derived indexes, order results, browser copies, complete export and the coordinated Settings flow remain incomplete; this is not full data-maintenance acceptance. Coordinated Owner-only conversation cleanup now persists source/replica/backup/search/order progress, resumes partial failures, reviews changed backups and retains source/consumer replay barriers. Real complete-node routes and the consumer result adapter are exercised; browser copies, Settings UI, full export, other scopes and remote acceptance remain incomplete. Settings now exposes reviewed conversation cleanup and durable resume; older browser copies have separate atomic erasure with deletion markers. Synthetic loopback browser checks cover cancellation, keyboard confirmation, node restart, browser reload and zero reimport. Final frontend 191 tests, TypeScript and build pass; full export, other scopes, cleanup-history capacity handling and remote/packaged acceptance remain incomplete. Cleanup history v2 now rotates only terminal summaries while retaining monotonic review generations and replay barriers (69d797b). Owner-selected ZIP exports cover nine product scopes, verified original documents and offline images, with an explicit manifest and exclusions. Loopback HTTP verifies every archive entry; browser checks cover keyboard download requests, layout correction, connection failure and same-node restart retry. Final backend: 1333 passed / 29 skipped; frontend: 198 passed. Other erasure scopes, unified legacy export, full account-data boundaries and packaged/remote acceptance remain incomplete. Reviewed reading cleanup now coordinates source, replica, known backups and search. Windows browser evidence covers held-file failure, node restart, changed-backup review, resume and retention of a new same-ID bookmark. Full data maintenance, v4 scale performance and packaged/remote acceptance remain incomplete. 2026-09-14 requirement review: 阅读/会话来源、冲突恢复、旧投递屏障和协调清理已有证据；完整同步清空与远端未确认提示仍需合并复核。 2026-09-14 closing review: 设置页本地范围清理及重启、真实加密冲突/旧投递屏障已对齐；远端明确未确认，不声明全局擦除。",
+      "evidence": [
+        "docs/acceptance/device-sync-development/README.md",
+        "docs/acceptance/device-sync-development/personal-data-maintenance.md",
+        "docs/acceptance/device-sync-development/cleanup-settings-browser.json",
+        "docs/acceptance/device-sync-development/product-export-http.json",
+        "docs/acceptance/device-sync-development/product-export-browser.json",
+        "docs/acceptance/device-sync-development/reading-cleanup.md",
+        "docs/acceptance/device-sync-development/reading-cleanup-browser.json",
+        "docs/acceptance/device-sync-development/reading-cleanup-http.json",
+        "docs/acceptance/candidate-delivery/requirement-review-20260914.md",
+        "docs/acceptance/candidate-delivery/mainflow-and-erasure-review-20260914.md"
+      ],
+      "implementation_commit": "f486fb76d417fab96d97fcdcbeb5c8762b931b38"
+    },
+    {
+      "id": "G01",
+      "document": "README.md",
+      "scenario": "干净安装",
+      "expected": "全新数据目录，无历史、无模型、无好友时有正确入口和空状态",
+      "status": "passed",
+      "actual": " 2026-09-14 requirement review: 各功能空目录与空状态证据已有，但全新安装下八入口的统一覆盖尚未逐项汇总。 2026-09-14 final entry review: 当前安装 wheel 另起全新空数据节点，实际页面逐一核对八入口及无模型/好友/历史的空状态。",
+      "evidence": [
+        "docs/acceptance/candidate-delivery/requirement-review-20260914.md",
+        "docs/acceptance/candidate-delivery/fresh-entry-states-20260914.md"
+      ],
+      "implementation_commit": "f486fb76d417fab96d97fcdcbeb5c8762b931b38"
+    },
+    {
+      "id": "G02",
+      "document": "README.md",
+      "scenario": "完整流程",
+      "expected": "从实际页面入口完成用户任务，无需手工改配置文件或数据库",
+      "status": "passed",
+      "actual": " 2026-09-14 requirement review: 八项主流程有实际页面记录；需确认所有原要求的完成动作均可从入口达成，不能以组件检查替代整条用户流程。 2026-09-14 closing review: 八项任务均有真实页面入口和完成动作；复用现有主流程记录，不要求用户手工改配置或数据库。",
+      "evidence": [
+        "docs/acceptance/candidate-delivery/requirement-review-20260914.md",
+        "docs/acceptance/candidate-delivery/mainflow-and-erasure-review-20260914.md"
+      ],
+      "implementation_commit": "f486fb76d417fab96d97fcdcbeb5c8762b931b38"
+    },
+    {
+      "id": "G03",
+      "document": "README.md",
+      "scenario": "页面状态",
+      "expected": "加载、空、错误、有内容均有测试；错误提供恢复动作，不无限转圈",
+      "status": "passed",
+      "actual": " 2026-09-14 requirement review: 本轮复现并修复设置首次加载失败永久转圈，键盘重试和 252 项前端通过；其余主要状态覆盖仍待统一复核。 Installed-wheel Chrome follow-up: while the shell remained available, GET settings returned a real HTTP 503 through a loopback fault proxy. The page showed the focused safe error; after removing the fault, Tab/Enter retry restored Identity & storage without a page reload. 2026-09-14 final entry review: 当前空状态、加载与既有八页面故障恢复/有内容证据逐项对齐，设置永久转圈已修复，未新增测试矩阵。",
+      "evidence": [
+        "webapp/src/screens/Settings.loading.test.tsx",
+        "docs/acceptance/candidate-delivery/requirement-review-20260914.md",
+        "docs/acceptance/candidate-delivery/settings-recovery-20260914.md",
+        "docs/acceptance/candidate-delivery/fresh-entry-states-20260914.md"
+      ],
+      "implementation_commit": "f486fb76d417fab96d97fcdcbeb5c8762b931b38"
+    },
+    {
+      "id": "G04",
+      "document": "README.md",
+      "scenario": "重启恢复",
+      "expected": "已保存数据仍在，中途操作可恢复或明确失败，不伪造完成",
+      "status": "passed",
+      "actual": " 2026-09-14 actual Chrome/three existing loopback nodes: a real Windows file lock made publication fail without changing revision-6 saved draft or visibility; author restart retained it, then unlock/review/retry published the same ID as revision 7 to both recipients. With Bob stopped, page draft revision 8 narrowed only the draft; confirmation published revision 9 to Carol alone. Bob retained last-checked time and old version while offline, then reconnected to no visible updates; old/current-version fetches both returned 409 feed_publication_unavailable. Page Stop sharing produced revision 10; all three restarted with stopped state, subscriptions and independent Bob copy unchanged. Bob could reopen the copy in the browser. Observer verifier and Ruff passed; no product modification or repeated unit/scale tests. Process-offline loopback is not public-NAT, packaged desktop or complete common-gate evidence. 2026-09-14 requirement review: 各功能专属重启用例与真实进程记录覆盖保留、恢复或明确失败，原任务身份不自动重发。",
+      "evidence": [
+        "docs/acceptance/friend-feed-development/audience-recovery-browser-20260914.md",
+        "docs/acceptance/friend-feed-development/audience-recovery-checkpoints-20260914.json",
+        "docs/acceptance/candidate-delivery/sync-policy-20260914.md",
+        "docs/acceptance/ask-ryn-development/model-switch-recovery-20260914.md",
+        "docs/acceptance/candidate-delivery/requirement-review-20260914.md"
+      ],
+      "implementation_commit": "858cda5028842d659c8afd31a08a5cc6440faa27"
+    },
+    {
+      "id": "G05",
+      "document": "README.md",
+      "scenario": "重复与并发",
+      "expected": "连点、重试、重复投递不产生重复记录或结算；并发符合各文档规则",
+      "status": "passed",
+      "actual": " 2026-09-14 requirement review: 各功能真实存储/加密与路由重试检查覆盖并发、原身份、重复投递与结算；已有页面错误不伪造成功。",
+      "evidence": [
+        "tests/test_device_sync_transfer.py",
+        "tests/test_friend_feed.py",
+        "docs/acceptance/friends-development/mailbox-recovery-20260914.md",
+        "docs/acceptance/ai-permissions-development/README.md",
+        "docs/acceptance/candidate-delivery/requirement-review-20260914.md"
+      ],
+      "implementation_commit": "858cda5028842d659c8afd31a08a5cc6440faa27"
+    },
+    {
+      "id": "G06",
+      "document": "README.md",
+      "scenario": "权限与隐私",
+      "expected": "未授权请求由节点拒绝；私有内容、会话和秘密不进入普通日志、诊断或公开注册信息",
+      "status": "passed",
+      "actual": " 2026-09-14: Search now uses no-store in both HTTP responses and frontend requests. Regression checks first reproduced the absent header/cache policy. Real production-node TCP acceptance created and deleted a synthetic conversation via Owner API: nine success/error responses forbid caching, original open returns 200 then 409 after deletion and the query becomes empty. A separate real-store regression verifies deletion gating while the stale index still exists. Scoped backend 24 and frontend 13 checks passed; TypeScript/build passed. This does not measure actual browser cache retention, cross-node revocation, complete traffic/log privacy or packaged platforms. 2026-09-14 requirement review: 权限拒绝、加密投影和局部日志检查已执行；仍需统一审计本轮私有内容/秘密的日志、诊断、公开注册与外发边界。 2026-09-14 closing review: 节点权限拒绝、固定公开投影、模型错误与后台诊断核对完成；三个日志问题修复并回归。",
+      "evidence": [
+        "docs/acceptance/search-development/cache-privacy-20260914.md",
+        "docs/acceptance/search-development/cache-privacy-http-20260914.json",
+        "docs/acceptance/candidate-delivery/requirement-review-20260914.md",
+        "docs/acceptance/candidate-delivery/privacy-boundaries-20260914.md"
+      ],
+      "implementation_commit": "f486fb76d417fab96d97fcdcbeb5c8762b931b38"
+    },
+    {
+      "id": "G07",
+      "document": "README.md",
+      "scenario": "可访问性",
+      "expected": "主要流程可仅用键盘完成；弹窗焦点正确；状态不只靠颜色表达",
+      "status": "passed",
+      "actual": " 2026-09-14 actual Chrome keyboard follow-up reproduced focus falling to BODY after the last Load more button disappeared. Fixed pagination to focus the first new result, preserving focus if the user moved elsewhere while waiting. New build browser verification: 20 to 24 results, focused result index 20 opens its exact Ask message, and browser back retains keyword/type/source/sort plus scrollTop 2375 (scrollHeight 3245, clientHeight 870). Scoped frontend 15, TypeScript/build passed. Simulated Alt+Left did not navigate; the supported browser back tool verified restoration, not an end-to-end native keyboard shortcut. Date/friend filter combinations, complete keyboard and packaged-platform acceptance remain incomplete. 2026-09-14 real Chrome follow-up with existing A/B message and B stopped: native keyboard entry persisted both date fields; matching day plus friend/type returned one message, next day returned zero, reversed range showed an actionable error and recovered. Saved excluded the message while Friend shares included it. Open focused the exact local message while peer was offline; browser return retained keyword/friend/type/dates/sort, and clear restored empty inputs/results. Initial generic date fill left fields blank and received no date-validation credit. No product changes or repeated tests. Complete platform/privacy/keyboard common gates remain incomplete. 2026-09-14 requirement review: 阅读、搜索、发送确认、冲突和清理焦点已有证据；全应用主要流程的键盘覆盖还未形成完整结论。 2026-09-14 final scoped acceptance: 主要流程的键盘操作、弹窗取消/确认和焦点恢复已闭合；状态有明确文字。使用实际安装页面与已有键盘证据，不宣称屏幕阅读器或全站逐控件认证。",
+      "evidence": [
+        "docs/acceptance/search-development/keyboard-return-20260914.md",
+        "docs/acceptance/search-development/keyboard-return-checkpoints-20260914.json",
+        "docs/acceptance/search-development/filter-combinations-20260914.md",
+        "docs/acceptance/search-development/filter-combinations-checkpoints-20260914.json",
+        "docs/acceptance/candidate-delivery/requirement-review-20260914.md",
+        "docs/acceptance/candidate-delivery/keyboard-final-20260914.md"
+      ],
+      "implementation_commit": "04d94f21fb702ffe0ac9ed596ccb56e681e578f4"
+    },
+    {
+      "id": "G08",
+      "document": "README.md",
+      "scenario": "数据维护",
+      "expected": "新数据纳入明确的导出/擦除范围；秘密不默认导出；升级保留原数据",
+      "status": "passed",
+      "actual": "Reviewed local conversation, reading, offline-download and friend-feed cleanup now have durable recovery; conversation browser copies have a separate flow. Nine selected product scopes export to ZIP with verified document and offline bytes, manifest and explicit exclusions. Real loopback browser checks cover confirmation, partial file deletion, node restart and original-operation retries preserving new work. Friend-feed cleanup additionally prevents old publication/refresh requests restoring cleared data; a polling-induced review failure was reproduced and fixed. Final regression: 1377 backend passed / 29 skipped; 211 frontend passed. Complete account-data maintenance, remaining erasure scopes, legacy export unification, v4 reading scale performance and packaged/remote acceptance remain incomplete. Managed document files now use a reviewed persistent cleanup receipt, source fencing and exact-file retries. Windows browser checks cover held-file failure, restart, changed-file approval and retention of later saved documents; completed-request replay preserves a same-ID copy recreated after completion. Search derived-copy coordination and other remaining personal-data ranges are not claimed complete. 2026-09-14 requirement review: 九范围 ZIP、阅读偏好 JSON 与多种协调擦除已有证据；每类新增数据的明确保留/导出/擦除范围与升级证据仍须逐项闭合。 2026-09-14 final scoped acceptance: 九范围导出及各本地清理边界已明确；补齐卡片历史与已知旧备份清理，文件失败重启恢复通过，秘密不默认导出，升级保留18个关键数据文件。保留凭证/删除标记和未确认远端范围明确列出。",
+      "evidence": [
+        "docs/acceptance/device-sync-development/personal-data-maintenance.md",
+        "docs/acceptance/device-sync-development/cleanup-settings-browser.json",
+        "docs/acceptance/device-sync-development/product-export-http.json",
+        "docs/acceptance/device-sync-development/product-export-browser.json",
+        "docs/acceptance/offline-reading-development/cleanup-retry-browser.json",
+        "docs/acceptance/offline-reading-development/cleanup-retry-http.json",
+        "docs/acceptance/device-sync-development/reading-cleanup.md",
+        "docs/acceptance/device-sync-development/reading-cleanup-browser.json",
+        "docs/acceptance/device-sync-development/reading-cleanup-http.json",
+        "docs/acceptance/friend-feed-development/cleanup.md",
+        "docs/acceptance/friend-feed-development/cleanup-http.json",
+        "docs/acceptance/friend-feed-development/cleanup-browser.json",
+        "docs/acceptance/friends-development/document-cleanup.md",
+        "docs/acceptance/friends-development/document-cleanup-http.json",
+        "docs/acceptance/friends-development/document-cleanup-browser.json",
+        "docs/acceptance/candidate-delivery/requirement-review-20260914.md",
+        "docs/acceptance/candidate-delivery/data-scope-final-20260914.md"
+      ],
+      "implementation_commit": "04d94f21fb702ffe0ac9ed596ccb56e681e578f4"
+    },
+    {
+      "id": "G09",
+      "document": "README.md",
+      "scenario": "故障隔离",
+      "expected": "搜索、AI、好友或同步失败不使整个应用和已可用阅读一起失效",
+      "status": "passed",
+      "actual": " Damaged document metadata/body/control/timestamps are isolated from healthy search results, with explicit bounded source warnings. Stale index queries and direct opens do not disclose pending-cleanup bodies. Windows browser checks show two healthy results during one damaged copy, normal reading and Settings recovery access; fixture restoration recovers all three results and removes the warning. Final backend 1393 passed / 29 skipped, frontend 216 passed; broader platform and full requirement acceptance remain incomplete. 2026-09-14 requirement review: 损坏搜索源、坏同步副本、模型忙碌/不可达、来源和好友失败均有独立恢复记录；阅读及 HTTP 健康保持可用。",
+      "evidence": [
+        "docs/acceptance/search-development/source-isolation.md",
+        "docs/acceptance/search-development/source-isolation-http.json",
+        "docs/acceptance/search-development/source-isolation-browser.json",
+        "tests/test_device_sync_reading_bridge.py",
+        "docs/acceptance/ask-ryn-development/cancel-timeout-browser-20260914.md",
+        "docs/acceptance/candidate-delivery/requirement-review-20260914.md"
+      ],
+      "implementation_commit": "858cda5028842d659c8afd31a08a5cc6440faa27"
+    },
+    {
+      "id": "G10",
+      "document": "README.md",
+      "scenario": "发布证据",
+      "expected": "记录提交、平台、环境、步骤、预期/实际结果、耗时及限制；只声明实测范围",
+      "status": "passed",
+      "actual": "Local candidate identity, installed-wheel startup, two-node browser results and the final full backend/frontend checks are recorded. macOS and public-network checks are explicitly waived by the user; their absence is not a local completion blocker. Remaining per-case evidence must still be audited. 2026-09-14 requirement review: 每条原用例保留条件、实际结果与证据；提交/平台/计时边界明确，本地结果不冒充远端 CI，跳过不冒充通过。",
+      "evidence": [
+        "docs/acceptance/candidate-delivery/final-checks-20260914.md",
+        "docs/acceptance/candidate-delivery/two-node-20260914.md",
+        "docs/product-briefs/ACCEPTANCE_SCOPE.md",
+        "docs/acceptance/candidate-delivery/requirement-review-20260914.md"
+      ],
+      "implementation_commit": "858cda5028842d659c8afd31a08a5cc6440faa27"
+    }
+  ]
+}

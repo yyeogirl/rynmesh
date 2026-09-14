@@ -1,0 +1,49 @@
+{
+  "scope": "Windows Chrome with reused synthetic 25-message store and production node without delay transport",
+  "base_commit": "4c36a39",
+  "before_fix": {
+    "first_page_count": 20,
+    "loaded_count": 24,
+    "focus_after_last_page": "BODY",
+    "focus_after_next_tab": "BODY",
+    "opened_message": "message-9",
+    "target_focus_id": "ask-message-message-9",
+    "before_open_scroll_top": 2375,
+    "after_return_scroll_top": 2375
+  },
+  "after_fix": {
+    "browser_asset": "index-BgiJBxgZ.js",
+    "first_page_count": 20,
+    "loaded_count": 24,
+    "focused_result_index_zero_based": 20,
+    "focus_tag": "A",
+    "opened_message": "message-6",
+    "target_focus_id": "ask-message-message-6",
+    "before_open_scroll_top": 2375,
+    "after_return_scroll_top": 2375,
+    "scroller_client_height": 870,
+    "scroller_scroll_height": 3245,
+    "keyword_preserved": true,
+    "type_preserved": "chat",
+    "source_preserved": true,
+    "sort_preserved": "recent",
+    "results_after_return": 24,
+    "browser_warnings_or_errors": 0
+  },
+  "keyboard_observed": [
+    "initial page through navigation to search input",
+    "keyword entry",
+    "type and source controls",
+    "tab traversal through native date segments",
+    "sort selection",
+    "pagination activation",
+    "new result activation"
+  ],
+  "return_mechanism": "browser back tool; simulated Alt+Left did not navigate",
+  "date_values_selected": false,
+  "friend_filter_selected": false,
+  "packaged_desktop": false,
+  "complete_keyboard_gate": false,
+  "scoped_frontend_tests": 15,
+  "typescript_and_build": "passed"
+}

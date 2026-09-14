@@ -236,7 +236,6 @@ export default function Recommendations() {
                 onInspect={() => navigate(`/items/${item.content_id}`)}
                 onOpen={() => {
                   setViewing(item);
-                  if (item.digest_item_id) void digestApi.sendFeedback(item.digest_item_id, "opened").catch(() => undefined);
                 }}
                 onFetchPreview={async () => {
                   await client.fetchPreview(item.content_id, item.provider_peer_id);
@@ -276,7 +275,10 @@ export default function Recommendations() {
       ) : (
         <EmptyState title="No recommendations" body="Ask the curator to review visible node evidence." />
       )}
-      {viewing ? <ContentViewer item={viewing} onClose={() => setViewing(null)} /> : null}
+      {viewing ? <ContentViewer item={viewing} client={client} onRead={async () => {
+        await client.recordContentConsumption(viewing, "opened");
+        if (viewing.digest_item_id) await digestApi.sendFeedback(viewing.digest_item_id, "opened");
+      }} onClose={() => setViewing(null)} /> : null}
     </div>
   );
 }
