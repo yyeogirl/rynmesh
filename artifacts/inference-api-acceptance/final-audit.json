@@ -1,0 +1,23 @@
+{
+  "date": "2026-09-18",
+  "backend_tests_passed": 120,
+  "services_ui_tests_passed": 12,
+  "ruff_passed": true,
+  "frontend_build_passed": true,
+  "live_sdk_retest": {
+    "passed": false,
+    "completed_checks": 0,
+    "model": "qwen",
+    "http_status": 503,
+    "error": "model_alias_target_unavailable",
+    "provider_ssh": "connection_timed_out",
+    "root_cause": "undetermined: remote host or network unavailable"
+  },
+  "acceptance_complete": false,
+  "remaining": [
+    "Restore provider reachability and rerun SDK/P2P acceptance",
+    "Deliver annotated screenshot of the current configuration page",
+    "Validate integration with latest upstream/main",
+    "Build desktop installer if preparing a release"
+  ]
+}

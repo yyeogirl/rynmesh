@@ -25,6 +25,14 @@ import type {
   WorkResult,
 } from "./types";
 
+export interface InferenceAccess {
+  base_url: string;
+  keys: { id: string; name: string; revoked: number; output_token_limit: number; used_output_tokens: number }[];
+  models: { id: string; rynmesh: { source: string; model_alias: string; max_output_tokens: number } }[];
+  targets: InferenceAccess["models"];
+  aliases: Record<string, string>;
+}
+
 export interface LLMServiceRecord {
   peer_id: string;
   node_name?: string;
@@ -142,6 +150,10 @@ export interface NodeClient {
   }): Promise<{ work_order_id: string; order: WorkOrder }>;
   listWorkResults(filters?: { work_order_id?: string; status?: string; network_id?: string }): Promise<WorkResult[]>;
   listLLMServices(networkId?: string): Promise<LLMServiceRecord[]>;
+  getInferenceAccess(): Promise<InferenceAccess>;
+  setInferenceModelAlias(name: string, target: string): Promise<{ name: string; target: string }>;
+  createInferenceKey(name: string, outputTokenLimit: number): Promise<{ id: string; key: string }>;
+  revokeInferenceKey(id: string): Promise<{ revoked: boolean }>;
   getLLMServiceStatus(): Promise<LLMProviderStatus>;
   publishLLMService(req?: { network_id?: string; benchmark?: boolean }): Promise<Record<string, unknown>>;
   pauseLLMService(): Promise<LLMProviderStatus>;

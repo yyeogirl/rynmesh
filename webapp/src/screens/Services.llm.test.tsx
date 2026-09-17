@@ -66,6 +66,25 @@ function renderServices(options: {
 }
 
 describe("Services local LLM flow", () => {
+  it("saves a short model alias and uses it in the agent example", async () => {
+    const { client, user } = renderServices();
+    const target = { id: "peer/0123456789abcdef/qwen3-14b", rynmesh: { source: "peer", model_alias: "Qwen3 14B", max_output_tokens: 512 } };
+    const access = { base_url: "http://127.0.0.1:8791/v1", keys: [], models: [target], targets: [target], aliases: {} as Record<string, string> };
+    vi.spyOn(client, "getInferenceAccess").mockImplementation(async () => ({ ...access }));
+    const save = vi.spyOn(client, "setInferenceModelAlias").mockImplementation(async (name, id) => {
+      access.aliases = { [name]: id };
+      access.models = [{ ...target, id: name }];
+      return { name, target: id };
+    });
+    await user.click(await screen.findByRole("button", { name: "Configure API access" }));
+    expect(await screen.findByLabelText("Model alias")).toHaveValue("qwen");
+    await user.click(screen.getByRole("button", { name: "Save model alias" }));
+    await waitFor(() => expect(save).toHaveBeenCalledWith("qwen", target.id));
+    expect(await screen.findByRole("option", { name: "qwen" })).toBeInTheDocument();
+    expect(screen.getByLabelText("Model", { exact: true })).toHaveValue("qwen");
+    expect(screen.getByText(/from openai import OpenAI/)).toHaveTextContent('model="qwen"');
+  });
+
   it("uses the production network default and submits the selected transport policy", async () => {
     const { user, submit } = renderServices();
 

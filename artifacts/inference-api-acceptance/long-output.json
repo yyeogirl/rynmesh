@@ -1,0 +1,24 @@
+{
+  "requested_output_limit": 32768,
+  "context_window": 40960,
+  "long_output_test": {
+    "usage": {
+      "prompt_tokens": 53,
+      "completion_tokens": 2304,
+      "total_tokens": 2357
+    },
+    "finish_reason": "length",
+    "done": true,
+    "elapsed_seconds": 215.7,
+    "chunks": 5,
+    "characters": 2304
+  },
+  "long_context_test": {
+    "prompt_tokens": 40933,
+    "completion_tokens": 1,
+    "elapsed_seconds": 53.1,
+    "sampled_peak_vram_mib": 19367
+  },
+  "provider_timeout_seconds": 7200,
+  "full_32768_token_generation_tested": false
+}

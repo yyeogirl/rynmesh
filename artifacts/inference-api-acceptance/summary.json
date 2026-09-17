@@ -1,0 +1,238 @@
+{
+  "date": "2026-09-17",
+  "provider": "117.50.189.73",
+  "runtime_model": "Qwen3-14B-Q4",
+  "gpu": "V100 32GB",
+  "sdk_versions": {
+    "openai": "3.14.1",
+    "anthropic": "1.6.0"
+  },
+  "paths": {
+    "local": {
+      "passed": true,
+      "checks": [
+        {
+          "name": "openai_multiturn",
+          "passed": true,
+          "usage": {
+            "completion_tokens": 9,
+            "prompt_tokens": 57,
+            "total_tokens": 66,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": null
+          }
+        },
+        {
+          "name": "openai_real_stream",
+          "passed": true,
+          "content_events": 16,
+          "first_content_ms": 1217,
+          "total_ms": 4827
+        },
+        {
+          "name": "openai_agent_tool_roundtrip",
+          "passed": true,
+          "tool": "get_weather"
+        },
+        {
+          "name": "responses_nonstream",
+          "passed": true
+        },
+        {
+          "name": "responses_stream",
+          "passed": true,
+          "events": 11
+        },
+        {
+          "name": "anthropic_nonstream",
+          "passed": true
+        },
+        {
+          "name": "anthropic_stream",
+          "passed": true,
+          "usage": {
+            "cache_creation": null,
+            "cache_creation_input_tokens": null,
+            "cache_read_input_tokens": null,
+            "inference_geo": null,
+            "input_tokens": 19,
+            "output_tokens": 15,
+            "output_tokens_details": null,
+            "server_tool_use": null,
+            "service_tier": null
+          }
+        },
+        {
+          "name": "responses_streamed_tool_roundtrip",
+          "passed": true
+        },
+        {
+          "name": "anthropic_streamed_tool_roundtrip",
+          "passed": true
+        }
+      ],
+      "transports": [],
+      "note": "Provider-local inference path on V100, accessed through an SSH tunnel; no workstation GPU/model was installed."
+    },
+    "direct": {
+      "passed": true,
+      "checks": [
+        {
+          "name": "openai_multiturn",
+          "passed": true,
+          "usage": {
+            "completion_tokens": 9,
+            "prompt_tokens": 57,
+            "total_tokens": 66,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": null
+          }
+        },
+        {
+          "name": "openai_real_stream",
+          "passed": true,
+          "content_events": 16,
+          "first_content_ms": 2015,
+          "total_ms": 5843
+        },
+        {
+          "name": "openai_agent_tool_roundtrip",
+          "passed": true,
+          "tool": "get_weather"
+        },
+        {
+          "name": "responses_nonstream",
+          "passed": true
+        },
+        {
+          "name": "responses_stream",
+          "passed": true,
+          "events": 11
+        },
+        {
+          "name": "anthropic_nonstream",
+          "passed": true
+        },
+        {
+          "name": "anthropic_stream",
+          "passed": true,
+          "usage": {
+            "cache_creation": null,
+            "cache_creation_input_tokens": null,
+            "cache_read_input_tokens": null,
+            "inference_geo": null,
+            "input_tokens": 19,
+            "output_tokens": 15,
+            "output_tokens_details": null,
+            "server_tool_use": null,
+            "service_tier": null
+          }
+        },
+        {
+          "name": "responses_streamed_tool_roundtrip",
+          "passed": true
+        },
+        {
+          "name": "anthropic_streamed_tool_roundtrip",
+          "passed": true
+        }
+      ],
+      "transports": [
+        "peer_http_direct"
+      ]
+    },
+    "p2p": {
+      "passed": true,
+      "checks": [
+        {
+          "name": "openai_multiturn",
+          "passed": true,
+          "usage": {
+            "completion_tokens": 9,
+            "prompt_tokens": 57,
+            "total_tokens": 66,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": null
+          }
+        },
+        {
+          "name": "openai_real_stream",
+          "passed": true,
+          "content_events": 16,
+          "first_content_ms": 10359,
+          "total_ms": 17094
+        },
+        {
+          "name": "openai_agent_tool_roundtrip",
+          "passed": true,
+          "tool": "get_weather"
+        },
+        {
+          "name": "responses_nonstream",
+          "passed": true
+        },
+        {
+          "name": "responses_stream",
+          "passed": true,
+          "events": 11
+        },
+        {
+          "name": "anthropic_nonstream",
+          "passed": true
+        },
+        {
+          "name": "anthropic_stream",
+          "passed": true,
+          "usage": {
+            "cache_creation": null,
+            "cache_creation_input_tokens": null,
+            "cache_read_input_tokens": null,
+            "inference_geo": null,
+            "input_tokens": 19,
+            "output_tokens": 15,
+            "output_tokens_details": null,
+            "server_tool_use": null,
+            "service_tier": null
+          }
+        },
+        {
+          "name": "responses_streamed_tool_roundtrip",
+          "passed": true
+        },
+        {
+          "name": "anthropic_streamed_tool_roundtrip",
+          "passed": true
+        }
+      ],
+      "transports": [
+        "ice_udp_direct"
+      ]
+    }
+  },
+  "cancellation": {
+    "direct": {
+      "passed": true,
+      "task_id": "api_a8d67f4bbe39438ca902dd75af5b4dd6",
+      "state": "cancelled",
+      "held": 0.0,
+      "cancellation_ms": 47,
+      "provider_state": "cancelled"
+    },
+    "p2p": {
+      "passed": true,
+      "task_id": "api_cbf17f8ce59844f1b0eca91ca12e7cd6",
+      "state": "cancelled",
+      "held": 0.0,
+      "cancellation_ms": 1547,
+      "provider_state": "cancelled"
+    }
+  },
+  "checks": {
+    "backend_tests": 94,
+    "services_ui_tests": 11,
+    "frontend_build": "passed",
+    "ruff": "passed",
+    "browser_layout": "verified"
+  },
+  "p2p_relay_used": false
+}

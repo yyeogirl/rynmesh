@@ -44,6 +44,10 @@ function qs<T extends object>(value: T | undefined): string {
 export function makeLiveNodeClient(baseUrl = "/api/local"): NodeClient {
   return {
     mode: "live",
+    getInferenceAccess: () => requestJson(`${baseUrl}/llm/api-access`),
+    setInferenceModelAlias: (name, target) => requestJson(`${baseUrl}/llm/model-aliases/${encodeURIComponent(name)}`, { method: "PUT", body: JSON.stringify({ target }) }),
+    createInferenceKey: (name, outputTokenLimit) => requestJson(`${baseUrl}/llm/api-keys`, { method: "POST", body: JSON.stringify({ name, output_token_limit: outputTokenLimit }) }),
+    revokeInferenceKey: (id) => requestJson(`${baseUrl}/llm/api-keys/${encodeURIComponent(id)}`, { method: "DELETE" }),
     getNodeStatus: () => requestJson(`${baseUrl}/node/status`),
     getRegistryStatus: () => requestJson(`${baseUrl}/registry/status`),
     listJobCapacities: (filters) => requestJson(`${baseUrl}/jobs/capacity${qs(filters)}`),

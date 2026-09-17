@@ -1,0 +1,51 @@
+{
+  "task_id": "api_8ebf00f23487424fbe0aabb5f0e2bc79",
+  "evidence": {
+    "distinct_public_egress_required": true,
+    "local": {
+      "host": "10.10.10.199",
+      "port": 61920,
+      "transport": "udp",
+      "type": "host"
+    },
+    "path_kind": "server_reflexive",
+    "peer_public_mapping_nominated": true,
+    "public_nat_traversal_required": true,
+    "relay_used": false,
+    "remote": {
+      "host": "117.50.189.73",
+      "port": 3000,
+      "transport": "udp",
+      "type": "srflx"
+    },
+    "request_bytes": 1230,
+    "response_bytes": 1015,
+    "transport": "ice_udp_direct"
+  },
+  "elapsed_seconds": 16.1,
+  "streaming": {
+    "done": true,
+    "evidence": {
+      "distinct_public_egress_required": true,
+      "local": {
+        "host": "10.10.10.199",
+        "port": 63607,
+        "transport": "udp",
+        "type": "host"
+      },
+      "path_kind": "server_reflexive",
+      "peer_public_mapping_nominated": true,
+      "public_nat_traversal_required": true,
+      "relay_used": false,
+      "remote": {
+        "host": "117.50.189.73",
+        "port": 3000,
+        "transport": "udp",
+        "type": "srflx"
+      },
+      "request_bytes": 1274,
+      "response_bytes": 4963,
+      "transport": "ice_udp_direct"
+    }
+  }
+}

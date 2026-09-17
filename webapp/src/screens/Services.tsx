@@ -13,6 +13,7 @@ import type {
 } from "../domain/nodeClient";
 import { LLM_TERMINAL_STATES, llmServiceRecordKey } from "../domain/llmOrders";
 import type { JobCapacity, WorkResult } from "../domain/types";
+import InferenceAccess from "./InferenceAccess";
 
 const VEO_CAPABILITY = "signal50.veo_motion.v1";
 const VEO_OPERATION = "signal50.remote_action.complete_flow_video_veo_motion_clips";
@@ -64,7 +65,7 @@ export default function Services() {
   const [selectedLlmServiceKey, setSelectedLlmServiceKey] = useState("");
   const [llmPrompt, setLlmPrompt] = useState("Explain in one sentence why this request travelled through Rynmesh.");
   const [llmMaxTokens, setLlmMaxTokens] = useState("64");
-  const [llmTransport, setLlmTransport] = useState<"auto" | "direct" | "p2p" | "relay">("auto");
+  const [llmTransport, setLlmTransport] = useState<"auto" | "direct" | "p2p" | "relay">("p2p");
   const [llmResult, setLlmResult] = useState<LLMOrderResult | null>(null);
   const [llmBalance, setLlmBalance] = useState<TaskBalanceSummary | null>(null);
   const [llmProvider, setLlmProvider] = useState<LLMProviderStatus | null>(null);
@@ -518,6 +519,8 @@ export default function Services() {
         context="Discover Provider nodes, submit signed work orders, and use a direct or end-to-end encrypted transport selected for each task."
         actions={<Button icon={RefreshCw} onClick={() => void refresh()}>Refresh</Button>}
       />
+
+      <InferenceAccess />
 
       <Panel>
         <div className="panel-head">

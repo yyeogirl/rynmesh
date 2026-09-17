@@ -1,0 +1,14 @@
+{
+  "requested_output_tokens": 128000,
+  "tools": 76,
+  "done": true,
+  "answer_characters": 111,
+  "reasoning_characters": 381,
+  "tool_call_deltas": 0,
+  "usage": {
+    "prompt_tokens": 33649,
+    "completion_tokens": 108,
+    "total_tokens": 33757
+  },
+  "elapsed_seconds": 80.0
+}

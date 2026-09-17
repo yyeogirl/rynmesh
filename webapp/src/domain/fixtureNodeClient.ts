@@ -1039,6 +1039,18 @@ export function makeFixtureNodeClient(): NodeClient {
       await delay();
       return [];
     },
+    async getInferenceAccess() {
+      return { base_url: "http://127.0.0.1:8791/v1", keys: [], models: [], targets: [], aliases: {} };
+    },
+    async setInferenceModelAlias() {
+      throw new Error("Connect a live node to save a model alias.");
+    },
+    async createInferenceKey() {
+      throw new Error("Connect a live node to create an API key.");
+    },
+    async revokeInferenceKey() {
+      return { revoked: true };
+    },
     async listLLMServices() {
       await delay();
       return [{

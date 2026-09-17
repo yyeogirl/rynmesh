@@ -14,6 +14,8 @@ from dataclasses import dataclass
 from typing import Any, Protocol
 from urllib.parse import urlparse
 
+from .chat import ChatAccumulator, validate_chat
+
 
 class AdapterError(RuntimeError):
     pass
@@ -24,6 +26,7 @@ class LLMAdapter(Protocol):
     def models(self) -> list[dict[str, Any]]: ...
     def capabilities(self) -> dict[str, Any]: ...
     def infer(self, *, prompt: str, max_tokens: int, task_id: str, timeout_s: float) -> dict[str, Any]: ...
+    def chat(self, body: dict[str, Any], *, task_id: str, timeout_s: float, on_event: Any = None) -> dict[str, Any]: ...
     def cancel(self, task_id: str) -> bool: ...
     def metrics(self) -> dict[str, Any]: ...
     def shutdown(self) -> None: ...
@@ -193,6 +196,76 @@ class OpenAICompatibleAdapter:
             raise
         finally:
             self._cancelled.discard(task_id)
+
+    def chat(self, body: dict[str, Any], *, task_id: str, timeout_s: float,
+             on_event: Any = None) -> dict[str, Any]:
+        body = validate_chat(body)
+        if task_id in self._cancelled:
+            raise AdapterError("task_cancelled")
+        if not self.model and not self.health().get("ok"):
+            raise AdapterError("local API has no usable model")
+        body["model"] = self.model
+        streaming = bool(body.get("stream"))
+        if streaming:
+            body["stream_options"] = {"include_usage": True}
+        started = time.monotonic()
+        deadline = started + timeout_s
+        try:
+            if not streaming:
+                raw = self._json("/v1/chat/completions", body, timeout_s, task_id=task_id)
+                choice = raw["choices"][0]
+                message = choice["message"]
+                usage = raw.get("usage") or {}
+                finish = choice.get("finish_reason") or "stop"
+            else:
+                request = urllib.request.Request(self.base_url + "/v1/chat/completions",
+                                                 data=json.dumps(body).encode(), headers=self._headers())
+                accumulator = ChatAccumulator()
+                with urllib.request.urlopen(request, timeout=timeout_s) as response:
+                    if "text/event-stream" not in response.headers.get("content-type", ""):
+                        raise AdapterError("upstream_streaming_not_supported")
+                    with self._lock:
+                        self._active_responses[task_id] = response
+                    total = 0
+                    for line in response:
+                        total += len(line)
+                        if total > 32 * 1024 * 1024:
+                            raise AdapterError("stream exceeds 32 MiB")
+                        if task_id in self._cancelled:
+                            raise AdapterError("task_cancelled")
+                        if time.monotonic() > deadline:
+                            raise AdapterError("inference timed out")
+                        if not line.startswith(b"data:"):
+                            continue
+                        data = line[5:].strip()
+                        if data == b"[DONE]":
+                            break
+                        chunk = json.loads(data)
+                        if "error" in chunk:
+                            raise AdapterError("upstream_stream_error")
+                        accumulator.add(chunk)
+                        if on_event:
+                            on_event(chunk)
+                if not accumulator.finished:
+                    raise AdapterError("upstream_stream_truncated")
+                message, usage, finish = accumulator.message(), accumulator.usage, accumulator.finish_reason
+            if task_id in self._cancelled:
+                raise AdapterError("task_cancelled")
+            if not message.get("content") and not message.get("tool_calls") and not message.get("reasoning_content"):
+                raise AdapterError("upstream_empty_completion")
+            input_tokens = int(usage.get("prompt_tokens") or max(1, len(json.dumps(body["messages"])) // 4))
+            output_tokens = int(usage.get("completion_tokens") or max(1, len(json.dumps(message)) // 4))
+            return {"text": message.get("content") or "", "message": message, "finish_reason": finish,
+                    "input_tokens": input_tokens, "output_tokens": output_tokens,
+                    "duration_ms": int((time.monotonic() - started) * 1000)}
+        except (OSError, ValueError, KeyError, IndexError) as exc:
+            if task_id in self._cancelled:
+                raise AdapterError("task_cancelled") from exc
+            raise AdapterError("upstream_chat_failed") from exc
+        finally:
+            with self._lock:
+                self._active_responses.pop(task_id, None)
+                self._cancelled.discard(task_id)
 
     def cancel(self, task_id: str) -> bool:
         with self._lock:

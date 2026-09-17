@@ -1,0 +1,26 @@
+[
+  {
+    "enabled": false,
+    "stream": false,
+    "nested": false,
+    "answer": "Hello! How can I assist you today? \ud83d\ude0a",
+    "reasoning_characters": 0,
+    "elapsed_seconds": 45.6
+  },
+  {
+    "enabled": true,
+    "stream": true,
+    "nested": false,
+    "answer": "Hello! \ud83d\ude0a How can I assist you today?",
+    "reasoning_characters": 422,
+    "elapsed_seconds": 11.9
+  },
+  {
+    "enabled": true,
+    "stream": false,
+    "nested": true,
+    "answer": "Hello! \ud83d\ude0a How can I assist you today?",
+    "reasoning_characters": 422,
+    "elapsed_seconds": 12.0
+  }
+]

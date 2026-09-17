@@ -88,6 +88,12 @@ class TaskOrderStore:
         self._lock = threading.RLock()
 
     def get(self, task_id: str) -> dict[str, Any] | None:
+        # Windows can reject reads/replaces while another thread holds the file.
+        # Use the same reentrant lock as transitions and checkpoints.
+        with self._lock:
+            return self._read(task_id)
+
+    def _read(self, task_id: str) -> dict[str, Any] | None:
         path = self._path(task_id)
         if not path.exists():
             return None
