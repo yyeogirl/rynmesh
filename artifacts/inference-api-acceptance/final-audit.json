@@ -6,16 +6,25 @@
   "frontend_build_passed": true,
   "live_sdk_retest": {
     "passed": false,
+    "status": "not_completed_server_intentionally_shut_down",
     "completed_checks": 0,
     "model": "qwen",
     "http_status": 503,
     "error": "model_alias_target_unavailable",
     "provider_ssh": "connection_timed_out",
-    "root_cause": "undetermined: remote host or network unavailable"
+    "user_confirmed_context": "User deliberately shut down the test server after the successful tests; confirmed on 2026-09-18",
+    "functional_acceptance_blocker": false
   },
-  "acceptance_complete": false,
-  "remaining": [
-    "Restore provider reachability and rerun SDK/P2P acceptance",
+  "core_functional_acceptance": {
+    "status": "passed",
+    "scope": "Documented local inference API and dual-node strict P2P text/function-tool compatibility",
+    "basis": [
+      "Previously completed real-model SDK and strict P2P checks",
+      "Current backend/UI regression, Ruff and frontend build",
+      "User accepted the prior successful test evidence after confirming intentional server shutdown"
+    ]
+  },
+  "remaining_delivery_and_release_items": [
     "Deliver annotated screenshot of the current configuration page",
     "Validate integration with latest upstream/main",
     "Build desktop installer if preparing a release"

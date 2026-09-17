@@ -1,10 +1,18 @@
 # Inference API acceptance — 2026-09-17
 
-Historical result: passed for the documented text/function-tool compatibility subset.
-This is not a statement of current deployment availability. The 2026-09-18 audit
-passed 120 backend tests, 12 Services UI tests, Ruff and the production frontend
-build, but live SDK retesting failed with HTTP 503 `model_alias_target_unavailable`.
-SSH to the provider also timed out. See [final-audit.json](final-audit.json) and
+Acceptance result: **passed** for the documented local inference API and dual-node
+strict P2P text/function-tool scope, based on the completed real-model checks below
+and the 2026-09-18 regression checks (120 backend tests, 12 Services UI tests, Ruff
+and the production frontend build).
+
+The user confirmed on 2026-09-18 that they deliberately shut down the test server
+after the successful tests and accepted the functionality on that evidence.
+The later live retest observed HTTP 503 `model_alias_target_unavailable` and an
+SSH timeout while the server was shut down; it completed no inference checks.
+Those observations are retained, but are not a functional acceptance failure.
+This acceptance does not assert current service availability, completion of the
+annotated screenshot, a new installer release or integration with latest main.
+See [final-audit.json](final-audit.json) and
 [current acceptance status and remaining work](../../docs/LOCAL_INFERENCE_ACCEPTANCE.md).
 
 Machine-readable evidence: [summary.json](summary.json).
