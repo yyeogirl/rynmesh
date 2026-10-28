@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "started_at": "2026-09-14T06:28:00.984994+00:00",
+  "passed": true,
+  "scope": "fresh real TCP nodes and default HTTP Registry sender quota; no artificial quota settings",
+  "not_proven": [
+    "desktop installation/UI",
+    "different public network exits",
+    "recipient-wide capacity over TCP",
+    "full-hour real-clock message expiry",
+    "full privacy export audit"
+  ],
+  "checks": [
+    {
+      "name": "real_default_sender_quota",
+      "result": "passed",
+      "pending_envelopes": 16,
+      "refused_message": 17,
+      "safe_error": "sender_quota"
+    },
+    {
+      "name": "quota_failure_restart_recovery_and_same_id_retry",
+      "result": "passed",
+      "received_messages": 17,
+      "duplicate_messages": 0
+    }
+  ],
+  "scenario": "mailbox-quota",
+  "finished_at": "2026-09-14T06:28:58.185668+00:00"
+}

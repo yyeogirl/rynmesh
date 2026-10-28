@@ -1,0 +1,21 @@
+{
+  "date": "2026-09-11",
+  "environment": "Windows independent loopback node and in-app browser",
+  "asset": "index-Bi9lNg6V.js",
+  "initial_review": {"documents": 1, "files": 3, "display_kib": 0.8},
+  "keyboard_cancel_kept_same_review_counts": true,
+  "keyboard_confirmation_exercised": true,
+  "windows_delete_sharing_denial_reproduced": true,
+  "unfinished_state_and_error_focus_verified": true,
+  "same_home_restart_kept_original_job": true,
+  "later_fixture_document_visible_after_restart": true,
+  "changed_remaining_file_resume_rejected": true,
+  "remaining_file_review_count": 1,
+  "keyboard_approval_after_handle_release_completed": true,
+  "completion_focus_verified": true,
+  "later_document_visible_after_completion": true,
+  "closed_owned_node_handle_and_tab": true,
+  "packaged_desktop": false,
+  "two_person_browser_flow": false,
+  "remote_erasure_confirmed": false
+}

@@ -1,0 +1,15 @@
+{
+  "baseline": "Disjoint synthetic legacy files migrated through source API; no seeded receipts",
+  "baseline_migration_seconds": 3.658625799987931,
+  "changed_records": 100,
+  "error_type": "PeerTransportError",
+  "phase": "initial_merge",
+  "platform": "Windows-11-10.0.28120-SP0",
+  "python": "3.12.10",
+  "recorded_at_unix": 1789123668.2820039,
+  "records_per_converged_source": 10000,
+  "scope": "Bookmarks; two loopback route packages; no scheduler wait/UI/other workers/cross-NAT",
+  "status": "failed",
+  "target_met": false,
+  "target_seconds": 60
+}

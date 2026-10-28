@@ -12,6 +12,8 @@ import json
 import math
 from pathlib import Path
 
+import pytest
+
 from rynmesh.services.embeddings import EmbeddingsWorker, embed_stub
 from rynmesh.services.image import ImageWorker, make_rgba_png, stub_image
 from rynmesh.services.llm import LLMWorker, llm_stub_complete
@@ -88,17 +90,28 @@ def _roundtrip(
     return json.loads(completed[-1]["message"])
 
 
-def test_llm_worker_end_to_end(tmp_path) -> None:
+def test_legacy_llm_work_order_rejects_plaintext(tmp_path) -> None:
     provider = _new_store(tmp_path / "p", tmp_path / "net", "p")
     requester = _new_store(tmp_path / "r", tmp_path / "net", "r")
-    payload = _roundtrip(
-        LLMWorker(), requester, provider,
-        network_id="rynmesh-test-llm",
-        params={"prompt": "hello rynmesh", "max_tokens": 16},
-    )
-    assert payload["backend"] == "stub"
-    assert isinstance(payload["text"], str) and len(payload["text"]) > 0
-    assert payload["tokens"] >= 8
+    with pytest.raises(ValueError, match="private task protocol"):
+        _roundtrip(
+            LLMWorker(), requester, provider,
+            network_id="rynmesh-test-llm",
+            params={"prompt": "must not enter registry", "max_tokens": 16},
+        )
+
+    with pytest.raises(ValueError, match="private task protocol"):
+        requester.submit_work_order(
+            provider_peer_id=provider.peer_id,
+            capability="rynmesh.llm.private.v1",
+            operation="rynmesh.llm.private.infer.v1.p2p_offer",
+            params={
+                "session_id": "session",
+                "ice_signal": {"username": "u", "password": "p", "candidates": ["candidate"]},
+                "timeout_seconds": 30,
+                "payload": {"prompt": "nested plaintext must not enter registry"},
+            },
+        )
 
 
 def test_embeddings_worker_end_to_end(tmp_path) -> None:

@@ -9,6 +9,11 @@ Rynmesh is alpha software. “Implemented” below means the behavior exists in
 the repository and is covered by the current release process; it does not mean
 the behavior has completed production hardening or broad field validation.
 
+The evidence each milestone must produce before it is claimed, and what a
+feature ships with beyond working code, are defined in
+[`TESTING_STRATEGY.md`](TESTING_STRATEGY.md). Its §5 records where coverage is
+currently short of the claims on this page.
+
 ## Current release: P1 Ryn Companion
 
 The personal-assistant milestone is implemented and available in the public
@@ -91,6 +96,9 @@ Implemented foundations:
 - encrypted direct messages and small attachments
 - signed publication and verified peer fetches
 - credit and serve-receipt primitives
+- peer mailbox (delivered, #35): sealed, signed, short-TTL registry
+  store-and-forward so pairing and chat reach an offline or endpoint-less node
+  (`docs/PEER_MAILBOX.md`)
 
 Planned product work:
 
@@ -111,17 +119,27 @@ friend-origin content can be distinguished, verified, muted, and removed.
 Goal: let an owner-approved agent perform useful work across nodes within clear
 limits.
 
+Status: the first service landed early. The local-LLM package delivers an
+encrypted node-to-node task protocol, provider publication and discovery, a
+task-first Services catalog with a Private AI chat, strict-P2P transport
+checks, and a development-only Task Balance ledger. Strict public-internet
+acceptance and the items in `SERVICE_PLATFORM_NEXT.md` remain before this
+graduates from preview.
+
 Planned work:
 
 1. A budgeted agent loop with permitted action types, per-period limits,
    confirmations, and a complete local audit trail.
 2. A general service manifest and invocation protocol based on the existing
-   work-order path, with metering and result verification.
-3. Useful initial services such as local model generation, media transcoding,
-   and network egress.
+   work-order path, with metering and result verification. The LLM package is
+   the reference implementation; the service-experience framework in
+   `SERVICE_PLATFORM_NEXT.md` generalizes its seams.
+3. Useful initial services such as local model generation (shipped as the
+   Private AI preview), media transcoding, and network egress.
 4. Agent-to-agent commissioning within the owner’s approval envelope.
 5. Credit debits and credits for verified service work. Credits remain
-   non-transferable during this milestone.
+   non-transferable during this milestone; the development Task Balance is
+   folded into the credit ledger as part of this item.
 
 ## P4: Open-network hardening
 

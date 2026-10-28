@@ -19,6 +19,9 @@ import time
 from html.parser import HTMLParser
 from pathlib import Path
 from typing import Any, Callable
+from urllib.parse import urljoin
+
+from ..atomic_io import atomic_write_json
 
 __all__ = ["ReaderError", "extract_readable", "readable_url", "ReaderCache", "link_post_target"]
 
@@ -26,7 +29,7 @@ MAX_BLOCKS = 400
 MIN_PARAGRAPH_CHARS = 25
 CACHE_TTL_S = 24 * 3600
 # Bump whenever extraction behaviour changes; older entries are then ignored.
-EXTRACTOR_VERSION = 2
+EXTRACTOR_VERSION = 3
 
 # Containers whose text is never article body.
 _SKIP_TAGS = {
@@ -98,6 +101,8 @@ class _Extractor(HTMLParser):
         self.lead_image = ""
         self._stack: list[str] = []
         self._skip_depth = 0
+        self._skip_tag = ""
+        self._password_groups: set[int] = set()
         self._in_title = False
         # container id -> list of (tag, text)
         self._groups: dict[int, list[tuple[str, str]]] = {}
@@ -106,6 +111,9 @@ class _Extractor(HTMLParser):
         self._block: list[str] = []
         self._block_tag = ""
         self._next_group = 0
+        self._images: dict[int, list[dict[str, str]]] = {}
+        self.best_group: int | None = None
+        self.images_omitted = False
 
     # -- helpers ----------------------------------------------------------
     def _looks_like_chrome(self, attrs: dict[str, str]) -> bool:
@@ -126,12 +134,19 @@ class _Extractor(HTMLParser):
     def handle_starttag(self, tag: str, attrs_list: list[tuple[str, str | None]]) -> None:
         attrs = {k: (v or "") for k, v in attrs_list}
         if self._skip_depth:
+            # A password form beside the selected prose can be an HTTP-200
+            # sign-in gate. Forms inside ignored navigation/sidebars do not
+            # belong to the article and must not block a public download.
+            if (self._skip_tag == "form" and tag == "input"
+                    and attrs.get("type", "").strip().lower() == "password" and self._group_stack):
+                self._password_groups.add(self._group_stack[-1])
             if tag not in _VOID_TAGS:
                 self._skip_depth += 1
             return
         if tag in _SKIP_TAGS:
             if tag not in _VOID_TAGS:
                 self._skip_depth = 1
+                self._skip_tag = tag
             return
 
         if tag == "title":
@@ -155,6 +170,18 @@ class _Extractor(HTMLParser):
             self._block_tag = tag
         elif tag == "br":
             self._block.append(" ")
+        elif tag == "img" and self._group_stack:
+            # Passive images inside the selected article only; never scripts,
+            # frames, navigation art or explicitly tiny tracking pixels.
+            dimensions = [attrs.get(key, '').removesuffix('px') for key in ('width', 'height')]
+            tiny = any(value.isdigit() and int(value) <= 2 for value in dimensions)
+            source = (attrs.get('src') or attrs.get('data-src') or '').strip()
+            if source and not tiny and not self._looks_like_chrome(attrs):
+                images = self._images.setdefault(self._group_stack[-1], [])
+                if len(images) < 64:
+                    images.append({'url': source[:4096], 'alt': attrs.get('alt', '')[:300]})
+                else:
+                    self.images_omitted = True
         self._stack.append(tag)
 
     def handle_endtag(self, tag: str) -> None:
@@ -200,7 +227,8 @@ class _Extractor(HTMLParser):
             # No prose anywhere (link dumps, JS-rendered pages): fall back to
             # whatever headings/list text we did find, so the reader still
             # shows something rather than an empty panel.
-            best = max(self._groups.values(), key=lambda b: sum(len(t) for _, t in b))
+            best_id, best = max(self._groups.items(), key=lambda row: sum(len(t) for _, t in row[1]))
+        self.best_group = best_id
         out = []
         for tag, text in best[:MAX_BLOCKS]:
             if tag == "p" and len(text) < MIN_PARAGRAPH_CHARS:
@@ -223,6 +251,14 @@ def extract_readable(data: bytes, *, url: str = "") -> dict[str, Any]:
         # Malformed markup is normal on the open web; keep whatever parsed.
         pass
     blocks = parser.best_blocks()
+    images = parser._images.get(parser.best_group, [])
+    if parser.lead_image:
+        images = [{'url': parser.lead_image, 'alt': ''}, *images]
+    image_urls = {}
+    for image in images:
+        source = urljoin(url, image['url'])
+        if source.startswith(('https://', 'http://')):
+            image_urls.setdefault(source, {**image, 'url': source})
     words = sum(len(block["text"].split()) for block in blocks)
     return {
         "url": url,
@@ -232,7 +268,11 @@ def extract_readable(data: bytes, *, url: str = "") -> dict[str, Any]:
         "byline": parser.byline.strip()[:200],
         "lead_image": parser.lead_image.strip(),
         "blocks": blocks,
+        "access_required": parser.best_group in parser._password_groups,
         "word_count": words,
+        "images": list(image_urls.values()),
+        "images_omitted": parser.images_omitted,
+        "truncated": len(parser._groups.get(parser.best_group, [])) > MAX_BLOCKS,
     }
 
 
@@ -285,28 +325,25 @@ class ReaderCache:
 
         return self.dir / (hashlib.sha256(url.encode("utf-8")).hexdigest()[:20] + ".json")
 
-    def get(self, url: str, *, now: float) -> dict[str, Any] | None:
+    def get(self, url: str, *, now: float, allow_stale: bool = False) -> dict[str, Any] | None:
         path = self._path(url)
         try:
             payload = json.loads(path.read_text(encoding="utf-8"))
         except (OSError, ValueError):
             return None
-        if now - float(payload.get("cached_at", 0)) > self.ttl_s:
+        if not allow_stale and now - float(payload.get("cached_at", 0)) > self.ttl_s:
             return None
         if int(payload.get("extractor", 0)) != EXTRACTOR_VERSION:
             return None  # extracted by an older reader: re-fetch
         return payload.get("article")
 
     def put(self, url: str, article: dict[str, Any], *, now: float) -> None:
-        tmp = self._path(url).with_suffix(".tmp")
-        tmp.write_text(
-            json.dumps(
-                {"cached_at": now, "extractor": EXTRACTOR_VERSION, "article": article},
-                ensure_ascii=False,
-            ),
-            encoding="utf-8",
+        atomic_write_json(
+            self._path(url),
+            {"cached_at": now, "extractor": EXTRACTOR_VERSION, "article": article},
+            sort_keys=False,
+            ensure_ascii=False,
         )
-        tmp.replace(self._path(url))
 
     def clear(self) -> None:
         """Erase locally cached article extracts without removing the cache root."""

@@ -1,0 +1,1023 @@
+{
+  "scope": "Windows loopback browser; existing real Qwen model and native runtime; not packaged desktop",
+  "checkpoints": [
+    {
+      "label": "baseline",
+      "at": "2026-09-14T10:43:41.710830+00:00",
+      "service": {
+        "configured": true,
+        "ready": false,
+        "online": false,
+        "publication_enabled": false
+      },
+      "runtime": {
+        "installed": true,
+        "running": false,
+        "status": "stopped",
+        "release": "b10774"
+      },
+      "storage": null,
+      "error": null,
+      "model_bytes": 491400032,
+      "runtime_binary_exists": true,
+      "conversation_count": 10,
+      "conversations_sha256": "f7ac5ef4c02658178d60d16df8db2f6830295aee4cd89af65b0469cc47059083",
+      "orders": [
+        {
+          "task_id": "task_0e305e5ddafd4a10bb63cb64927e604b",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_184cacbe8ef04e1b9f759e8e2276ffcf",
+          "state": "cancelled"
+        },
+        {
+          "task_id": "task_235eeba1c5144bafa9e13a7d1e097abd",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_34fc78914cb4437e8a3db83938386d6d",
+          "state": "failed"
+        },
+        {
+          "task_id": "task_599ea957a83d430da66c0f46c7e60170",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_640e1bc624f24a9aba5182d8b906a605",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_6878bf44c63740b7aa918a7dad0661be",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_6d3243c7292e4294984a297d8fcc9e0c",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_79a80590dab946bfba63ffac18aed28e",
+          "state": "failed"
+        },
+        {
+          "task_id": "task_9b4be5cb9d514b31a38aaf9f6bb98480",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_a57f5248710449c98e14b75ed08f292a",
+          "state": "failed"
+        },
+        {
+          "task_id": "task_a6ccac2aa7f34051ab9868b7c4c9563f",
+          "state": "failed"
+        },
+        {
+          "task_id": "task_bc999cf7b51b46e885d3e9e77a64dcff",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_e3ea70ccfea146209002c53f565f71e0",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_f5a09bdeef9c4a47a2a8540844ab8954",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_f7623ac161234d4a9fb66b71fec1da0c",
+          "state": "succeeded"
+        }
+      ],
+      "manifest_exists": true,
+      "model_sha256": "74a4da8c9fdbcd15bd1f6d01d621410d31c6fc00986f5eb687824e7b93d7a9db"
+    },
+    {
+      "label": "model-missing",
+      "at": "2026-09-14T10:44:45.274839+00:00",
+      "service": {
+        "configured": true,
+        "ready": false,
+        "online": false,
+        "publication_enabled": false
+      },
+      "runtime": {
+        "installed": true,
+        "running": false,
+        "status": "stopped",
+        "release": "b10774"
+      },
+      "storage": null,
+      "error": null,
+      "model_bytes": 0,
+      "runtime_binary_exists": true,
+      "conversation_count": 10,
+      "conversations_sha256": "f7ac5ef4c02658178d60d16df8db2f6830295aee4cd89af65b0469cc47059083",
+      "orders": [
+        {
+          "task_id": "task_0e305e5ddafd4a10bb63cb64927e604b",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_184cacbe8ef04e1b9f759e8e2276ffcf",
+          "state": "cancelled"
+        },
+        {
+          "task_id": "task_235eeba1c5144bafa9e13a7d1e097abd",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_34fc78914cb4437e8a3db83938386d6d",
+          "state": "failed"
+        },
+        {
+          "task_id": "task_599ea957a83d430da66c0f46c7e60170",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_640e1bc624f24a9aba5182d8b906a605",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_6878bf44c63740b7aa918a7dad0661be",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_6d3243c7292e4294984a297d8fcc9e0c",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_79a80590dab946bfba63ffac18aed28e",
+          "state": "failed"
+        },
+        {
+          "task_id": "task_9b4be5cb9d514b31a38aaf9f6bb98480",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_a57f5248710449c98e14b75ed08f292a",
+          "state": "failed"
+        },
+        {
+          "task_id": "task_a6ccac2aa7f34051ab9868b7c4c9563f",
+          "state": "failed"
+        },
+        {
+          "task_id": "task_bc999cf7b51b46e885d3e9e77a64dcff",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_e3ea70ccfea146209002c53f565f71e0",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_f5a09bdeef9c4a47a2a8540844ab8954",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_f7623ac161234d4a9fb66b71fec1da0c",
+          "state": "succeeded"
+        }
+      ],
+      "manifest_exists": true
+    },
+    {
+      "label": "runtime-missing",
+      "at": "2026-09-14T10:45:48.160748+00:00",
+      "service": {
+        "configured": true,
+        "ready": false,
+        "online": false,
+        "publication_enabled": false
+      },
+      "runtime": {
+        "installed": false,
+        "running": false,
+        "status": "not installed",
+        "release": "b10774"
+      },
+      "storage": null,
+      "error": null,
+      "model_bytes": 491400032,
+      "runtime_binary_exists": false,
+      "conversation_count": 10,
+      "conversations_sha256": "f7ac5ef4c02658178d60d16df8db2f6830295aee4cd89af65b0469cc47059083",
+      "orders": [
+        {
+          "task_id": "task_0e305e5ddafd4a10bb63cb64927e604b",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_184cacbe8ef04e1b9f759e8e2276ffcf",
+          "state": "cancelled"
+        },
+        {
+          "task_id": "task_235eeba1c5144bafa9e13a7d1e097abd",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_34fc78914cb4437e8a3db83938386d6d",
+          "state": "failed"
+        },
+        {
+          "task_id": "task_599ea957a83d430da66c0f46c7e60170",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_640e1bc624f24a9aba5182d8b906a605",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_6878bf44c63740b7aa918a7dad0661be",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_6d3243c7292e4294984a297d8fcc9e0c",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_79a80590dab946bfba63ffac18aed28e",
+          "state": "failed"
+        },
+        {
+          "task_id": "task_9b4be5cb9d514b31a38aaf9f6bb98480",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_a57f5248710449c98e14b75ed08f292a",
+          "state": "failed"
+        },
+        {
+          "task_id": "task_a6ccac2aa7f34051ab9868b7c4c9563f",
+          "state": "failed"
+        },
+        {
+          "task_id": "task_bc999cf7b51b46e885d3e9e77a64dcff",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_e3ea70ccfea146209002c53f565f71e0",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_f5a09bdeef9c4a47a2a8540844ab8954",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_f7623ac161234d4a9fb66b71fec1da0c",
+          "state": "succeeded"
+        }
+      ],
+      "manifest_exists": true,
+      "model_sha256": "74a4da8c9fdbcd15bd1f6d01d621410d31c6fc00986f5eb687824e7b93d7a9db"
+    },
+    {
+      "label": "model-missing-final",
+      "at": "2026-09-14T10:52:12.831809+00:00",
+      "service": {
+        "configured": true,
+        "ready": false,
+        "online": false,
+        "publication_enabled": false
+      },
+      "runtime": {
+        "installed": true,
+        "running": false,
+        "status": "stopped",
+        "release": "b10774"
+      },
+      "storage": {
+        "model_owned": true,
+        "model_present": false,
+        "model_bytes": 0
+      },
+      "error": null,
+      "model_bytes": 0,
+      "runtime_binary_exists": true,
+      "conversation_count": 10,
+      "conversations_sha256": "f7ac5ef4c02658178d60d16df8db2f6830295aee4cd89af65b0469cc47059083",
+      "orders": [
+        {
+          "task_id": "task_0e305e5ddafd4a10bb63cb64927e604b",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_184cacbe8ef04e1b9f759e8e2276ffcf",
+          "state": "cancelled"
+        },
+        {
+          "task_id": "task_235eeba1c5144bafa9e13a7d1e097abd",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_34fc78914cb4437e8a3db83938386d6d",
+          "state": "failed"
+        },
+        {
+          "task_id": "task_599ea957a83d430da66c0f46c7e60170",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_640e1bc624f24a9aba5182d8b906a605",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_6878bf44c63740b7aa918a7dad0661be",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_6d3243c7292e4294984a297d8fcc9e0c",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_79a80590dab946bfba63ffac18aed28e",
+          "state": "failed"
+        },
+        {
+          "task_id": "task_9b4be5cb9d514b31a38aaf9f6bb98480",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_a57f5248710449c98e14b75ed08f292a",
+          "state": "failed"
+        },
+        {
+          "task_id": "task_a6ccac2aa7f34051ab9868b7c4c9563f",
+          "state": "failed"
+        },
+        {
+          "task_id": "task_bc999cf7b51b46e885d3e9e77a64dcff",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_e3ea70ccfea146209002c53f565f71e0",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_f5a09bdeef9c4a47a2a8540844ab8954",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_f7623ac161234d4a9fb66b71fec1da0c",
+          "state": "succeeded"
+        }
+      ],
+      "manifest_exists": true
+    },
+    {
+      "label": "runtime-missing-final",
+      "at": "2026-09-14T10:52:34.109800+00:00",
+      "service": {
+        "configured": true,
+        "ready": false,
+        "online": false,
+        "publication_enabled": false
+      },
+      "runtime": {
+        "installed": false,
+        "running": false,
+        "status": "not installed",
+        "release": "b10774"
+      },
+      "storage": {
+        "model_owned": true,
+        "model_present": true,
+        "model_bytes": 491400032
+      },
+      "error": null,
+      "model_bytes": 491400032,
+      "runtime_binary_exists": false,
+      "conversation_count": 10,
+      "conversations_sha256": "f7ac5ef4c02658178d60d16df8db2f6830295aee4cd89af65b0469cc47059083",
+      "orders": [
+        {
+          "task_id": "task_0e305e5ddafd4a10bb63cb64927e604b",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_184cacbe8ef04e1b9f759e8e2276ffcf",
+          "state": "cancelled"
+        },
+        {
+          "task_id": "task_235eeba1c5144bafa9e13a7d1e097abd",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_34fc78914cb4437e8a3db83938386d6d",
+          "state": "failed"
+        },
+        {
+          "task_id": "task_599ea957a83d430da66c0f46c7e60170",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_640e1bc624f24a9aba5182d8b906a605",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_6878bf44c63740b7aa918a7dad0661be",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_6d3243c7292e4294984a297d8fcc9e0c",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_79a80590dab946bfba63ffac18aed28e",
+          "state": "failed"
+        },
+        {
+          "task_id": "task_9b4be5cb9d514b31a38aaf9f6bb98480",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_a57f5248710449c98e14b75ed08f292a",
+          "state": "failed"
+        },
+        {
+          "task_id": "task_a6ccac2aa7f34051ab9868b7c4c9563f",
+          "state": "failed"
+        },
+        {
+          "task_id": "task_bc999cf7b51b46e885d3e9e77a64dcff",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_e3ea70ccfea146209002c53f565f71e0",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_f5a09bdeef9c4a47a2a8540844ab8954",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_f7623ac161234d4a9fb66b71fec1da0c",
+          "state": "succeeded"
+        }
+      ],
+      "manifest_exists": true,
+      "model_sha256": "74a4da8c9fdbcd15bd1f6d01d621410d31c6fc00986f5eb687824e7b93d7a9db"
+    },
+    {
+      "label": "update-observation",
+      "at": "2026-09-14T10:53:29.945472+00:00",
+      "service": {
+        "configured": true,
+        "ready": false,
+        "online": false,
+        "publication_enabled": false
+      },
+      "runtime": {
+        "installed": true,
+        "running": false,
+        "status": "stopped",
+        "release": "b10774"
+      },
+      "storage": {
+        "model_owned": true,
+        "model_present": true,
+        "model_bytes": 491400032
+      },
+      "error": null,
+      "model_bytes": 491400032,
+      "runtime_binary_exists": true,
+      "conversation_count": 10,
+      "conversations_sha256": "f7ac5ef4c02658178d60d16df8db2f6830295aee4cd89af65b0469cc47059083",
+      "orders": [
+        {
+          "task_id": "task_0e305e5ddafd4a10bb63cb64927e604b",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_184cacbe8ef04e1b9f759e8e2276ffcf",
+          "state": "cancelled"
+        },
+        {
+          "task_id": "task_235eeba1c5144bafa9e13a7d1e097abd",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_34fc78914cb4437e8a3db83938386d6d",
+          "state": "failed"
+        },
+        {
+          "task_id": "task_599ea957a83d430da66c0f46c7e60170",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_640e1bc624f24a9aba5182d8b906a605",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_6878bf44c63740b7aa918a7dad0661be",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_6d3243c7292e4294984a297d8fcc9e0c",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_79a80590dab946bfba63ffac18aed28e",
+          "state": "failed"
+        },
+        {
+          "task_id": "task_9b4be5cb9d514b31a38aaf9f6bb98480",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_a57f5248710449c98e14b75ed08f292a",
+          "state": "failed"
+        },
+        {
+          "task_id": "task_a6ccac2aa7f34051ab9868b7c4c9563f",
+          "state": "failed"
+        },
+        {
+          "task_id": "task_bc999cf7b51b46e885d3e9e77a64dcff",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_e3ea70ccfea146209002c53f565f71e0",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_f5a09bdeef9c4a47a2a8540844ab8954",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_f7623ac161234d4a9fb66b71fec1da0c",
+          "state": "succeeded"
+        }
+      ],
+      "manifest_exists": true,
+      "model_sha256": "74a4da8c9fdbcd15bd1f6d01d621410d31c6fc00986f5eb687824e7b93d7a9db"
+    },
+    {
+      "label": "recovered-ready",
+      "at": "2026-09-14T10:54:12.212341+00:00",
+      "service": {
+        "configured": true,
+        "ready": true,
+        "online": false,
+        "publication_enabled": false
+      },
+      "runtime": {
+        "installed": true,
+        "running": true,
+        "status": "running",
+        "release": "b10774"
+      },
+      "storage": {
+        "model_owned": true,
+        "model_present": true,
+        "model_bytes": 491400032
+      },
+      "error": null,
+      "model_bytes": 491400032,
+      "runtime_binary_exists": true,
+      "conversation_count": 10,
+      "conversations_sha256": "f7ac5ef4c02658178d60d16df8db2f6830295aee4cd89af65b0469cc47059083",
+      "orders": [
+        {
+          "task_id": "task_0e305e5ddafd4a10bb63cb64927e604b",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_184cacbe8ef04e1b9f759e8e2276ffcf",
+          "state": "cancelled"
+        },
+        {
+          "task_id": "task_235eeba1c5144bafa9e13a7d1e097abd",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_34fc78914cb4437e8a3db83938386d6d",
+          "state": "failed"
+        },
+        {
+          "task_id": "task_599ea957a83d430da66c0f46c7e60170",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_640e1bc624f24a9aba5182d8b906a605",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_6878bf44c63740b7aa918a7dad0661be",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_6d3243c7292e4294984a297d8fcc9e0c",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_79a80590dab946bfba63ffac18aed28e",
+          "state": "failed"
+        },
+        {
+          "task_id": "task_9b4be5cb9d514b31a38aaf9f6bb98480",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_a57f5248710449c98e14b75ed08f292a",
+          "state": "failed"
+        },
+        {
+          "task_id": "task_a6ccac2aa7f34051ab9868b7c4c9563f",
+          "state": "failed"
+        },
+        {
+          "task_id": "task_bc999cf7b51b46e885d3e9e77a64dcff",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_e3ea70ccfea146209002c53f565f71e0",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_f5a09bdeef9c4a47a2a8540844ab8954",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_f7623ac161234d4a9fb66b71fec1da0c",
+          "state": "succeeded"
+        }
+      ],
+      "manifest_exists": true,
+      "model_sha256": "74a4da8c9fdbcd15bd1f6d01d621410d31c6fc00986f5eb687824e7b93d7a9db"
+    },
+    {
+      "label": "removal-cancelled",
+      "at": "2026-09-14T10:55:22.756609+00:00",
+      "service": {
+        "configured": true,
+        "ready": true,
+        "online": false,
+        "publication_enabled": false
+      },
+      "runtime": {
+        "installed": true,
+        "running": true,
+        "status": "running",
+        "release": "b10774"
+      },
+      "storage": {
+        "model_owned": true,
+        "model_present": true,
+        "model_bytes": 491400032
+      },
+      "error": null,
+      "model_bytes": 491400032,
+      "runtime_binary_exists": true,
+      "conversation_count": 10,
+      "conversations_sha256": "f7ac5ef4c02658178d60d16df8db2f6830295aee4cd89af65b0469cc47059083",
+      "orders": [
+        {
+          "task_id": "task_0e305e5ddafd4a10bb63cb64927e604b",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_184cacbe8ef04e1b9f759e8e2276ffcf",
+          "state": "cancelled"
+        },
+        {
+          "task_id": "task_235eeba1c5144bafa9e13a7d1e097abd",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_34fc78914cb4437e8a3db83938386d6d",
+          "state": "failed"
+        },
+        {
+          "task_id": "task_599ea957a83d430da66c0f46c7e60170",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_640e1bc624f24a9aba5182d8b906a605",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_6878bf44c63740b7aa918a7dad0661be",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_6d3243c7292e4294984a297d8fcc9e0c",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_79a80590dab946bfba63ffac18aed28e",
+          "state": "failed"
+        },
+        {
+          "task_id": "task_9b4be5cb9d514b31a38aaf9f6bb98480",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_a57f5248710449c98e14b75ed08f292a",
+          "state": "failed"
+        },
+        {
+          "task_id": "task_a6ccac2aa7f34051ab9868b7c4c9563f",
+          "state": "failed"
+        },
+        {
+          "task_id": "task_bc999cf7b51b46e885d3e9e77a64dcff",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_e3ea70ccfea146209002c53f565f71e0",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_f5a09bdeef9c4a47a2a8540844ab8954",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_f7623ac161234d4a9fb66b71fec1da0c",
+          "state": "succeeded"
+        }
+      ],
+      "manifest_exists": true,
+      "model_sha256": "74a4da8c9fdbcd15bd1f6d01d621410d31c6fc00986f5eb687824e7b93d7a9db"
+    },
+    {
+      "label": "removal-locked",
+      "at": "2026-09-14T10:56:28.429992+00:00",
+      "service": {
+        "configured": true,
+        "ready": false,
+        "online": false,
+        "publication_enabled": false
+      },
+      "runtime": {
+        "installed": true,
+        "running": false,
+        "status": "stopped",
+        "release": "b10774"
+      },
+      "storage": {
+        "model_owned": true,
+        "model_present": true,
+        "model_bytes": 491400032
+      },
+      "error": null,
+      "model_bytes": 491400032,
+      "runtime_binary_exists": true,
+      "conversation_count": 10,
+      "conversations_sha256": "f7ac5ef4c02658178d60d16df8db2f6830295aee4cd89af65b0469cc47059083",
+      "orders": [
+        {
+          "task_id": "task_0e305e5ddafd4a10bb63cb64927e604b",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_184cacbe8ef04e1b9f759e8e2276ffcf",
+          "state": "cancelled"
+        },
+        {
+          "task_id": "task_235eeba1c5144bafa9e13a7d1e097abd",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_34fc78914cb4437e8a3db83938386d6d",
+          "state": "failed"
+        },
+        {
+          "task_id": "task_599ea957a83d430da66c0f46c7e60170",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_640e1bc624f24a9aba5182d8b906a605",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_6878bf44c63740b7aa918a7dad0661be",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_6d3243c7292e4294984a297d8fcc9e0c",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_79a80590dab946bfba63ffac18aed28e",
+          "state": "failed"
+        },
+        {
+          "task_id": "task_9b4be5cb9d514b31a38aaf9f6bb98480",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_a57f5248710449c98e14b75ed08f292a",
+          "state": "failed"
+        },
+        {
+          "task_id": "task_a6ccac2aa7f34051ab9868b7c4c9563f",
+          "state": "failed"
+        },
+        {
+          "task_id": "task_bc999cf7b51b46e885d3e9e77a64dcff",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_e3ea70ccfea146209002c53f565f71e0",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_f5a09bdeef9c4a47a2a8540844ab8954",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_f7623ac161234d4a9fb66b71fec1da0c",
+          "state": "succeeded"
+        }
+      ],
+      "manifest_exists": true,
+      "model_sha256": "74a4da8c9fdbcd15bd1f6d01d621410d31c6fc00986f5eb687824e7b93d7a9db"
+    },
+    {
+      "label": "removed",
+      "at": "2026-09-14T10:57:46.216060+00:00",
+      "service": {
+        "configured": true,
+        "ready": false,
+        "online": false,
+        "publication_enabled": false
+      },
+      "runtime": {
+        "installed": true,
+        "running": false,
+        "status": "stopped",
+        "release": "b10774"
+      },
+      "storage": {
+        "model_owned": true,
+        "model_present": false,
+        "model_bytes": 0
+      },
+      "error": null,
+      "model_bytes": 0,
+      "runtime_binary_exists": true,
+      "conversation_count": 10,
+      "conversations_sha256": "f7ac5ef4c02658178d60d16df8db2f6830295aee4cd89af65b0469cc47059083",
+      "orders": [
+        {
+          "task_id": "task_0e305e5ddafd4a10bb63cb64927e604b",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_184cacbe8ef04e1b9f759e8e2276ffcf",
+          "state": "cancelled"
+        },
+        {
+          "task_id": "task_235eeba1c5144bafa9e13a7d1e097abd",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_34fc78914cb4437e8a3db83938386d6d",
+          "state": "failed"
+        },
+        {
+          "task_id": "task_599ea957a83d430da66c0f46c7e60170",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_640e1bc624f24a9aba5182d8b906a605",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_6878bf44c63740b7aa918a7dad0661be",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_6d3243c7292e4294984a297d8fcc9e0c",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_79a80590dab946bfba63ffac18aed28e",
+          "state": "failed"
+        },
+        {
+          "task_id": "task_9b4be5cb9d514b31a38aaf9f6bb98480",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_a57f5248710449c98e14b75ed08f292a",
+          "state": "failed"
+        },
+        {
+          "task_id": "task_a6ccac2aa7f34051ab9868b7c4c9563f",
+          "state": "failed"
+        },
+        {
+          "task_id": "task_bc999cf7b51b46e885d3e9e77a64dcff",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_e3ea70ccfea146209002c53f565f71e0",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_f5a09bdeef9c4a47a2a8540844ab8954",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_f7623ac161234d4a9fb66b71fec1da0c",
+          "state": "succeeded"
+        }
+      ],
+      "manifest_exists": true
+    },
+    {
+      "label": "removed-restarted",
+      "at": "2026-09-14T10:58:36.191009+00:00",
+      "service": {
+        "configured": true,
+        "ready": false,
+        "online": false,
+        "publication_enabled": false
+      },
+      "runtime": {
+        "installed": true,
+        "running": false,
+        "status": "stopped",
+        "release": "b10774"
+      },
+      "storage": {
+        "model_owned": true,
+        "model_present": false,
+        "model_bytes": 0
+      },
+      "error": null,
+      "model_bytes": 0,
+      "runtime_binary_exists": true,
+      "conversation_count": 10,
+      "conversations_sha256": "f7ac5ef4c02658178d60d16df8db2f6830295aee4cd89af65b0469cc47059083",
+      "orders": [
+        {
+          "task_id": "task_0e305e5ddafd4a10bb63cb64927e604b",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_184cacbe8ef04e1b9f759e8e2276ffcf",
+          "state": "cancelled"
+        },
+        {
+          "task_id": "task_235eeba1c5144bafa9e13a7d1e097abd",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_34fc78914cb4437e8a3db83938386d6d",
+          "state": "failed"
+        },
+        {
+          "task_id": "task_599ea957a83d430da66c0f46c7e60170",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_640e1bc624f24a9aba5182d8b906a605",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_6878bf44c63740b7aa918a7dad0661be",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_6d3243c7292e4294984a297d8fcc9e0c",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_79a80590dab946bfba63ffac18aed28e",
+          "state": "failed"
+        },
+        {
+          "task_id": "task_9b4be5cb9d514b31a38aaf9f6bb98480",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_a57f5248710449c98e14b75ed08f292a",
+          "state": "failed"
+        },
+        {
+          "task_id": "task_a6ccac2aa7f34051ab9868b7c4c9563f",
+          "state": "failed"
+        },
+        {
+          "task_id": "task_bc999cf7b51b46e885d3e9e77a64dcff",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_e3ea70ccfea146209002c53f565f71e0",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_f5a09bdeef9c4a47a2a8540844ab8954",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_f7623ac161234d4a9fb66b71fec1da0c",
+          "state": "succeeded"
+        }
+      ],
+      "manifest_exists": true
+    }
+  ]
+}

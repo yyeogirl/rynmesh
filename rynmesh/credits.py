@@ -22,6 +22,11 @@ from .types import now_iso
 CREDIT_LEDGER_VERSION = "rynmesh-credits-v0.1"
 GLOBAL_CATEGORY = "global"
 GENERAL_CATEGORY = "general"
+# Categories under this prefix are accounting views (escrow holds, dev
+# balances), not contribution evidence. They are never folded into the
+# global/general reputation score; a scoreboard must ask for them by name.
+DEV_CATEGORY_PREFIX = "dev:"
+TASK_BALANCE_CATEGORY = DEV_CATEGORY_PREFIX + "task_balance"
 
 
 EVENT_WEIGHTS: dict[str, float] = {
@@ -34,12 +39,27 @@ EVENT_WEIGHTS: dict[str, float] = {
     "availability_attested": 1.0,
     "job_capacity_advertised": 0.25,
     "work_order_completed": 0.0,
+    # Escrow accounting for peer services (category dev:task_balance). Amounts
+    # are custom, non-negative units of the development Task Balance; the
+    # kind says which direction the fold applies them in.
+    "task_balance_opening": 0.0,
+    "task_hold": 0.0,
+    "task_release": 0.0,
+    "task_settle": 0.0,
+    "task_earning": 0.0,
     "safety_blocked": -5.0,
     "spam_reported": -10.0,
     "protocol_violation": -25.0,
     "illegal_content": -100.0,
 }
-CUSTOM_AMOUNT_EVENT_KINDS = {"work_order_completed"}
+CUSTOM_AMOUNT_EVENT_KINDS = {
+    "work_order_completed",
+    "task_balance_opening",
+    "task_hold",
+    "task_release",
+    "task_settle",
+    "task_earning",
+}
 
 
 class CreditLedgerError(RuntimeError):
@@ -472,6 +492,9 @@ def _amount_allowed(kind: str, amount: float) -> bool:
 
 
 def _category_matches(event_category: str, requested: str) -> bool:
+    if event_category.startswith(DEV_CATEGORY_PREFIX):
+        # Accounting views are only visible when asked for explicitly.
+        return event_category == requested
     if not requested or requested == GLOBAL_CATEGORY:
         return True
     return event_category in {requested, GENERAL_CATEGORY}

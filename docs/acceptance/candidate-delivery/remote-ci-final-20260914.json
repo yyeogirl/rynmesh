@@ -1,0 +1,624 @@
+{
+  "id": 34862743090,
+  "name": "CI",
+  "event": "pull_request",
+  "head_sha": "25aa0b8836760bc1e33c3b505717585344a183ea",
+  "status": "completed",
+  "conclusion": "success",
+  "html_url": "https://github.com/yyeogirl/rynmesh/actions/runs/34862743090",
+  "created_at": "2026-09-14T15:31:47Z",
+  "jobs": [
+    {
+      "id": 104038861079,
+      "name": "peer-transit-e2e",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/yyeogirl/rynmesh/actions/runs/34862743090/job/104038861079",
+      "started_at": "2026-09-14T15:31:50Z",
+      "completed_at": "2026-09-14T15:33:35Z",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@v7",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-python@v7",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m pip install -e \".[dev]\"",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Three-node direct ICE peer-transit acceptance",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Persistent worker soak smoke",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-python@v7",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@v7",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "id": 104038861129,
+      "name": "llm-e2e",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/yyeogirl/rynmesh/actions/runs/34862743090/job/104038861129",
+      "started_at": "2026-09-14T15:31:51Z",
+      "completed_at": "2026-09-14T15:33:07Z",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@v7",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-python@v7",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m pip install -e .",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Deterministic strict P2P private LLM flow",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Deterministic encrypted-relay private LLM flow",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Deterministic peer-message mailbox flow",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Clean up isolated E2E stack",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-python@v7",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@v7",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "id": 104038861221,
+      "name": "packaged-node",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/yyeogirl/rynmesh/actions/runs/34862743090/job/104038861221",
+      "started_at": "2026-09-14T15:31:51Z",
+      "completed_at": "2026-09-14T15:32:40Z",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@v7",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-python@v7",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-node@v7",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m pip install -e \".[dev]\" build",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run cd webapp && npm ci && npm run build",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Fold UI into the package and start the node",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify the packaged node serves the app",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-node@v7",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-python@v7",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@v7",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "id": 104038861263,
+      "name": "friend-product-e2e",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/yyeogirl/rynmesh/actions/runs/34862743090/job/104038861263",
+      "started_at": "2026-09-14T15:31:51Z",
+      "completed_at": "2026-09-14T15:33:27Z",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@v7",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-python@v7",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m pip install -e \".[documents]\"",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "First sharing through fresh nodes and an HTTP mailbox",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Default mailbox quota and recovery without duplicate messages",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Show bounded acceptance evidence",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-python@v7",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@v7",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "id": 104038861275,
+      "name": "desktop-compile (aarch64)",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/yyeogirl/rynmesh/actions/runs/34862743090/job/104038861275",
+      "started_at": "2026-09-14T15:31:55Z",
+      "completed_at": "2026-09-14T15:34:04Z",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@v7",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-node@v7",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-python@v7",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run dtolnay/rust-toolchain@stable",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run npm ci",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Build self-contained node sidecar",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Fetch pinned llama.cpp runtime",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify bundled runtime starts",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Start bundled node sidecar",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Node finds the bundled runtime",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Compile desktop shell",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-python@v7",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-node@v7",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@v7",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "id": 104038861318,
+      "name": "webapp",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/yyeogirl/rynmesh/actions/runs/34862743090/job/104038861318",
+      "started_at": "2026-09-14T15:31:51Z",
+      "completed_at": "2026-09-14T15:33:10Z",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@v7",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-node@v7",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run npm ci",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Tests",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Typecheck",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Build",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-node@v7",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@v7",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "id": 104038861326,
+      "name": "backend",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/yyeogirl/rynmesh/actions/runs/34862743090/job/104038861326",
+      "started_at": "2026-09-14T15:31:51Z",
+      "completed_at": "2026-09-14T15:35:08Z",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@v7",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-python@v7",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Install",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Tests",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Lint",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-python@v7",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@v7",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "id": 104038861514,
+      "name": "desktop-compile (x86_64)",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/yyeogirl/rynmesh/actions/runs/34862743090/job/104038861514",
+      "started_at": "2026-09-14T15:31:51Z",
+      "completed_at": "2026-09-14T15:37:24Z",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@v7",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-node@v7",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-python@v7",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run dtolnay/rust-toolchain@stable",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run npm ci",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Build self-contained node sidecar",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Fetch pinned llama.cpp runtime",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify bundled runtime starts",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Start bundled node sidecar",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Node finds the bundled runtime",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Compile desktop shell",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-python@v7",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-node@v7",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@v7",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "id": 104038861736,
+      "name": "contribution-workflow",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/yyeogirl/rynmesh/actions/runs/34862743090/job/104038861736",
+      "started_at": "2026-09-14T15:31:51Z",
+      "completed_at": "2026-09-14T15:31:56Z",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@v7",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-node@v7",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Test exclusive reservation state machine",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-node@v7",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@v7",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    }
+  ],
+  "test_summaries": {
+    "backend": [
+      "2026-09-14T15:35:04.4265713Z 1521 passed, 3 skipped, 6 warnings in 176.30s (0:02:56)",
+      "2026-09-14T15:35:05.1994402Z All checks passed!"
+    ],
+    "webapp": [
+      "2026-09-14T15:32:50.7697392Z  Test Files  46 passed (46)",
+      "2026-09-14T15:32:50.7698495Z       Tests  256 passed (256)"
+    ],
+    "friend-product-e2e": []
+  },
+  "tested_product_commit": "04d94f21fb702ffe0ac9ed596ccb56e681e578f4",
+  "head_commit_note": "25aa0b8 changes only CI acceptance orchestration and test fixtures; rynmesh/ and webapp/ are identical to the installed 04d94f2 candidate."
+}

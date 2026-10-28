@@ -1,0 +1,59 @@
+{
+  "actions": {
+    "cancel": {
+      "cancel_response": {
+        "cancel_requested": true,
+        "conversation_id": "running-d376c91c5c6343d6891ac04bdb464609",
+        "state": "running",
+        "task_id": "task_184cacbe8ef04e1b9f759e8e2276ffcf"
+      },
+      "conversation_id": "running-d376c91c5c6343d6891ac04bdb464609",
+      "created_at": "2026-09-14T08:43:13.151476+00:00",
+      "initial_pid": 60112,
+      "observed_running": {
+        "at": "2026-09-14T08:43:19.863491+00:00",
+        "state": "running"
+      },
+      "task_id": "task_184cacbe8ef04e1b9f759e8e2276ffcf",
+      "verified": {
+        "at": "2026-09-14T08:43:26.595769+00:00",
+        "message_count": 2,
+        "pid": 60112,
+        "provider_order_count": 1,
+        "run": {
+          "cancel_requested": true,
+          "conversation_id": "running-d376c91c5c6343d6891ac04bdb464609",
+          "state": "cancelled",
+          "task_id": "task_184cacbe8ef04e1b9f759e8e2276ffcf"
+        },
+        "same_request_returned_original": true
+      }
+    },
+    "interrupt": {
+      "conversation_id": "running-c538a28727c74150b11a5a04ff42384f",
+      "created_at": "2026-09-14T08:43:51.562615+00:00",
+      "initial_pid": 60112,
+      "interrupted_at": "2026-09-14T08:43:58.343000+00:00",
+      "observed_running": {
+        "at": "2026-09-14T08:43:58.306031+00:00",
+        "state": "running"
+      },
+      "task_id": "task_a6ccac2aa7f34051ab9868b7c4c9563f",
+      "verified": {
+        "at": "2026-09-14T08:44:37.150144+00:00",
+        "message_count": 2,
+        "pid": 24128,
+        "provider_order_count": 1,
+        "run": {
+          "cancel_requested": false,
+          "conversation_id": "running-c538a28727c74150b11a5a04ff42384f",
+          "error_code": "consumer_restarted_before_completion",
+          "state": "failed",
+          "task_id": "task_a6ccac2aa7f34051ab9868b7c4c9563f"
+        },
+        "same_request_returned_original": true
+      }
+    }
+  },
+  "scope": "Production owner APIs, real remote native CPU model on loopback; no inference stub; not browser cancel or GPU acceptance"
+}

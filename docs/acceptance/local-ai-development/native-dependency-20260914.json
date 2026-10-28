@@ -1,0 +1,30 @@
+{
+  "scope": "Windows CPU; real pinned llama-server and Qwen model; actual node routes via TestClient, no public network",
+  "dll": "ggml-base.dll",
+  "missing_dependency": {
+    "http_status": 409,
+    "error": "local inference runtime dependency is missing; use Update runtime to repair it",
+    "ready": false,
+    "online": false,
+    "publication_enabled": false,
+    "runtime_log": "runtime_process_starting\nruntime_process_exited code=3221225781\n"
+  },
+  "restored": {
+    "http_status": 200,
+    "ready": true,
+    "publication_enabled": false,
+    "real_inference_self_test": {
+      "self_test": {
+        "ok": true,
+        "output_sha256": "40a2bebbc1661adb41ced6d70d69ba5bd888e2fb6fda5327e956efc966be909e",
+        "model": "rynmesh-qwen2.5-0.5b-q4",
+        "input_tokens": 40,
+        "output_tokens": 8,
+        "duration_ms": 187
+      }
+    },
+    "dll_bytes_unchanged": true,
+    "runtime_log": "runtime_process_starting\n"
+  },
+  "final_runtime_running": false
+}

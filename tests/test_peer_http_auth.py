@@ -161,7 +161,8 @@ def test_token_file_is_owner_only_on_disk(client, tmp_path):
 
     client.get("/api/local/auth/token")
     mode = stat.S_IMODE((tmp_path / "control_token").stat().st_mode)
-    assert mode == 0o600
+    if os.name != "nt":
+        assert mode == 0o600
 
 
 def test_static_shell_is_reachable_without_auth(client):

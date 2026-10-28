@@ -2,10 +2,12 @@ from __future__ import annotations
 
 import json
 import os
+import queue
 import select
 import socket
 import subprocess
 import sys
+import threading
 import time
 import zipfile
 from datetime import datetime, timedelta, timezone
@@ -1432,9 +1434,17 @@ def _mcp_request(proc: subprocess.Popen[str], message: dict, *, timeout_s: float
     assert proc.stdout is not None
     proc.stdin.write(json.dumps(message) + "\n")
     proc.stdin.flush()
-    ready, _, _ = select.select([proc.stdout], [], [], timeout_s)
-    assert ready, f"Timed out waiting for MCP response: {message['method']}"
-    line = proc.stdout.readline()
+    if os.name == "nt":
+        lines: queue.Queue[str] = queue.Queue(maxsize=1)
+        threading.Thread(target=lambda: lines.put(proc.stdout.readline()), daemon=True).start()
+        try:
+            line = lines.get(timeout=timeout_s)
+        except queue.Empty:
+            pytest.fail(f"Timed out waiting for MCP response: {message['method']}")
+    else:
+        ready, _, _ = select.select([proc.stdout], [], [], timeout_s)
+        assert ready, f"Timed out waiting for MCP response: {message['method']}"
+        line = proc.stdout.readline()
     assert line, f"MCP server closed unexpectedly while handling {message['method']}"
     return json.loads(line)
 

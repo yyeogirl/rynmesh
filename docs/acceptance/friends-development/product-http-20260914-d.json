@@ -1,0 +1,50 @@
+{
+  "version": 1,
+  "started_at": "2026-09-14T06:11:23.000211+00:00",
+  "passed": true,
+  "scope": "isolated real TCP processes, HTTP registry mailbox, deterministic local article source",
+  "not_proven": [
+    "desktop installation/UI",
+    "different public network exits",
+    "mailbox quota/expiry failures",
+    "full privacy export audit"
+  ],
+  "checks": [
+    {
+      "name": "cancelled_invite_and_offline_local_preview",
+      "result": "passed"
+    },
+    {
+      "name": "concurrent_accept_one_relationship_and_retry",
+      "result": "passed",
+      "invite_to_accept_seconds": 1.969
+    },
+    {
+      "name": "bidirectional_text_attachment_and_dedup",
+      "result": "passed",
+      "accept_to_confirm_seconds": 1.125
+    },
+    {
+      "name": "read_save_share_explicit_fetch_and_share_back",
+      "result": "passed",
+      "body_sha256": "2ddae3d2d0b8dbfd1be287d726032b6c0591b07e2bd453095293f35a61cc4fc8"
+    },
+    {
+      "name": "real_http_mailbox_receiver_confirmation_and_process_restart",
+      "result": "passed"
+    },
+    {
+      "name": "offline_revocation_survives_restart_blocks_new_fetch_retains_saved_copy",
+      "result": "passed",
+      "fetch_denial": "friend_card_fetch_failed",
+      "protected_fetch_before_revocation": 200,
+      "protected_fetch_after_revocation": 403,
+      "protected_fetch_after_restart": 403
+    },
+    {
+      "name": "real_clock_invite_expiry",
+      "result": "passed"
+    }
+  ],
+  "finished_at": "2026-09-14T06:12:29.983965+00:00"
+}

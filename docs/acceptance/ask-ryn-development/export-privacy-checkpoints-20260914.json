@@ -1,0 +1,158 @@
+{
+  "scope": "Windows loopback node and browser; synthetic existing conversations; ordinary export/deletion only",
+  "checkpoints": [
+    {
+      "label": "exported",
+      "at": "2026-09-14T10:35:32.655842+00:00",
+      "conversation_ids": [
+        "a4dc83fb-4695-407d-a36c-0fbd7ec99a88",
+        "f64fd70a-974b-43f9-a6d1-64cc5eff4468"
+      ],
+      "draft_sha256": "5d1022381a1311e48be58c2f319cea45521f9036c8073186fb023bc9b5fa3f34",
+      "response_bytes": 6705,
+      "cache_control": {
+        "export": "no-store",
+        "conversations": "no-store",
+        "draft": "no-store"
+      },
+      "unauthenticated_export_status": 401,
+      "credential_checks": {
+        "identity.ed25519": "absent from response and captured log in stored/base64/hex forms",
+        "messaging.x25519": "absent from response and captured log in stored/base64/hex forms",
+        "control_token": "absent from response and captured log in stored/base64/hex forms"
+      },
+      "download": {
+        "file": "C:\\Users\\\u5b50\u9675\\Downloads\\ryn-conversations.json",
+        "bytes": 8978,
+        "sha256": "6621ec069ac26c73d9463c3f8c028c191ac6ae57f4882e1e184a92a4df5731bb",
+        "matches_owner_export": true
+      },
+      "log_bytes_checked": 406,
+      "body_strings_absent_from_captured_log": 19,
+      "orders": [
+        {
+          "task_id": "task_11bc875638d448eaa45011696e2ee65b",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_503bf8f06b094f3e930b647b0f6fbad1",
+          "state": "failed"
+        },
+        {
+          "task_id": "task_6789f825db1f477cb74c8efd6fcc513b",
+          "state": "cancelled"
+        },
+        {
+          "task_id": "task_986ebea985a5443e8c07431c9a5c36f9",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_b61ad327061047c5a97f421893265895",
+          "state": "failed"
+        },
+        {
+          "task_id": "task_c3727e08ce7b47fc8942687d0406765a",
+          "state": "timed_out"
+        }
+      ]
+    },
+    {
+      "label": "deleted",
+      "at": "2026-09-14T10:37:04.648751+00:00",
+      "conversation_ids": [
+        "a4dc83fb-4695-407d-a36c-0fbd7ec99a88"
+      ],
+      "draft_sha256": "5d1022381a1311e48be58c2f319cea45521f9036c8073186fb023bc9b5fa3f34",
+      "response_bytes": 2503,
+      "cache_control": {
+        "export": "no-store",
+        "conversations": "no-store",
+        "draft": "no-store"
+      },
+      "unauthenticated_export_status": 401,
+      "credential_checks": {
+        "identity.ed25519": "absent from response and captured log in stored/base64/hex forms",
+        "messaging.x25519": "absent from response and captured log in stored/base64/hex forms",
+        "control_token": "absent from response and captured log in stored/base64/hex forms"
+      },
+      "download": {},
+      "log_bytes_checked": 609,
+      "body_strings_absent_from_captured_log": 7,
+      "orders": [
+        {
+          "task_id": "task_11bc875638d448eaa45011696e2ee65b",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_503bf8f06b094f3e930b647b0f6fbad1",
+          "state": "failed"
+        },
+        {
+          "task_id": "task_6789f825db1f477cb74c8efd6fcc513b",
+          "state": "cancelled"
+        },
+        {
+          "task_id": "task_986ebea985a5443e8c07431c9a5c36f9",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_b61ad327061047c5a97f421893265895",
+          "state": "failed"
+        },
+        {
+          "task_id": "task_c3727e08ce7b47fc8942687d0406765a",
+          "state": "timed_out"
+        }
+      ]
+    },
+    {
+      "label": "restarted",
+      "at": "2026-09-14T10:37:28.748309+00:00",
+      "conversation_ids": [
+        "a4dc83fb-4695-407d-a36c-0fbd7ec99a88"
+      ],
+      "draft_sha256": "5d1022381a1311e48be58c2f319cea45521f9036c8073186fb023bc9b5fa3f34",
+      "response_bytes": 2503,
+      "cache_control": {
+        "export": "no-store",
+        "conversations": "no-store",
+        "draft": "no-store"
+      },
+      "unauthenticated_export_status": 401,
+      "credential_checks": {
+        "identity.ed25519": "absent from response and captured log in stored/base64/hex forms",
+        "messaging.x25519": "absent from response and captured log in stored/base64/hex forms",
+        "control_token": "absent from response and captured log in stored/base64/hex forms"
+      },
+      "download": {},
+      "log_bytes_checked": 812,
+      "body_strings_absent_from_captured_log": 7,
+      "orders": [
+        {
+          "task_id": "task_11bc875638d448eaa45011696e2ee65b",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_503bf8f06b094f3e930b647b0f6fbad1",
+          "state": "failed"
+        },
+        {
+          "task_id": "task_6789f825db1f477cb74c8efd6fcc513b",
+          "state": "cancelled"
+        },
+        {
+          "task_id": "task_986ebea985a5443e8c07431c9a5c36f9",
+          "state": "succeeded"
+        },
+        {
+          "task_id": "task_b61ad327061047c5a97f421893265895",
+          "state": "failed"
+        },
+        {
+          "task_id": "task_c3727e08ce7b47fc8942687d0406765a",
+          "state": "timed_out"
+        }
+      ]
+    }
+  ]
+}

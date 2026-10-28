@@ -1,0 +1,15 @@
+{
+  "recorded_date": "2026-09-11",
+  "scope": "Windows Codex in-app browser, real local node HTTP and 10k synthetic store records; not packaged desktop acceptance",
+  "query_fixture": "common-English-keyword",
+  "loaded_rows": 40,
+  "opened_record": "content:scale-article-960",
+  "local_body_visible": true,
+  "model_required": false,
+  "return_rows": 40,
+  "return_keyword_preserved": true,
+  "return_opened_record_present": true,
+  "exact_browser_scroll_pixels_measured": false,
+  "scroll_evidence": "Search component test restores 1600px on .app-main after reloading 40 results; browser AX confirms row count and keyword only",
+  "node_stop_observation": "Index status unavailable displayed after deliberate node shutdown; already rendered results remained visible"
+}

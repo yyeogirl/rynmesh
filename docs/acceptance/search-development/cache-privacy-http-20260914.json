@@ -1,0 +1,66 @@
+{
+  "recorded_at": "2026-09-14T11:44:09.683770+00:00",
+  "scope": "Windows production app, synthetic conversation created/deleted through Owner TCP API",
+  "responses": [
+    {
+      "case": "rebuild",
+      "status": 200,
+      "cache_control": "no-store",
+      "response_sha256": "3eba84300b64d6a9bc1583c8dd438ca8fbf7c90e9451e3b7abca2635189a6c7f"
+    },
+    {
+      "case": "query",
+      "status": 200,
+      "cache_control": "no-store",
+      "response_sha256": "94193627e5d6a7bc3b7922f86b34eab20433166eabb1414160781840c35482fd"
+    },
+    {
+      "case": "open",
+      "status": 200,
+      "cache_control": "no-store",
+      "response_sha256": "f0e9ddcfbd2867c851845cddea075798cc9d76f2a06ef6f7a4bf90c9d7581bca"
+    },
+    {
+      "case": "status",
+      "status": 200,
+      "cache_control": "no-store",
+      "response_sha256": "a11aea1e4c53e0cd4adc32d493999780045379f16db4247fec51dac6810e0ea2"
+    },
+    {
+      "case": "owner_denied",
+      "status": 401,
+      "cache_control": "no-store",
+      "response_sha256": "0601a20b227cb73d55040ca798707f523dc9a6832ad726cc8ea20895e3edf359"
+    },
+    {
+      "case": "bad_query",
+      "status": 400,
+      "cache_control": "no-store",
+      "response_sha256": "bd8d39d54febbcf8c64151bcb40e2b7b3b52d6cb8ae963826df9270600fee0f2"
+    },
+    {
+      "case": "missing_identifier",
+      "status": 422,
+      "cache_control": "no-store",
+      "response_sha256": "1a8bb15ad5c9e440528903b8b54dbd0662665911dbb3b08477d7c06e19a9ee47"
+    },
+    {
+      "case": "open_after_delete",
+      "status": 409,
+      "cache_control": "no-store",
+      "response_sha256": "cf839c6d18dcee883eb05a1acdb6666617421e0fe2acfeb9b5740934f57550ee"
+    },
+    {
+      "case": "query_after_delete",
+      "status": 200,
+      "cache_control": "no-store",
+      "response_sha256": "796160c89fa1ecf2c62e2414351aec55b06ffe342d204b43b41ee7656c13f995"
+    }
+  ],
+  "initial_matches": 1,
+  "deleted_matches": 0,
+  "node_stopped": true,
+  "browser_cache_measured": false,
+  "packaged_desktop": false,
+  "complete_privacy_audit": false
+}

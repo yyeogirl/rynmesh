@@ -27,6 +27,7 @@ from .identity import (
 )
 from .jobs import (
     JobCapacityRecord,
+    JobError,
     WorkOrder,
     WorkResult,
     default_expires_at,
@@ -34,6 +35,7 @@ from .jobs import (
     sign_job_capacity,
     sign_work_order,
     sign_work_result,
+    validate_capability_params,
     verify_job_capacity,
     verify_work_order,
     verify_work_result,
@@ -293,6 +295,10 @@ class RynmeshStore:
             sorted(env_root_set | set(trusted_root_peer_ids or ()))
         )
         self.registry = default_peer_registry(self.network_dir)
+        # What this process has already advertised per network, so concurrent
+        # services on one node merge into the single per-peer capacity record
+        # instead of overwriting each other. See register_job_capacity.
+        self._advertised_capacity: dict[str, dict[str, Any]] = {}
         self.credit_ledger = FileCreditLedger(
             self.network_dir / "credits",
             tier_resolver=self._resolve_identity_tier,
@@ -378,6 +384,22 @@ class RynmeshStore:
             "warning_terms": list(self.scanner.warning_terms),
         }
 
+    def messaging_public_key(self) -> str:
+        """This node's X25519 messaging public key, base64.
+
+        Lives beside the identity key under ``self.home``. ``create_app`` loads
+        the same path for ``/api/peer/pubkey`` and for the mailbox client, so
+        the advertised key, the served key and the decrypting key are one key
+        even when ``$RYNMESH_HOME`` points somewhere else.
+        """
+        from .services import peer_box
+
+        try:
+            key = peer_box.load_or_create_messaging_key(self.home / "messaging.x25519")
+        except (OSError, ValueError):
+            return ""
+        return peer_box.public_key_b64(key)
+
     def register_node(
         self,
         *,
@@ -400,6 +422,10 @@ class RynmeshStore:
                 "primary_ip": _primary_lan_ip(),
                 "ip_addresses": list(_local_ip_addresses()),
                 "peer_endpoint": active_endpoints[0] if active_endpoints else "",
+                # How a peer that cannot reach this node's endpoint (both
+                # behind NATs) still seals mailbox messages for it. The record
+                # is signed, so the key is as trustworthy as the peer id.
+                "messaging_pub": self.messaging_public_key(),
             },
         )
         signed = sign_peer_record(record, private_key_bytes=self.private_key_bytes)
@@ -432,16 +458,28 @@ class RynmeshStore:
         cleaned_capabilities = tuple(str(item).strip() for item in capabilities if str(item).strip())
         if not cleaned_capabilities:
             raise ValueError("capabilities are required")
+        # The registry stores ONE capacity record per peer, replaced wholesale.
+        # Multiple services on one node (LLM provider, video, egress) each
+        # register their own capability list, and the LLM provider republishes
+        # every 30s — without merging, every publication wipes the others'
+        # capabilities out of discovery. Merge against what this process has
+        # already advertised: capabilities union, metadata/price update.
+        merged = self._advertised_capacity.setdefault(network_id, {
+            "capabilities": set(), "price_credits": {}, "metadata": {},
+        })
+        merged["capabilities"].update(cleaned_capabilities)
+        merged["price_credits"].update(dict(price_credits or {}))
+        merged["metadata"].update(dict(metadata or {}))
         record = JobCapacityRecord(
             peer_id=self.peer_id,
             node_name=self.node_name,
-            capabilities=cleaned_capabilities,
+            capabilities=tuple(sorted(merged["capabilities"])),
             network_id=network_id,
             capacity_units=max(1, int(capacity_units or 1)),
             max_concurrent=max(1, int(max_concurrent or 1)),
-            price_credits=dict(price_credits or {}),
+            price_credits=dict(merged["price_credits"]),
             polling_interval_sec=max(1, int(polling_interval_sec or 30)),
-            metadata=dict(metadata or {}),
+            metadata=dict(merged["metadata"]),
         )
         signed = sign_job_capacity(record, private_key_bytes=self.private_key_bytes)
         result = self.registry.publish_job_capacity(signed)
@@ -506,13 +544,18 @@ class RynmeshStore:
         cleaned_operation = str(operation or "").strip()
         if not cleaned_operation:
             raise ValueError("operation is required")
+        cleaned_params = dict(params or {})
+        try:
+            validate_capability_params(cleaned_capability, cleaned_operation, cleaned_params)
+        except JobError as exc:
+            raise ValueError(str(exc)) from exc
         order = WorkOrder(
             work_order_id=new_work_order_id(),
             requester_peer_id=self.peer_id,
             provider_peer_id=provider,
             capability=cleaned_capability,
             operation=cleaned_operation,
-            params=dict(params or {}),
+            params=cleaned_params,
             network_id=network_id,
             input_content_ids=tuple(str(item) for item in (input_content_ids or ()) if str(item)),
             max_credit_cost=float(max_credit_cost or 0.0),

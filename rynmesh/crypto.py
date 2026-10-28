@@ -15,6 +15,7 @@ from dataclasses import dataclass
 from typing import Any
 
 SIGNATURE_ALG = "ed25519"
+_CANONICAL_ENCODER = json.JSONEncoder(sort_keys=True, separators=(",", ":"), ensure_ascii=False)
 
 
 class SignatureError(ValueError):
@@ -24,16 +25,28 @@ class SignatureError(ValueError):
 def canonical_json(payload: dict[str, Any]) -> bytes:
     """Return deterministic UTF-8 JSON bytes for signing and hashing."""
 
-    return json.dumps(
-        payload,
-        sort_keys=True,
-        separators=(",", ":"),
-        ensure_ascii=False,
-    ).encode("utf-8")
+    # JSONEncoder keeps recursion/circular-reference state inside each encode
+    # call. Reuse the immutable options, not a payload or its encoded bytes.
+    return _CANONICAL_ENCODER.encode(payload).encode("utf-8")
 
 
 def sha256_bytes(data: bytes) -> str:
     return "sha256:" + hashlib.sha256(data).hexdigest()
+
+
+def sha256_file(path, *, chunk_size: int = 1024 * 1024) -> str:
+    """Chunked 'sha256:<hex>' digest of a file (str or Path) — the one file hasher.
+
+    Content manifests and model fingerprints both use this; keeping a single
+    implementation means an algorithm migration happens in one place.
+    """
+    from pathlib import Path
+
+    digest = hashlib.sha256()
+    with Path(path).expanduser().open("rb") as handle:
+        for chunk in iter(lambda: handle.read(chunk_size), b""):
+            digest.update(chunk)
+    return "sha256:" + digest.hexdigest()
 
 
 def b64(data: bytes) -> str:

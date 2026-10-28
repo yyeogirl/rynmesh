@@ -1,0 +1,76 @@
+{
+  "consumer": {
+    "node_name": "windows-local-consumer",
+    "peer_id": "dHYBDPjLYaFMCZjr02CGGWv5KlMb+VKrFgIemhGiqBQ=",
+    "daemon_running": true,
+    "desktop_managed": false,
+    "registry": "connected",
+    "peer_count": 2,
+    "local_items": 0,
+    "fetched_items": 0,
+    "pending_recs": 0,
+    "version": "ryn-node 0.6.2",
+    "uptime_seconds": 1107
+  },
+  "provider": {
+    "peer_id": "WlQlFPsh9l6byhuSaZctpQzc/LmNo+jwKLlYLI6Y6SU=",
+    "node_name": "V100 32GB Provider",
+    "updated_at": "2026-09-07T18:55:11.31676+08:00",
+    "accepting_orders": true,
+    "capacity": {
+      "available": 1,
+      "max_concurrent": 1,
+      "queue_limit": 0,
+      "queue_policy": "reject_when_full",
+      "running": 0
+    },
+    "configured": true,
+    "health": {
+      "latency_ms": 1,
+      "model": "Qwen3-14B-Q4",
+      "model_count": 1,
+      "ok": true
+    },
+    "node_messaging_pub": "Vnh4x/nYCobSMx+LAKvHCWYMag3csZVzpnsO7k59z2c=",
+    "online": true,
+    "service": {
+      "adapter": "openai_compatible",
+      "capabilities": [
+        "text-generation"
+      ],
+      "content_rules": "Provider-defined content policy applies.",
+      "context_window": 4096,
+      "hardware_requirements": {},
+      "healthcheck": {
+        "enabled": true
+      },
+      "license_id": "unknown",
+      "license_notice": "Operator must review and comply with the model and runtime licenses.",
+      "max_concurrent": 1,
+      "max_output_tokens": 512,
+      "model_alias": "qwen3-14b-v100",
+      "model_fingerprint": "",
+      "package_id": "qwen3-14b",
+      "pricing": {
+        "currency": "DEV_TASK_BALANCE",
+        "input_per_1k": 0.001,
+        "maximum_per_task": 1.0,
+        "minimum": 0.001,
+        "output_per_1k": 0.002
+      },
+      "privacy": {
+        "compute_node_sees_plaintext": true,
+        "log_bodies": false,
+        "policy_text": "No prompt/response logging; plaintext exists at the compute node during inference.",
+        "retention_seconds": 0,
+        "temporary_storage": false
+      },
+      "protocol_version": "rynmesh.llm.task.v1",
+      "queue_limit": 0,
+      "risk_labels": [],
+      "runtime": "external",
+      "timeout_seconds": 120.0,
+      "version": "0.1.0"
+    }
+  }
+}

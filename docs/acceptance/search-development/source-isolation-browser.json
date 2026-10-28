@@ -1,0 +1,18 @@
+{
+  "date": "2026-09-12",
+  "environment": "Windows loopback node with live workers and in-app browser",
+  "asset": "index-D8-tK4gK.js",
+  "query_entered_in_browser": true,
+  "damaged_results_visible": 2,
+  "unavailable_document_warning_visible": true,
+  "no_false_index_catchup_message": true,
+  "healthy_saved_document_opened_and_read": true,
+  "back_preserved_keywords": true,
+  "recovery_link_reached_settings": true,
+  "settings_showed_healthy_and_unavailable_copies": true,
+  "restored_results_visible": 3,
+  "warning_cleared_after_fixture_restoration": true,
+  "metadata_repair_performed_by_fixture_not_product_ui": true,
+  "owned_tab_and_node_closed": true,
+  "packaged_desktop": false
+}

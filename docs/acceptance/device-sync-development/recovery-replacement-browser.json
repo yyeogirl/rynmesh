@@ -1,0 +1,22 @@
+{
+  "recorded_on": "2026-09-11",
+  "environment": "Windows, in-app browser, isolated loopback node, synthetic source-created branches",
+  "build": "index-BdkpYEtQ.js",
+  "steps": [
+    {"action": "Keep a deleted conversation's concurrent branch", "observed": "Separate history opens with original recipient and readable messages; no model configured"},
+    {"action": "Delete that kept copy through the conversation page", "observed": "Copy leaves ordinary history; original recovery remains"},
+    {"action": "Keep the original branch again", "observed": "Explicit replacement review appears and receives focus; no automatic copy"},
+    {"action": "Tab twice and press Enter to cancel", "observed": "Review closes; focus returns to the original branch button"},
+    {"action": "Reopen review, Tab and Enter to confirm", "observed": "A different conversation identity opens with original recipient and messages"},
+    {"action": "Stop the node process, restart with its original data directory, reload", "observed": "Replacement history remains readable without a model"},
+    {"action": "Repeat the original branch and replacement confirmation", "observed": "The same replacement identity opens; only one such copy remains in the visible history"}
+  ],
+  "layout": {"viewport_width": 1280, "document_client_width": 1265, "document_scroll_width": 1266, "elements_outside_viewport": 0},
+  "limits": [
+    "Not packaged desktop or physical-device/cross-NAT acceptance",
+    "Synthetic conflicts are seeded through two source stores; this browser run does not exercise pairing or network synchronization",
+    "Response-loss retry and write failure were automated checks, not browser-injected failures",
+    "One-pixel document width difference remains; other viewports were not checked"
+  ],
+  "cleanup": "Temporary browser tab closed and node process stopped; isolated data directory retained"
+}

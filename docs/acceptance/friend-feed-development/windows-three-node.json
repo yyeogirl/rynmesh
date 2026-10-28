@@ -1,0 +1,74 @@
+{
+  "recorded_at": "2026-09-11T05:04:46.039623+00:00",
+  "scope": "Three independent Windows node processes with real loopback HTTP, separate homes and identities; not packaged desktop or public NAT evidence",
+  "ports": [
+    18860,
+    18861,
+    18862
+  ],
+  "process_ids": [
+    39872,
+    42116,
+    12676
+  ],
+  "pairings": [
+    {
+      "port": 18861,
+      "relationship_id": "132921484033401689274aae70734cb1"
+    },
+    {
+      "port": 18862,
+      "relationship_id": "792eac87440f460a95afa08cb137d58c"
+    }
+  ],
+  "author_friend_count": 2,
+  "draft_only_counts": [
+    0,
+    0
+  ],
+  "both_recipients_following_before_publish": true,
+  "publication_id": "259b24dbeee44ac38fbf7c67a43b697e",
+  "publication_revision": 2,
+  "bob_automatic_visible_count": 1,
+  "bob_visibility_observed_after_publish_seconds": 51.572458267211914,
+  "visibility_timing_scope": "Upper bound: first API observation after browser publish, not the exact arrival time",
+  "carol_visible_count": 0,
+  "carol_direct_fetch_status": 503,
+  "carol_direct_fetch_error": "feed_operation_unavailable",
+  "browser_author_saved_draft": true,
+  "browser_author_confirmed_selected_audience": true,
+  "browser_bob_followed_explicitly": true,
+  "browser_bob_body_visible": true,
+  "bob_read_before_restart": true,
+  "bob_revision_before_restart": 2,
+  "restart_process_ids": [
+    43156,
+    15456,
+    38956
+  ],
+  "restart_read_preserved": true,
+  "restart_subscription_preserved": true,
+  "restart_publication_revision": 2,
+  "restart_copy_sha256": "85d354453b67ab3e434d01f629686a549dab3c07ebeb934610c84ef77305c8c2",
+  "current_carol_direct_fetch_status": 409,
+  "current_carol_direct_fetch_error": "feed_publication_unavailable",
+  "audience_changed_to_carol_revision": 4,
+  "audience_change_automatic_observation_seconds": 1.702999999979511,
+  "bob_after_scope_change_count": 0,
+  "carol_after_scope_change_count": 1,
+  "bob_old_fetch_status": 409,
+  "bob_old_fetch_error": "feed_publication_unavailable",
+  "stop_revision": 5,
+  "stop_automatic_observation_seconds": 3.0939999999827705,
+  "carol_after_stop_count": 0,
+  "carol_stopped_fetch_status": 409,
+  "bob_saved_copy_unchanged_after_revoke": true,
+  "bob_unsubscribed": true,
+  "bob_copy_unchanged_after_unsubscribe": true,
+  "browser_saved_copy_remained_open_after_revocation": true,
+  "browser_disconnect_error_observed": true,
+  "browser_reconnect_error_cleared_automatically": true,
+  "reconnect_bob_process_id": 7872,
+  "all_acceptance_processes_stopped": true,
+  "all_acceptance_ports_released": true
+}

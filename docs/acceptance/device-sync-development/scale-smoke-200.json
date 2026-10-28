@@ -1,0 +1,27 @@
+{
+  "baseline": "Disjoint synthetic legacy files migrated through source API; no seeded receipts",
+  "baseline_migration_seconds": 0.2830215999856591,
+  "changed_records": 10,
+  "incremental_json_bytes": 21460,
+  "incremental_total_seconds": 3.4515406000136863,
+  "incremental_transfer": {
+    "acknowledged": 20,
+    "batches": 2,
+    "seconds": 2.2062092999985907
+  },
+  "initial_merge": {
+    "acknowledged": 400,
+    "batches": 4,
+    "seconds": 4.006031500000972
+  },
+  "phase": "finished",
+  "platform": "Windows-11-10.0.28120-SP0",
+  "python": "3.12.10",
+  "recorded_at_unix": 1789123647.7673354,
+  "records_per_converged_source": 200,
+  "scope": "Bookmarks; two loopback route packages; no scheduler wait/UI/other workers/cross-NAT",
+  "source_write_seconds": 1.2453276000160258,
+  "status": "measured",
+  "target_met": true,
+  "target_seconds": 60
+}

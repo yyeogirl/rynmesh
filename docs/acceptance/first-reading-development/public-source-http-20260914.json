@@ -1,0 +1,95 @@
+{
+  "scope": "Windows production node over loopback HTTP with real built-in public feeds; no browser or packaged desktop proof",
+  "date": "2026-09-14",
+  "fresh_home": "D:\\code\\rynmesh-first-reading-acceptance-20260914",
+  "seeded_content": false,
+  "installed_models": 0,
+  "public_registration": false,
+  "web_asset": "index-CMyM7MOV.js",
+  "node_before": {
+    "kind": "ryn.first-reading-acceptance.v1",
+    "pid": 61616,
+    "port": 18930,
+    "started_at": "2026-09-14T05:53:59.068627+00:00"
+  },
+  "node_after": {
+    "kind": "ryn.first-reading-acceptance.v1",
+    "pid": 42584,
+    "port": 18930,
+    "started_at": "2026-09-14T05:56:40.288548+00:00"
+  },
+  "first_ready": {
+    "item_count": 30,
+    "source_count": 14,
+    "healthy_sources": 11,
+    "failed_sources": 3,
+    "content_ready_seconds_from_node_start": 45.5020637512207
+  },
+  "reader_first_attempt": {
+    "source": "Reddit r/science",
+    "http_status": 200,
+    "blocks": 0,
+    "recorded_as_read": false,
+    "result": "No extractable body; no success credit. Live browser error and original-link interaction not tested."
+  },
+  "successful_read": {
+    "observed_at": "2026-09-14T05:56:19.732957+00:00",
+    "source": "BBC News · World",
+    "item_id": "142ace4865ee7ff0",
+    "reader_blocks": 18,
+    "reader_characters": 3135,
+    "reader_sha256": "95601badd14eacf0fe7d44b5e09e48c4409652982b006e12702dca4ecef92a75",
+    "reader_truncated": false,
+    "history_count": 1,
+    "bookmarked": true,
+    "progress": 0.37
+  },
+  "completion_seconds_from_node_start": 140.6007375717163,
+  "completion_timing_note": "API execution included manual inspection pauses; this is not desktop installation/startup timing.",
+  "restart": {
+    "observed_at": "2026-09-14T05:57:33.411777+00:00",
+    "history_exactly_retained": true,
+    "history_count": 1,
+    "progress": 0.37,
+    "bookmarked": true,
+    "reader_sha256": "95601badd14eacf0fe7d44b5e09e48c4409652982b006e12702dca4ecef92a75",
+    "reader_cached": true
+  },
+  "first_success_completed_after_restart": true,
+  "source_retry": {
+    "observed_at": "2026-09-14T05:57:51.352532+00:00",
+    "source_before": {
+      "id": "default-youtube-3blue1brown",
+      "title": "YouTube · 3Blue1Brown",
+      "ok": false,
+      "status": "failed",
+      "error": "source_fetch_failed",
+      "item_count": 0,
+      "last_checked_unix": 1789365401.7762423,
+      "last_success_unix": 0.0,
+      "consecutive_failures": 2,
+      "using_cached_items": false
+    },
+    "source_after": {
+      "id": "default-youtube-3blue1brown",
+      "title": "YouTube · 3Blue1Brown",
+      "ok": false,
+      "status": "failed",
+      "error": "source_fetch_failed",
+      "item_count": 0,
+      "last_checked_unix": 1789365470.207748,
+      "last_success_unix": 0.0,
+      "consecutive_failures": 3,
+      "using_cached_items": false
+    },
+    "other_sources_unchanged": true,
+    "other_source_count": 13,
+    "returned_item_count": 30
+  },
+  "limitations": [
+    "Browser tool unavailable: Unable to load browser request-header policy.",
+    "Packaged macOS installation and reading interaction not tested.",
+    "Successful source recovery is not demonstrated: retried YouTube source remained unavailable.",
+    "Reading progress persistence verified as API state, not restored scroll position in this run."
+  ]
+}

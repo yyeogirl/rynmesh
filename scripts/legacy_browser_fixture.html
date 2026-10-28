@@ -1,0 +1,43 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><title>Legacy migration acceptance input</title>
+<style>body{font:16px system-ui;max-width:900px;margin:32px auto}button,a{margin:8px;padding:10px}pre{white-space:pre-wrap;overflow-wrap:anywhere}</style>
+<h1>Synthetic legacy migration input</h1>
+<p>This test-only page creates two clearly synthetic browser history records using Ryn's real encrypted legacy store. It does not create node history or send inference requests.</p>
+<button id="prepare">Prepare two synthetic legacy conversations</button><button id="inspect">Inspect retained browser originals</button>
+<a href="/ask">Open normal Ask Ryn migration</a><pre id="result" role="status"></pre>
+<script type="module">
+import { saveConversation, readLegacyConversations, conversationStorageMode } from './legacy-store.js';
+const prefix='migration-acceptance-20260914-';
+const samples=['one','two'].map((name,index)=>({id:prefix+name,title:'Migration sample '+name,
+ serviceKey:'legacy-provider-'+name+'::legacy-model-'+name,providerPeerId:'legacy-provider-'+name,
+ serviceName:'Archived model '+name,networkId:'legacy-test-network',createdAt:'2026-09-01T00:00:00Z',updatedAt:'2026-09-02T00:00:00Z',
+ messages:[{id:prefix+name+'-question',role:'user',content:'Synthetic legacy question '+name,
+ createdAt:'2026-09-01T00:00:00Z',status:'complete',taskId:'legacy-task-'+name},
+ {id:prefix+name+'-answer',role:'assistant',content:'Synthetic legacy answer '+name,
+ createdAt:'2026-09-02T00:00:00Z',status:'complete',taskId:'legacy-task-'+name,cost:0}]}));
+const display=value=>document.querySelector('#result').textContent=typeof value==='string'?value:JSON.stringify(value,null,2);
+async function inspect(){
+ const mode=await conversationStorageMode();
+ const all=await readLegacyConversations();
+ const rows=all.conversations.filter(row=>row.id.startsWith(prefix));
+ const bytes=new TextEncoder().encode(JSON.stringify(rows.sort((a,b)=>a.id.localeCompare(b.id))));
+ const digest=Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',bytes)),b=>b.toString(16).padStart(2,'0')).join('');
+ const open=indexedDB.open('ryn-private-ai-chat',2);
+ const db=await new Promise((resolve,reject)=>{open.onsuccess=()=>resolve(open.result);open.onerror=()=>reject(open.error)});
+ const request=db.transaction('conversations','readonly').objectStore('conversations').getAll();
+ const raw=await new Promise((resolve,reject)=>{request.onsuccess=()=>resolve(request.result);request.onerror=()=>reject(request.error)});
+ db.close();
+ const selected=raw.filter(row=>row.id.startsWith(prefix));
+ display({storage:mode,fixture_copies:rows.length,unreadable:all.unreadable,browser_original_digest:digest,
+ ciphertext_records:selected.filter(row=>typeof row.ciphertext==='string'&&typeof row.iv==='string').length,
+ raw_records_contain_message_text:JSON.stringify(selected).includes('Synthetic legacy'),
+ records:rows.map(({id,serviceKey,providerPeerId,createdAt,updatedAt,messages})=>({id,serviceKey,providerPeerId,createdAt,updatedAt,message_count:messages.length}))});
+}
+document.querySelector('#prepare').onclick=async()=>{try{
+ if(await conversationStorageMode()!=='encrypted')throw Error('Encrypted browser storage unavailable; no fixture prepared.');
+ const prior=await readLegacyConversations();
+ if(prior.conversations.some(row=>row.id.startsWith(prefix)))throw Error('Fixture originals already exist. Inspect them; do not overwrite recovery input.');
+ for(const row of samples)await saveConversation(row);
+ await inspect();
+}catch(error){display(error.message)}};
+document.querySelector('#inspect').onclick=()=>inspect().catch(error=>display(error.message));
+</script></html>

@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "scenario": "windows-held-file-cleanup-restart-and-new-copy",
+  "old_reviewed_file_removed": true,
+  "new_copy_ciphertext_unchanged": true,
+  "completed_original_request_replayed_without_removing_new_copy": true,
+  "cleanup_done": true,
+  "freed_file_bytes": 14896,
+  "download_state": "partial",
+  "limits": [
+    "Synthetic loopback node",
+    "File integrity and original request replay checked over real storage and HTTP",
+    "Browser flow is documented separately; not packaged desktop or cross-network evidence"
+  ]
+}

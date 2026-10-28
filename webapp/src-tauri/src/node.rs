@@ -69,6 +69,38 @@ fn env_or(key: &str, default: impl FnOnce() -> String) -> String {
     }
 }
 
+/// Directory holding the bundled `llama-server`, so managed Local AI needs no
+/// runtime download (issue #34). Order: an operator's own RYNMESH_LLAMA_DIR,
+/// the packaged app resources, then the dev tree. `None` means "not bundled",
+/// and the node falls back to its managed download.
+fn llama_runtime_dir() -> Option<PathBuf> {
+    // Both spellings: the Windows release ships `llama-server.exe`, and this
+    // shell is built for Windows too.
+    fn holds_server(dir: PathBuf) -> Option<PathBuf> {
+        (dir.join("llama-server").is_file() || dir.join("llama-server.exe").is_file())
+            .then_some(dir)
+    }
+    if let Ok(explicit) = std::env::var("RYNMESH_LLAMA_DIR") {
+        if !explicit.is_empty() {
+            log::info!("llama runtime: using RYNMESH_LLAMA_DIR ({explicit})");
+            return Some(PathBuf::from(explicit));
+        }
+    }
+    // Packaged: Ryn.app/Contents/MacOS/Ryn -> Ryn.app/Contents/Resources/llama.
+    if let Some(dir) = std::env::current_exe().ok().and_then(|exe| {
+        let bin = exe.parent()?.to_path_buf();
+        bin.parent()
+            .and_then(|contents| holds_server(contents.join("Resources/llama")))
+            .or_else(|| holds_server(bin.join("llama")))
+    }) {
+        log::info!("llama runtime: using the bundled resources ({})", dir.display());
+        return Some(dir);
+    }
+    let dev = holds_server(PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("resources/llama"))?;
+    log::info!("llama runtime: using the dev resources ({})", dev.display());
+    Some(dev)
+}
+
 /// RYNMESH_* defaults mirror launch_ryn_node_webapp.zsh; any value already in
 /// the process environment wins (operator override).
 fn node_env(port: u16) -> Vec<(String, String)> {
@@ -77,7 +109,7 @@ fn node_env(port: u16) -> Vec<(String, String)> {
     let registry = env_or("RYNMESH_REGISTRY_URL", || {
         "https://registry.rynmesh.ai".to_string()
     });
-    vec![
+    let mut env: Vec<(String, String)> = vec![
         ("RYNMESH_NODE_NAME".into(), env_or("RYNMESH_NODE_NAME", || mname.clone())),
         ("RYNMESH_MACHINE_NAME".into(), env_or("RYNMESH_MACHINE_NAME", || mname.clone())),
         ("RYNMESH_MACHINE_IP".into(), env_or("RYNMESH_MACHINE_IP", || ip.clone())),
@@ -90,7 +122,11 @@ fn node_env(port: u16) -> Vec<(String, String)> {
         ("RYNMESH_AUTO_REGISTER".into(), env_or("RYNMESH_AUTO_REGISTER", || "1".to_string())),
         ("RYNMESH_REGISTRY_URL".into(), registry.clone()),
         ("RYNMESH_RELAY_URL".into(), env_or("RYNMESH_RELAY_URL", || registry.clone())),
-    ]
+    ];
+    if let Some(llama) = llama_runtime_dir() {
+        env.push(("RYNMESH_LLAMA_DIR".into(), llama.to_string_lossy().into_owned()));
+    }
+    env
 }
 
 fn which(bin: &str) -> bool {

@@ -151,6 +151,33 @@ export interface RecommendationProfile {
   feedback_count: number;
 }
 
+export type FirstSuccessPhase =
+  | "checking_sources"
+  | "needs_action"
+  | "ready"
+  | "awaiting_signal"
+  | "completed";
+
+export interface FirstSuccessStatus {
+  version: "ryn.first-success.v1";
+  phase: FirstSuccessPhase;
+  completed: boolean;
+  dismissed: boolean;
+  node_ready: boolean;
+  content_ready: boolean;
+  item_count: number;
+  healthy_sources: number;
+  source_count: number;
+  failed_sources: number;
+  degraded: boolean;
+  using_cache: boolean;
+  first_item_opened: boolean;
+  first_signal_recorded: boolean;
+  milestones: Record<string, number>;
+  safe_error: "discovery_unavailable" | null;
+  recoverable_actions: string[];
+}
+
 export interface NodeStatus {
   node_name: string;
   peer_id: string;
@@ -186,7 +213,7 @@ export interface PrivacyStatus {
   cloud_ai_enabled: boolean;
 }
 
-export type PrivacyEraseScope = "history" | "profile" | "cache" | "audit";
+export type PrivacyEraseScope = "history" | "profile" | "cache" | "audit" | "onboarding";
 export type PersonalDataExport = Record<string, unknown> & {
   version: number;
   exported_at: string;

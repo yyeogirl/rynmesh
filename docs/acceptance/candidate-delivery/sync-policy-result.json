@@ -1,0 +1,515 @@
+{
+  "scope": "installed wheel, two Windows loopback nodes, in-app browser",
+  "checkpoints": [
+    {
+      "label": "paused-before-change",
+      "at": "2026-09-14T13:26:28.864767+00:00",
+      "nodes": {
+        "A": {
+          "devices": [
+            {
+              "id": "772898ba914c8df83dd6838852d9e8a0362507a7ebf399422a04f89d182027a2",
+              "revision": 2,
+              "status": "active",
+              "paused": true,
+              "remote_paused": false,
+              "effective_scopes": [],
+              "removal_pending": false,
+              "sync": {
+                "pending": null,
+                "last_success_at": null,
+                "error_code": "",
+                "conflicts": 0,
+                "state": "paused"
+              }
+            }
+          ],
+          "bookmarks": {
+            "703f4f97f13d2d70e24d77b183cd8df7938ef65910f70821aaf679b1c1ec241d": true,
+            "728e7fdbc6cfa652e4b939825fc26a41893f3f600ceff57a11f1d600a5831a59": true
+          },
+          "independent_copies": 1
+        },
+        "B": {
+          "devices": [
+            {
+              "id": "772898ba914c8df83dd6838852d9e8a0362507a7ebf399422a04f89d182027a2",
+              "revision": 1,
+              "status": "active",
+              "paused": false,
+              "remote_paused": true,
+              "effective_scopes": [],
+              "removal_pending": false,
+              "sync": {
+                "pending": null,
+                "last_success_at": null,
+                "error_code": "",
+                "conflicts": 0,
+                "state": "paused"
+              }
+            }
+          ],
+          "bookmarks": {
+            "728e7fdbc6cfa652e4b939825fc26a41893f3f600ceff57a11f1d600a5831a59": true,
+            "703f4f97f13d2d70e24d77b183cd8df7938ef65910f70821aaf679b1c1ec241d": true
+          },
+          "independent_copies": 1
+        }
+      }
+    },
+    {
+      "label": "paused-after-change",
+      "at": "2026-09-14T13:27:03.045174+00:00",
+      "nodes": {
+        "A": {
+          "devices": [
+            {
+              "id": "772898ba914c8df83dd6838852d9e8a0362507a7ebf399422a04f89d182027a2",
+              "revision": 2,
+              "status": "active",
+              "paused": true,
+              "remote_paused": false,
+              "effective_scopes": [],
+              "removal_pending": false,
+              "sync": {
+                "pending": null,
+                "last_success_at": null,
+                "error_code": "",
+                "conflicts": 0,
+                "state": "paused"
+              }
+            }
+          ],
+          "bookmarks": {
+            "703f4f97f13d2d70e24d77b183cd8df7938ef65910f70821aaf679b1c1ec241d": true,
+            "728e7fdbc6cfa652e4b939825fc26a41893f3f600ceff57a11f1d600a5831a59": true
+          },
+          "independent_copies": 1
+        },
+        "B": {
+          "devices": [
+            {
+              "id": "772898ba914c8df83dd6838852d9e8a0362507a7ebf399422a04f89d182027a2",
+              "revision": 1,
+              "status": "active",
+              "paused": false,
+              "remote_paused": true,
+              "effective_scopes": [],
+              "removal_pending": false,
+              "sync": {
+                "pending": null,
+                "last_success_at": null,
+                "error_code": "",
+                "conflicts": 0,
+                "state": "paused"
+              }
+            }
+          ],
+          "bookmarks": {
+            "728e7fdbc6cfa652e4b939825fc26a41893f3f600ceff57a11f1d600a5831a59": false,
+            "703f4f97f13d2d70e24d77b183cd8df7938ef65910f70821aaf679b1c1ec241d": true
+          },
+          "independent_copies": 1
+        }
+      }
+    },
+    {
+      "label": "resumed",
+      "at": "2026-09-14T13:28:03.050427+00:00",
+      "nodes": {
+        "A": {
+          "devices": [
+            {
+              "id": "772898ba914c8df83dd6838852d9e8a0362507a7ebf399422a04f89d182027a2",
+              "revision": 3,
+              "status": "active",
+              "paused": false,
+              "remote_paused": false,
+              "effective_scopes": [
+                "bookmarks"
+              ],
+              "removal_pending": false,
+              "sync": {
+                "state": "confirmed",
+                "pending": 0,
+                "last_success_at": 1789392475,
+                "error_code": "",
+                "conflicts": 0
+              }
+            }
+          ],
+          "bookmarks": {
+            "703f4f97f13d2d70e24d77b183cd8df7938ef65910f70821aaf679b1c1ec241d": true
+          },
+          "independent_copies": 1
+        },
+        "B": {
+          "devices": [
+            {
+              "id": "772898ba914c8df83dd6838852d9e8a0362507a7ebf399422a04f89d182027a2",
+              "revision": 1,
+              "status": "active",
+              "paused": false,
+              "remote_paused": false,
+              "effective_scopes": [
+                "bookmarks"
+              ],
+              "removal_pending": false,
+              "sync": {
+                "state": "confirmed",
+                "pending": 0,
+                "last_success_at": 1789392469,
+                "error_code": "",
+                "conflicts": 0
+              }
+            }
+          ],
+          "bookmarks": {
+            "728e7fdbc6cfa652e4b939825fc26a41893f3f600ceff57a11f1d600a5831a59": false,
+            "703f4f97f13d2d70e24d77b183cd8df7938ef65910f70821aaf679b1c1ec241d": true
+          },
+          "independent_copies": 1
+        }
+      }
+    },
+    {
+      "label": "scope-off-before-change",
+      "at": "2026-09-14T13:28:51.003552+00:00",
+      "nodes": {
+        "A": {
+          "devices": [
+            {
+              "id": "772898ba914c8df83dd6838852d9e8a0362507a7ebf399422a04f89d182027a2",
+              "revision": 4,
+              "status": "active",
+              "paused": false,
+              "remote_paused": false,
+              "effective_scopes": [],
+              "removal_pending": false,
+              "sync": {
+                "pending": null,
+                "last_success_at": null,
+                "error_code": "",
+                "conflicts": 0,
+                "state": "no_scope"
+              }
+            }
+          ],
+          "bookmarks": {
+            "703f4f97f13d2d70e24d77b183cd8df7938ef65910f70821aaf679b1c1ec241d": true
+          },
+          "independent_copies": 1
+        },
+        "B": {
+          "devices": [
+            {
+              "id": "772898ba914c8df83dd6838852d9e8a0362507a7ebf399422a04f89d182027a2",
+              "revision": 1,
+              "status": "active",
+              "paused": false,
+              "remote_paused": false,
+              "effective_scopes": [],
+              "removal_pending": false,
+              "sync": {
+                "pending": null,
+                "last_success_at": null,
+                "error_code": "",
+                "conflicts": 0,
+                "state": "no_scope"
+              }
+            }
+          ],
+          "bookmarks": {
+            "728e7fdbc6cfa652e4b939825fc26a41893f3f600ceff57a11f1d600a5831a59": false,
+            "703f4f97f13d2d70e24d77b183cd8df7938ef65910f70821aaf679b1c1ec241d": true
+          },
+          "independent_copies": 1
+        }
+      }
+    },
+    {
+      "label": "scope-off-after-change",
+      "at": "2026-09-14T13:29:51.301811+00:00",
+      "nodes": {
+        "A": {
+          "devices": [
+            {
+              "id": "772898ba914c8df83dd6838852d9e8a0362507a7ebf399422a04f89d182027a2",
+              "revision": 4,
+              "status": "active",
+              "paused": false,
+              "remote_paused": false,
+              "effective_scopes": [],
+              "removal_pending": false,
+              "sync": {
+                "pending": null,
+                "last_success_at": null,
+                "error_code": "",
+                "conflicts": 0,
+                "state": "no_scope"
+              }
+            }
+          ],
+          "bookmarks": {
+            "703f4f97f13d2d70e24d77b183cd8df7938ef65910f70821aaf679b1c1ec241d": true
+          },
+          "independent_copies": 1
+        },
+        "B": {
+          "devices": [
+            {
+              "id": "772898ba914c8df83dd6838852d9e8a0362507a7ebf399422a04f89d182027a2",
+              "revision": 1,
+              "status": "active",
+              "paused": false,
+              "remote_paused": false,
+              "effective_scopes": [],
+              "removal_pending": false,
+              "sync": {
+                "pending": null,
+                "last_success_at": null,
+                "error_code": "",
+                "conflicts": 0,
+                "state": "no_scope"
+              }
+            }
+          ],
+          "bookmarks": {
+            "728e7fdbc6cfa652e4b939825fc26a41893f3f600ceff57a11f1d600a5831a59": true,
+            "703f4f97f13d2d70e24d77b183cd8df7938ef65910f70821aaf679b1c1ec241d": true
+          },
+          "independent_copies": 1
+        }
+      }
+    },
+    {
+      "label": "scope-restored",
+      "at": "2026-09-14T13:31:06.083476+00:00",
+      "nodes": {
+        "A": {
+          "devices": [
+            {
+              "id": "772898ba914c8df83dd6838852d9e8a0362507a7ebf399422a04f89d182027a2",
+              "revision": 5,
+              "status": "active",
+              "paused": false,
+              "remote_paused": false,
+              "effective_scopes": [
+                "bookmarks"
+              ],
+              "removal_pending": false,
+              "sync": {
+                "state": "confirmed",
+                "pending": 0,
+                "last_success_at": 1789392663,
+                "error_code": "",
+                "conflicts": 0
+              }
+            }
+          ],
+          "bookmarks": {
+            "703f4f97f13d2d70e24d77b183cd8df7938ef65910f70821aaf679b1c1ec241d": true,
+            "728e7fdbc6cfa652e4b939825fc26a41893f3f600ceff57a11f1d600a5831a59": true
+          },
+          "independent_copies": 1
+        },
+        "B": {
+          "devices": [
+            {
+              "id": "772898ba914c8df83dd6838852d9e8a0362507a7ebf399422a04f89d182027a2",
+              "revision": 1,
+              "status": "active",
+              "paused": false,
+              "remote_paused": false,
+              "effective_scopes": [
+                "bookmarks"
+              ],
+              "removal_pending": false,
+              "sync": {
+                "state": "confirmed",
+                "pending": 0,
+                "last_success_at": 1789392658,
+                "error_code": "",
+                "conflicts": 0
+              }
+            }
+          ],
+          "bookmarks": {
+            "728e7fdbc6cfa652e4b939825fc26a41893f3f600ceff57a11f1d600a5831a59": true,
+            "703f4f97f13d2d70e24d77b183cd8df7938ef65910f70821aaf679b1c1ec241d": true
+          },
+          "independent_copies": 1
+        }
+      }
+    },
+    {
+      "label": "removed-before-change",
+      "at": "2026-09-14T13:32:12.856972+00:00",
+      "nodes": {
+        "A": {
+          "devices": [
+            {
+              "id": "772898ba914c8df83dd6838852d9e8a0362507a7ebf399422a04f89d182027a2",
+              "revision": 5,
+              "status": "revoked",
+              "paused": false,
+              "remote_paused": false,
+              "effective_scopes": [],
+              "removal_pending": false,
+              "sync": {
+                "pending": null,
+                "last_success_at": null,
+                "error_code": "",
+                "conflicts": 0,
+                "state": "unpaired"
+              }
+            }
+          ],
+          "bookmarks": {
+            "703f4f97f13d2d70e24d77b183cd8df7938ef65910f70821aaf679b1c1ec241d": true,
+            "728e7fdbc6cfa652e4b939825fc26a41893f3f600ceff57a11f1d600a5831a59": true
+          },
+          "independent_copies": 1
+        },
+        "B": {
+          "devices": [
+            {
+              "id": "772898ba914c8df83dd6838852d9e8a0362507a7ebf399422a04f89d182027a2",
+              "revision": 1,
+              "status": "revoked",
+              "paused": false,
+              "remote_paused": false,
+              "effective_scopes": [],
+              "removal_pending": false,
+              "sync": {
+                "pending": null,
+                "last_success_at": null,
+                "error_code": "",
+                "conflicts": 0,
+                "state": "unpaired"
+              }
+            }
+          ],
+          "bookmarks": {
+            "728e7fdbc6cfa652e4b939825fc26a41893f3f600ceff57a11f1d600a5831a59": true,
+            "703f4f97f13d2d70e24d77b183cd8df7938ef65910f70821aaf679b1c1ec241d": true
+          },
+          "independent_copies": 1
+        }
+      }
+    },
+    {
+      "label": "removed-after-change",
+      "at": "2026-09-14T13:32:49.139593+00:00",
+      "nodes": {
+        "A": {
+          "devices": [
+            {
+              "id": "772898ba914c8df83dd6838852d9e8a0362507a7ebf399422a04f89d182027a2",
+              "revision": 5,
+              "status": "revoked",
+              "paused": false,
+              "remote_paused": false,
+              "effective_scopes": [],
+              "removal_pending": false,
+              "sync": {
+                "pending": null,
+                "last_success_at": null,
+                "error_code": "",
+                "conflicts": 0,
+                "state": "unpaired"
+              }
+            }
+          ],
+          "bookmarks": {
+            "703f4f97f13d2d70e24d77b183cd8df7938ef65910f70821aaf679b1c1ec241d": true,
+            "728e7fdbc6cfa652e4b939825fc26a41893f3f600ceff57a11f1d600a5831a59": true
+          },
+          "independent_copies": 1
+        },
+        "B": {
+          "devices": [
+            {
+              "id": "772898ba914c8df83dd6838852d9e8a0362507a7ebf399422a04f89d182027a2",
+              "revision": 1,
+              "status": "revoked",
+              "paused": false,
+              "remote_paused": false,
+              "effective_scopes": [],
+              "removal_pending": false,
+              "sync": {
+                "pending": null,
+                "last_success_at": null,
+                "error_code": "",
+                "conflicts": 0,
+                "state": "unpaired"
+              }
+            }
+          ],
+          "bookmarks": {
+            "728e7fdbc6cfa652e4b939825fc26a41893f3f600ceff57a11f1d600a5831a59": false,
+            "703f4f97f13d2d70e24d77b183cd8df7938ef65910f70821aaf679b1c1ec241d": true
+          },
+          "independent_copies": 1
+        }
+      }
+    },
+    {
+      "label": "restarted-after-removal",
+      "at": "2026-09-14T13:33:35.652379+00:00",
+      "nodes": {
+        "A": {
+          "devices": [
+            {
+              "id": "772898ba914c8df83dd6838852d9e8a0362507a7ebf399422a04f89d182027a2",
+              "revision": 5,
+              "status": "revoked",
+              "paused": false,
+              "remote_paused": false,
+              "effective_scopes": [],
+              "removal_pending": false,
+              "sync": {
+                "pending": null,
+                "last_success_at": null,
+                "error_code": "",
+                "conflicts": 0,
+                "state": "unpaired"
+              }
+            }
+          ],
+          "bookmarks": {
+            "703f4f97f13d2d70e24d77b183cd8df7938ef65910f70821aaf679b1c1ec241d": true,
+            "728e7fdbc6cfa652e4b939825fc26a41893f3f600ceff57a11f1d600a5831a59": true
+          },
+          "independent_copies": 1
+        },
+        "B": {
+          "devices": [
+            {
+              "id": "772898ba914c8df83dd6838852d9e8a0362507a7ebf399422a04f89d182027a2",
+              "revision": 1,
+              "status": "revoked",
+              "paused": false,
+              "remote_paused": false,
+              "effective_scopes": [],
+              "removal_pending": false,
+              "sync": {
+                "pending": null,
+                "last_success_at": null,
+                "error_code": "",
+                "conflicts": 0,
+                "state": "unpaired"
+              }
+            }
+          ],
+          "bookmarks": {
+            "728e7fdbc6cfa652e4b939825fc26a41893f3f600ceff57a11f1d600a5831a59": false,
+            "703f4f97f13d2d70e24d77b183cd8df7938ef65910f70821aaf679b1c1ec241d": true
+          },
+          "independent_copies": 1
+        }
+      }
+    }
+  ],
+  "verification": "passed"
+}

@@ -1,0 +1,9 @@
+.issues { display: grid; gap: 1.25rem; overflow-wrap: anywhere; min-width: 0; }
+.issues section, .issues article { min-width: 0; }
+.issues article { border-top: 1px solid var(--border-color); padding-top: .75rem; margin-top: .75rem; }
+.issues button { margin: .4rem .5rem .4rem 0; white-space: normal; }
+.issues textarea { width: 100%; box-sizing: border-box; }
+.transcript { max-height: 24rem; overflow: auto; padding: .75rem; }
+.transcript p { white-space: pre-wrap; }
+.review { min-width: 0; overflow-wrap: anywhere; }
+.review button { margin: .4rem .5rem .4rem 0; white-space: normal; }

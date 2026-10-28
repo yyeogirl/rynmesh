@@ -1,0 +1,2781 @@
+{
+  "scope": "API checkpoints supplementing actual browser actions; Windows production node, not packaged desktop",
+  "fixture": "rynmesh-first-reading-acceptance-20260914-browser01",
+  "observations": [
+    {
+      "label": "restart-incomplete-open-first-article",
+      "at": "2026-09-14T06:57:07.884194+00:00",
+      "node_pid": 62488,
+      "node_started_at": "2026-09-14T06:55:45.714436+00:00",
+      "health_seconds": 0.0030086999759078026,
+      "first_success": {
+        "version": "ryn.first-success.v1",
+        "phase": "awaiting_signal",
+        "completed": false,
+        "dismissed": true,
+        "node_ready": true,
+        "content_ready": true,
+        "item_count": 30,
+        "source_count": 14,
+        "failed_sources": 3,
+        "healthy_sources": 11,
+        "degraded": true,
+        "using_cache": true,
+        "first_item_opened": true,
+        "first_signal_recorded": false,
+        "milestones": {
+          "node_ready": 1789368891.1834202,
+          "content_ready": 1789368903.3576932,
+          "first_item_opened": 1789368988.8122864,
+          "first_signal_recorded": 0.0,
+          "completed": 0.0
+        },
+        "safe_error": null,
+        "recoverable_actions": []
+      },
+      "history": [
+        {
+          "item_id": "f5671a8b3b300a17",
+          "first_opened_unix": 1789368988.7684667,
+          "last_opened_unix": 1789368988.7684667,
+          "open_count": 1,
+          "bookmarked": false,
+          "progress": 0.0,
+          "completed": false,
+          "record_digest": "09eef98dbd5c84ff5bfb7690ae0b4e6bcc90504ab4467ff7f3231b77f054f54b"
+        }
+      ],
+      "sources": [
+        {
+          "id": "default-youtube-3blue1brown",
+          "status": "cached",
+          "ok": false,
+          "error": "source_fetch_failed",
+          "item_count": 15,
+          "last_checked_unix": 1789368947.140009,
+          "last_success_unix": 1789368878.1734188,
+          "consecutive_failures": 1,
+          "using_cached_items": true
+        },
+        {
+          "id": "default-youtube-computerphile",
+          "status": "cached",
+          "ok": false,
+          "error": "source_fetch_failed",
+          "item_count": 15,
+          "last_checked_unix": 1789368947.9558926,
+          "last_success_unix": 1789368879.0370548,
+          "consecutive_failures": 1,
+          "using_cached_items": true
+        },
+        {
+          "id": "default-youtube-kurzgesagt",
+          "status": "cached",
+          "ok": false,
+          "error": "source_fetch_failed",
+          "item_count": 15,
+          "last_checked_unix": 1789368948.5465448,
+          "last_success_unix": 1789368879.7208192,
+          "consecutive_failures": 1,
+          "using_cached_items": true
+        },
+        {
+          "id": "default-reddit-science",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 26,
+          "last_checked_unix": 1789368949.3293257,
+          "last_success_unix": 1789368949.3293257,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-hacker-news",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 20,
+          "last_checked_unix": 1789368951.1559167,
+          "last_success_unix": 1789368951.1559167,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-bbc-world",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 23,
+          "last_checked_unix": 1789368952.9724565,
+          "last_success_unix": 1789368952.9724565,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-ars-technica",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 20,
+          "last_checked_unix": 1789368954.5664668,
+          "last_success_unix": 1789368954.5664668,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-arxiv-ai",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 0,
+          "last_checked_unix": 1789368956.148837,
+          "last_success_unix": 1789368956.148837,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-arxiv-machine-learning",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 50,
+          "last_checked_unix": 1789368956.907638,
+          "last_success_unix": 1789368956.907638,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-nasa-podcast",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 50,
+          "last_checked_unix": 1789368957.9813619,
+          "last_success_unix": 1789368957.9813619,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-librivox",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 10,
+          "last_checked_unix": 1789368961.3304152,
+          "last_success_unix": 1789368961.3304152,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-xkcd",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 4,
+          "last_checked_unix": 1789368963.0658147,
+          "last_success_unix": 1789368963.0658147,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-nasa-image",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 50,
+          "last_checked_unix": 1789368963.6973274,
+          "last_success_unix": 1789368963.6973274,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-gutenberg-new",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 19,
+          "last_checked_unix": 1789368964.6479588,
+          "last_success_unix": 1789368964.6479588,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        }
+      ],
+      "feedback": [],
+      "model_configured": false
+    },
+    {
+      "label": "first-reading-saved",
+      "at": "2026-09-14T06:57:33.482101+00:00",
+      "node_pid": 62488,
+      "node_started_at": "2026-09-14T06:55:45.714436+00:00",
+      "health_seconds": 0.0017089999746531248,
+      "first_success": {
+        "version": "ryn.first-success.v1",
+        "phase": "completed",
+        "completed": true,
+        "dismissed": true,
+        "node_ready": true,
+        "content_ready": true,
+        "item_count": 30,
+        "source_count": 14,
+        "failed_sources": 3,
+        "healthy_sources": 11,
+        "degraded": true,
+        "using_cache": true,
+        "first_item_opened": true,
+        "first_signal_recorded": true,
+        "milestones": {
+          "node_ready": 1789368891.1834202,
+          "content_ready": 1789368903.3576932,
+          "first_item_opened": 1789368988.8122864,
+          "first_signal_recorded": 1789369043.6013937,
+          "completed": 1789369043.7128296
+        },
+        "safe_error": null,
+        "recoverable_actions": []
+      },
+      "history": [
+        {
+          "item_id": "f5671a8b3b300a17",
+          "first_opened_unix": 1789368988.7684667,
+          "last_opened_unix": 1789368988.7684667,
+          "open_count": 1,
+          "bookmarked": true,
+          "progress": 0.1591,
+          "completed": false,
+          "record_digest": "c28cbcbdfecf55a6cc7a74e4d6decc2a374e1f2073e926e3fcb1a4bb4b3c4794"
+        }
+      ],
+      "sources": [
+        {
+          "id": "default-youtube-3blue1brown",
+          "status": "cached",
+          "ok": false,
+          "error": "source_fetch_failed",
+          "item_count": 15,
+          "last_checked_unix": 1789368947.140009,
+          "last_success_unix": 1789368878.1734188,
+          "consecutive_failures": 1,
+          "using_cached_items": true
+        },
+        {
+          "id": "default-youtube-computerphile",
+          "status": "cached",
+          "ok": false,
+          "error": "source_fetch_failed",
+          "item_count": 15,
+          "last_checked_unix": 1789368947.9558926,
+          "last_success_unix": 1789368879.0370548,
+          "consecutive_failures": 1,
+          "using_cached_items": true
+        },
+        {
+          "id": "default-youtube-kurzgesagt",
+          "status": "cached",
+          "ok": false,
+          "error": "source_fetch_failed",
+          "item_count": 15,
+          "last_checked_unix": 1789368948.5465448,
+          "last_success_unix": 1789368879.7208192,
+          "consecutive_failures": 1,
+          "using_cached_items": true
+        },
+        {
+          "id": "default-reddit-science",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 26,
+          "last_checked_unix": 1789368949.3293257,
+          "last_success_unix": 1789368949.3293257,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-hacker-news",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 20,
+          "last_checked_unix": 1789368951.1559167,
+          "last_success_unix": 1789368951.1559167,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-bbc-world",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 23,
+          "last_checked_unix": 1789368952.9724565,
+          "last_success_unix": 1789368952.9724565,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-ars-technica",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 20,
+          "last_checked_unix": 1789368954.5664668,
+          "last_success_unix": 1789368954.5664668,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-arxiv-ai",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 0,
+          "last_checked_unix": 1789368956.148837,
+          "last_success_unix": 1789368956.148837,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-arxiv-machine-learning",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 50,
+          "last_checked_unix": 1789368956.907638,
+          "last_success_unix": 1789368956.907638,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-nasa-podcast",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 50,
+          "last_checked_unix": 1789368957.9813619,
+          "last_success_unix": 1789368957.9813619,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-librivox",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 10,
+          "last_checked_unix": 1789368961.3304152,
+          "last_success_unix": 1789368961.3304152,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-xkcd",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 4,
+          "last_checked_unix": 1789368963.0658147,
+          "last_success_unix": 1789368963.0658147,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-nasa-image",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 50,
+          "last_checked_unix": 1789368963.6973274,
+          "last_success_unix": 1789368963.6973274,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-gutenberg-new",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 19,
+          "last_checked_unix": 1789368964.6479588,
+          "last_success_unix": 1789368964.6479588,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        }
+      ],
+      "feedback": [],
+      "model_configured": false
+    },
+    {
+      "label": "saved-reading-after-restart",
+      "at": "2026-09-14T06:58:41.612738+00:00",
+      "node_pid": 37400,
+      "node_started_at": "2026-09-14T06:58:24.644287+00:00",
+      "health_seconds": 0.0020849000429734588,
+      "first_success": {
+        "version": "ryn.first-success.v1",
+        "phase": "completed",
+        "completed": true,
+        "dismissed": true,
+        "node_ready": true,
+        "content_ready": true,
+        "item_count": 30,
+        "source_count": 14,
+        "failed_sources": 3,
+        "healthy_sources": 11,
+        "degraded": true,
+        "using_cache": true,
+        "first_item_opened": true,
+        "first_signal_recorded": true,
+        "milestones": {
+          "node_ready": 1789368891.1834202,
+          "content_ready": 1789368903.3576932,
+          "first_item_opened": 1789368988.8122864,
+          "first_signal_recorded": 1789369043.6013937,
+          "completed": 1789369043.7128296
+        },
+        "safe_error": null,
+        "recoverable_actions": []
+      },
+      "history": [
+        {
+          "item_id": "f5671a8b3b300a17",
+          "first_opened_unix": 1789368988.7684667,
+          "last_opened_unix": 1789368988.7684667,
+          "open_count": 1,
+          "bookmarked": true,
+          "progress": 0.1591,
+          "completed": false,
+          "record_digest": "c28cbcbdfecf55a6cc7a74e4d6decc2a374e1f2073e926e3fcb1a4bb4b3c4794"
+        }
+      ],
+      "sources": [
+        {
+          "id": "default-youtube-3blue1brown",
+          "status": "cached",
+          "ok": false,
+          "error": "source_fetch_failed",
+          "item_count": 15,
+          "last_checked_unix": 1789368947.140009,
+          "last_success_unix": 1789368878.1734188,
+          "consecutive_failures": 1,
+          "using_cached_items": true
+        },
+        {
+          "id": "default-youtube-computerphile",
+          "status": "cached",
+          "ok": false,
+          "error": "source_fetch_failed",
+          "item_count": 15,
+          "last_checked_unix": 1789368947.9558926,
+          "last_success_unix": 1789368879.0370548,
+          "consecutive_failures": 1,
+          "using_cached_items": true
+        },
+        {
+          "id": "default-youtube-kurzgesagt",
+          "status": "cached",
+          "ok": false,
+          "error": "source_fetch_failed",
+          "item_count": 15,
+          "last_checked_unix": 1789368948.5465448,
+          "last_success_unix": 1789368879.7208192,
+          "consecutive_failures": 1,
+          "using_cached_items": true
+        },
+        {
+          "id": "default-reddit-science",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 26,
+          "last_checked_unix": 1789368949.3293257,
+          "last_success_unix": 1789368949.3293257,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-hacker-news",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 20,
+          "last_checked_unix": 1789368951.1559167,
+          "last_success_unix": 1789368951.1559167,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-bbc-world",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 23,
+          "last_checked_unix": 1789368952.9724565,
+          "last_success_unix": 1789368952.9724565,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-ars-technica",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 20,
+          "last_checked_unix": 1789368954.5664668,
+          "last_success_unix": 1789368954.5664668,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-arxiv-ai",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 0,
+          "last_checked_unix": 1789368956.148837,
+          "last_success_unix": 1789368956.148837,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-arxiv-machine-learning",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 50,
+          "last_checked_unix": 1789368956.907638,
+          "last_success_unix": 1789368956.907638,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-nasa-podcast",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 50,
+          "last_checked_unix": 1789368957.9813619,
+          "last_success_unix": 1789368957.9813619,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-librivox",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 10,
+          "last_checked_unix": 1789368961.3304152,
+          "last_success_unix": 1789368961.3304152,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-xkcd",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 4,
+          "last_checked_unix": 1789368963.0658147,
+          "last_success_unix": 1789368963.0658147,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-nasa-image",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 50,
+          "last_checked_unix": 1789368963.6973274,
+          "last_success_unix": 1789368963.6973274,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-gutenberg-new",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 19,
+          "last_checked_unix": 1789368964.6479588,
+          "last_success_unix": 1789368964.6479588,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        }
+      ],
+      "feedback": [],
+      "model_configured": false
+    },
+    {
+      "label": "three-feedback-actions",
+      "at": "2026-09-14T07:01:29.600735+00:00",
+      "node_pid": 37400,
+      "node_started_at": "2026-09-14T06:58:24.644287+00:00",
+      "health_seconds": 0.001655799977015704,
+      "first_success": {
+        "version": "ryn.first-success.v1",
+        "phase": "completed",
+        "completed": true,
+        "dismissed": true,
+        "node_ready": true,
+        "content_ready": true,
+        "item_count": 30,
+        "source_count": 14,
+        "failed_sources": 0,
+        "healthy_sources": 14,
+        "degraded": false,
+        "using_cache": false,
+        "first_item_opened": true,
+        "first_signal_recorded": true,
+        "milestones": {
+          "node_ready": 1789368891.1834202,
+          "content_ready": 1789368903.3576932,
+          "first_item_opened": 1789368988.8122864,
+          "first_signal_recorded": 1789369043.6013937,
+          "completed": 1789369043.7128296
+        },
+        "safe_error": null,
+        "recoverable_actions": []
+      },
+      "history": [
+        {
+          "item_id": "f5671a8b3b300a17",
+          "first_opened_unix": 1789368988.7684667,
+          "last_opened_unix": 1789369137.1474655,
+          "open_count": 2,
+          "bookmarked": true,
+          "progress": 0.1591,
+          "completed": false,
+          "record_digest": "4075ba61b625a1c714e3b5a8380f72d456934e985b8235a95154eaff7fbb73db"
+        }
+      ],
+      "sources": [
+        {
+          "id": "default-youtube-3blue1brown",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 15,
+          "last_checked_unix": 1789369106.0723908,
+          "last_success_unix": 1789369106.0723908,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-youtube-computerphile",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 15,
+          "last_checked_unix": 1789369107.056858,
+          "last_success_unix": 1789369107.056858,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-youtube-kurzgesagt",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 15,
+          "last_checked_unix": 1789369107.7146518,
+          "last_success_unix": 1789369107.7146518,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-reddit-science",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 26,
+          "last_checked_unix": 1789369108.431923,
+          "last_success_unix": 1789369108.431923,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-hacker-news",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 20,
+          "last_checked_unix": 1789369110.2331035,
+          "last_success_unix": 1789369110.2331035,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-bbc-world",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 23,
+          "last_checked_unix": 1789369112.0672448,
+          "last_success_unix": 1789369112.0672448,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-ars-technica",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 20,
+          "last_checked_unix": 1789369113.4492831,
+          "last_success_unix": 1789369113.4492831,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-arxiv-ai",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 0,
+          "last_checked_unix": 1789369115.2416675,
+          "last_success_unix": 1789369115.2416675,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-arxiv-machine-learning",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 50,
+          "last_checked_unix": 1789369116.883143,
+          "last_success_unix": 1789369116.883143,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-nasa-podcast",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 50,
+          "last_checked_unix": 1789369119.6405096,
+          "last_success_unix": 1789369119.6405096,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-librivox",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 10,
+          "last_checked_unix": 1789369123.7077186,
+          "last_success_unix": 1789369123.7077186,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-xkcd",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 4,
+          "last_checked_unix": 1789369125.673938,
+          "last_success_unix": 1789369125.673938,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-nasa-image",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 50,
+          "last_checked_unix": 1789369126.3002374,
+          "last_success_unix": 1789369126.3002374,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-gutenberg-new",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 19,
+          "last_checked_unix": 1789369127.6565363,
+          "last_success_unix": 1789369127.6565363,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        }
+      ],
+      "feedback": [
+        {
+          "event_id": "300ae9073c814535a4a6c38d7c2d6c36",
+          "content_id": "digest:edb230416141769b",
+          "action": "hide",
+          "updated_at": "2026-09-14T07:01:19.800710+00:00",
+          "undone_at": "",
+          "active": true
+        },
+        {
+          "event_id": "3daaa36dfce54e3a8bb057744c867174",
+          "content_id": "digest:142ace4865ee7ff0",
+          "action": "less",
+          "updated_at": "2026-09-14T07:00:13.147343+00:00",
+          "undone_at": "",
+          "active": true
+        },
+        {
+          "event_id": "366b113e97fb4f7f9ca4e268c54a159a",
+          "content_id": "digest:f5671a8b3b300a17",
+          "action": "more",
+          "updated_at": "2026-09-14T07:00:01.747580+00:00",
+          "undone_at": "",
+          "active": true
+        }
+      ],
+      "model_configured": false
+    },
+    {
+      "label": "feedback-one-undone-custom-source-added",
+      "at": "2026-09-14T07:02:01.755670+00:00",
+      "node_pid": 37400,
+      "node_started_at": "2026-09-14T06:58:24.644287+00:00",
+      "health_seconds": 0.0017423999961465597,
+      "first_success": {
+        "version": "ryn.first-success.v1",
+        "phase": "completed",
+        "completed": true,
+        "dismissed": true,
+        "node_ready": true,
+        "content_ready": true,
+        "item_count": 30,
+        "source_count": 15,
+        "failed_sources": 0,
+        "healthy_sources": 15,
+        "degraded": false,
+        "using_cache": false,
+        "first_item_opened": true,
+        "first_signal_recorded": true,
+        "milestones": {
+          "node_ready": 1789368891.1834202,
+          "content_ready": 1789368903.3576932,
+          "first_item_opened": 1789368988.8122864,
+          "first_signal_recorded": 1789369043.6013937,
+          "completed": 1789369043.7128296
+        },
+        "safe_error": null,
+        "recoverable_actions": []
+      },
+      "history": [
+        {
+          "item_id": "f5671a8b3b300a17",
+          "first_opened_unix": 1789368988.7684667,
+          "last_opened_unix": 1789369137.1474655,
+          "open_count": 2,
+          "bookmarked": true,
+          "progress": 0.1591,
+          "completed": false,
+          "record_digest": "4075ba61b625a1c714e3b5a8380f72d456934e985b8235a95154eaff7fbb73db"
+        }
+      ],
+      "sources": [
+        {
+          "id": "default-youtube-3blue1brown",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 15,
+          "last_checked_unix": 1789369106.0723908,
+          "last_success_unix": 1789369106.0723908,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-youtube-computerphile",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 15,
+          "last_checked_unix": 1789369107.056858,
+          "last_success_unix": 1789369107.056858,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-youtube-kurzgesagt",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 15,
+          "last_checked_unix": 1789369107.7146518,
+          "last_success_unix": 1789369107.7146518,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-reddit-science",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 26,
+          "last_checked_unix": 1789369108.431923,
+          "last_success_unix": 1789369108.431923,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-hacker-news",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 20,
+          "last_checked_unix": 1789369110.2331035,
+          "last_success_unix": 1789369110.2331035,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-bbc-world",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 23,
+          "last_checked_unix": 1789369112.0672448,
+          "last_success_unix": 1789369112.0672448,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-ars-technica",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 20,
+          "last_checked_unix": 1789369113.4492831,
+          "last_success_unix": 1789369113.4492831,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-arxiv-ai",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 0,
+          "last_checked_unix": 1789369115.2416675,
+          "last_success_unix": 1789369115.2416675,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-arxiv-machine-learning",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 50,
+          "last_checked_unix": 1789369116.883143,
+          "last_success_unix": 1789369116.883143,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-nasa-podcast",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 50,
+          "last_checked_unix": 1789369119.6405096,
+          "last_success_unix": 1789369119.6405096,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-librivox",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 10,
+          "last_checked_unix": 1789369123.7077186,
+          "last_success_unix": 1789369123.7077186,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-xkcd",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 4,
+          "last_checked_unix": 1789369125.673938,
+          "last_success_unix": 1789369125.673938,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-nasa-image",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 50,
+          "last_checked_unix": 1789369126.3002374,
+          "last_success_unix": 1789369126.3002374,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-gutenberg-new",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 19,
+          "last_checked_unix": 1789369127.6565363,
+          "last_success_unix": 1789369127.6565363,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "ccd580d775550ba4",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 1,
+          "last_checked_unix": 0.0,
+          "last_success_unix": 0.0,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        }
+      ],
+      "feedback": [
+        {
+          "event_id": "300ae9073c814535a4a6c38d7c2d6c36",
+          "content_id": "digest:edb230416141769b",
+          "action": "hide",
+          "updated_at": "2026-09-14T07:01:19.800710+00:00",
+          "undone_at": "",
+          "active": true
+        },
+        {
+          "event_id": "3daaa36dfce54e3a8bb057744c867174",
+          "content_id": "digest:142ace4865ee7ff0",
+          "action": "less",
+          "updated_at": "2026-09-14T07:00:13.147343+00:00",
+          "undone_at": "2026-09-14T07:01:36.167024+00:00",
+          "active": false
+        },
+        {
+          "event_id": "366b113e97fb4f7f9ca4e268c54a159a",
+          "content_id": "digest:f5671a8b3b300a17",
+          "action": "more",
+          "updated_at": "2026-09-14T07:00:01.747580+00:00",
+          "undone_at": "",
+          "active": true
+        }
+      ],
+      "model_configured": false
+    },
+    {
+      "label": "before-source-failure",
+      "at": "2026-09-14T07:02:51.796915+00:00",
+      "node_pid": 37400,
+      "node_started_at": "2026-09-14T06:58:24.644287+00:00",
+      "health_seconds": 0.002867999952286482,
+      "first_success": {
+        "version": "ryn.first-success.v1",
+        "phase": "completed",
+        "completed": true,
+        "dismissed": true,
+        "node_ready": true,
+        "content_ready": true,
+        "item_count": 30,
+        "source_count": 15,
+        "failed_sources": 1,
+        "healthy_sources": 14,
+        "degraded": true,
+        "using_cache": true,
+        "first_item_opened": true,
+        "first_signal_recorded": true,
+        "milestones": {
+          "node_ready": 1789368891.1834202,
+          "content_ready": 1789368903.3576932,
+          "first_item_opened": 1789368988.8122864,
+          "first_signal_recorded": 1789369043.6013937,
+          "completed": 1789369043.7128296
+        },
+        "safe_error": null,
+        "recoverable_actions": []
+      },
+      "history": [
+        {
+          "item_id": "f5671a8b3b300a17",
+          "first_opened_unix": 1789368988.7684667,
+          "last_opened_unix": 1789369137.1474655,
+          "open_count": 2,
+          "bookmarked": true,
+          "progress": 0.1591,
+          "completed": false,
+          "record_digest": "4075ba61b625a1c714e3b5a8380f72d456934e985b8235a95154eaff7fbb73db"
+        }
+      ],
+      "sources": [
+        {
+          "id": "default-youtube-3blue1brown",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 15,
+          "last_checked_unix": 1789369307.3936553,
+          "last_success_unix": 1789369307.3936553,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-youtube-computerphile",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 15,
+          "last_checked_unix": 1789369308.2498736,
+          "last_success_unix": 1789369308.2498736,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-youtube-kurzgesagt",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 15,
+          "last_checked_unix": 1789369308.8607452,
+          "last_success_unix": 1789369308.8607452,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-reddit-science",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 26,
+          "last_checked_unix": 1789369309.5763164,
+          "last_success_unix": 1789369309.5763164,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-hacker-news",
+          "status": "cached",
+          "ok": false,
+          "error": "source_fetch_failed",
+          "item_count": 20,
+          "last_checked_unix": 1789369311.5830574,
+          "last_success_unix": 1789369110.2331035,
+          "consecutive_failures": 1,
+          "using_cached_items": true
+        },
+        {
+          "id": "default-bbc-world",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 23,
+          "last_checked_unix": 1789369321.38852,
+          "last_success_unix": 1789369321.38852,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-ars-technica",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 20,
+          "last_checked_unix": 1789369323.2290056,
+          "last_success_unix": 1789369323.2290056,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-arxiv-ai",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 0,
+          "last_checked_unix": 1789369325.0420556,
+          "last_success_unix": 1789369325.0420556,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-arxiv-machine-learning",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 50,
+          "last_checked_unix": 1789369326.0157259,
+          "last_success_unix": 1789369326.0157259,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-nasa-podcast",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 50,
+          "last_checked_unix": 1789369327.1155002,
+          "last_success_unix": 1789369327.1155002,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-librivox",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 10,
+          "last_checked_unix": 1789369331.0937974,
+          "last_success_unix": 1789369331.0937974,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-xkcd",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 4,
+          "last_checked_unix": 1789369333.0574267,
+          "last_success_unix": 1789369333.0574267,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-nasa-image",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 50,
+          "last_checked_unix": 1789369333.9002757,
+          "last_success_unix": 1789369333.9002757,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-gutenberg-new",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 19,
+          "last_checked_unix": 1789369334.8694613,
+          "last_success_unix": 1789369334.8694613,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "ccd580d775550ba4",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 1,
+          "last_checked_unix": 1789369336.7740376,
+          "last_success_unix": 1789369336.7740376,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        }
+      ],
+      "feedback": [
+        {
+          "event_id": "300ae9073c814535a4a6c38d7c2d6c36",
+          "content_id": "digest:edb230416141769b",
+          "action": "hide",
+          "updated_at": "2026-09-14T07:01:19.800710+00:00",
+          "undone_at": "",
+          "active": true
+        },
+        {
+          "event_id": "3daaa36dfce54e3a8bb057744c867174",
+          "content_id": "digest:142ace4865ee7ff0",
+          "action": "less",
+          "updated_at": "2026-09-14T07:00:13.147343+00:00",
+          "undone_at": "2026-09-14T07:01:36.167024+00:00",
+          "active": false
+        },
+        {
+          "event_id": "366b113e97fb4f7f9ca4e268c54a159a",
+          "content_id": "digest:f5671a8b3b300a17",
+          "action": "more",
+          "updated_at": "2026-09-14T07:00:01.747580+00:00",
+          "undone_at": "",
+          "active": true
+        }
+      ],
+      "model_configured": false
+    },
+    {
+      "label": "source-failed-cached-content",
+      "at": "2026-09-14T07:03:13.336125+00:00",
+      "node_pid": 37400,
+      "node_started_at": "2026-09-14T06:58:24.644287+00:00",
+      "health_seconds": 0.0017460999661125243,
+      "first_success": {
+        "version": "ryn.first-success.v1",
+        "phase": "completed",
+        "completed": true,
+        "dismissed": true,
+        "node_ready": true,
+        "content_ready": true,
+        "item_count": 30,
+        "source_count": 15,
+        "failed_sources": 2,
+        "healthy_sources": 13,
+        "degraded": true,
+        "using_cache": true,
+        "first_item_opened": true,
+        "first_signal_recorded": true,
+        "milestones": {
+          "node_ready": 1789368891.1834202,
+          "content_ready": 1789368903.3576932,
+          "first_item_opened": 1789368988.8122864,
+          "first_signal_recorded": 1789369043.6013937,
+          "completed": 1789369043.7128296
+        },
+        "safe_error": null,
+        "recoverable_actions": []
+      },
+      "history": [
+        {
+          "item_id": "f5671a8b3b300a17",
+          "first_opened_unix": 1789368988.7684667,
+          "last_opened_unix": 1789369137.1474655,
+          "open_count": 2,
+          "bookmarked": true,
+          "progress": 0.1591,
+          "completed": false,
+          "record_digest": "4075ba61b625a1c714e3b5a8380f72d456934e985b8235a95154eaff7fbb73db"
+        }
+      ],
+      "sources": [
+        {
+          "id": "default-youtube-3blue1brown",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 15,
+          "last_checked_unix": 1789369307.3936553,
+          "last_success_unix": 1789369307.3936553,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-youtube-computerphile",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 15,
+          "last_checked_unix": 1789369308.2498736,
+          "last_success_unix": 1789369308.2498736,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-youtube-kurzgesagt",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 15,
+          "last_checked_unix": 1789369308.8607452,
+          "last_success_unix": 1789369308.8607452,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-reddit-science",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 26,
+          "last_checked_unix": 1789369309.5763164,
+          "last_success_unix": 1789369309.5763164,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-hacker-news",
+          "status": "cached",
+          "ok": false,
+          "error": "source_fetch_failed",
+          "item_count": 20,
+          "last_checked_unix": 1789369311.5830574,
+          "last_success_unix": 1789369110.2331035,
+          "consecutive_failures": 1,
+          "using_cached_items": true
+        },
+        {
+          "id": "default-bbc-world",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 23,
+          "last_checked_unix": 1789369321.38852,
+          "last_success_unix": 1789369321.38852,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-ars-technica",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 20,
+          "last_checked_unix": 1789369323.2290056,
+          "last_success_unix": 1789369323.2290056,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-arxiv-ai",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 0,
+          "last_checked_unix": 1789369325.0420556,
+          "last_success_unix": 1789369325.0420556,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-arxiv-machine-learning",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 50,
+          "last_checked_unix": 1789369326.0157259,
+          "last_success_unix": 1789369326.0157259,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-nasa-podcast",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 50,
+          "last_checked_unix": 1789369327.1155002,
+          "last_success_unix": 1789369327.1155002,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-librivox",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 10,
+          "last_checked_unix": 1789369331.0937974,
+          "last_success_unix": 1789369331.0937974,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-xkcd",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 4,
+          "last_checked_unix": 1789369333.0574267,
+          "last_success_unix": 1789369333.0574267,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-nasa-image",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 50,
+          "last_checked_unix": 1789369333.9002757,
+          "last_success_unix": 1789369333.9002757,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-gutenberg-new",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 19,
+          "last_checked_unix": 1789369334.8694613,
+          "last_success_unix": 1789369334.8694613,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "ccd580d775550ba4",
+          "status": "cached",
+          "ok": false,
+          "error": "source_fetch_failed",
+          "item_count": 1,
+          "last_checked_unix": 1789369378.9546394,
+          "last_success_unix": 1789369336.7740376,
+          "consecutive_failures": 1,
+          "using_cached_items": true
+        }
+      ],
+      "feedback": [
+        {
+          "event_id": "300ae9073c814535a4a6c38d7c2d6c36",
+          "content_id": "digest:edb230416141769b",
+          "action": "hide",
+          "updated_at": "2026-09-14T07:01:19.800710+00:00",
+          "undone_at": "",
+          "active": true
+        },
+        {
+          "event_id": "3daaa36dfce54e3a8bb057744c867174",
+          "content_id": "digest:142ace4865ee7ff0",
+          "action": "less",
+          "updated_at": "2026-09-14T07:00:13.147343+00:00",
+          "undone_at": "2026-09-14T07:01:36.167024+00:00",
+          "active": false
+        },
+        {
+          "event_id": "366b113e97fb4f7f9ca4e268c54a159a",
+          "content_id": "digest:f5671a8b3b300a17",
+          "action": "more",
+          "updated_at": "2026-09-14T07:00:01.747580+00:00",
+          "undone_at": "",
+          "active": true
+        }
+      ],
+      "model_configured": false
+    },
+    {
+      "label": "source-recovered",
+      "at": "2026-09-14T07:04:02.074955+00:00",
+      "node_pid": 37400,
+      "node_started_at": "2026-09-14T06:58:24.644287+00:00",
+      "health_seconds": 0.0019901000196114182,
+      "first_success": {
+        "version": "ryn.first-success.v1",
+        "phase": "completed",
+        "completed": true,
+        "dismissed": true,
+        "node_ready": true,
+        "content_ready": true,
+        "item_count": 30,
+        "source_count": 15,
+        "failed_sources": 1,
+        "healthy_sources": 14,
+        "degraded": true,
+        "using_cache": true,
+        "first_item_opened": true,
+        "first_signal_recorded": true,
+        "milestones": {
+          "node_ready": 1789368891.1834202,
+          "content_ready": 1789368903.3576932,
+          "first_item_opened": 1789368988.8122864,
+          "first_signal_recorded": 1789369043.6013937,
+          "completed": 1789369043.7128296
+        },
+        "safe_error": null,
+        "recoverable_actions": []
+      },
+      "history": [
+        {
+          "item_id": "f5671a8b3b300a17",
+          "first_opened_unix": 1789368988.7684667,
+          "last_opened_unix": 1789369137.1474655,
+          "open_count": 2,
+          "bookmarked": true,
+          "progress": 0.1591,
+          "completed": false,
+          "record_digest": "4075ba61b625a1c714e3b5a8380f72d456934e985b8235a95154eaff7fbb73db"
+        }
+      ],
+      "sources": [
+        {
+          "id": "default-youtube-3blue1brown",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 15,
+          "last_checked_unix": 1789369307.3936553,
+          "last_success_unix": 1789369307.3936553,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-youtube-computerphile",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 15,
+          "last_checked_unix": 1789369308.2498736,
+          "last_success_unix": 1789369308.2498736,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-youtube-kurzgesagt",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 15,
+          "last_checked_unix": 1789369308.8607452,
+          "last_success_unix": 1789369308.8607452,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-reddit-science",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 26,
+          "last_checked_unix": 1789369309.5763164,
+          "last_success_unix": 1789369309.5763164,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-hacker-news",
+          "status": "cached",
+          "ok": false,
+          "error": "source_fetch_failed",
+          "item_count": 20,
+          "last_checked_unix": 1789369311.5830574,
+          "last_success_unix": 1789369110.2331035,
+          "consecutive_failures": 1,
+          "using_cached_items": true
+        },
+        {
+          "id": "default-bbc-world",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 23,
+          "last_checked_unix": 1789369321.38852,
+          "last_success_unix": 1789369321.38852,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-ars-technica",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 20,
+          "last_checked_unix": 1789369323.2290056,
+          "last_success_unix": 1789369323.2290056,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-arxiv-ai",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 0,
+          "last_checked_unix": 1789369325.0420556,
+          "last_success_unix": 1789369325.0420556,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-arxiv-machine-learning",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 50,
+          "last_checked_unix": 1789369326.0157259,
+          "last_success_unix": 1789369326.0157259,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-nasa-podcast",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 50,
+          "last_checked_unix": 1789369327.1155002,
+          "last_success_unix": 1789369327.1155002,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-librivox",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 10,
+          "last_checked_unix": 1789369331.0937974,
+          "last_success_unix": 1789369331.0937974,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-xkcd",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 4,
+          "last_checked_unix": 1789369333.0574267,
+          "last_success_unix": 1789369333.0574267,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-nasa-image",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 50,
+          "last_checked_unix": 1789369333.9002757,
+          "last_success_unix": 1789369333.9002757,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-gutenberg-new",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 19,
+          "last_checked_unix": 1789369334.8694613,
+          "last_success_unix": 1789369334.8694613,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "ccd580d775550ba4",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 1,
+          "last_checked_unix": 1789369413.0898755,
+          "last_success_unix": 1789369413.0898755,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        }
+      ],
+      "feedback": [
+        {
+          "event_id": "300ae9073c814535a4a6c38d7c2d6c36",
+          "content_id": "digest:edb230416141769b",
+          "action": "hide",
+          "updated_at": "2026-09-14T07:01:19.800710+00:00",
+          "undone_at": "",
+          "active": true
+        },
+        {
+          "event_id": "3daaa36dfce54e3a8bb057744c867174",
+          "content_id": "digest:142ace4865ee7ff0",
+          "action": "less",
+          "updated_at": "2026-09-14T07:00:13.147343+00:00",
+          "undone_at": "2026-09-14T07:01:36.167024+00:00",
+          "active": false
+        },
+        {
+          "event_id": "366b113e97fb4f7f9ca4e268c54a159a",
+          "content_id": "digest:f5671a8b3b300a17",
+          "action": "more",
+          "updated_at": "2026-09-14T07:00:01.747580+00:00",
+          "undone_at": "",
+          "active": true
+        }
+      ],
+      "model_configured": false
+    },
+    {
+      "label": "bookmark-write-failed",
+      "at": "2026-09-14T07:08:59.715191+00:00",
+      "node_pid": 37400,
+      "node_started_at": "2026-09-14T06:58:24.644287+00:00",
+      "health_seconds": 0.003552399983163923,
+      "first_success": {
+        "version": "ryn.first-success.v1",
+        "phase": "completed",
+        "completed": true,
+        "dismissed": true,
+        "node_ready": true,
+        "content_ready": true,
+        "item_count": 30,
+        "source_count": 15,
+        "failed_sources": 1,
+        "healthy_sources": 14,
+        "degraded": true,
+        "using_cache": true,
+        "first_item_opened": true,
+        "first_signal_recorded": true,
+        "milestones": {
+          "node_ready": 1789368891.1834202,
+          "content_ready": 1789368903.3576932,
+          "first_item_opened": 1789368988.8122864,
+          "first_signal_recorded": 1789369043.6013937,
+          "completed": 1789369043.7128296
+        },
+        "safe_error": null,
+        "recoverable_actions": []
+      },
+      "history": [
+        {
+          "item_id": "f5671a8b3b300a17",
+          "first_opened_unix": 1789368988.7684667,
+          "last_opened_unix": 1789369686.0635328,
+          "open_count": 4,
+          "bookmarked": false,
+          "progress": 0.1591,
+          "completed": false,
+          "record_digest": "d67dc09f8bcc1ee2ba94d89c84c8c99c6ee0aff9a607392a454199294f3338c5"
+        }
+      ],
+      "sources": [
+        {
+          "id": "default-youtube-3blue1brown",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 15,
+          "last_checked_unix": 1789369307.3936553,
+          "last_success_unix": 1789369307.3936553,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-youtube-computerphile",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 15,
+          "last_checked_unix": 1789369308.2498736,
+          "last_success_unix": 1789369308.2498736,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-youtube-kurzgesagt",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 15,
+          "last_checked_unix": 1789369308.8607452,
+          "last_success_unix": 1789369308.8607452,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-reddit-science",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 26,
+          "last_checked_unix": 1789369309.5763164,
+          "last_success_unix": 1789369309.5763164,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-hacker-news",
+          "status": "cached",
+          "ok": false,
+          "error": "source_fetch_failed",
+          "item_count": 20,
+          "last_checked_unix": 1789369311.5830574,
+          "last_success_unix": 1789369110.2331035,
+          "consecutive_failures": 1,
+          "using_cached_items": true
+        },
+        {
+          "id": "default-bbc-world",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 23,
+          "last_checked_unix": 1789369321.38852,
+          "last_success_unix": 1789369321.38852,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-ars-technica",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 20,
+          "last_checked_unix": 1789369323.2290056,
+          "last_success_unix": 1789369323.2290056,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-arxiv-ai",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 0,
+          "last_checked_unix": 1789369325.0420556,
+          "last_success_unix": 1789369325.0420556,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-arxiv-machine-learning",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 50,
+          "last_checked_unix": 1789369326.0157259,
+          "last_success_unix": 1789369326.0157259,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-nasa-podcast",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 50,
+          "last_checked_unix": 1789369327.1155002,
+          "last_success_unix": 1789369327.1155002,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-librivox",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 10,
+          "last_checked_unix": 1789369331.0937974,
+          "last_success_unix": 1789369331.0937974,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-xkcd",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 4,
+          "last_checked_unix": 1789369333.0574267,
+          "last_success_unix": 1789369333.0574267,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-nasa-image",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 50,
+          "last_checked_unix": 1789369333.9002757,
+          "last_success_unix": 1789369333.9002757,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-gutenberg-new",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 19,
+          "last_checked_unix": 1789369334.8694613,
+          "last_success_unix": 1789369334.8694613,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "ccd580d775550ba4",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 1,
+          "last_checked_unix": 1789369413.0898755,
+          "last_success_unix": 1789369413.0898755,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        }
+      ],
+      "feedback": [
+        {
+          "event_id": "300ae9073c814535a4a6c38d7c2d6c36",
+          "content_id": "digest:edb230416141769b",
+          "action": "hide",
+          "updated_at": "2026-09-14T07:01:19.800710+00:00",
+          "undone_at": "",
+          "active": true
+        },
+        {
+          "event_id": "3daaa36dfce54e3a8bb057744c867174",
+          "content_id": "digest:142ace4865ee7ff0",
+          "action": "less",
+          "updated_at": "2026-09-14T07:00:13.147343+00:00",
+          "undone_at": "2026-09-14T07:01:36.167024+00:00",
+          "active": false
+        },
+        {
+          "event_id": "366b113e97fb4f7f9ca4e268c54a159a",
+          "content_id": "digest:f5671a8b3b300a17",
+          "action": "more",
+          "updated_at": "2026-09-14T07:00:01.747580+00:00",
+          "undone_at": "",
+          "active": true
+        }
+      ],
+      "model_configured": false
+    },
+    {
+      "label": "feedback-write-failed",
+      "at": "2026-09-14T07:10:28.540512+00:00",
+      "node_pid": 37400,
+      "node_started_at": "2026-09-14T06:58:24.644287+00:00",
+      "health_seconds": 0.0031568999984301627,
+      "first_success": {
+        "version": "ryn.first-success.v1",
+        "phase": "completed",
+        "completed": true,
+        "dismissed": true,
+        "node_ready": true,
+        "content_ready": true,
+        "item_count": 30,
+        "source_count": 15,
+        "failed_sources": 1,
+        "healthy_sources": 14,
+        "degraded": true,
+        "using_cache": true,
+        "first_item_opened": true,
+        "first_signal_recorded": true,
+        "milestones": {
+          "node_ready": 1789368891.1834202,
+          "content_ready": 1789368903.3576932,
+          "first_item_opened": 1789368988.8122864,
+          "first_signal_recorded": 1789369043.6013937,
+          "completed": 1789369043.7128296
+        },
+        "safe_error": null,
+        "recoverable_actions": []
+      },
+      "history": [
+        {
+          "item_id": "f5671a8b3b300a17",
+          "first_opened_unix": 1789368988.7684667,
+          "last_opened_unix": 1789369686.0635328,
+          "open_count": 4,
+          "bookmarked": true,
+          "progress": 0.1592,
+          "completed": false,
+          "record_digest": "2392cd52026aa2228d90e9c9da28df2ffdcbf98bbb1c2d06b0a6aa5c15e49235"
+        }
+      ],
+      "sources": [
+        {
+          "id": "default-youtube-3blue1brown",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 15,
+          "last_checked_unix": 1789369307.3936553,
+          "last_success_unix": 1789369307.3936553,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-youtube-computerphile",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 15,
+          "last_checked_unix": 1789369308.2498736,
+          "last_success_unix": 1789369308.2498736,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-youtube-kurzgesagt",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 15,
+          "last_checked_unix": 1789369308.8607452,
+          "last_success_unix": 1789369308.8607452,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-reddit-science",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 26,
+          "last_checked_unix": 1789369309.5763164,
+          "last_success_unix": 1789369309.5763164,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-hacker-news",
+          "status": "cached",
+          "ok": false,
+          "error": "source_fetch_failed",
+          "item_count": 20,
+          "last_checked_unix": 1789369311.5830574,
+          "last_success_unix": 1789369110.2331035,
+          "consecutive_failures": 1,
+          "using_cached_items": true
+        },
+        {
+          "id": "default-bbc-world",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 23,
+          "last_checked_unix": 1789369321.38852,
+          "last_success_unix": 1789369321.38852,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-ars-technica",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 20,
+          "last_checked_unix": 1789369323.2290056,
+          "last_success_unix": 1789369323.2290056,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-arxiv-ai",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 0,
+          "last_checked_unix": 1789369325.0420556,
+          "last_success_unix": 1789369325.0420556,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-arxiv-machine-learning",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 50,
+          "last_checked_unix": 1789369326.0157259,
+          "last_success_unix": 1789369326.0157259,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-nasa-podcast",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 50,
+          "last_checked_unix": 1789369327.1155002,
+          "last_success_unix": 1789369327.1155002,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-librivox",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 10,
+          "last_checked_unix": 1789369331.0937974,
+          "last_success_unix": 1789369331.0937974,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-xkcd",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 4,
+          "last_checked_unix": 1789369333.0574267,
+          "last_success_unix": 1789369333.0574267,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-nasa-image",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 50,
+          "last_checked_unix": 1789369333.9002757,
+          "last_success_unix": 1789369333.9002757,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-gutenberg-new",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 19,
+          "last_checked_unix": 1789369334.8694613,
+          "last_success_unix": 1789369334.8694613,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "ccd580d775550ba4",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 1,
+          "last_checked_unix": 1789369413.0898755,
+          "last_success_unix": 1789369413.0898755,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        }
+      ],
+      "feedback": [
+        {
+          "event_id": "300ae9073c814535a4a6c38d7c2d6c36",
+          "content_id": "digest:edb230416141769b",
+          "action": "hide",
+          "updated_at": "2026-09-14T07:01:19.800710+00:00",
+          "undone_at": "",
+          "active": true
+        },
+        {
+          "event_id": "3daaa36dfce54e3a8bb057744c867174",
+          "content_id": "digest:142ace4865ee7ff0",
+          "action": "less",
+          "updated_at": "2026-09-14T07:00:13.147343+00:00",
+          "undone_at": "2026-09-14T07:01:36.167024+00:00",
+          "active": false
+        },
+        {
+          "event_id": "366b113e97fb4f7f9ca4e268c54a159a",
+          "content_id": "digest:f5671a8b3b300a17",
+          "action": "more",
+          "updated_at": "2026-09-14T07:00:01.747580+00:00",
+          "undone_at": "",
+          "active": true
+        }
+      ],
+      "model_configured": false
+    },
+    {
+      "label": "writes-recovered",
+      "at": "2026-09-14T07:11:05.789858+00:00",
+      "node_pid": 37400,
+      "node_started_at": "2026-09-14T06:58:24.644287+00:00",
+      "health_seconds": 0.0017785999807529151,
+      "first_success": {
+        "version": "ryn.first-success.v1",
+        "phase": "completed",
+        "completed": true,
+        "dismissed": true,
+        "node_ready": true,
+        "content_ready": true,
+        "item_count": 30,
+        "source_count": 15,
+        "failed_sources": 1,
+        "healthy_sources": 14,
+        "degraded": true,
+        "using_cache": true,
+        "first_item_opened": true,
+        "first_signal_recorded": true,
+        "milestones": {
+          "node_ready": 1789368891.1834202,
+          "content_ready": 1789368903.3576932,
+          "first_item_opened": 1789368988.8122864,
+          "first_signal_recorded": 1789369043.6013937,
+          "completed": 1789369043.7128296
+        },
+        "safe_error": null,
+        "recoverable_actions": []
+      },
+      "history": [
+        {
+          "item_id": "f5671a8b3b300a17",
+          "first_opened_unix": 1789368988.7684667,
+          "last_opened_unix": 1789369686.0635328,
+          "open_count": 4,
+          "bookmarked": true,
+          "progress": 0.1592,
+          "completed": false,
+          "record_digest": "2392cd52026aa2228d90e9c9da28df2ffdcbf98bbb1c2d06b0a6aa5c15e49235"
+        }
+      ],
+      "sources": [
+        {
+          "id": "default-youtube-3blue1brown",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 15,
+          "last_checked_unix": 1789369307.3936553,
+          "last_success_unix": 1789369307.3936553,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-youtube-computerphile",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 15,
+          "last_checked_unix": 1789369308.2498736,
+          "last_success_unix": 1789369308.2498736,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-youtube-kurzgesagt",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 15,
+          "last_checked_unix": 1789369308.8607452,
+          "last_success_unix": 1789369308.8607452,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-reddit-science",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 26,
+          "last_checked_unix": 1789369309.5763164,
+          "last_success_unix": 1789369309.5763164,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-hacker-news",
+          "status": "cached",
+          "ok": false,
+          "error": "source_fetch_failed",
+          "item_count": 20,
+          "last_checked_unix": 1789369311.5830574,
+          "last_success_unix": 1789369110.2331035,
+          "consecutive_failures": 1,
+          "using_cached_items": true
+        },
+        {
+          "id": "default-bbc-world",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 23,
+          "last_checked_unix": 1789369321.38852,
+          "last_success_unix": 1789369321.38852,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-ars-technica",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 20,
+          "last_checked_unix": 1789369323.2290056,
+          "last_success_unix": 1789369323.2290056,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-arxiv-ai",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 0,
+          "last_checked_unix": 1789369325.0420556,
+          "last_success_unix": 1789369325.0420556,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-arxiv-machine-learning",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 50,
+          "last_checked_unix": 1789369326.0157259,
+          "last_success_unix": 1789369326.0157259,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-nasa-podcast",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 50,
+          "last_checked_unix": 1789369327.1155002,
+          "last_success_unix": 1789369327.1155002,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-librivox",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 10,
+          "last_checked_unix": 1789369331.0937974,
+          "last_success_unix": 1789369331.0937974,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-xkcd",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 4,
+          "last_checked_unix": 1789369333.0574267,
+          "last_success_unix": 1789369333.0574267,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-nasa-image",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 50,
+          "last_checked_unix": 1789369333.9002757,
+          "last_success_unix": 1789369333.9002757,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-gutenberg-new",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 19,
+          "last_checked_unix": 1789369334.8694613,
+          "last_success_unix": 1789369334.8694613,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "ccd580d775550ba4",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 1,
+          "last_checked_unix": 1789369413.0898755,
+          "last_success_unix": 1789369413.0898755,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        }
+      ],
+      "feedback": [
+        {
+          "event_id": "75446573f6434247aaa6d8196e4a5e1a",
+          "content_id": "digest:f5671a8b3b300a17",
+          "action": "less",
+          "updated_at": "2026-09-14T07:10:50.682391+00:00",
+          "undone_at": "",
+          "active": true
+        },
+        {
+          "event_id": "300ae9073c814535a4a6c38d7c2d6c36",
+          "content_id": "digest:edb230416141769b",
+          "action": "hide",
+          "updated_at": "2026-09-14T07:01:19.800710+00:00",
+          "undone_at": "",
+          "active": true
+        },
+        {
+          "event_id": "3daaa36dfce54e3a8bb057744c867174",
+          "content_id": "digest:142ace4865ee7ff0",
+          "action": "less",
+          "updated_at": "2026-09-14T07:00:13.147343+00:00",
+          "undone_at": "2026-09-14T07:01:36.167024+00:00",
+          "active": false
+        },
+        {
+          "event_id": "366b113e97fb4f7f9ca4e268c54a159a",
+          "content_id": "digest:f5671a8b3b300a17",
+          "action": "more",
+          "updated_at": "2026-09-14T07:00:01.747580+00:00",
+          "undone_at": "",
+          "active": false
+        }
+      ],
+      "model_configured": false
+    },
+    {
+      "label": "final-restart-retained",
+      "at": "2026-09-14T07:11:39.817086+00:00",
+      "node_pid": 33876,
+      "node_started_at": "2026-09-14T07:11:29.298905+00:00",
+      "health_seconds": 0.0018268999992869794,
+      "first_success": {
+        "version": "ryn.first-success.v1",
+        "phase": "completed",
+        "completed": true,
+        "dismissed": true,
+        "node_ready": true,
+        "content_ready": true,
+        "item_count": 30,
+        "source_count": 15,
+        "failed_sources": 1,
+        "healthy_sources": 14,
+        "degraded": true,
+        "using_cache": true,
+        "first_item_opened": true,
+        "first_signal_recorded": true,
+        "milestones": {
+          "node_ready": 1789368891.1834202,
+          "content_ready": 1789368903.3576932,
+          "first_item_opened": 1789368988.8122864,
+          "first_signal_recorded": 1789369043.6013937,
+          "completed": 1789369043.7128296
+        },
+        "safe_error": null,
+        "recoverable_actions": []
+      },
+      "history": [
+        {
+          "item_id": "f5671a8b3b300a17",
+          "first_opened_unix": 1789368988.7684667,
+          "last_opened_unix": 1789369686.0635328,
+          "open_count": 4,
+          "bookmarked": true,
+          "progress": 0.1592,
+          "completed": false,
+          "record_digest": "2392cd52026aa2228d90e9c9da28df2ffdcbf98bbb1c2d06b0a6aa5c15e49235"
+        }
+      ],
+      "sources": [
+        {
+          "id": "default-youtube-3blue1brown",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 15,
+          "last_checked_unix": 1789369307.3936553,
+          "last_success_unix": 1789369307.3936553,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-youtube-computerphile",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 15,
+          "last_checked_unix": 1789369308.2498736,
+          "last_success_unix": 1789369308.2498736,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-youtube-kurzgesagt",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 15,
+          "last_checked_unix": 1789369308.8607452,
+          "last_success_unix": 1789369308.8607452,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-reddit-science",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 26,
+          "last_checked_unix": 1789369309.5763164,
+          "last_success_unix": 1789369309.5763164,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-hacker-news",
+          "status": "cached",
+          "ok": false,
+          "error": "source_fetch_failed",
+          "item_count": 20,
+          "last_checked_unix": 1789369311.5830574,
+          "last_success_unix": 1789369110.2331035,
+          "consecutive_failures": 1,
+          "using_cached_items": true
+        },
+        {
+          "id": "default-bbc-world",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 23,
+          "last_checked_unix": 1789369321.38852,
+          "last_success_unix": 1789369321.38852,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-ars-technica",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 20,
+          "last_checked_unix": 1789369323.2290056,
+          "last_success_unix": 1789369323.2290056,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-arxiv-ai",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 0,
+          "last_checked_unix": 1789369325.0420556,
+          "last_success_unix": 1789369325.0420556,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-arxiv-machine-learning",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 50,
+          "last_checked_unix": 1789369326.0157259,
+          "last_success_unix": 1789369326.0157259,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-nasa-podcast",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 50,
+          "last_checked_unix": 1789369327.1155002,
+          "last_success_unix": 1789369327.1155002,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-librivox",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 10,
+          "last_checked_unix": 1789369331.0937974,
+          "last_success_unix": 1789369331.0937974,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-xkcd",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 4,
+          "last_checked_unix": 1789369333.0574267,
+          "last_success_unix": 1789369333.0574267,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-nasa-image",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 50,
+          "last_checked_unix": 1789369333.9002757,
+          "last_success_unix": 1789369333.9002757,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "default-gutenberg-new",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 19,
+          "last_checked_unix": 1789369334.8694613,
+          "last_success_unix": 1789369334.8694613,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        },
+        {
+          "id": "ccd580d775550ba4",
+          "status": "healthy",
+          "ok": true,
+          "error": "",
+          "item_count": 1,
+          "last_checked_unix": 1789369413.0898755,
+          "last_success_unix": 1789369413.0898755,
+          "consecutive_failures": 0,
+          "using_cached_items": false
+        }
+      ],
+      "feedback": [
+        {
+          "event_id": "75446573f6434247aaa6d8196e4a5e1a",
+          "content_id": "digest:f5671a8b3b300a17",
+          "action": "less",
+          "updated_at": "2026-09-14T07:10:50.682391+00:00",
+          "undone_at": "",
+          "active": true
+        },
+        {
+          "event_id": "300ae9073c814535a4a6c38d7c2d6c36",
+          "content_id": "digest:edb230416141769b",
+          "action": "hide",
+          "updated_at": "2026-09-14T07:01:19.800710+00:00",
+          "undone_at": "",
+          "active": true
+        },
+        {
+          "event_id": "3daaa36dfce54e3a8bb057744c867174",
+          "content_id": "digest:142ace4865ee7ff0",
+          "action": "less",
+          "updated_at": "2026-09-14T07:00:13.147343+00:00",
+          "undone_at": "2026-09-14T07:01:36.167024+00:00",
+          "active": false
+        },
+        {
+          "event_id": "366b113e97fb4f7f9ca4e268c54a159a",
+          "content_id": "digest:f5671a8b3b300a17",
+          "action": "more",
+          "updated_at": "2026-09-14T07:00:01.747580+00:00",
+          "undone_at": "",
+          "active": false
+        }
+      ],
+      "model_configured": false
+    }
+  ],
+  "initial_node": {
+    "pid": 58948,
+    "started_at": "2026-09-14T06:54:36.558351+00:00",
+    "origin": "fixture startup marker read before the first deliberate restart"
+  },
+  "checks": {
+    "first_completion_seconds": 167.15447854995728,
+    "content_ready_seconds": 26.799342155456543,
+    "restart_exact_history_retained": true,
+    "single_source_changed": "ccd580d775550ba4",
+    "other_sources_unchanged_count": 14,
+    "failure_kept_cached_source_item": true,
+    "recovered_source": true,
+    "source_failure_preserved_reading": true,
+    "only_requested_feedback_undone": true,
+    "bookmark_failure_preserved_unsaved": true,
+    "feedback_failure_preserved_all_events": true,
+    "bookmark_retry_retained_one_item": true,
+    "feedback_retry_added_one_event": true,
+    "unrelated_feedback_unchanged": true,
+    "final_restart_exact_history_and_feedback_retained": true
+  }
+}

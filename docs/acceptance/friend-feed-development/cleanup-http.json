@@ -1,0 +1,15 @@
+{
+  "verified_at": "2026-09-11T15:23:32.074976+00:00",
+  "environment": "Windows, three independent loopback nodes",
+  "selected_bob_initially_visible": true,
+  "carol_initially_denied": true,
+  "publisher_cleanup_confirmed": true,
+  "receiver_cleanup_confirmed": true,
+  "old_publication_fetch_denied": true,
+  "saved_copy_hash_unchanged": true,
+  "friendships_retained": true,
+  "new_publication_and_refollow_succeeded": true,
+  "completed_cleanup_replay_kept_new_work": true,
+  "remote_erasure_confirmed": false,
+  "packaged_desktop": false
+}

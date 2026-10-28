@@ -1,0 +1,68 @@
+{
+  "scope": "Real CPU attempt completed before browser stop; actual browser cancellation and full timeout use synthetic delayed HTTP runtime, zero-fee self service.",
+  "real_model_stop_clicked": false,
+  "real_model_order": {
+    "task_id": "task_e3ea70ccfea146209002c53f565f71e0",
+    "state": "succeeded",
+    "provider_peer_id": "31QPVqwHR8puKwMvslGKIWcZC9eYhFZCt+H8D6qi4YA=",
+    "service_id": "local-small",
+    "amount": 0.001,
+    "transport": "peer_http_direct",
+    "error_code": null
+  },
+  "real_model_running_observation": {
+    "task_id": "task_e3ea70ccfea146209002c53f565f71e0",
+    "observed_state": "running",
+    "at": "2026-09-14T10:05:03.828122+00:00",
+    "provider_pid": 66928
+  },
+  "synthetic_orders": [
+    {
+      "task_id": "task_11bc875638d448eaa45011696e2ee65b",
+      "state": "succeeded",
+      "error_code": null,
+      "amount": 0.0,
+      "events": [
+        "hold",
+        "settle"
+      ]
+    },
+    {
+      "task_id": "task_c3727e08ce7b47fc8942687d0406765a",
+      "state": "timed_out",
+      "error_code": "inference_timeout",
+      "amount": null,
+      "events": [
+        "hold",
+        "release"
+      ]
+    },
+    {
+      "task_id": "task_6789f825db1f477cb74c8efd6fcc513b",
+      "state": "cancelled",
+      "error_code": null,
+      "amount": null,
+      "events": [
+        "hold",
+        "release"
+      ]
+    }
+  ],
+  "only_three_new_runtime_calls": true,
+  "original_checks_and_restart_unchanged": true,
+  "prior_conversation_unchanged": true,
+  "cancel_runtime": {
+    "delay_seconds": 45,
+    "elapsed_seconds": 45.063,
+    "socket_write_succeeded": true,
+    "started_at": "2026-09-14T10:11:05.257745+00:00",
+    "state": "response_attempted"
+  },
+  "timeout_runtime": {
+    "delay_seconds": 125,
+    "elapsed_seconds": 125.063,
+    "socket_write_succeeded": false,
+    "started_at": "2026-09-14T10:13:21.912003+00:00",
+    "state": "response_attempted"
+  }
+}

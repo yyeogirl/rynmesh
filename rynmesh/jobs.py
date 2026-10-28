@@ -8,6 +8,7 @@ Rynmesh content or relay blobs and referenced by hash.
 
 from __future__ import annotations
 
+import json
 import uuid
 from dataclasses import dataclass, field
 from datetime import datetime, timedelta, timezone
@@ -17,10 +18,62 @@ from .crypto import SignatureError, SignedPayload, sign_payload, verify_signed_p
 from .types import now_iso
 
 JOB_STATUS_VALUES = {"open", "accepted", "running", "completed", "failed", "cancelled"}
+LLM_CONTROL_PARAMS = {
+    "rynmesh.llm.private.infer.v1.p2p_offer": {"session_id", "ice_signal", "timeout_seconds"},
+    "rynmesh.llm.private.infer.v1.relay": {"encrypted_task_ref"},
+    "rynmesh.llm.private.infer.v1.settlement": {"signed_settlement"},
+    "rynmesh.llm.private.infer.v1.cancel": {"signed_cancel"},
+}
 
 
 class JobError(RuntimeError):
     pass
+
+
+# Registry-visible work-order params are control-plane metadata only. Bounding
+# their size matters as much as bounding their keys: without it, a task body
+# can simply ride inside an allowed key, which is the exact invariant this
+# module exists to enforce.
+_MAX_PARAMS_JSON_BYTES = 16 * 1024
+_MAX_PARAM_STRING_CHARS = 2048
+
+
+def validate_llm_control_params(operation: str, params: dict[str, Any]) -> None:
+    """Allow only the body-free signaling shapes used by the private protocol."""
+    allowed = LLM_CONTROL_PARAMS.get(str(operation))
+    if allowed is None:
+        raise JobError("unsupported LLM control operation; use the private task protocol")
+    unexpected = set(params) - allowed
+    if unexpected:
+        raise JobError("LLM control params are not allowed; task bodies require the private task protocol")
+    try:
+        serialized = json.dumps(params, separators=(",", ":"), sort_keys=True)
+    except (TypeError, ValueError) as exc:
+        raise JobError("LLM control params must be JSON-serializable") from exc
+    if len(serialized.encode("utf-8")) > _MAX_PARAMS_JSON_BYTES:
+        raise JobError("LLM control params exceed the control-plane size limit")
+    for key, value in params.items():
+        # Signed envelopes and ICE metadata are structured; every bare string
+        # is a short identifier and gets a hard length cap.
+        if isinstance(value, str) and len(value) > _MAX_PARAM_STRING_CHARS:
+            raise JobError(f"LLM control param '{key}' exceeds the control-plane length limit")
+
+
+# capability prefix (with trailing dot or exact) -> params validator. Service
+# packages register here; generic code (store, verify_work_order) dispatches
+# through it instead of hard-coding service names.
+CAPABILITY_PARAM_POLICIES: dict[str, Any] = {
+    "rynmesh.llm.": validate_llm_control_params,
+    "rynmesh.llm": validate_llm_control_params,
+}
+
+
+def validate_capability_params(capability: str, operation: str, params: dict[str, Any]) -> None:
+    cleaned = str(capability or "")
+    for prefix, validator in CAPABILITY_PARAM_POLICIES.items():
+        if cleaned == prefix.rstrip(".") or cleaned.startswith(prefix if prefix.endswith(".") else prefix + "."):
+            validator(operation, params)
+            return
 
 
 @dataclass(frozen=True)
@@ -216,6 +269,7 @@ def verify_work_order(signed: SignedPayload) -> WorkOrder:
         raise JobError("work_order_capability_required")
     if not order.operation:
         raise JobError("work_order_operation_required")
+    validate_capability_params(order.capability, order.operation, order.params)
     return order
 
 

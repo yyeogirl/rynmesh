@@ -1,4 +1,5 @@
 import type { NodeClient } from "./nodeClient";
+import type { ConsumptionRecord } from "./digestClient";
 import { NodeClientError } from "./nodeClient";
 import type {
   ContentFilters,
@@ -16,7 +17,17 @@ async function requestJson<T>(path: string, init?: RequestInit): Promise<T> {
     ...init,
   });
   if (!response.ok) {
-    throw new NodeClientError(`Local Ryn node returned ${response.status}`, response.status);
+    let detail = "";
+    try {
+      const payload = (await response.json()) as { detail?: unknown };
+      if (typeof payload.detail === "string") detail = payload.detail.trim();
+    } catch {
+      // The status code remains useful when the response body is not JSON.
+    }
+    throw new NodeClientError(
+      `Local Ryn node returned ${response.status}${detail ? `: ${detail}` : ""}`,
+      response.status,
+    );
   }
   return (await response.json()) as T;
 }
@@ -45,6 +56,50 @@ export function makeLiveNodeClient(baseUrl = "/api/local"): NodeClient {
       );
       return payload.work_results;
     },
+    listLLMServices: async (networkId = "rynmesh-main") => {
+      const payload = await requestJson<{ services: import("./nodeClient").LLMServiceRecord[] }>(
+        `${baseUrl}/llm/services${qs({ network_id: networkId })}`,
+      );
+      return payload.services;
+    },
+    getLLMServiceStatus: () => requestJson(`${baseUrl}/llm/service/status`),
+    publishLLMService: (req) =>
+      requestJson(`${baseUrl}/llm/services/publish`, {
+        method: "POST",
+        body: JSON.stringify(req ?? {}),
+      }),
+    pauseLLMService: () => requestJson(`${baseUrl}/llm/services/pause`, { method: "POST" }),
+    setupLLMService: (req) =>
+      requestJson(`${baseUrl}/llm/setup`, { method: "POST", body: JSON.stringify(req) }),
+    startLLMSetup: (req) =>
+      requestJson(`${baseUrl}/llm/setup/async`, { method: "POST", body: JSON.stringify(req) }),
+    getLLMSetupStatus: () => requestJson(`${baseUrl}/llm/setup/status`),
+    cancelLLMSetup: (jobId) =>
+      requestJson(`${baseUrl}/llm/setup/${encodeURIComponent(jobId)}/cancel`, { method: "POST" }),
+    getLLMHardware: () => requestJson(`${baseUrl}/llm/hardware`),
+    runLLMServiceAction: (action, options) =>
+      requestJson(`${baseUrl}/llm/service/actions/${encodeURIComponent(action)}`, {
+        method: "POST",
+        body: JSON.stringify(options ?? {}),
+      }),
+    getTaskBalance: () => requestJson(`${baseUrl}/task-balance`),
+    submitLLMOrder: (req) =>
+      requestJson(`${baseUrl}/llm/orders/async`, { method: "POST", body: JSON.stringify(req) }),
+    getLLMOrder: (taskId) =>
+      requestJson(`${baseUrl}/llm/orders/${encodeURIComponent(taskId)}`),
+    cancelLLMOrder: (taskId) =>
+      requestJson(`${baseUrl}/llm/orders/${encodeURIComponent(taskId)}/cancel`, { method: "POST" }),
+    listLLMOrders: async () => {
+      const payload = await requestJson<{ orders: import("./nodeClient").LLMOrderResult[] }>(`${baseUrl}/llm/orders`);
+      return payload.orders;
+    },
+    getLLMPrivacy: () => requestJson(`${baseUrl}/llm/privacy`),
+    updateLLMPrivacy: (resultRetentionSeconds) =>
+      requestJson(`${baseUrl}/llm/privacy`, {
+        method: "PUT",
+        body: JSON.stringify({ result_retention_seconds: resultRetentionSeconds }),
+      }),
+    clearLLMOrders: () => requestJson(`${baseUrl}/llm/orders`, { method: "DELETE" }),
     discoverPeers: (req) =>
       requestJson(`${baseUrl}/peers/discover`, { method: "POST", body: JSON.stringify(req ?? {}) }),
     listPeers: (filters?: PeerFilters) => requestJson(`${baseUrl}/peers${qs(filters)}`),
@@ -66,6 +121,32 @@ export function makeLiveNodeClient(baseUrl = "/api/local"): NodeClient {
       }),
     requestRecommendations: (req) =>
       requestJson(`${baseUrl}/recommendations`, { method: "POST", body: JSON.stringify(req ?? {}) }),
+    getFirstSuccess: () => requestJson(`${baseUrl}/first-success`),
+    dismissFirstSuccess: () => requestJson(`${baseUrl}/first-success/dismiss`, { method: "POST" }),
+    resetFirstSuccess: () => requestJson(`${baseUrl}/first-success/reset`, { method: "POST" }),
+    recordContentConsumption: async (item, action, progress, reading) => {
+      return requestJson<ConsumptionRecord>(`${baseUrl}/consumption`, {
+        method: "POST",
+        body: JSON.stringify({
+          action,
+          progress,
+          ...reading,
+          item: {
+            item_id: item.digest_item_id ?? item.content_id,
+            source_id: item.publisher_peer_id,
+            source_title: item.source_peer_name ?? item.source_platform ?? "Ryn source",
+            source_kind: item.source_platform ?? "rynmesh",
+            title: item.title,
+            link: item.external_url || `rynmesh://content/${encodeURIComponent(item.content_id)}`,
+            summary: item.description,
+            content_kind: item.content_kind,
+            content_type: item.content_type,
+            tags: item.tags,
+            reasons: [],
+          },
+        }),
+      });
+    },
     getRecommendationProfile: () => requestJson(`${baseUrl}/recommendations/profile`),
     updateRecommendationProfile: (patch) =>
       requestJson(`${baseUrl}/recommendations/profile`, {

@@ -1,0 +1,32 @@
+{
+  "recorded_on": "2026-09-11",
+  "environment": "Windows, in-app browser, isolated loopback node, synthetic source-created conversation conflicts and one intentionally unreadable older browser copy",
+  "initial_ui_build": "index-6W7xuQ9y.js",
+  "keyboard_fix_build": "index-CzlZMK3L.js",
+  "final_layout_and_restart_build": "index-BhTdtX65.js",
+  "final_automated_build": "index-CTCUJ2r0.js",
+  "steps": [
+    {"action": "Create the explicitly labelled synthetic older-browser fixture using its button, then open Settings / Privacy & data", "observed": "Node and browser cleanup have separate review controls; the fixture contains no real user data"},
+    {"action": "Review node data", "observed": "One visible conversation, three recovery branches, one migration backup, an unsent draft and zero original AI tasks are shown; two source identities are included internally"},
+    {"action": "Open confirmation, cancel with Enter, then reopen and confirm with Tab / Enter", "observed": "Cancel keeps data and returns focus; confirmation completes source, replica, backup, search and order steps, with a focused node-only result"},
+    {"action": "Review the browser copy and cancel its confirmation", "observed": "The unreadable synthetic copy remains; focus returns to the browser-clear button"},
+    {"action": "Confirm browser cleanup with Tab / Enter", "observed": "The reviewed copy is cleared, success receives focus, and other tabs/profiles/remote devices remain explicitly unconfirmed"},
+    {"action": "Stop the node and inspect its synthetic stores", "observed": "Visible history, recovery and draft are empty; the reviewed migration backup is absent; both replica conversation records retain erased markers"},
+    {"action": "Restart with the same directory, reload Settings and review again", "observed": "Completed node progress survives; node conversation/recovery/backup/task counts are zero; browser copies are zero and its clear button is disabled"},
+    {"action": "Discard the browser review by keyboard", "observed": "Focus returns to Review browser copies"},
+    {"action": "Open Ask Ryn after restart and explicitly import older browser history", "observed": "No conversations or old draft appear; import reports zero confirmed and zero requiring recovery; no model is installed"}
+  ],
+  "issues_fixed": [
+    "Review controls briefly disabling themselves left focus at the document; review scopes now receive focus when loading finishes",
+    "Discarding a review removed the focused control; focus now returns to the original review button",
+    "Node-result wording could appear to contradict a separately completed browser cleanup; it now directs users to the separate browser status"
+  ],
+  "layout": {"viewport_width": 1280, "document_client_width": 1265, "document_scroll_width": 1266, "elements_outside_viewport": 0, "scope": "Desktop viewport only; not complete responsive or packaged-desktop acceptance"},
+  "limits": [
+    "Node fixtures are seeded synthetic causal source records; this run does not exercise pairing or remote erase acknowledgements",
+    "The browser fixture is intentionally unreadable; actual encrypted v1 preservation, write abort, concurrent writers, response-loss retry and memory fallback are automated IndexedDB tests",
+    "The final additional pre-encryption deletion check is covered by automated tests, not a browser-injected cryptographic failure",
+    "Not physical-device, cross-NAT, every browser profile, full export or every personal-data scope acceptance"
+  ],
+  "cleanup": "Temporary browser tab closed and both owned node processes stopped; isolated synthetic data directory retained"
+}

@@ -1,0 +1,17 @@
+{
+  "task_id": "task_2a3302a61e4143ef96837e5f76b88c06",
+  "state": "succeeded",
+  "service_id": "qwen3-14b",
+  "model_alias": "qwen3-14b-v100",
+  "output": "Rynmesh 公网 Qwen3-14B 对话验收通过",
+  "input_tokens": 33,
+  "output_tokens": 18,
+  "duration_ms": 1882,
+  "amount": 0.001,
+  "currency": "DEV_TASK_BALANCE",
+  "transport": "peer_http_direct",
+  "transport_evidence": {
+    "transport": "peer_http_direct",
+    "relay_used": false
+  }
+}

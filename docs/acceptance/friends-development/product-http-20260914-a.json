@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "started_at": "2026-09-14T06:05:01.981873+00:00",
+  "passed": false,
+  "scope": "isolated real TCP processes, HTTP registry mailbox, deterministic local article source",
+  "not_proven": [
+    "desktop installation/UI",
+    "different public network exits",
+    "mailbox quota/expiry failures",
+    "full privacy export audit"
+  ],
+  "checks": [
+    {
+      "name": "cancelled_invite_and_offline_local_preview",
+      "result": "passed"
+    },
+    {
+      "name": "concurrent_accept_one_relationship_and_retry",
+      "result": "passed",
+      "invite_to_accept_seconds": 2.25
+    },
+    {
+      "name": "bidirectional_text_attachment_and_dedup",
+      "result": "passed",
+      "accept_to_confirm_seconds": 1.406
+    }
+  ],
+  "finished_at": "2026-09-14T06:05:13.380814+00:00"
+}

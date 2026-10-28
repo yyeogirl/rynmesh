@@ -19,7 +19,9 @@ Registered transports:
 
 from __future__ import annotations
 
+import base64
 import hashlib
+import json
 import os
 import ssl
 from pathlib import Path
@@ -139,6 +141,50 @@ class RealityTransport:
             raise TransportError("response too large", reason="too_large")
         return data
 
+    def post_bytes(
+        self, url: str, body: bytes, *, timeout_s: float, max_bytes: int,
+        headers: dict[str, str] | None = None,
+    ) -> bytes:
+        session, connect_host, sni = self._session()
+        rewritten, extra = self._resolve_url(url, connect_host, sni)
+        if headers:
+            extra.update(headers)
+        # The mesh credential is mandatory transport metadata. A caller may
+        # add content headers, but must not be able to replace authentication.
+        key = network_key()
+        if key:
+            extra[NETWORK_KEY_HEADER] = hashlib.sha256(
+                ("rynmesh-net-key:" + key).encode(),
+            ).hexdigest()
+        try:
+            resp = session.post(
+                rewritten, data=body, headers=extra, timeout=timeout_s,
+                stream=True, allow_redirects=False,
+            )
+            resp.raise_for_status()
+            if not 200 <= resp.status_code < 300:
+                raise TransportError(
+                    f"reality: HTTP {resp.status_code}", reason="http_error",
+                )
+            chunks: list[bytes] = []
+            total = 0
+            for chunk in resp.iter_content(chunk_size=64 * 1024):
+                if not chunk:
+                    continue
+                total += len(chunk)
+                if total > max_bytes:
+                    raise TransportError("response too large", reason="too_large")
+                chunks.append(chunk)
+            data = b"".join(chunks)
+        except TransportError:
+            raise
+        except Exception as exc:
+            raise TransportError(f"reality: {exc}", reason="http_error") from exc
+        finally:
+            if "resp" in locals():
+                resp.close()
+        return data
+
     def download(
         self, url: str, dest: Path, *, timeout_s: float, max_bytes: int,
         headers: dict[str, str] | None = None,
@@ -210,7 +256,7 @@ class MeekTransport:
             h.update(extra)
         return h
 
-    def _post_to_bridge(self, payload: bytes, timeout_s: float) -> bytes:
+    def _post_to_bridge(self, payload: bytes, timeout_s: float, max_bytes: int) -> bytes:
         """POST ``payload`` to the meek bridge; return the response body."""
         parts = urlparse(self._meek_url)
         connect_host = self.profile.connect_host or parts.hostname or ""
@@ -233,11 +279,9 @@ class MeekTransport:
             headers["Content-Length"] = str(len(payload))
             conn.request("POST", parts.path or "/", body=payload, headers=headers)
             resp = conn.getresponse()
-            if resp.status == 404:
-                raise TransportError("meek bridge not found (404)", reason="http_error")
-            if resp.status >= 400:
+            if not 200 <= resp.status < 300:
                 raise TransportError(f"meek bridge HTTP {resp.status}", reason="http_error")
-            body = resp.read(200 * 1024 * 1024)  # 200 MB cap on meek payload
+            body = resp.read(max_bytes + 1)
         except TransportError:
             raise
         except (OSError, ssl.SSLError, http.client.HTTPException) as exc:
@@ -257,7 +301,35 @@ class MeekTransport:
         # it on our behalf and returns the bytes.  This is a simplified meek
         # relay (the bridge must understand this protocol; see meek docs).
         request_envelope = url.encode("utf-8")
-        response = self._post_to_bridge(request_envelope, timeout_s)
+        response = self._post_to_bridge(request_envelope, timeout_s, max_bytes)
+        if len(response) > max_bytes:
+            raise TransportError("meek response too large", reason="too_large")
+        return response
+
+    def post_bytes(
+        self, url: str, body: bytes, *, timeout_s: float, max_bytes: int,
+        headers: dict[str, str] | None = None,
+    ) -> bytes:
+        # POST needs an explicit inner request envelope so a meek-compatible
+        # Rynmesh bridge can reconstruct method, protected origin headers, and
+        # the already-encrypted application body without exposing them as outer
+        # CDN headers.
+        inner_headers = dict(_profile_headers(self.profile))
+        if headers:
+            inner_headers.update(headers)
+        key = network_key()
+        if key:
+            inner_headers[NETWORK_KEY_HEADER] = hashlib.sha256(
+                ("rynmesh-net-key:" + key).encode(),
+            ).hexdigest()
+        envelope = json.dumps({
+            "kind": "rynmesh.transport.request.v1",
+            "method": "POST",
+            "url": url,
+            "headers": inner_headers,
+            "body_b64": base64.b64encode(body).decode("ascii"),
+        }, separators=(",", ":"), sort_keys=True).encode("utf-8")
+        response = self._post_to_bridge(envelope, timeout_s, max_bytes)
         if len(response) > max_bytes:
             raise TransportError("meek response too large", reason="too_large")
         return response
@@ -359,6 +431,19 @@ class EchTransport:
             url, timeout_s=timeout_s, max_bytes=max_bytes, headers=headers
         )
 
+    def post_bytes(
+        self, url: str, body: bytes, *, timeout_s: float, max_bytes: int,
+        headers: dict[str, str] | None = None,
+    ) -> bytes:
+        if self._ech_active:
+            return self._ech_request(
+                url, method="POST", body=body, timeout_s=timeout_s,
+                max_bytes=max_bytes, headers=headers,
+            )
+        return self._delegate.post_bytes(
+            url, body, timeout_s=timeout_s, max_bytes=max_bytes, headers=headers,
+        )
+
     def download(
         self, url: str, dest: Path, *, timeout_s: float, max_bytes: int,
         headers: dict[str, str] | None = None,
@@ -377,7 +462,16 @@ class EchTransport:
         self, url: str, *, timeout_s: float, max_bytes: int,
         headers: dict[str, str] | None = None,
     ) -> bytes:
-        """Make a request using the ECH-enabled SSL context."""
+        return self._ech_request(
+            url, method="GET", body=None, timeout_s=timeout_s,
+            max_bytes=max_bytes, headers=headers,
+        )
+
+    def _ech_request(
+        self, url: str, *, method: str, body: bytes | None, timeout_s: float,
+        max_bytes: int, headers: dict[str, str] | None = None,
+    ) -> bytes:
+        """Make a bounded request using the ECH-enabled SSL context."""
         import http.client
         import socket
 
@@ -395,10 +489,21 @@ class EchTransport:
             merged = _profile_headers(self.profile)
             if headers:
                 merged.update(headers)
+            key = network_key()
+            if key:
+                merged[NETWORK_KEY_HEADER] = hashlib.sha256(
+                    ("rynmesh-net-key:" + key).encode(),
+                ).hexdigest()
             merged["Host"] = host if port in (80, 443) else f"{host}:{port}"
-            conn.request("GET", path, headers=merged)
+            if body is not None:
+                merged["Content-Length"] = str(len(body))
+            conn.request(method, path, body=body, headers=merged)
             resp = conn.getresponse()
+            if not 200 <= resp.status < 300:
+                raise TransportError(f"http status {resp.status}", reason="http_error")
             data = resp.read(max_bytes + 1)
+        except TransportError:
+            raise
         except (OSError, ssl.SSLError) as exc:
             raise TransportError(f"ech: {exc}", reason="http_error") from exc
         finally:

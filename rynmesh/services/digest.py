@@ -17,6 +17,7 @@ import html as _html
 import json
 import re
 import ssl
+import threading
 import time
 import urllib.request
 from datetime import UTC, datetime
@@ -26,6 +27,7 @@ from pathlib import Path
 from typing import Any, Callable, Mapping
 from xml.etree import ElementTree
 
+from ..atomic_io import atomic_write_json
 from ..recommendation_evidence import build_evidence_packet
 from ..recommendation_profile import RecommendationProfileStore
 from ..recommender import (
@@ -570,6 +572,7 @@ class DigestService:
         self.fetcher = fetcher or default_fetcher
         self.bootstrap_defaults = bootstrap_defaults
         self.profile_store = profile_store
+        self._refresh_lock = threading.RLock()
         if bootstrap_defaults:
             self.ensure_default_sources()
 
@@ -582,10 +585,7 @@ class DigestService:
             return fallback
 
     def _save(self, name: str, payload: Any) -> None:
-        path = self.dir / name
-        tmp = path.with_suffix(".tmp")
-        tmp.write_text(json.dumps(payload, indent=2, sort_keys=True), encoding="utf-8")
-        tmp.replace(path)
+        atomic_write_json(self.dir / name, payload, indent=2, sort_keys=True)
 
     # -- sources ----------------------------------------------------------
     def list_sources(self) -> list[dict[str, Any]]:
@@ -795,17 +795,32 @@ class DigestService:
         return changed
 
     # -- ingestion ----------------------------------------------------------
-    def refresh(self, *, timeout_s: float = 8.0) -> dict[str, Any]:
-        """Fetch every source; one bad feed never kills the run."""
+    def refresh(self, *, timeout_s: float = 8.0, source_id: str | None = None) -> dict[str, Any]:
+        """Fetch all or one source, rejecting overlapping fetches with a stable code."""
+        if not self._refresh_lock.acquire(blocking=False):
+            raise DigestError("discovery_busy")
+        try:
+            return self._refresh_sources(timeout_s=timeout_s, only_source_id=source_id)
+        finally:
+            self._refresh_lock.release()
+
+    def _refresh_sources(self, *, timeout_s: float, only_source_id: str | None) -> dict[str, Any]:
         if self.bootstrap_defaults:
             self.ensure_default_sources()
+        sources = self.list_sources()
+        if only_source_id is not None and not any(row["id"] == only_source_id for row in sources):
+            raise DigestError("source_not_found")
         previous_health = {
             str(entry.get("id", "")): entry for entry in self._load("health.json", [])
         }
         health: list[dict[str, Any]] = []
         new_count = 0
-        for source in self.list_sources():
+        for source in sources:
             source_id = source["id"]
+            if only_source_id is not None and source_id != only_source_id:
+                if source_id in previous_health:
+                    health.append(previous_health[source_id])
+                continue
             checked_at = time.time()
             previous = previous_health.get(source_id, {})
             if str(source.get("feed_url", "")).startswith("local:"):
@@ -828,13 +843,13 @@ class DigestService:
             try:
                 payload = self.fetcher(source["feed_url"], timeout_s)
                 _, entries = parse_feed(payload)
-            except DigestError as exc:
+            except DigestError:
                 health.append(
                     {
                         "id": source_id,
                         "title": source["title"],
                         "ok": False,
-                        "error": str(exc),
+                        "error": "source_feed_invalid",
                         "item_count": existing,
                         "last_checked_unix": checked_at,
                         "last_success_unix": float(previous.get("last_success_unix", 0.0) or 0.0),
@@ -844,13 +859,13 @@ class DigestService:
                     }
                 )
                 continue
-            except Exception as exc:  # network layer, DNS, TLS — degrade, don't die
+            except Exception:  # network layer, DNS, TLS — degrade, don't leak details
                 health.append(
                     {
                         "id": source_id,
                         "title": source["title"],
                         "ok": False,
-                        "error": f"fetch_failed: {exc}",
+                        "error": "source_fetch_failed",
                         "item_count": existing,
                         "last_checked_unix": checked_at,
                         "last_success_unix": float(previous.get("last_success_unix", 0.0) or 0.0),
@@ -877,6 +892,29 @@ class DigestService:
         self._save("health.json", health)
         return {"sources": health, "new_items": new_count}
 
+    def source_health(self) -> list[dict[str, Any]]:
+        """Bounded owner-visible health, including sources not checked yet."""
+        previous = {str(row.get("id", "")): row for row in self._load("health.json", [])}
+        rows = []
+        for source in self.list_sources():
+            entry = previous.get(source["id"], {})
+            ok = bool(entry.get("ok"))
+            cached = bool(entry.get("using_cached_items"))
+            error = str(entry.get("error", ""))
+            rows.append({
+                "id": source["id"], "title": str(source.get("title", ""))[:256],
+                "ok": ok, "status": "not_checked" if not entry else "healthy" if ok else "cached" if cached else "failed",
+                "error": "" if ok or not entry else error if error in {
+                    "source_feed_invalid", "source_fetch_failed"
+                } else "source_fetch_failed",
+                "item_count": int(entry.get("item_count", 0) or 0),
+                "last_checked_unix": float(entry.get("last_checked_unix", 0) or 0),
+                "last_success_unix": float(entry.get("last_success_unix", 0) or 0),
+                "consecutive_failures": int(entry.get("consecutive_failures", 0) or 0),
+                "using_cached_items": cached,
+            })
+        return rows
+
     # -- proactive discovery -------------------------------------------------
     def discovery_status(self) -> dict[str, Any]:
         state = self._load("discovery-state.json", {})
@@ -888,9 +926,9 @@ class DigestService:
         formats = sorted(
             {str(item.get("content_kind", "document") or "document") for item in items}
         )
-        health = list(self._load("health.json", []))
+        health = self.source_health()
         healthy_sources = sum(1 for entry in health if entry.get("ok"))
-        failed_sources = sum(1 for entry in health if not entry.get("ok"))
+        failed_sources = sum(1 for entry in health if entry["status"] in {"cached", "failed"})
         cached_sources = sum(1 for entry in health if entry.get("using_cached_items"))
         return {
             "phase": str(state.get("phase", "ready" if items else "waiting")),
@@ -935,11 +973,11 @@ class DigestService:
             self.check_watchers(now_unix=now_unix, timeout_s=timeout_s)
             refresh = self.refresh(timeout_s=timeout_s)
             digest = self.build(now_unix=now_unix)
-        except Exception as exc:
+        except Exception:
             state.update(
                 {
                     "phase": "error",
-                    "message": str(exc)[:300],
+                    "message": "discovery_refresh_failed",
                     "next_refresh_unix": float(now_unix + DEFAULT_REFRESH_INTERVAL_S),
                 }
             )
@@ -1040,7 +1078,7 @@ class DigestService:
         return {"text": text, **parsed}
 
     def feedback(self, item_id: str, action: str) -> dict[str, Any]:
-        if action not in {"up", "down", "opened", "more_like_this"}:
+        if action not in {"up", "down", "hide", "opened", "more_like_this"}:
             raise DigestError(f"feedback_action_unknown: {action}")
         prefs = self._load(
             "prefs.json", {"seen": [], "tag_affinity": {}, "source_weight": {}, "events": 0}
@@ -1050,6 +1088,22 @@ class DigestService:
             raise DigestError("feedback_item_unknown")
         source = next((s for s in self.list_sources() if s["id"] == item["source_id"]), None)
 
+        if self.profile_store is not None:
+            # New actions have one canonical influence. Legacy derived weights
+            # remain on disk for export, but must not survive undo in the ranker.
+            if action != "opened":
+                self.profile_store.feedback({
+                    "content_id": f"digest:{item_id}", "title": item.get("title", ""),
+                    "tags": list(_candidate_tags(source, item)) if source else [],
+                    "publisher_peer_id": f"source:{item['source_id']}",
+                    "source_platform": self._source_platform(source) if source else "",
+                }, "more" if action in {"up", "more_like_this"} else
+                    "hide" if action == "hide" else "less")
+            else:
+                prefs["seen"] = sorted(set(prefs.get("seen", [])) | {item_id})
+                self._save("prefs.json", prefs)
+            return {"ok": True}
+
         seen = set(prefs.get("seen", []))
         seen.add(item_id)
         prefs["seen"] = sorted(seen)
@@ -1057,6 +1111,7 @@ class DigestService:
         delta = {
             "up": WEIGHT_UP,
             "down": WEIGHT_DOWN,
+            "hide": WEIGHT_DOWN,
             "opened": WEIGHT_OPENED,
             "more_like_this": WEIGHT_UP,
         }[action]
@@ -1064,9 +1119,9 @@ class DigestService:
         current = float(weights.get(item["source_id"], source["weight"] if source else 1.0))
         weights[item["source_id"]] = round(min(WEIGHT_MAX, max(WEIGHT_MIN, current + delta)), 3)
 
-        if source and action in {"up", "down", "more_like_this"}:
+        if source and action in {"up", "down", "hide", "more_like_this"}:
             affinity = prefs.setdefault("tag_affinity", {})
-            tag_delta = TAG_DOWN if action == "down" else TAG_UP
+            tag_delta = TAG_DOWN if action in {"down", "hide"} else TAG_UP
             for tag in source.get("tags", []):
                 affinity[tag] = round(float(affinity.get(tag, 0.0)) + tag_delta, 3)
             if action in {"up", "more_like_this"}:
@@ -1076,19 +1131,6 @@ class DigestService:
                     affinity[term] = round(float(affinity.get(term, 0.0)) + TERM_UP, 3)
         prefs["events"] = int(prefs.get("events", 0)) + 1
         self._save("prefs.json", prefs)
-        if self.profile_store is not None and source is not None and action != "opened":
-            content_kind, _ = self._content_shape(source, item)
-            platform = self._source_platform(source)
-            self.profile_store.feedback(
-                {
-                    "content_id": f"digest:{item_id}",
-                    "tags": list(_candidate_tags(source, item)),
-                    "content_kind": content_kind,
-                    "publisher_peer_id": f"source:{source['id']}",
-                    "source_platform": platform,
-                },
-                "more" if action in {"up", "more_like_this"} else "less",
-            )
         return {"ok": True, "source_weight": weights[item["source_id"]]}
 
     def _find_item(self, item_id: str) -> dict[str, Any] | None:
@@ -1217,13 +1259,23 @@ class DigestService:
     ) -> dict[str, Any]:
         sources = {source["id"]: source for source in self.list_sources()}
         prefs = self._load("prefs.json", {})
+        profile_signals = self.profile_store.signals() if self.profile_store is not None else None
         weights = {
             source_id: float(prefs.get("source_weight", {}).get(source_id, source["weight"]))
             for source_id, source in sources.items()
         }
+        if profile_signals is not None:
+            weights = {
+                source_id: min(WEIGHT_MAX, max(WEIGHT_MIN, float(source["weight"]) +
+                    float(profile_signals["publisher_weights"].get(f"source:{source_id}", 0)) * 0.1))
+                for source_id, source in sources.items()
+            }
         max_weight = max(weights.values(), default=0.0)
         trust = {sid: (w / max_weight if max_weight > 0 else 0.0) for sid, w in weights.items()}
         rated_sources = set(prefs.get("source_weight", {}))
+        if profile_signals is not None:
+            rated_sources = {key.removeprefix("source:") for key in
+                             profile_signals["publisher_weights"] if key.startswith("source:")}
 
         candidates = []
         by_id: dict[str, dict[str, Any]] = {}
@@ -1252,8 +1304,9 @@ class DigestService:
         liked = {t: v for t, v in prefs.get("tag_affinity", {}).items() if v > 0}
         liked.update(steer_up)
         hidden_content_ids: set[str] = set()
-        if self.profile_store is not None:
-            profile_signals = self.profile_store.signals()
+        if profile_signals is not None:
+            liked = {}  # Profile already includes explicit direction and feedback.
+            steer_down = set()
             for tag, weight in profile_signals["tag_weights"].items():
                 liked[tag] = liked.get(tag, 0.0) + float(weight)
             hidden_content_ids.update(

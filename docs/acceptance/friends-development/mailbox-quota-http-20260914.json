@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "started_at": "2026-09-14T06:22:17.543467+00:00",
+  "passed": false,
+  "scope": "fresh real TCP nodes and default HTTP Registry sender quota; no artificial quota settings",
+  "not_proven": [
+    "desktop installation/UI",
+    "different public network exits",
+    "recipient-wide capacity over TCP",
+    "full-hour real-clock message expiry",
+    "full privacy export audit"
+  ],
+  "checks": [],
+  "scenario": "mailbox-quota",
+  "finished_at": "2026-09-14T06:22:48.978196+00:00"
+}

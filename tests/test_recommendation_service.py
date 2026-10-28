@@ -262,14 +262,14 @@ def _client(tmp_path, monkeypatch):
     return TestClient(create_app(store)), store
 
 
-def test_endpoint_empty_store_returns_starter_recommendations(tmp_path, monkeypatch):
+def test_endpoint_empty_store_returns_no_fabricated_recommendations(tmp_path, monkeypatch):
     client, _ = _client(tmp_path, monkeypatch)
     response = client.post("/api/local/recommendations", json={"limit": 6})
     assert response.status_code == 200
     recommendations = response.json()
-    assert len(recommendations) == 6
-    assert all(item["item"]["starter"] is True for item in recommendations)
-    assert all(item["contentId"].startswith("starter:") for item in recommendations)
+    assert recommendations == []
+    assert client.post("/api/local/recommendations/feedback",
+        json={"contentId": "starter:agents", "action": "more"}).status_code == 404
 
 
 def test_endpoint_prefers_real_digest_content_and_accepts_feedback(tmp_path, monkeypatch):
@@ -332,8 +332,12 @@ def test_endpoint_tolerates_empty_body(tmp_path, monkeypatch):
     assert isinstance(response.json(), list)
 
 
-def test_profile_direction_platforms_and_feedback_change_starter_ranking(tmp_path, monkeypatch):
+def test_profile_direction_and_feedback_apply_to_feed_content_without_starter_fallback(tmp_path, monkeypatch):
     client, _ = _client(tmp_path, monkeypatch)
+    service = client.app.state.digest_service
+    service.fetcher = lambda *_: b'<rss version="2.0"><channel><title>Public Picks</title><item><title>Open source agents</title><link>https://example.com/agents</link><description>Open source agents research</description></item></channel></rss>'
+    service.add_source("https://example.com/feed", tags=["ai-agents", "platform:github"])
+    service.proactive_refresh(now_unix=NOW)
     profile = client.patch(
         "/api/local/recommendations/profile",
         json={"direction": "open source agents", "platforms": ["github"], "topics": ["ai-agents"]},
@@ -343,7 +347,8 @@ def test_profile_direction_platforms_and_feedback_change_starter_ranking(tmp_pat
     assert client.app.state.digest_service.get_steering()["text"] == "open source agents"
 
     before = client.post("/api/local/recommendations", json={"limit": 8}).json()
-    assert before[0]["contentId"] in {"starter:agents", "starter:oss"}
+    assert len(before) == 1
+    assert before[0]["contentId"].startswith("digest:")
     target = before[0]["contentId"]
     feedback = client.post(
         "/api/local/recommendations/feedback",
@@ -351,4 +356,4 @@ def test_profile_direction_platforms_and_feedback_change_starter_ranking(tmp_pat
     )
     assert feedback.status_code == 200
     after = client.post("/api/local/recommendations", json={"limit": 8}).json()
-    assert target not in {item["contentId"] for item in after}
+    assert after == []

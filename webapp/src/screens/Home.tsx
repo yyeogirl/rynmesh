@@ -1,5 +1,5 @@
-import { Compass, Settings2, Sparkles, UploadCloud } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { Bot, Compass, Settings2, Sparkles, UploadCloud } from "lucide-react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAppContext } from "../appContext";
 import ContentViewer from "../components/ContentViewer";
@@ -17,57 +17,120 @@ import type { ActivityEvent, ContentItem, Recommendation } from "../domain/types
 import { digestApi } from "../domain/digestClient";
 import RecommendedServices from "./components/RecommendedServices";
 
+type HomeSource = "activity" | "recommendations" | "content";
+const sourceLabels: Record<HomeSource, string> = { activity: "activity", recommendations: "recommendations", content: "content list" };
+
 export default function Home() {
-  const { client, node, peers, notify } = useAppContext();
+  const { client, node, peers, notify, firstSuccess, openFirstSuccess, refreshFirstSuccess } = useAppContext();
   const navigate = useNavigate();
   const [activity, setActivity] = useState<ActivityEvent[]>([]);
   const [recommendations, setRecommendations] = useState<Recommendation[]>([]);
   const [items, setItems] = useState<ContentItem[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState<Record<HomeSource, boolean>>({ activity: true, recommendations: true, content: true });
+  const [errors, setErrors] = useState<Partial<Record<HomeSource, boolean>>>({});
+  const requests = useRef<Record<HomeSource, number>>({ activity: 0, recommendations: 0, content: 0 });
+  const pending = useRef<Record<HomeSource, boolean>>({ activity: false, recommendations: false, content: false });
   const [viewing, setViewing] = useState<ContentItem | null>(null);
   const [availableRecommendations, setAvailableRecommendations] = useState(0);
   const knownDiscoveryItems = useRef(0);
 
-  useEffect(() => {
-    let active = true;
-    void Promise.all([client.getActivity(), client.requestRecommendations({ limit: 2 }), client.listContent()])
-      .then(([events, recs, content]) => {
-        if (!active) return;
-        setActivity(events);
-        setRecommendations(recs);
-        setItems(content);
-      })
-      .finally(() => {
-        if (active) setLoading(false);
-      });
-    return () => {
-      active = false;
-    };
+  const load = useCallback(async (source: HomeSource) => {
+    const request = ++requests.current[source];
+    const current = () => requests.current[source] === request;
+    pending.current[source] = true;
+    setLoading((value) => ({ ...value, [source]: true }));
+    try {
+      if (source === "activity") {
+        const value = await client.getActivity();
+        if (current()) setActivity(value);
+      } else if (source === "recommendations") {
+        const value = await client.requestRecommendations({ limit: 2 });
+        if (current()) setRecommendations(value);
+      } else {
+        const value = await client.listContent();
+        if (current()) setItems(value);
+      }
+      if (!current()) return false;
+      setErrors((value) => ({ ...value, [source]: false }));
+      return true;
+    } catch {
+      if (current()) setErrors((value) => ({ ...value, [source]: true }));
+      return false;
+    } finally {
+      if (current()) {
+        pending.current[source] = false;
+        setLoading((value) => ({ ...value, [source]: false }));
+      }
+    }
   }, [client]);
 
   useEffect(() => {
+    setActivity([]);
+    setRecommendations([]);
+    setItems([]);
+    setErrors({});
+    setAvailableRecommendations(0);
+    knownDiscoveryItems.current = 0;
+    void load("activity");
+    void load("recommendations");
+    void load("content");
+    return () => {
+      for (const source of Object.keys(sourceLabels) as HomeSource[]) requests.current[source] += 1;
+    };
+  }, [load]);
+
+  useEffect(() => {
+    let active = true;
     const updateDiscovery = () => {
       void digestApi.getDiscoveryStatus().then(async (status) => {
+        if (!active) return;
         setAvailableRecommendations(status.item_count);
-        if (status.item_count > 0 && status.item_count !== knownDiscoveryItems.current) {
-          knownDiscoveryItems.current = status.item_count;
-          setRecommendations(await client.requestRecommendations({ limit: 2 }));
+        if (status.item_count > 0 && status.item_count !== knownDiscoveryItems.current && !pending.current.recommendations) {
+          if (await load("recommendations") && active) knownDiscoveryItems.current = status.item_count;
         }
       }).catch(() => undefined);
     };
     updateDiscovery();
     const timer = window.setInterval(updateDiscovery, 4000);
-    return () => window.clearInterval(timer);
-  }, [client]);
-
-  if (loading) return <LoadingPanel />;
+    return () => { active = false; window.clearInterval(timer); };
+  }, [load]);
 
   const flagged = items.filter((item) => ["flagged", "blocked"].includes(item.safety_outcome)).length;
   const showingStarters = recommendations.length > 0 && recommendations.every((rec) => rec.item?.starter);
 
   return (
     <div className="screen-grid home-grid">
+      {(Object.keys(sourceLabels) as HomeSource[]).some((source) => errors[source]) ? (
+        <Panel title="Some home information is unavailable">
+          <div role="status">
+            <p>Available content stays usable. Retry the affected section.</p>
+            {(Object.keys(sourceLabels) as HomeSource[]).filter((source) => errors[source]).map((source) => (
+              <Button key={source} disabled={loading[source]} onClick={() => void load(source)}>Retry {sourceLabels[source]}</Button>
+            ))}
+          </div>
+        </Panel>
+      ) : null}
       <RecommendedServices client={client} />
+      {firstSuccess && !firstSuccess.completed ? (
+        <Panel className="home-first-success">
+          <div>
+            <span className="eyebrow">Start here</span>
+            <h2>Get your first useful result</h2>
+            <p>Open one recommendation and save one choice. Ryn uses that local signal to improve what comes next.</p>
+          </div>
+          <Button variant="primary" icon={Sparkles} onClick={() => openFirstSuccess?.()}>Continue first reading</Button>
+        </Panel>
+      ) : null}
+      {firstSuccess?.completed ? (
+        <Panel className="home-first-success">
+          <div>
+            <span className="eyebrow">Optional next step</span>
+            <h2>Enable private AI on this device</h2>
+            <p>Ryn can recommend a model for this computer and keep prompts local. Your recommendations already work without it.</p>
+          </div>
+          <Button icon={Bot} onClick={() => navigate("/services/manage")}>Set up local AI</Button>
+        </Panel>
+      ) : null}
       <PageHeader
         eyebrow="Ryn node"
         title="Local node console"
@@ -87,10 +150,11 @@ export default function Home() {
           <p className="mono">{node.peer_id}</p>
         </div>
         <div className="hero-actions">
+          <Button onClick={() => navigate("/reading")}>Continue reading</Button>
           <Button icon={Compass} onClick={() => navigate("/explore")}>
             Explore
           </Button>
-          <Button icon={Sparkles} onClick={() => navigate("/search-ask")}>
+          <Button icon={Sparkles} onClick={() => navigate("/ask")}>
             Ask AI
           </Button>
           <Button icon={UploadCloud} variant="primary" onClick={() => navigate("/publish")}>
@@ -110,7 +174,7 @@ export default function Home() {
           value={Math.max(availableRecommendations, recommendations.length)}
           to="/digest"
         />
-        <StatTile label="Flagged" value={flagged} to="/explore?safety=flagged" tone={flagged ? "warn" : "neutral"} />
+        <StatTile label="Flagged" value={errors.content ? "Unavailable" : loading.content ? "Loading…" : flagged} to="/explore?safety=flagged" tone={flagged ? "warn" : "neutral"} />
       </div>
 
       <Panel title={showingStarters ? "Start here: teach your assistant" : "Curator Highlights"} className="home-recs">
@@ -139,7 +203,6 @@ export default function Home() {
                   onInspect={() => navigate(`/items/${item.content_id}`)}
                   onOpen={() => {
                     setViewing(item);
-                    if (item.digest_item_id) void digestApi.sendFeedback(item.digest_item_id, "opened").catch(() => undefined);
                   }}
                   onFetchPreview={() => notify("info", "Preview fetch requested through local node")}
                   onFetchFull={() => notify("warn", "Full fetch requires confirmation from item detail")}
@@ -148,7 +211,7 @@ export default function Home() {
                     if (item.digest_item_id) {
                       void digestApi.sendFeedback(item.digest_item_id, action === "more" ? "up" : "down").catch(() => undefined);
                     }
-                    setRecommendations(await client.requestRecommendations({ limit: 2 }));
+                    await load("recommendations");
                     notify("ok", "Your local recommendation profile learned from that feedback");
                   }}
                 />
@@ -156,13 +219,18 @@ export default function Home() {
             })}
             </div>
           </>
-        ) : (
-          <EmptyState title="No recommendations yet" body="Ask the AI curator to review visible node evidence." />
-        )}
+        ) : loading.recommendations ? <LoadingPanel /> : errors.recommendations ? (
+          <p>Recommendations could not be loaded. Use Retry recommendations above.</p>
+        ) : <EmptyState title="No recommendations yet" body="Open For You to check content sources and retry. Reading does not require a model." />}
       </Panel>
-      {viewing ? <ContentViewer item={viewing} onClose={() => setViewing(null)} /> : null}
+      {viewing ? <ContentViewer item={viewing} client={client} onRead={async () => {
+        await client.recordContentConsumption(viewing, "opened");
+        if (viewing.digest_item_id) await digestApi.sendFeedback(viewing.digest_item_id, "opened");
+        await refreshFirstSuccess?.();
+      }} onClose={() => setViewing(null)} /> : null}
 
       <Panel title="Recent Activity" className="activity-panel">
+        {loading.activity ? <p role="status">Loading activity…</p> : !activity.length && !errors.activity ? <p>No activity yet.</p> : null}
         <div className="activity-list">
           {activity.map((event) => (
             <div key={`${event.t}-${event.text}`} className="activity-row">
@@ -186,7 +254,7 @@ function StatTile({
   tone = "neutral",
 }: {
   label: string;
-  value: number;
+  value: number | string;
   to: string;
   tone?: "neutral" | "warn";
 }) {

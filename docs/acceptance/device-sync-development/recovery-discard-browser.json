@@ -1,0 +1,18 @@
+{
+  "recorded_on": "2026-09-11",
+  "environment": "Windows, in-app browser, isolated loopback node, synthetic source-created conversation conflicts",
+  "build": "index-CyA-zBf1.js",
+  "steps": [
+    {"action": "Open discard review for a deleted synthetic conversation", "observed": "Review receives focus, identifies the conversation and branch count, and explains independent-copy and remote-deletion limits"},
+    {"action": "Tab twice and Enter to keep recovery for now", "observed": "No deletion; recovery remains and focus returns to its button"},
+    {"action": "Reopen review and confirm with Tab and Enter", "observed": "Deleted conversation recovery leaves the list; focused status confirms local persistence only"},
+    {"action": "Stop and restart the node with its original data directory, reload Ask Ryn", "observed": "Discarded recovery stays absent; unrelated live conversation branches remain"},
+    {"action": "Open the previously kept independent copy", "observed": "Original provider and messages remain readable without a model"}
+  ],
+  "limits": [
+    "Source seeding uses synthetic stores, not this run's device-pairing or network-delivery flow",
+    "Not packaged desktop, physical-device, cross-NAT or complete personal-data-erasure acceptance",
+    "Stale review, response loss, pending tasks, disk failure and old-message replay are automated checks rather than browser-injected failures"
+  ],
+  "cleanup": "Temporary browser tab closed and node process stopped; isolated data directory retained"
+}

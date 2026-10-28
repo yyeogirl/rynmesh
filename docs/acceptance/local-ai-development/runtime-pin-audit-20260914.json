@@ -1,0 +1,79 @@
+{
+  "release": "b10774",
+  "html_url": "https://github.com/ggml-org/llama.cpp/releases/tag/b10774",
+  "published_at": "2026-09-03T01:52:31Z",
+  "assets": [
+    {
+      "platform": [
+        "Darwin",
+        "arm64"
+      ],
+      "asset": "llama-b10774-bin-macos-arm64.tar.gz",
+      "pinned_sha256": "aeb59ccd60191bdf96ddb57f352286430d9e0b6dc29281460e1bd217556c3c78",
+      "pinned_size": 11088473,
+      "release_sha256": "sha256:aeb59ccd60191bdf96ddb57f352286430d9e0b6dc29281460e1bd217556c3c78",
+      "release_size": 11088473,
+      "updated_at": "2026-09-03T01:53:12Z"
+    },
+    {
+      "platform": [
+        "Darwin",
+        "x86_64"
+      ],
+      "asset": "llama-b10774-bin-macos-x64.tar.gz",
+      "pinned_sha256": "9acda4c44584970622ecc06086b5b8cd3e06b6dc0d039f8c95a63f1186f80e5e",
+      "pinned_size": 11146110,
+      "release_sha256": "sha256:9acda4c44584970622ecc06086b5b8cd3e06b6dc0d039f8c95a63f1186f80e5e",
+      "release_size": 11146110,
+      "updated_at": "2026-09-03T01:53:13Z"
+    },
+    {
+      "platform": [
+        "Linux",
+        "x86_64"
+      ],
+      "asset": "llama-b10774-bin-ubuntu-x64.tar.gz",
+      "pinned_sha256": "68caa9c0e6dcdf32283fc4d8a0008fe389cb191bb79f5fa34c255beec388046d",
+      "pinned_size": 16718077,
+      "release_sha256": "sha256:68caa9c0e6dcdf32283fc4d8a0008fe389cb191bb79f5fa34c255beec388046d",
+      "release_size": 16718077,
+      "updated_at": "2026-09-03T01:53:33Z"
+    },
+    {
+      "platform": [
+        "Linux",
+        "arm64"
+      ],
+      "asset": "llama-b10774-bin-ubuntu-arm64.tar.gz",
+      "pinned_sha256": "eeb67bd32e163d09687e7a7a8bc25119bb2cbc637d5ec2b45c493c7df1675452",
+      "pinned_size": 13363523,
+      "release_sha256": "sha256:eeb67bd32e163d09687e7a7a8bc25119bb2cbc637d5ec2b45c493c7df1675452",
+      "release_size": 13363523,
+      "updated_at": "2026-09-03T01:53:14Z"
+    },
+    {
+      "platform": [
+        "Windows",
+        "x86_64"
+      ],
+      "asset": "llama-b10774-bin-win-cpu-x64.zip",
+      "pinned_sha256": "04f25dd148fda9d66efd91e96c637126220273fec62cdf5007367722c11bc744",
+      "pinned_size": 18380733,
+      "release_sha256": "sha256:04f25dd148fda9d66efd91e96c637126220273fec62cdf5007367722c11bc744",
+      "release_size": 18380733,
+      "updated_at": "2026-09-03T01:53:35Z"
+    },
+    {
+      "platform": [
+        "Windows",
+        "arm64"
+      ],
+      "asset": "llama-b10774-bin-win-cpu-arm64.zip",
+      "pinned_sha256": "a26b288a4a9b1d9163a171e6b834b4f2956f72fcb51d8b75560565939b4a755f",
+      "pinned_size": 11949368,
+      "release_sha256": "sha256:a26b288a4a9b1d9163a171e6b834b4f2956f72fcb51d8b75560565939b4a755f",
+      "release_size": 11949368,
+      "updated_at": "2026-09-03T01:53:34Z"
+    }
+  ]
+}

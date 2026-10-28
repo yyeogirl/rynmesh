@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import os
+
 import pytest
 from cryptography.exceptions import InvalidTag
 
@@ -19,7 +21,8 @@ def test_load_is_stable_and_0600(tmp_path):
     k1 = peer_box.public_key_b64(peer_box.load_or_create_messaging_key(p))
     k2 = peer_box.public_key_b64(peer_box.load_or_create_messaging_key(p))
     assert k1 == k2  # persisted, not regenerated
-    assert (p.stat().st_mode & 0o777) == 0o600
+    if os.name != "nt":
+        assert (p.stat().st_mode & 0o777) == 0o600
 
 def test_wrong_key_fails(tmp_path):
     a = peer_box.load_or_create_messaging_key(tmp_path / "a")

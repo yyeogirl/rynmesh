@@ -1,0 +1,1244 @@
+{
+  "scope": "Synthetic HTTP faults; real browser, node stores and task protocol; loopback only",
+  "checkpoints": [
+    {
+      "label": "busy-before-check",
+      "conversations": [
+        {
+          "id": "f64fd70a-974b-43f9-a6d1-64cc5eff4468",
+          "messages": [
+            {
+              "id": "question_task_503bf8f06b094f3e930b647b0f6fbad1",
+              "role": "user",
+              "status": "complete",
+              "taskId": "task_503bf8f06b094f3e930b647b0f6fbad1",
+              "content_sha256": "665c57ee333e987d62640c3e8f4ac966381a05362de190d9379b1c4524ac1363"
+            },
+            {
+              "id": "answer_task_503bf8f06b094f3e930b647b0f6fbad1",
+              "role": "assistant",
+              "status": "failed",
+              "taskId": "task_503bf8f06b094f3e930b647b0f6fbad1",
+              "content_sha256": "546048e0fc7be053df2122c9239e7b23b4c711fa004222531bb40bc01adfc431",
+              "run": {
+                "task_id": "task_503bf8f06b094f3e930b647b0f6fbad1",
+                "conversation_id": "f64fd70a-974b-43f9-a6d1-64cc5eff4468",
+                "state": "failed",
+                "cancel_requested": false,
+                "error_code": "runtime_busy"
+              }
+            }
+          ]
+        }
+      ],
+      "orders": [
+        {
+          "task_id": "task_503bf8f06b094f3e930b647b0f6fbad1",
+          "state": "failed",
+          "error_code": "runtime_busy",
+          "amount": null
+        }
+      ],
+      "runtime_calls": [
+        {
+          "mode": "ready"
+        },
+        {
+          "mode": "ready"
+        },
+        {
+          "mode": "runtime_busy"
+        }
+      ]
+    },
+    {
+      "label": "recovered-check-original",
+      "conversations": [
+        {
+          "id": "f64fd70a-974b-43f9-a6d1-64cc5eff4468",
+          "messages": [
+            {
+              "id": "question_task_503bf8f06b094f3e930b647b0f6fbad1",
+              "role": "user",
+              "status": "complete",
+              "taskId": "task_503bf8f06b094f3e930b647b0f6fbad1",
+              "content_sha256": "665c57ee333e987d62640c3e8f4ac966381a05362de190d9379b1c4524ac1363"
+            },
+            {
+              "id": "answer_task_503bf8f06b094f3e930b647b0f6fbad1",
+              "role": "assistant",
+              "status": "failed",
+              "taskId": "task_503bf8f06b094f3e930b647b0f6fbad1",
+              "content_sha256": "546048e0fc7be053df2122c9239e7b23b4c711fa004222531bb40bc01adfc431",
+              "run": {
+                "task_id": "task_503bf8f06b094f3e930b647b0f6fbad1",
+                "conversation_id": "f64fd70a-974b-43f9-a6d1-64cc5eff4468",
+                "state": "failed",
+                "cancel_requested": false,
+                "error_code": "runtime_busy"
+              }
+            }
+          ]
+        }
+      ],
+      "orders": [
+        {
+          "task_id": "task_503bf8f06b094f3e930b647b0f6fbad1",
+          "state": "failed",
+          "error_code": "runtime_busy",
+          "amount": null
+        }
+      ],
+      "runtime_calls": [
+        {
+          "mode": "ready"
+        },
+        {
+          "mode": "ready"
+        },
+        {
+          "mode": "runtime_busy"
+        }
+      ]
+    },
+    {
+      "label": "explicit-recovery",
+      "conversations": [
+        {
+          "id": "f64fd70a-974b-43f9-a6d1-64cc5eff4468",
+          "messages": [
+            {
+              "id": "question_task_503bf8f06b094f3e930b647b0f6fbad1",
+              "role": "user",
+              "status": "complete",
+              "taskId": "task_503bf8f06b094f3e930b647b0f6fbad1",
+              "content_sha256": "665c57ee333e987d62640c3e8f4ac966381a05362de190d9379b1c4524ac1363"
+            },
+            {
+              "id": "answer_task_503bf8f06b094f3e930b647b0f6fbad1",
+              "role": "assistant",
+              "status": "failed",
+              "taskId": "task_503bf8f06b094f3e930b647b0f6fbad1",
+              "content_sha256": "546048e0fc7be053df2122c9239e7b23b4c711fa004222531bb40bc01adfc431",
+              "run": {
+                "task_id": "task_503bf8f06b094f3e930b647b0f6fbad1",
+                "conversation_id": "f64fd70a-974b-43f9-a6d1-64cc5eff4468",
+                "state": "failed",
+                "cancel_requested": false,
+                "error_code": "runtime_busy"
+              }
+            },
+            {
+              "id": "question_task_986ebea985a5443e8c07431c9a5c36f9",
+              "role": "user",
+              "status": "complete",
+              "taskId": "task_986ebea985a5443e8c07431c9a5c36f9",
+              "content_sha256": "e22d185560c636e1537812c48ef06f379c84668bb9e04e4972fd4bcec88ccbe8"
+            },
+            {
+              "id": "answer_task_986ebea985a5443e8c07431c9a5c36f9",
+              "role": "assistant",
+              "status": "complete",
+              "taskId": "task_986ebea985a5443e8c07431c9a5c36f9",
+              "content_sha256": "bdb2d0041fb712adf290c61f284c34d7d046b311e41f417c1fddce174889842c",
+              "run": {
+                "task_id": "task_986ebea985a5443e8c07431c9a5c36f9",
+                "conversation_id": "f64fd70a-974b-43f9-a6d1-64cc5eff4468",
+                "state": "succeeded",
+                "cancel_requested": false
+              }
+            }
+          ]
+        }
+      ],
+      "orders": [
+        {
+          "task_id": "task_986ebea985a5443e8c07431c9a5c36f9",
+          "state": "succeeded",
+          "error_code": null,
+          "amount": 0.0
+        },
+        {
+          "task_id": "task_503bf8f06b094f3e930b647b0f6fbad1",
+          "state": "failed",
+          "error_code": "runtime_busy",
+          "amount": null
+        }
+      ],
+      "runtime_calls": [
+        {
+          "mode": "ready"
+        },
+        {
+          "mode": "ready"
+        },
+        {
+          "mode": "runtime_busy"
+        },
+        {
+          "mode": "ready"
+        }
+      ]
+    },
+    {
+      "label": "model-not-ready-request",
+      "conversations": [
+        {
+          "id": "f64fd70a-974b-43f9-a6d1-64cc5eff4468",
+          "messages": [
+            {
+              "id": "question_task_503bf8f06b094f3e930b647b0f6fbad1",
+              "role": "user",
+              "status": "complete",
+              "taskId": "task_503bf8f06b094f3e930b647b0f6fbad1",
+              "content_sha256": "665c57ee333e987d62640c3e8f4ac966381a05362de190d9379b1c4524ac1363"
+            },
+            {
+              "id": "answer_task_503bf8f06b094f3e930b647b0f6fbad1",
+              "role": "assistant",
+              "status": "failed",
+              "taskId": "task_503bf8f06b094f3e930b647b0f6fbad1",
+              "content_sha256": "546048e0fc7be053df2122c9239e7b23b4c711fa004222531bb40bc01adfc431",
+              "run": {
+                "task_id": "task_503bf8f06b094f3e930b647b0f6fbad1",
+                "conversation_id": "f64fd70a-974b-43f9-a6d1-64cc5eff4468",
+                "state": "failed",
+                "cancel_requested": false,
+                "error_code": "runtime_busy"
+              }
+            },
+            {
+              "id": "question_task_986ebea985a5443e8c07431c9a5c36f9",
+              "role": "user",
+              "status": "complete",
+              "taskId": "task_986ebea985a5443e8c07431c9a5c36f9",
+              "content_sha256": "e22d185560c636e1537812c48ef06f379c84668bb9e04e4972fd4bcec88ccbe8"
+            },
+            {
+              "id": "answer_task_986ebea985a5443e8c07431c9a5c36f9",
+              "role": "assistant",
+              "status": "complete",
+              "taskId": "task_986ebea985a5443e8c07431c9a5c36f9",
+              "content_sha256": "bdb2d0041fb712adf290c61f284c34d7d046b311e41f417c1fddce174889842c",
+              "run": {
+                "task_id": "task_986ebea985a5443e8c07431c9a5c36f9",
+                "conversation_id": "f64fd70a-974b-43f9-a6d1-64cc5eff4468",
+                "state": "succeeded",
+                "cancel_requested": false
+              }
+            },
+            {
+              "id": "question_task_23117fb8677140a5a70f6424c907c076",
+              "role": "user",
+              "status": "complete",
+              "taskId": "task_23117fb8677140a5a70f6424c907c076",
+              "content_sha256": "d64c061e1371308dff6a6c6523116be44114471b2bcaace5686683e25b77b831"
+            },
+            {
+              "id": "answer_task_23117fb8677140a5a70f6424c907c076",
+              "role": "assistant",
+              "status": "failed",
+              "taskId": "task_23117fb8677140a5a70f6424c907c076",
+              "content_sha256": "840b1ef04ef97633a358972e8a72260c221c1b8032f62f69270ddc7b513b192b",
+              "run": {
+                "task_id": "task_23117fb8677140a5a70f6424c907c076",
+                "conversation_id": "f64fd70a-974b-43f9-a6d1-64cc5eff4468",
+                "state": "failed",
+                "cancel_requested": false,
+                "error_code": "provider_unavailable"
+              }
+            }
+          ]
+        }
+      ],
+      "orders": [
+        {
+          "task_id": "task_986ebea985a5443e8c07431c9a5c36f9",
+          "state": "succeeded",
+          "error_code": null,
+          "amount": 0.0
+        },
+        {
+          "task_id": "task_503bf8f06b094f3e930b647b0f6fbad1",
+          "state": "failed",
+          "error_code": "runtime_busy",
+          "amount": null
+        }
+      ],
+      "runtime_calls": [
+        {
+          "mode": "ready"
+        },
+        {
+          "mode": "ready"
+        },
+        {
+          "mode": "runtime_busy"
+        },
+        {
+          "mode": "ready"
+        }
+      ]
+    },
+    {
+      "label": "not-ready-fixed",
+      "conversations": [
+        {
+          "id": "f64fd70a-974b-43f9-a6d1-64cc5eff4468",
+          "messages": [
+            {
+              "id": "question_task_503bf8f06b094f3e930b647b0f6fbad1",
+              "role": "user",
+              "status": "complete",
+              "taskId": "task_503bf8f06b094f3e930b647b0f6fbad1",
+              "content_sha256": "665c57ee333e987d62640c3e8f4ac966381a05362de190d9379b1c4524ac1363"
+            },
+            {
+              "id": "answer_task_503bf8f06b094f3e930b647b0f6fbad1",
+              "role": "assistant",
+              "status": "failed",
+              "taskId": "task_503bf8f06b094f3e930b647b0f6fbad1",
+              "content_sha256": "546048e0fc7be053df2122c9239e7b23b4c711fa004222531bb40bc01adfc431",
+              "run": {
+                "task_id": "task_503bf8f06b094f3e930b647b0f6fbad1",
+                "conversation_id": "f64fd70a-974b-43f9-a6d1-64cc5eff4468",
+                "state": "failed",
+                "cancel_requested": false,
+                "error_code": "runtime_busy"
+              }
+            },
+            {
+              "id": "question_task_986ebea985a5443e8c07431c9a5c36f9",
+              "role": "user",
+              "status": "complete",
+              "taskId": "task_986ebea985a5443e8c07431c9a5c36f9",
+              "content_sha256": "e22d185560c636e1537812c48ef06f379c84668bb9e04e4972fd4bcec88ccbe8"
+            },
+            {
+              "id": "answer_task_986ebea985a5443e8c07431c9a5c36f9",
+              "role": "assistant",
+              "status": "complete",
+              "taskId": "task_986ebea985a5443e8c07431c9a5c36f9",
+              "content_sha256": "bdb2d0041fb712adf290c61f284c34d7d046b311e41f417c1fddce174889842c",
+              "run": {
+                "task_id": "task_986ebea985a5443e8c07431c9a5c36f9",
+                "conversation_id": "f64fd70a-974b-43f9-a6d1-64cc5eff4468",
+                "state": "succeeded",
+                "cancel_requested": false
+              }
+            },
+            {
+              "id": "question_task_23117fb8677140a5a70f6424c907c076",
+              "role": "user",
+              "status": "complete",
+              "taskId": "task_23117fb8677140a5a70f6424c907c076",
+              "content_sha256": "d64c061e1371308dff6a6c6523116be44114471b2bcaace5686683e25b77b831"
+            },
+            {
+              "id": "answer_task_23117fb8677140a5a70f6424c907c076",
+              "role": "assistant",
+              "status": "failed",
+              "taskId": "task_23117fb8677140a5a70f6424c907c076",
+              "content_sha256": "840b1ef04ef97633a358972e8a72260c221c1b8032f62f69270ddc7b513b192b",
+              "run": {
+                "task_id": "task_23117fb8677140a5a70f6424c907c076",
+                "conversation_id": "f64fd70a-974b-43f9-a6d1-64cc5eff4468",
+                "state": "failed",
+                "cancel_requested": false,
+                "error_code": "provider_unavailable"
+              }
+            },
+            {
+              "id": "question_task_fb3aa6e8ac704fc8b45f4826e3cad817",
+              "role": "user",
+              "status": "complete",
+              "taskId": "task_fb3aa6e8ac704fc8b45f4826e3cad817",
+              "content_sha256": "df5f511401cc89e25e7f85e784777f40faf936ec0c5416292e3c61dbe9fbf270"
+            },
+            {
+              "id": "answer_task_fb3aa6e8ac704fc8b45f4826e3cad817",
+              "role": "assistant",
+              "status": "failed",
+              "taskId": "task_fb3aa6e8ac704fc8b45f4826e3cad817",
+              "content_sha256": "a81c22d088eba149a75369dfbd4ed82bbdd4a4e6d1097be7e7ac0c16ccde1bb7",
+              "run": {
+                "task_id": "task_fb3aa6e8ac704fc8b45f4826e3cad817",
+                "conversation_id": "f64fd70a-974b-43f9-a6d1-64cc5eff4468",
+                "state": "failed",
+                "cancel_requested": false,
+                "error_code": "model_not_ready"
+              }
+            }
+          ]
+        }
+      ],
+      "orders": [
+        {
+          "task_id": "task_986ebea985a5443e8c07431c9a5c36f9",
+          "state": "succeeded",
+          "error_code": null,
+          "amount": 0.0
+        },
+        {
+          "task_id": "task_503bf8f06b094f3e930b647b0f6fbad1",
+          "state": "failed",
+          "error_code": "runtime_busy",
+          "amount": null
+        }
+      ],
+      "runtime_calls": [
+        {
+          "mode": "ready"
+        },
+        {
+          "mode": "ready"
+        },
+        {
+          "mode": "runtime_busy"
+        },
+        {
+          "mode": "ready"
+        }
+      ]
+    },
+    {
+      "label": "runtime-unavailable",
+      "conversations": [
+        {
+          "id": "f64fd70a-974b-43f9-a6d1-64cc5eff4468",
+          "messages": [
+            {
+              "id": "question_task_503bf8f06b094f3e930b647b0f6fbad1",
+              "role": "user",
+              "status": "complete",
+              "taskId": "task_503bf8f06b094f3e930b647b0f6fbad1",
+              "content_sha256": "665c57ee333e987d62640c3e8f4ac966381a05362de190d9379b1c4524ac1363"
+            },
+            {
+              "id": "answer_task_503bf8f06b094f3e930b647b0f6fbad1",
+              "role": "assistant",
+              "status": "failed",
+              "taskId": "task_503bf8f06b094f3e930b647b0f6fbad1",
+              "content_sha256": "546048e0fc7be053df2122c9239e7b23b4c711fa004222531bb40bc01adfc431",
+              "run": {
+                "task_id": "task_503bf8f06b094f3e930b647b0f6fbad1",
+                "conversation_id": "f64fd70a-974b-43f9-a6d1-64cc5eff4468",
+                "state": "failed",
+                "cancel_requested": false,
+                "error_code": "runtime_busy"
+              }
+            },
+            {
+              "id": "question_task_986ebea985a5443e8c07431c9a5c36f9",
+              "role": "user",
+              "status": "complete",
+              "taskId": "task_986ebea985a5443e8c07431c9a5c36f9",
+              "content_sha256": "e22d185560c636e1537812c48ef06f379c84668bb9e04e4972fd4bcec88ccbe8"
+            },
+            {
+              "id": "answer_task_986ebea985a5443e8c07431c9a5c36f9",
+              "role": "assistant",
+              "status": "complete",
+              "taskId": "task_986ebea985a5443e8c07431c9a5c36f9",
+              "content_sha256": "bdb2d0041fb712adf290c61f284c34d7d046b311e41f417c1fddce174889842c",
+              "run": {
+                "task_id": "task_986ebea985a5443e8c07431c9a5c36f9",
+                "conversation_id": "f64fd70a-974b-43f9-a6d1-64cc5eff4468",
+                "state": "succeeded",
+                "cancel_requested": false
+              }
+            },
+            {
+              "id": "question_task_23117fb8677140a5a70f6424c907c076",
+              "role": "user",
+              "status": "complete",
+              "taskId": "task_23117fb8677140a5a70f6424c907c076",
+              "content_sha256": "d64c061e1371308dff6a6c6523116be44114471b2bcaace5686683e25b77b831"
+            },
+            {
+              "id": "answer_task_23117fb8677140a5a70f6424c907c076",
+              "role": "assistant",
+              "status": "failed",
+              "taskId": "task_23117fb8677140a5a70f6424c907c076",
+              "content_sha256": "840b1ef04ef97633a358972e8a72260c221c1b8032f62f69270ddc7b513b192b",
+              "run": {
+                "task_id": "task_23117fb8677140a5a70f6424c907c076",
+                "conversation_id": "f64fd70a-974b-43f9-a6d1-64cc5eff4468",
+                "state": "failed",
+                "cancel_requested": false,
+                "error_code": "provider_unavailable"
+              }
+            },
+            {
+              "id": "question_task_fb3aa6e8ac704fc8b45f4826e3cad817",
+              "role": "user",
+              "status": "complete",
+              "taskId": "task_fb3aa6e8ac704fc8b45f4826e3cad817",
+              "content_sha256": "df5f511401cc89e25e7f85e784777f40faf936ec0c5416292e3c61dbe9fbf270"
+            },
+            {
+              "id": "answer_task_fb3aa6e8ac704fc8b45f4826e3cad817",
+              "role": "assistant",
+              "status": "failed",
+              "taskId": "task_fb3aa6e8ac704fc8b45f4826e3cad817",
+              "content_sha256": "a81c22d088eba149a75369dfbd4ed82bbdd4a4e6d1097be7e7ac0c16ccde1bb7",
+              "run": {
+                "task_id": "task_fb3aa6e8ac704fc8b45f4826e3cad817",
+                "conversation_id": "f64fd70a-974b-43f9-a6d1-64cc5eff4468",
+                "state": "failed",
+                "cancel_requested": false,
+                "error_code": "model_not_ready"
+              }
+            },
+            {
+              "id": "question_task_b61ad327061047c5a97f421893265895",
+              "role": "user",
+              "status": "complete",
+              "taskId": "task_b61ad327061047c5a97f421893265895",
+              "content_sha256": "57c410144c868fdfc2aa147a5db501b393119bba14d769c99ddbdd78f2422468"
+            },
+            {
+              "id": "answer_task_b61ad327061047c5a97f421893265895",
+              "role": "assistant",
+              "status": "failed",
+              "taskId": "task_b61ad327061047c5a97f421893265895",
+              "content_sha256": "144b0c4f74c40c468cea2a6e98161844c76dde8bc845c5a7b91e47a2d8fb097b",
+              "run": {
+                "task_id": "task_b61ad327061047c5a97f421893265895",
+                "conversation_id": "f64fd70a-974b-43f9-a6d1-64cc5eff4468",
+                "state": "failed",
+                "cancel_requested": false,
+                "error_code": "runtime_unavailable"
+              }
+            }
+          ]
+        }
+      ],
+      "orders": [
+        {
+          "task_id": "task_b61ad327061047c5a97f421893265895",
+          "state": "failed",
+          "error_code": "runtime_unavailable",
+          "amount": null
+        },
+        {
+          "task_id": "task_986ebea985a5443e8c07431c9a5c36f9",
+          "state": "succeeded",
+          "error_code": null,
+          "amount": 0.0
+        },
+        {
+          "task_id": "task_503bf8f06b094f3e930b647b0f6fbad1",
+          "state": "failed",
+          "error_code": "runtime_busy",
+          "amount": null
+        }
+      ],
+      "runtime_calls": [
+        {
+          "mode": "ready"
+        },
+        {
+          "mode": "ready"
+        },
+        {
+          "mode": "runtime_busy"
+        },
+        {
+          "mode": "ready"
+        },
+        {
+          "mode": "runtime_unavailable"
+        }
+      ]
+    },
+    {
+      "label": "stopped-runtime",
+      "conversations": [
+        {
+          "id": "f64fd70a-974b-43f9-a6d1-64cc5eff4468",
+          "messages": [
+            {
+              "id": "question_task_503bf8f06b094f3e930b647b0f6fbad1",
+              "role": "user",
+              "status": "complete",
+              "taskId": "task_503bf8f06b094f3e930b647b0f6fbad1",
+              "content_sha256": "665c57ee333e987d62640c3e8f4ac966381a05362de190d9379b1c4524ac1363"
+            },
+            {
+              "id": "answer_task_503bf8f06b094f3e930b647b0f6fbad1",
+              "role": "assistant",
+              "status": "failed",
+              "taskId": "task_503bf8f06b094f3e930b647b0f6fbad1",
+              "content_sha256": "546048e0fc7be053df2122c9239e7b23b4c711fa004222531bb40bc01adfc431",
+              "run": {
+                "task_id": "task_503bf8f06b094f3e930b647b0f6fbad1",
+                "conversation_id": "f64fd70a-974b-43f9-a6d1-64cc5eff4468",
+                "state": "failed",
+                "cancel_requested": false,
+                "error_code": "runtime_busy"
+              }
+            },
+            {
+              "id": "question_task_986ebea985a5443e8c07431c9a5c36f9",
+              "role": "user",
+              "status": "complete",
+              "taskId": "task_986ebea985a5443e8c07431c9a5c36f9",
+              "content_sha256": "e22d185560c636e1537812c48ef06f379c84668bb9e04e4972fd4bcec88ccbe8"
+            },
+            {
+              "id": "answer_task_986ebea985a5443e8c07431c9a5c36f9",
+              "role": "assistant",
+              "status": "complete",
+              "taskId": "task_986ebea985a5443e8c07431c9a5c36f9",
+              "content_sha256": "bdb2d0041fb712adf290c61f284c34d7d046b311e41f417c1fddce174889842c",
+              "run": {
+                "task_id": "task_986ebea985a5443e8c07431c9a5c36f9",
+                "conversation_id": "f64fd70a-974b-43f9-a6d1-64cc5eff4468",
+                "state": "succeeded",
+                "cancel_requested": false
+              }
+            },
+            {
+              "id": "question_task_23117fb8677140a5a70f6424c907c076",
+              "role": "user",
+              "status": "complete",
+              "taskId": "task_23117fb8677140a5a70f6424c907c076",
+              "content_sha256": "d64c061e1371308dff6a6c6523116be44114471b2bcaace5686683e25b77b831"
+            },
+            {
+              "id": "answer_task_23117fb8677140a5a70f6424c907c076",
+              "role": "assistant",
+              "status": "failed",
+              "taskId": "task_23117fb8677140a5a70f6424c907c076",
+              "content_sha256": "840b1ef04ef97633a358972e8a72260c221c1b8032f62f69270ddc7b513b192b",
+              "run": {
+                "task_id": "task_23117fb8677140a5a70f6424c907c076",
+                "conversation_id": "f64fd70a-974b-43f9-a6d1-64cc5eff4468",
+                "state": "failed",
+                "cancel_requested": false,
+                "error_code": "provider_unavailable"
+              }
+            },
+            {
+              "id": "question_task_fb3aa6e8ac704fc8b45f4826e3cad817",
+              "role": "user",
+              "status": "complete",
+              "taskId": "task_fb3aa6e8ac704fc8b45f4826e3cad817",
+              "content_sha256": "df5f511401cc89e25e7f85e784777f40faf936ec0c5416292e3c61dbe9fbf270"
+            },
+            {
+              "id": "answer_task_fb3aa6e8ac704fc8b45f4826e3cad817",
+              "role": "assistant",
+              "status": "failed",
+              "taskId": "task_fb3aa6e8ac704fc8b45f4826e3cad817",
+              "content_sha256": "a81c22d088eba149a75369dfbd4ed82bbdd4a4e6d1097be7e7ac0c16ccde1bb7",
+              "run": {
+                "task_id": "task_fb3aa6e8ac704fc8b45f4826e3cad817",
+                "conversation_id": "f64fd70a-974b-43f9-a6d1-64cc5eff4468",
+                "state": "failed",
+                "cancel_requested": false,
+                "error_code": "model_not_ready"
+              }
+            },
+            {
+              "id": "question_task_b61ad327061047c5a97f421893265895",
+              "role": "user",
+              "status": "complete",
+              "taskId": "task_b61ad327061047c5a97f421893265895",
+              "content_sha256": "57c410144c868fdfc2aa147a5db501b393119bba14d769c99ddbdd78f2422468"
+            },
+            {
+              "id": "answer_task_b61ad327061047c5a97f421893265895",
+              "role": "assistant",
+              "status": "failed",
+              "taskId": "task_b61ad327061047c5a97f421893265895",
+              "content_sha256": "144b0c4f74c40c468cea2a6e98161844c76dde8bc845c5a7b91e47a2d8fb097b",
+              "run": {
+                "task_id": "task_b61ad327061047c5a97f421893265895",
+                "conversation_id": "f64fd70a-974b-43f9-a6d1-64cc5eff4468",
+                "state": "failed",
+                "cancel_requested": false,
+                "error_code": "runtime_unavailable"
+              }
+            },
+            {
+              "id": "question_task_41a2a2c7e2114f64868edc937871bdcf",
+              "role": "user",
+              "status": "complete",
+              "taskId": "task_41a2a2c7e2114f64868edc937871bdcf",
+              "content_sha256": "e1f0938f8d917cabc4fba371c759f6fd7faaab03a7c31e9f61ecbb694b1bed50"
+            },
+            {
+              "id": "answer_task_41a2a2c7e2114f64868edc937871bdcf",
+              "role": "assistant",
+              "status": "failed",
+              "taskId": "task_41a2a2c7e2114f64868edc937871bdcf",
+              "content_sha256": "a336777fe78b329be1c67e8531889f222d3665e0a06507211d41e9e35d6708ba",
+              "run": {
+                "task_id": "task_41a2a2c7e2114f64868edc937871bdcf",
+                "conversation_id": "f64fd70a-974b-43f9-a6d1-64cc5eff4468",
+                "state": "failed",
+                "cancel_requested": false,
+                "error_code": "runtime_connection_failed"
+              }
+            }
+          ]
+        }
+      ],
+      "orders": [
+        {
+          "task_id": "task_b61ad327061047c5a97f421893265895",
+          "state": "failed",
+          "error_code": "runtime_unavailable",
+          "amount": null
+        },
+        {
+          "task_id": "task_986ebea985a5443e8c07431c9a5c36f9",
+          "state": "succeeded",
+          "error_code": null,
+          "amount": 0.0
+        },
+        {
+          "task_id": "task_503bf8f06b094f3e930b647b0f6fbad1",
+          "state": "failed",
+          "error_code": "runtime_busy",
+          "amount": null
+        }
+      ],
+      "runtime_calls": [
+        {
+          "mode": "ready"
+        },
+        {
+          "mode": "ready"
+        },
+        {
+          "mode": "runtime_busy"
+        },
+        {
+          "mode": "ready"
+        },
+        {
+          "mode": "runtime_unavailable"
+        }
+      ]
+    },
+    {
+      "label": "recovered-check-stopped-task",
+      "conversations": [
+        {
+          "id": "f64fd70a-974b-43f9-a6d1-64cc5eff4468",
+          "messages": [
+            {
+              "id": "question_task_503bf8f06b094f3e930b647b0f6fbad1",
+              "role": "user",
+              "status": "complete",
+              "taskId": "task_503bf8f06b094f3e930b647b0f6fbad1",
+              "content_sha256": "665c57ee333e987d62640c3e8f4ac966381a05362de190d9379b1c4524ac1363"
+            },
+            {
+              "id": "answer_task_503bf8f06b094f3e930b647b0f6fbad1",
+              "role": "assistant",
+              "status": "failed",
+              "taskId": "task_503bf8f06b094f3e930b647b0f6fbad1",
+              "content_sha256": "546048e0fc7be053df2122c9239e7b23b4c711fa004222531bb40bc01adfc431",
+              "run": {
+                "task_id": "task_503bf8f06b094f3e930b647b0f6fbad1",
+                "conversation_id": "f64fd70a-974b-43f9-a6d1-64cc5eff4468",
+                "state": "failed",
+                "cancel_requested": false,
+                "error_code": "runtime_busy"
+              }
+            },
+            {
+              "id": "question_task_986ebea985a5443e8c07431c9a5c36f9",
+              "role": "user",
+              "status": "complete",
+              "taskId": "task_986ebea985a5443e8c07431c9a5c36f9",
+              "content_sha256": "e22d185560c636e1537812c48ef06f379c84668bb9e04e4972fd4bcec88ccbe8"
+            },
+            {
+              "id": "answer_task_986ebea985a5443e8c07431c9a5c36f9",
+              "role": "assistant",
+              "status": "complete",
+              "taskId": "task_986ebea985a5443e8c07431c9a5c36f9",
+              "content_sha256": "bdb2d0041fb712adf290c61f284c34d7d046b311e41f417c1fddce174889842c",
+              "run": {
+                "task_id": "task_986ebea985a5443e8c07431c9a5c36f9",
+                "conversation_id": "f64fd70a-974b-43f9-a6d1-64cc5eff4468",
+                "state": "succeeded",
+                "cancel_requested": false
+              }
+            },
+            {
+              "id": "question_task_23117fb8677140a5a70f6424c907c076",
+              "role": "user",
+              "status": "complete",
+              "taskId": "task_23117fb8677140a5a70f6424c907c076",
+              "content_sha256": "d64c061e1371308dff6a6c6523116be44114471b2bcaace5686683e25b77b831"
+            },
+            {
+              "id": "answer_task_23117fb8677140a5a70f6424c907c076",
+              "role": "assistant",
+              "status": "failed",
+              "taskId": "task_23117fb8677140a5a70f6424c907c076",
+              "content_sha256": "840b1ef04ef97633a358972e8a72260c221c1b8032f62f69270ddc7b513b192b",
+              "run": {
+                "task_id": "task_23117fb8677140a5a70f6424c907c076",
+                "conversation_id": "f64fd70a-974b-43f9-a6d1-64cc5eff4468",
+                "state": "failed",
+                "cancel_requested": false,
+                "error_code": "provider_unavailable"
+              }
+            },
+            {
+              "id": "question_task_fb3aa6e8ac704fc8b45f4826e3cad817",
+              "role": "user",
+              "status": "complete",
+              "taskId": "task_fb3aa6e8ac704fc8b45f4826e3cad817",
+              "content_sha256": "df5f511401cc89e25e7f85e784777f40faf936ec0c5416292e3c61dbe9fbf270"
+            },
+            {
+              "id": "answer_task_fb3aa6e8ac704fc8b45f4826e3cad817",
+              "role": "assistant",
+              "status": "failed",
+              "taskId": "task_fb3aa6e8ac704fc8b45f4826e3cad817",
+              "content_sha256": "a81c22d088eba149a75369dfbd4ed82bbdd4a4e6d1097be7e7ac0c16ccde1bb7",
+              "run": {
+                "task_id": "task_fb3aa6e8ac704fc8b45f4826e3cad817",
+                "conversation_id": "f64fd70a-974b-43f9-a6d1-64cc5eff4468",
+                "state": "failed",
+                "cancel_requested": false,
+                "error_code": "model_not_ready"
+              }
+            },
+            {
+              "id": "question_task_b61ad327061047c5a97f421893265895",
+              "role": "user",
+              "status": "complete",
+              "taskId": "task_b61ad327061047c5a97f421893265895",
+              "content_sha256": "57c410144c868fdfc2aa147a5db501b393119bba14d769c99ddbdd78f2422468"
+            },
+            {
+              "id": "answer_task_b61ad327061047c5a97f421893265895",
+              "role": "assistant",
+              "status": "failed",
+              "taskId": "task_b61ad327061047c5a97f421893265895",
+              "content_sha256": "144b0c4f74c40c468cea2a6e98161844c76dde8bc845c5a7b91e47a2d8fb097b",
+              "run": {
+                "task_id": "task_b61ad327061047c5a97f421893265895",
+                "conversation_id": "f64fd70a-974b-43f9-a6d1-64cc5eff4468",
+                "state": "failed",
+                "cancel_requested": false,
+                "error_code": "runtime_unavailable"
+              }
+            },
+            {
+              "id": "question_task_41a2a2c7e2114f64868edc937871bdcf",
+              "role": "user",
+              "status": "complete",
+              "taskId": "task_41a2a2c7e2114f64868edc937871bdcf",
+              "content_sha256": "e1f0938f8d917cabc4fba371c759f6fd7faaab03a7c31e9f61ecbb694b1bed50"
+            },
+            {
+              "id": "answer_task_41a2a2c7e2114f64868edc937871bdcf",
+              "role": "assistant",
+              "status": "failed",
+              "taskId": "task_41a2a2c7e2114f64868edc937871bdcf",
+              "content_sha256": "a336777fe78b329be1c67e8531889f222d3665e0a06507211d41e9e35d6708ba",
+              "run": {
+                "task_id": "task_41a2a2c7e2114f64868edc937871bdcf",
+                "conversation_id": "f64fd70a-974b-43f9-a6d1-64cc5eff4468",
+                "state": "failed",
+                "cancel_requested": false,
+                "error_code": "runtime_connection_failed"
+              }
+            }
+          ]
+        }
+      ],
+      "orders": [
+        {
+          "task_id": "task_b61ad327061047c5a97f421893265895",
+          "state": "failed",
+          "error_code": "runtime_unavailable",
+          "amount": null
+        },
+        {
+          "task_id": "task_986ebea985a5443e8c07431c9a5c36f9",
+          "state": "succeeded",
+          "error_code": null,
+          "amount": 0.0
+        },
+        {
+          "task_id": "task_503bf8f06b094f3e930b647b0f6fbad1",
+          "state": "failed",
+          "error_code": "runtime_busy",
+          "amount": null
+        }
+      ],
+      "runtime_calls": [
+        {
+          "mode": "ready"
+        },
+        {
+          "mode": "ready"
+        },
+        {
+          "mode": "runtime_busy"
+        },
+        {
+          "mode": "ready"
+        },
+        {
+          "mode": "runtime_unavailable"
+        }
+      ]
+    },
+    {
+      "label": "node-restarted",
+      "conversations": [
+        {
+          "id": "f64fd70a-974b-43f9-a6d1-64cc5eff4468",
+          "messages": [
+            {
+              "id": "question_task_503bf8f06b094f3e930b647b0f6fbad1",
+              "role": "user",
+              "status": "complete",
+              "taskId": "task_503bf8f06b094f3e930b647b0f6fbad1",
+              "content_sha256": "665c57ee333e987d62640c3e8f4ac966381a05362de190d9379b1c4524ac1363"
+            },
+            {
+              "id": "answer_task_503bf8f06b094f3e930b647b0f6fbad1",
+              "role": "assistant",
+              "status": "failed",
+              "taskId": "task_503bf8f06b094f3e930b647b0f6fbad1",
+              "content_sha256": "546048e0fc7be053df2122c9239e7b23b4c711fa004222531bb40bc01adfc431",
+              "run": {
+                "task_id": "task_503bf8f06b094f3e930b647b0f6fbad1",
+                "conversation_id": "f64fd70a-974b-43f9-a6d1-64cc5eff4468",
+                "state": "failed",
+                "cancel_requested": false,
+                "error_code": "runtime_busy"
+              }
+            },
+            {
+              "id": "question_task_986ebea985a5443e8c07431c9a5c36f9",
+              "role": "user",
+              "status": "complete",
+              "taskId": "task_986ebea985a5443e8c07431c9a5c36f9",
+              "content_sha256": "e22d185560c636e1537812c48ef06f379c84668bb9e04e4972fd4bcec88ccbe8"
+            },
+            {
+              "id": "answer_task_986ebea985a5443e8c07431c9a5c36f9",
+              "role": "assistant",
+              "status": "complete",
+              "taskId": "task_986ebea985a5443e8c07431c9a5c36f9",
+              "content_sha256": "bdb2d0041fb712adf290c61f284c34d7d046b311e41f417c1fddce174889842c",
+              "run": {
+                "task_id": "task_986ebea985a5443e8c07431c9a5c36f9",
+                "conversation_id": "f64fd70a-974b-43f9-a6d1-64cc5eff4468",
+                "state": "succeeded",
+                "cancel_requested": false
+              }
+            },
+            {
+              "id": "question_task_23117fb8677140a5a70f6424c907c076",
+              "role": "user",
+              "status": "complete",
+              "taskId": "task_23117fb8677140a5a70f6424c907c076",
+              "content_sha256": "d64c061e1371308dff6a6c6523116be44114471b2bcaace5686683e25b77b831"
+            },
+            {
+              "id": "answer_task_23117fb8677140a5a70f6424c907c076",
+              "role": "assistant",
+              "status": "failed",
+              "taskId": "task_23117fb8677140a5a70f6424c907c076",
+              "content_sha256": "840b1ef04ef97633a358972e8a72260c221c1b8032f62f69270ddc7b513b192b",
+              "run": {
+                "task_id": "task_23117fb8677140a5a70f6424c907c076",
+                "conversation_id": "f64fd70a-974b-43f9-a6d1-64cc5eff4468",
+                "state": "failed",
+                "cancel_requested": false,
+                "error_code": "provider_unavailable"
+              }
+            },
+            {
+              "id": "question_task_fb3aa6e8ac704fc8b45f4826e3cad817",
+              "role": "user",
+              "status": "complete",
+              "taskId": "task_fb3aa6e8ac704fc8b45f4826e3cad817",
+              "content_sha256": "df5f511401cc89e25e7f85e784777f40faf936ec0c5416292e3c61dbe9fbf270"
+            },
+            {
+              "id": "answer_task_fb3aa6e8ac704fc8b45f4826e3cad817",
+              "role": "assistant",
+              "status": "failed",
+              "taskId": "task_fb3aa6e8ac704fc8b45f4826e3cad817",
+              "content_sha256": "a81c22d088eba149a75369dfbd4ed82bbdd4a4e6d1097be7e7ac0c16ccde1bb7",
+              "run": {
+                "task_id": "task_fb3aa6e8ac704fc8b45f4826e3cad817",
+                "conversation_id": "f64fd70a-974b-43f9-a6d1-64cc5eff4468",
+                "state": "failed",
+                "cancel_requested": false,
+                "error_code": "model_not_ready"
+              }
+            },
+            {
+              "id": "question_task_b61ad327061047c5a97f421893265895",
+              "role": "user",
+              "status": "complete",
+              "taskId": "task_b61ad327061047c5a97f421893265895",
+              "content_sha256": "57c410144c868fdfc2aa147a5db501b393119bba14d769c99ddbdd78f2422468"
+            },
+            {
+              "id": "answer_task_b61ad327061047c5a97f421893265895",
+              "role": "assistant",
+              "status": "failed",
+              "taskId": "task_b61ad327061047c5a97f421893265895",
+              "content_sha256": "144b0c4f74c40c468cea2a6e98161844c76dde8bc845c5a7b91e47a2d8fb097b",
+              "run": {
+                "task_id": "task_b61ad327061047c5a97f421893265895",
+                "conversation_id": "f64fd70a-974b-43f9-a6d1-64cc5eff4468",
+                "state": "failed",
+                "cancel_requested": false,
+                "error_code": "runtime_unavailable"
+              }
+            },
+            {
+              "id": "question_task_41a2a2c7e2114f64868edc937871bdcf",
+              "role": "user",
+              "status": "complete",
+              "taskId": "task_41a2a2c7e2114f64868edc937871bdcf",
+              "content_sha256": "e1f0938f8d917cabc4fba371c759f6fd7faaab03a7c31e9f61ecbb694b1bed50"
+            },
+            {
+              "id": "answer_task_41a2a2c7e2114f64868edc937871bdcf",
+              "role": "assistant",
+              "status": "failed",
+              "taskId": "task_41a2a2c7e2114f64868edc937871bdcf",
+              "content_sha256": "a336777fe78b329be1c67e8531889f222d3665e0a06507211d41e9e35d6708ba",
+              "run": {
+                "task_id": "task_41a2a2c7e2114f64868edc937871bdcf",
+                "conversation_id": "f64fd70a-974b-43f9-a6d1-64cc5eff4468",
+                "state": "failed",
+                "cancel_requested": false,
+                "error_code": "runtime_connection_failed"
+              }
+            }
+          ]
+        }
+      ],
+      "orders": [
+        {
+          "task_id": "task_b61ad327061047c5a97f421893265895",
+          "state": "failed",
+          "error_code": "runtime_unavailable",
+          "amount": null
+        },
+        {
+          "task_id": "task_986ebea985a5443e8c07431c9a5c36f9",
+          "state": "succeeded",
+          "error_code": null,
+          "amount": 0.0
+        },
+        {
+          "task_id": "task_503bf8f06b094f3e930b647b0f6fbad1",
+          "state": "failed",
+          "error_code": "runtime_busy",
+          "amount": null
+        }
+      ],
+      "runtime_calls": [
+        {
+          "mode": "ready"
+        },
+        {
+          "mode": "ready"
+        },
+        {
+          "mode": "runtime_busy"
+        },
+        {
+          "mode": "ready"
+        },
+        {
+          "mode": "runtime_unavailable"
+        }
+      ]
+    },
+    {
+      "label": "restarted-check-original",
+      "conversations": [
+        {
+          "id": "f64fd70a-974b-43f9-a6d1-64cc5eff4468",
+          "messages": [
+            {
+              "id": "question_task_503bf8f06b094f3e930b647b0f6fbad1",
+              "role": "user",
+              "status": "complete",
+              "taskId": "task_503bf8f06b094f3e930b647b0f6fbad1",
+              "content_sha256": "665c57ee333e987d62640c3e8f4ac966381a05362de190d9379b1c4524ac1363"
+            },
+            {
+              "id": "answer_task_503bf8f06b094f3e930b647b0f6fbad1",
+              "role": "assistant",
+              "status": "failed",
+              "taskId": "task_503bf8f06b094f3e930b647b0f6fbad1",
+              "content_sha256": "546048e0fc7be053df2122c9239e7b23b4c711fa004222531bb40bc01adfc431",
+              "run": {
+                "task_id": "task_503bf8f06b094f3e930b647b0f6fbad1",
+                "conversation_id": "f64fd70a-974b-43f9-a6d1-64cc5eff4468",
+                "state": "failed",
+                "cancel_requested": false,
+                "error_code": "runtime_busy"
+              }
+            },
+            {
+              "id": "question_task_986ebea985a5443e8c07431c9a5c36f9",
+              "role": "user",
+              "status": "complete",
+              "taskId": "task_986ebea985a5443e8c07431c9a5c36f9",
+              "content_sha256": "e22d185560c636e1537812c48ef06f379c84668bb9e04e4972fd4bcec88ccbe8"
+            },
+            {
+              "id": "answer_task_986ebea985a5443e8c07431c9a5c36f9",
+              "role": "assistant",
+              "status": "complete",
+              "taskId": "task_986ebea985a5443e8c07431c9a5c36f9",
+              "content_sha256": "bdb2d0041fb712adf290c61f284c34d7d046b311e41f417c1fddce174889842c",
+              "run": {
+                "task_id": "task_986ebea985a5443e8c07431c9a5c36f9",
+                "conversation_id": "f64fd70a-974b-43f9-a6d1-64cc5eff4468",
+                "state": "succeeded",
+                "cancel_requested": false
+              }
+            },
+            {
+              "id": "question_task_23117fb8677140a5a70f6424c907c076",
+              "role": "user",
+              "status": "complete",
+              "taskId": "task_23117fb8677140a5a70f6424c907c076",
+              "content_sha256": "d64c061e1371308dff6a6c6523116be44114471b2bcaace5686683e25b77b831"
+            },
+            {
+              "id": "answer_task_23117fb8677140a5a70f6424c907c076",
+              "role": "assistant",
+              "status": "failed",
+              "taskId": "task_23117fb8677140a5a70f6424c907c076",
+              "content_sha256": "840b1ef04ef97633a358972e8a72260c221c1b8032f62f69270ddc7b513b192b",
+              "run": {
+                "task_id": "task_23117fb8677140a5a70f6424c907c076",
+                "conversation_id": "f64fd70a-974b-43f9-a6d1-64cc5eff4468",
+                "state": "failed",
+                "cancel_requested": false,
+                "error_code": "provider_unavailable"
+              }
+            },
+            {
+              "id": "question_task_fb3aa6e8ac704fc8b45f4826e3cad817",
+              "role": "user",
+              "status": "complete",
+              "taskId": "task_fb3aa6e8ac704fc8b45f4826e3cad817",
+              "content_sha256": "df5f511401cc89e25e7f85e784777f40faf936ec0c5416292e3c61dbe9fbf270"
+            },
+            {
+              "id": "answer_task_fb3aa6e8ac704fc8b45f4826e3cad817",
+              "role": "assistant",
+              "status": "failed",
+              "taskId": "task_fb3aa6e8ac704fc8b45f4826e3cad817",
+              "content_sha256": "a81c22d088eba149a75369dfbd4ed82bbdd4a4e6d1097be7e7ac0c16ccde1bb7",
+              "run": {
+                "task_id": "task_fb3aa6e8ac704fc8b45f4826e3cad817",
+                "conversation_id": "f64fd70a-974b-43f9-a6d1-64cc5eff4468",
+                "state": "failed",
+                "cancel_requested": false,
+                "error_code": "model_not_ready"
+              }
+            },
+            {
+              "id": "question_task_b61ad327061047c5a97f421893265895",
+              "role": "user",
+              "status": "complete",
+              "taskId": "task_b61ad327061047c5a97f421893265895",
+              "content_sha256": "57c410144c868fdfc2aa147a5db501b393119bba14d769c99ddbdd78f2422468"
+            },
+            {
+              "id": "answer_task_b61ad327061047c5a97f421893265895",
+              "role": "assistant",
+              "status": "failed",
+              "taskId": "task_b61ad327061047c5a97f421893265895",
+              "content_sha256": "144b0c4f74c40c468cea2a6e98161844c76dde8bc845c5a7b91e47a2d8fb097b",
+              "run": {
+                "task_id": "task_b61ad327061047c5a97f421893265895",
+                "conversation_id": "f64fd70a-974b-43f9-a6d1-64cc5eff4468",
+                "state": "failed",
+                "cancel_requested": false,
+                "error_code": "runtime_unavailable"
+              }
+            },
+            {
+              "id": "question_task_41a2a2c7e2114f64868edc937871bdcf",
+              "role": "user",
+              "status": "complete",
+              "taskId": "task_41a2a2c7e2114f64868edc937871bdcf",
+              "content_sha256": "e1f0938f8d917cabc4fba371c759f6fd7faaab03a7c31e9f61ecbb694b1bed50"
+            },
+            {
+              "id": "answer_task_41a2a2c7e2114f64868edc937871bdcf",
+              "role": "assistant",
+              "status": "failed",
+              "taskId": "task_41a2a2c7e2114f64868edc937871bdcf",
+              "content_sha256": "a336777fe78b329be1c67e8531889f222d3665e0a06507211d41e9e35d6708ba",
+              "run": {
+                "task_id": "task_41a2a2c7e2114f64868edc937871bdcf",
+                "conversation_id": "f64fd70a-974b-43f9-a6d1-64cc5eff4468",
+                "state": "failed",
+                "cancel_requested": false,
+                "error_code": "runtime_connection_failed"
+              }
+            }
+          ]
+        }
+      ],
+      "orders": [
+        {
+          "task_id": "task_b61ad327061047c5a97f421893265895",
+          "state": "failed",
+          "error_code": "runtime_unavailable",
+          "amount": null
+        },
+        {
+          "task_id": "task_986ebea985a5443e8c07431c9a5c36f9",
+          "state": "succeeded",
+          "error_code": null,
+          "amount": 0.0
+        },
+        {
+          "task_id": "task_503bf8f06b094f3e930b647b0f6fbad1",
+          "state": "failed",
+          "error_code": "runtime_busy",
+          "amount": null
+        }
+      ],
+      "runtime_calls": [
+        {
+          "mode": "ready"
+        },
+        {
+          "mode": "ready"
+        },
+        {
+          "mode": "runtime_busy"
+        },
+        {
+          "mode": "ready"
+        },
+        {
+          "mode": "runtime_unavailable"
+        }
+      ]
+    }
+  ]
+}

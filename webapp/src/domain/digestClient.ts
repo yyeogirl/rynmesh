@@ -16,6 +16,7 @@ export interface DigestSource {
 }
 
 export interface DigestSourceHealth {
+  status?: "not_checked" | "healthy" | "cached" | "failed";
   id: string;
   title: string;
   ok: boolean;
@@ -94,6 +95,10 @@ export interface ConsumptionRecord {
   bookmarked: boolean;
   progress: number;
   completed: boolean;
+  content_version?: string;
+  sync_reading_available?: boolean;
+  sync_revisions?: { reading?: string; bookmarks?: string };
+  sync_conflicts?: { reading?: boolean; bookmarks?: boolean };
 }
 
 export interface Watcher {
@@ -109,6 +114,7 @@ export interface ReaderBlock {
 }
 
 export interface ReaderArticle {
+  truncated?: boolean;
   url: string;
   title: string;
   byline: string;
@@ -155,6 +161,27 @@ export interface LocalModelCatalog {
   anthropic_key_present: boolean;
 }
 
+export interface FeedbackSignal {
+  event_id: string;
+  content_id: string;
+  title: string;
+  action: "more" | "less" | "hide" | "neutral";
+  tags: string[];
+  publisher: string;
+  platform: string;
+  updated_at: string;
+  undone_at: string;
+  active: boolean;
+  migrated: boolean;
+}
+
+export interface FeedbackHistory {
+  items: FeedbackSignal[];
+  total: number;
+  offset: number;
+  limit: number;
+}
+
 export class DigestClientError extends Error {
   constructor(message: string, readonly status: number) {
     super(message);
@@ -191,7 +218,15 @@ async function requestJson<T>(path: string, init?: RequestInit): Promise<T> {
 }
 
 export const digestApi = {
+  feedbackHistory: (offset = 0) => requestJson<FeedbackHistory>(`/recommendations/signals?offset=${offset}&limit=20`),
+  undoFeedback: (eventId: string) => requestJson<{ digest: Digest }>(
+    `/recommendations/feedback/${encodeURIComponent(eventId)}/undo`, { method: "POST" },
+  ),
   listSources: () => requestJson<DigestSource[]>("/sources"),
+  sourceHealth: () => requestJson<DigestSourceHealth[]>("/sources/health"),
+  retrySource: (sourceId: string) => requestJson<{ digest: Digest; status: DiscoveryStatus }>(
+    `/sources/${encodeURIComponent(sourceId)}/retry`, { method: "POST" },
+  ),
   addSource: (url: string) =>
     requestJson<DigestSource>("/sources", { method: "POST", body: JSON.stringify({ url }) }),
   removeSource: (sourceId: string) =>
@@ -219,7 +254,7 @@ export const digestApi = {
   getSteering: () => requestJson<Steering>("/digest/steer"),
   steer: (text: string) =>
     requestJson<Steering>("/digest/steer", { method: "POST", body: JSON.stringify({ text }) }),
-  sendFeedback: (itemId: string, action: "up" | "down" | "opened" | "more_like_this") =>
+  sendFeedback: (itemId: string, action: "up" | "down" | "hide" | "opened" | "more_like_this") =>
     requestJson<{ ok: boolean }>("/digest/feedback", {
       method: "POST",
       body: JSON.stringify({ item_id: itemId, action }),

@@ -1,4 +1,5 @@
 import configparser
+import os
 import plistlib
 import re
 import shutil
@@ -11,7 +12,7 @@ ENV_DIR = REPO / "deploy" / "env"
 
 def parse_env(path: Path) -> dict[str, str]:
     out = {}
-    for line in path.read_text().splitlines():
+    for line in path.read_text(encoding="utf-8").splitlines():
         line = line.strip()
         if not line or line.startswith("#") or "=" not in line:
             continue
@@ -61,7 +62,7 @@ SYSTEMD_DIR = REPO / "deploy" / "systemd"
 def _load_unit(path: Path) -> configparser.ConfigParser:
     cp = configparser.ConfigParser(strict=False, interpolation=None)
     cp.optionxform = str  # preserve key case
-    cp.read_string(path.read_text())
+    cp.read_string(path.read_text(encoding="utf-8"))
     return cp
 
 
@@ -116,7 +117,8 @@ def test_bringup_scripts_exist_and_are_executable():
     for name in ("bringup-office-mac.zsh", "bringup-linux-node.sh"):
         p = BIN_DIR / name
         assert p.exists(), f"missing {p}"
-        assert p.stat().st_mode & 0o111, f"{p} not executable"
+        if os.name != "nt":
+            assert p.stat().st_mode & 0o111, f"{p} not executable"
 
 
 def test_bringup_office_mac_syntax():
@@ -129,22 +131,24 @@ def test_bringup_office_mac_syntax():
 
 def test_bringup_linux_node_syntax():
     bash = shutil.which("bash")
+    if not bash or os.name == "nt":
+        return
     r = subprocess.run([bash, "-n", str(BIN_DIR / "bringup-linux-node.sh")], capture_output=True, text=True)
     assert r.returncode == 0, r.stderr
 
 
 def test_download_installer_marks_managed_desktop_daemon():
-    text = (REPO / "scripts" / "install.sh").read_text()
+    text = (REPO / "scripts" / "install.sh").read_text(encoding="utf-8")
     assert "RYNMESH_DESKTOP_MODE" in text
     assert "Environment=RYNMESH_DESKTOP_MODE=1" in text
 
 
 def test_desktop_sidecar_is_signed_and_executed_during_verification():
-    build_script = (REPO / "webapp" / "src-tauri" / "scripts" / "build-sidecar.sh").read_text()
-    verifier = (REPO / "webapp" / "src-tauri" / "scripts" / "verify-sidecar.sh").read_text()
-    ci_workflow = (REPO / ".github" / "workflows" / "ci.yml").read_text()
-    release_workflow = (REPO / ".github" / "workflows" / "release.yml").read_text()
-    tauri_config = (REPO / "webapp" / "src-tauri" / "tauri.conf.json").read_text()
+    build_script = (REPO / "webapp" / "src-tauri" / "scripts" / "build-sidecar.sh").read_text(encoding="utf-8")
+    verifier = (REPO / "webapp" / "src-tauri" / "scripts" / "verify-sidecar.sh").read_text(encoding="utf-8")
+    ci_workflow = (REPO / ".github" / "workflows" / "ci.yml").read_text(encoding="utf-8")
+    release_workflow = (REPO / ".github" / "workflows" / "release.yml").read_text(encoding="utf-8")
+    tauri_config = (REPO / "webapp" / "src-tauri" / "tauri.conf.json").read_text(encoding="utf-8")
 
     assert "--codesign-identity -" in build_script
     assert "--osx-entitlements-file" in build_script
@@ -160,25 +164,28 @@ def test_desktop_sidecar_is_signed_and_executed_during_verification():
 
 def test_verify_mesh_syntax_and_expected_nodes():
     p = REPO / "scripts" / "verify_mesh.sh"
-    assert p.exists() and (p.stat().st_mode & 0o111), "verify_mesh.sh missing or not executable"
+    assert p.exists(), "verify_mesh.sh missing"
+    if os.name != "nt":
+        assert p.stat().st_mode & 0o111, "verify_mesh.sh not executable"
     bash = shutil.which("bash")
-    r = subprocess.run([bash, "-n", str(p)], capture_output=True, text=True)
-    assert r.returncode == 0, r.stderr
-    text = p.read_text()
+    if bash and os.name != "nt":
+        r = subprocess.run([bash, "-n", str(p)], capture_output=True, text=True)
+        assert r.returncode == 0, r.stderr
+    text = p.read_text(encoding="utf-8")
     for n in ("your-mac", "ms-2", "m4-mini", "m2-mini", "hk-server", "sz-egress"):
         assert n in text, f"verify_mesh.sh does not check for {n}"
 
 
 def test_env_templates_have_update_publisher_key_slot():
     for name in ("office-mac", "hk-server", "sz-node"):
-        text = (ENV_DIR / f"{name}.env.example").read_text()
+        text = (ENV_DIR / f"{name}.env.example").read_text(encoding="utf-8")
         assert "RYNMESH_UPDATE_PUBLISHER_KEYS" in text, f"{name} missing publisher-key slot"
 
 
 def test_runbook_exists_and_references_real_artifacts():
     doc = REPO / "docs" / "RYNMESH_MESH_DEPLOYMENT.md"
     assert doc.exists(), "runbook missing"
-    text = doc.read_text()
+    text = doc.read_text(encoding="utf-8")
     for ref in (
         "deploy/bin/bringup-office-mac.zsh",
         "deploy/bin/bringup-linux-node.sh",

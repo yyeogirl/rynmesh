@@ -1,0 +1,20 @@
+{
+  "verified_at": "2026-09-11T14:47:54.543710+00:00",
+  "environment": "Windows loopback node",
+  "sequence": 2,
+  "done": [
+    "source",
+    "replica",
+    "backups",
+    "search"
+  ],
+  "remaining_steps": [],
+  "original_completed_request_replayed": true,
+  "new_source_bytes_unchanged": true,
+  "new_bookmark_retained": true,
+  "reviewed_orphan_removed": true,
+  "migration_backups_removed": true,
+  "sync_opt_in_unchanged": true,
+  "remote_confirmed": false,
+  "packaged_desktop": false
+}

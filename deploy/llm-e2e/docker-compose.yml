@@ -1,0 +1,117 @@
+name: rynmesh-llm-e2e
+
+x-node: &node
+  image: rynmesh-llm-e2e-node
+  build:
+    context: ../..
+    dockerfile: deploy/llm-e2e/Dockerfile
+  restart: "no"
+  environment: &node-env
+    RYNMESH_REGISTRY_URL: http://registry:8790
+    RYNMESH_NETWORK_ID: rynmesh-llm-e2e
+    RYNMESH_AUTO_REGISTER: "1"
+    RYNMESH_PEER_HOST: 0.0.0.0
+    RYNMESH_PEER_PORT: "8791"
+    RYNMESH_LLM_RELAY_URL: http://relay:8790
+    RYNMESH_NETWORK_KEY: ${RYNMESH_NETWORK_KEY:-}
+  networks: [control]
+
+services:
+  registry:
+    <<: *node
+    command: ["rynmesh-registry"]
+    environment:
+      RYNMESH_REGISTRY_HOST: 0.0.0.0
+      RYNMESH_REGISTRY_PORT: "8790"
+      RYNMESH_REGISTRY_DIR: /data/registry
+      RYNMESH_NETWORK_KEY: ${RYNMESH_NETWORK_KEY:-}
+    ports: ["127.0.0.1:18890:8790"]
+    volumes: ["registry-data:/data"]
+
+  relay:
+    <<: *node
+    command: ["rynmesh-registry"]
+    environment:
+      RYNMESH_REGISTRY_HOST: 0.0.0.0
+      RYNMESH_REGISTRY_PORT: "8790"
+      RYNMESH_REGISTRY_DIR: /data/relay
+      RYNMESH_NETWORK_KEY: ${RYNMESH_NETWORK_KEY:-}
+    ports: ["127.0.0.1:18893:8790"]
+    volumes: ["relay-data:/data"]
+
+  provider:
+    <<: *node
+    command: ["rynmesh-peer"]
+    environment:
+      <<: *node-env
+      RYNMESH_HOME: /data/provider
+      RYNMESH_NODE_NAME: llm-provider
+      RYNMESH_PEER_ENDPOINT: http://provider:8791
+      # Friend invitations deliberately require literal IP endpoints.
+      RYNMESH_FRIEND_ENDPOINT: http://172.30.48.11:8791
+      RYNMESH_LLM_SERVICE_MANIFEST: ${RYNMESH_LLM_MANIFEST:-/config/test-manifest.json}
+    ports: ["127.0.0.1:18891:8791"]
+    extra_hosts: ["host.docker.internal:host-gateway"]
+    volumes:
+      - provider-data:/data
+      - ./config:/config:ro
+      - ./config/demo-control-token:/data/provider/control_token:ro
+    networks:
+      control:
+        ipv4_address: 172.30.48.11
+      provider-runtime: {}
+    depends_on: [registry]
+
+  consumer:
+    <<: *node
+    command: ["rynmesh-peer"]
+    environment:
+      <<: *node-env
+      RYNMESH_HOME: /data/consumer
+      RYNMESH_NODE_NAME: llm-consumer
+      RYNMESH_PEER_ENDPOINT: http://consumer:8791
+      RYNMESH_FRIEND_ENDPOINT: http://172.30.48.12:8791
+      RYNMESH_LLM_FORCE_RELAY: ${RYNMESH_LLM_FORCE_RELAY:-0}
+      # Empty by default; the mailbox E2E sets it to "1" so the consumer's direct
+      # peer-message transport reports failure and store-and-forward takes over.
+      RYNMESH_MESSAGING_FORCE_MAILBOX: ${RYNMESH_MESSAGING_FORCE_MAILBOX:-}
+    ports: ["127.0.0.1:18892:8791"]
+    volumes:
+      - consumer-data:/data
+      - ./config/demo-control-token:/data/consumer/control_token:ro
+    depends_on: [registry]
+
+    networks:
+      control:
+        ipv4_address: 172.30.48.12
+
+  test-llm:
+    <<: *node
+    profiles: ["test"]
+    command: ["python", "-m", "rynmesh.llm_package.test_adapter"]
+    environment: {}
+    networks: [provider-runtime]
+
+  real-llm:
+    image: ghcr.io/ggml-org/llama.cpp:server@sha256:db8e923e6edc9241ad788979af79543a1e1ba55dbb7d41e62490ef0d0ad3c8e7
+    profiles: ["real"]
+    command: ["-m", "/models/model.gguf", "--host", "0.0.0.0", "--port", "8080", "-c", "2048", "-np", "1"]
+    volumes:
+      - ${RYNMESH_REAL_MODEL_PATH:-./config/model.gguf}:/models/model.gguf:ro
+    read_only: true
+    tmpfs: ["/tmp:size=128m"]
+    networks: [provider-runtime]
+
+networks:
+  control:
+    ipam:
+      config:
+        - subnet: 172.30.48.0/24
+  provider-runtime:
+    internal: true
+
+volumes:
+  registry-data: {}
+  relay-data: {}
+  provider-data: {}
+  consumer-data: {}

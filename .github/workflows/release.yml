@@ -76,6 +76,8 @@ jobs:
         run: npm ci
       - name: Build self-contained node sidecar
         run: ./webapp/src-tauri/scripts/build-sidecar.sh
+      - name: Fetch pinned llama.cpp runtime
+        run: ./webapp/src-tauri/scripts/fetch-llama-runtime.sh
       - name: Build desktop disk image
         working-directory: webapp
         run: npm run tauri build -- --bundles dmg
@@ -93,7 +95,9 @@ jobs:
           codesign --verify --deep --strict --verbose=2 "$app"
           test -x "$app/Contents/MacOS/rynmesh-peer"
           test "$(plutil -extract CFBundleShortVersionString raw "$app/Contents/Info.plist")" = "${GITHUB_REF_NAME#v}"
-          ./webapp/src-tauri/scripts/verify-sidecar.sh "$app/Contents/MacOS/rynmesh-peer"
+          "$app/Contents/Resources/llama/llama-server" --version
+          RYNMESH_LLAMA_DIR="$app/Contents/Resources/llama" \
+            ./webapp/src-tauri/scripts/verify-sidecar.sh "$app/Contents/MacOS/rynmesh-peer" --check-llm
       - name: Upload desktop artifact to release
         env:
           GH_TOKEN: ${{ github.token }}

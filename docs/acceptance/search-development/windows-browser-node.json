@@ -1,0 +1,86 @@
+{
+  "recorded_at": "2026-09-11T04:11:39.260134+00:00",
+  "scope": "Browser and local HTTP against a real node process with seeded synthetic records in real storage. Pairing seed used an in-memory transport; not packaged desktop, cross-NAT or production 10k-store performance acceptance.",
+  "node_pid": 14152,
+  "port": 18850,
+  "checks": [
+    {
+      "category": "saved_and_history",
+      "count": 1,
+      "kinds": [
+        "saved",
+        "history"
+      ],
+      "result_id": "content:search-demo-article",
+      "response_seconds": 0.027633099991362542,
+      "targets": [
+        {
+          "label": "Read local content",
+          "href": "/search?open=content%3Asearch-demo-article"
+        }
+      ]
+    },
+    {
+      "category": "share_card",
+      "count": 1,
+      "kinds": [
+        "share"
+      ],
+      "result_id": "card:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "response_seconds": 0.007484500005375594,
+      "targets": [
+        {
+          "label": "Open share",
+          "href": "/friends?card=aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        }
+      ]
+    },
+    {
+      "category": "friend_message",
+      "count": 1,
+      "kinds": [
+        "chat",
+        "share"
+      ],
+      "result_id": "message:KHrLXl+iS+kWdlY1Dx68SRxXkR+XRY810O2tZLJen7k=:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "response_seconds": 0.006308300013188273,
+      "targets": [
+        {
+          "label": "Open message",
+          "href": "/friends?peer=KHrLXl%2BiS%2BkWdlY1Dx68SRxXkR%2BXRY810O2tZLJen7k%3D&message=bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+        }
+      ]
+    },
+    {
+      "category": "ask_message",
+      "count": 1,
+      "kinds": [
+        "chat"
+      ],
+      "result_id": "ask:conversation-1:message-1",
+      "response_seconds": 0.007690400001592934,
+      "targets": [
+        {
+          "label": "Open Ask Ryn message",
+          "href": "/ask?conversation=conversation-1&network=network&message=message-1"
+        }
+      ]
+    }
+  ],
+  "article_body_sha256": "d9c128879124fbb872f506739a80771afefc1c82ac31180b60cd68bc76ffec73",
+  "browser_observations": {
+    "mixed_query_found_saved_and_history": true,
+    "local_article_read_without_model": true,
+    "back_preserved_keywords": true,
+    "ask_message_received_focus": true,
+    "friend_message_received_focus": true
+  },
+  "index_state": "ready",
+  "indexed_count": 4,
+  "cleanup": {
+    "node_pid_stopped": 14152,
+    "port_confirmed_closed": 18850,
+    "acceptance_tab_closed": true,
+    "seeded_node_home_preserved": true
+  }
+}

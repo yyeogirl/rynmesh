@@ -20,6 +20,7 @@ try:
 except ImportError:  # pragma: no cover
     FastAPIRequest = Any  # type: ignore
 
+from .atomic_io import atomic_write_json
 from .signal50_service import (
     DEFAULT_WORK_DIR,
     RELAY_BUNDLE_OPERATION,
@@ -129,6 +130,7 @@ class MediaOpsState:
         self._started = False
         self._thread: threading.Thread | None = None
         self._lock = threading.Lock()
+        self._file_lock = threading.RLock()
         self.active_job_id = ""
 
     def start(self) -> None:
@@ -172,29 +174,31 @@ class MediaOpsState:
 
     def load(self, job_id: str) -> dict[str, Any]:
         path = self._job_path(job_id)
-        if not path.exists():
-            return {}
-        try:
-            payload = json.loads(path.read_text(encoding="utf-8"))
-        except Exception:
-            return {}
+        with self._file_lock:
+            if not path.exists():
+                return {}
+            try:
+                payload = json.loads(path.read_text(encoding="utf-8"))
+            except Exception:
+                return {}
         return payload if isinstance(payload, dict) else {}
 
     def list_jobs(self, *, status: str = "", limit: int = 50) -> list[dict[str, Any]]:
         cleaned_status = str(status or "").strip()
         rows: list[dict[str, Any]] = []
-        for path in sorted(self.jobs_dir.glob("*.json"), reverse=True):
-            try:
-                payload = json.loads(path.read_text(encoding="utf-8"))
-            except Exception:
-                continue
-            if not isinstance(payload, dict):
-                continue
-            if cleaned_status and payload.get("status") != cleaned_status:
-                continue
-            rows.append(payload)
-            if len(rows) >= max(1, int(limit or 50)):
-                break
+        with self._file_lock:
+            for path in sorted(self.jobs_dir.glob("*.json"), reverse=True):
+                try:
+                    payload = json.loads(path.read_text(encoding="utf-8"))
+                except Exception:
+                    continue
+                if not isinstance(payload, dict):
+                    continue
+                if cleaned_status and payload.get("status") != cleaned_status:
+                    continue
+                rows.append(payload)
+                if len(rows) >= max(1, int(limit or 50)):
+                    break
         return rows
 
     def queue_depth(self) -> int:
@@ -255,17 +259,11 @@ class MediaOpsState:
         return self.jobs_dir / f"{cleaned}.json"
 
     def _write_job(self, job: dict[str, Any]) -> None:
-        self.jobs_dir.mkdir(parents=True, exist_ok=True)
-        path = self._job_path(str(job["job_id"]))
-        temporary_path = path.with_name(f".{path.name}.{uuid.uuid4().hex}.tmp")
-        try:
-            with temporary_path.open("w", encoding="utf-8") as handle:
-                handle.write(json.dumps(job, indent=2, ensure_ascii=True) + "\n")
-                handle.flush()
-                os.fsync(handle.fileno())
-            os.replace(temporary_path, path)
-        finally:
-            temporary_path.unlink(missing_ok=True)
+        with self._file_lock:
+            path = self._job_path(str(job["job_id"]))
+            atomic_write_json(
+                path, job, indent=2, sort_keys=False, ensure_ascii=True, trailing_newline=True
+            )
 
 
 def _require_local_request(request: Any) -> None:

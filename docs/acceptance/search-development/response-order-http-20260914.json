@@ -1,0 +1,202 @@
+{
+  "scope": "Production node behind a synthetic response-delay transport; actual Chrome interaction",
+  "verified_at": "2026-09-14T12:08:31.417703+00:00",
+  "events": [
+    {
+      "id": 1,
+      "state": "held",
+      "at": "2026-09-14T12:02:14.993743+00:00",
+      "elapsed_seconds": 0.015,
+      "mode": "hold-first",
+      "revision": 1,
+      "status": 200,
+      "cursor": false,
+      "query_sha256": "b96b292bb4cbb053d51dac2e84eb224fa2b68315fc3fcef922b53bc342efc5ee"
+    },
+    {
+      "id": 2,
+      "state": "ready",
+      "at": "2026-09-14T12:02:30.507867+00:00",
+      "elapsed_seconds": 0.016,
+      "mode": "hold-first",
+      "revision": 1,
+      "status": 200,
+      "cursor": false,
+      "query_sha256": "6135534072259d1b121c514e53b786f2009dd46db96d1c2fdb132e62e27c9dc7"
+    },
+    {
+      "id": 2,
+      "state": "sent",
+      "at": "2026-09-14T12:02:30.509869+00:00",
+      "elapsed_seconds": 0.016,
+      "mode": "hold-first",
+      "revision": 1,
+      "delayed": false
+    },
+    {
+      "id": 1,
+      "state": "released",
+      "at": "2026-09-14T12:02:48.340016+00:00",
+      "elapsed_seconds": 33.359,
+      "mode": "hold-first",
+      "revision": 1
+    },
+    {
+      "id": 1,
+      "state": "sent",
+      "at": "2026-09-14T12:02:48.341014+00:00",
+      "elapsed_seconds": 33.359,
+      "mode": "hold-first",
+      "revision": 1,
+      "delayed": true
+    },
+    {
+      "id": 3,
+      "state": "ready",
+      "at": "2026-09-14T12:03:02.062841+00:00",
+      "elapsed_seconds": 0.016,
+      "mode": "none",
+      "revision": 2,
+      "status": 200,
+      "cursor": false,
+      "query_sha256": "b96b292bb4cbb053d51dac2e84eb224fa2b68315fc3fcef922b53bc342efc5ee"
+    },
+    {
+      "id": 3,
+      "state": "sent",
+      "at": "2026-09-14T12:03:02.063842+00:00",
+      "elapsed_seconds": 0.016,
+      "mode": "none",
+      "revision": 2,
+      "delayed": false
+    },
+    {
+      "id": 4,
+      "state": "held",
+      "at": "2026-09-14T12:03:21.136345+00:00",
+      "elapsed_seconds": 0.016,
+      "mode": "hold-page",
+      "revision": 3,
+      "status": 200,
+      "cursor": true,
+      "query_sha256": "b96b292bb4cbb053d51dac2e84eb224fa2b68315fc3fcef922b53bc342efc5ee"
+    },
+    {
+      "id": 5,
+      "state": "ready",
+      "at": "2026-09-14T12:03:37.015666+00:00",
+      "elapsed_seconds": 0.0,
+      "mode": "hold-page",
+      "revision": 3,
+      "status": 200,
+      "cursor": false,
+      "query_sha256": "6135534072259d1b121c514e53b786f2009dd46db96d1c2fdb132e62e27c9dc7"
+    },
+    {
+      "id": 5,
+      "state": "sent",
+      "at": "2026-09-14T12:03:37.016637+00:00",
+      "elapsed_seconds": 0.0,
+      "mode": "hold-page",
+      "revision": 3,
+      "delayed": false
+    },
+    {
+      "id": 4,
+      "state": "released",
+      "at": "2026-09-14T12:03:57.671824+00:00",
+      "elapsed_seconds": 36.547,
+      "mode": "hold-page",
+      "revision": 3
+    },
+    {
+      "id": 4,
+      "state": "sent",
+      "at": "2026-09-14T12:03:57.672583+00:00",
+      "elapsed_seconds": 36.547,
+      "mode": "hold-page",
+      "revision": 3,
+      "delayed": true
+    },
+    {
+      "id": 6,
+      "state": "ready",
+      "at": "2026-09-14T12:04:13.351263+00:00",
+      "elapsed_seconds": 0.016,
+      "mode": "none",
+      "revision": 4,
+      "status": 200,
+      "cursor": false,
+      "query_sha256": "b96b292bb4cbb053d51dac2e84eb224fa2b68315fc3fcef922b53bc342efc5ee"
+    },
+    {
+      "id": 6,
+      "state": "sent",
+      "at": "2026-09-14T12:04:13.352265+00:00",
+      "elapsed_seconds": 0.016,
+      "mode": "none",
+      "revision": 4,
+      "delayed": false
+    },
+    {
+      "id": 7,
+      "state": "held",
+      "at": "2026-09-14T12:04:35.419526+00:00",
+      "elapsed_seconds": 0.0,
+      "mode": "hold-page",
+      "revision": 5,
+      "status": 200,
+      "cursor": true,
+      "query_sha256": "b96b292bb4cbb053d51dac2e84eb224fa2b68315fc3fcef922b53bc342efc5ee"
+    },
+    {
+      "id": 7,
+      "state": "released",
+      "at": "2026-09-14T12:05:05.332116+00:00",
+      "elapsed_seconds": 29.922,
+      "mode": "hold-page",
+      "revision": 5
+    },
+    {
+      "id": 7,
+      "state": "sent",
+      "at": "2026-09-14T12:05:05.333623+00:00",
+      "elapsed_seconds": 29.922,
+      "mode": "hold-page",
+      "revision": 5,
+      "delayed": true
+    },
+    {
+      "id": 8,
+      "state": "ready",
+      "at": "2026-09-14T12:05:39.628570+00:00",
+      "elapsed_seconds": 0.016,
+      "mode": "none",
+      "revision": 6,
+      "status": 200,
+      "cursor": false,
+      "query_sha256": "6135534072259d1b121c514e53b786f2009dd46db96d1c2fdb132e62e27c9dc7"
+    },
+    {
+      "id": 8,
+      "state": "sent",
+      "at": "2026-09-14T12:05:39.629575+00:00",
+      "elapsed_seconds": 0.016,
+      "mode": "none",
+      "revision": 6,
+      "delayed": false
+    }
+  ],
+  "delayed_seconds": {
+    "1": 33.359,
+    "4": 36.547,
+    "7": 29.922
+  },
+  "queries": 8,
+  "all_responses_200": true,
+  "old_first_and_page_sent_after_new": true,
+  "rapid_input_final_query_count": 1,
+  "safety_timeout_used": false,
+  "browser_checks_recorded_separately": true,
+  "packaged_desktop": false
+}

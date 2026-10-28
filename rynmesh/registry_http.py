@@ -6,6 +6,8 @@ accept inbound connections. Content still moves directly between peers when
 both endpoints are reachable.
 """
 
+import hashlib
+import hmac
 import json
 import os
 from pathlib import Path
@@ -13,10 +15,22 @@ from typing import Any, Optional
 
 from .crypto import SignedPayload
 from .jobs import JobError
+from .mailbox import MailboxError
 from .registry import FilePeerRegistry, PeerRegistry, RegistryError
 from .relay import FileRelayStore, RelayError
 
 MAX_REGISTRY_REQUEST_BYTES = 1024 * 1024
+# No lifespan/background-task pattern exists in this app, so expired mail is
+# reaped opportunistically instead of on a timer. Deposits are the only event
+# that grows the spool, which makes them the right place to hang the sweep.
+MAILBOX_SWEEP_EVERY_DEPOSITS = 50
+_MAILBOX_STATUS = {
+    "duplicate": 409,
+    "replay": 409,
+    "recipient_full": 429,
+    "sender_quota": 429,
+    "rate_limited": 429,
+}
 
 
 def create_app(
@@ -25,7 +39,7 @@ def create_app(
 ):
     try:
         from fastapi import FastAPI, HTTPException, Request
-        from fastapi.responses import FileResponse
+        from fastapi.responses import FileResponse, JSONResponse
     except ImportError as exc:  # pragma: no cover
         raise ImportError("Rynmesh registry HTTP server requires `fastapi`") from exc
 
@@ -33,8 +47,36 @@ def create_app(
     active_relay = relay_store or FileRelayStore(default_registry_root() / "relay")
     app = FastAPI(title="Rynmesh Registry", version="0.1")
 
+    # Derived once at app creation, not per request.
+    _network_key = os.environ.get("RYNMESH_NETWORK_KEY", "").strip()
+    _expected_auth = (
+        hashlib.sha256(("rynmesh-net-key:" + _network_key).encode("utf-8")).hexdigest()
+        if _network_key else ""
+    )
+
+    @app.middleware("http")
+    async def _guard_registry_api(request: Request, call_next):
+        """Hide the public coordination/relay surface behind the mesh key.
+
+        /health stays open even on a keyed mesh: load balancers, container
+        orchestrators, and operators probe it without the derived header, and
+        a 404 there marks a healthy registry as down and restart-loops it.
+        The generic body below reveals nothing mesh-specific.
+        """
+        path = request.url.path
+        if _expected_auth and path.startswith("/api/v1"):
+            if not hmac.compare_digest(request.headers.get("x-ryn-auth", ""), _expected_auth):
+                return JSONResponse({"detail": "Not Found"}, status_code=404)
+        return await call_next(request)
+
     @app.get("/health")
-    def health() -> dict[str, str]:
+    def health(request: Request) -> dict[str, str]:
+        if _expected_auth and not hmac.compare_digest(
+            request.headers.get("x-ryn-auth", ""), _expected_auth
+        ):
+            # Liveness without fingerprinting: authenticated callers get the
+            # registry identity, plain probes only see that something is up.
+            return {"status": "ok"}
         return {"status": "ok", "kind": "rynmesh-registry"}
 
     @app.post("/api/v1/peers/register")
@@ -155,6 +197,42 @@ def create_app(
         except (RegistryError, JobError) as exc:
             raise HTTPException(status_code=400, detail=str(exc)) from exc
         return {"network_id": network_id, "work_results": work_results}
+
+    _deposits = {"count": 0}
+
+    @app.post("/api/v1/mailbox/deposit")
+    async def deposit_mailbox(request: Request) -> dict[str, Any]:
+        signed = await _signed_request(request)
+        try:
+            result = active_registry.deposit_mailbox(signed)
+        except MailboxError as exc:
+            code = str(exc)
+            raise HTTPException(status_code=_MAILBOX_STATUS.get(code, 400), detail=code) from exc
+        except (RegistryError, OSError, KeyError, TypeError, ValueError) as exc:
+            # Nothing but a short code goes back: registry-side detail could
+            # describe a stored envelope belonging to somebody else.
+            raise HTTPException(status_code=400, detail="mailbox_request_invalid") from exc
+        _deposits["count"] += 1
+        if _deposits["count"] % MAILBOX_SWEEP_EVERY_DEPOSITS == 0:
+            sweeper = getattr(active_registry, "sweep_mailbox", None)
+            if callable(sweeper):
+                try:
+                    sweeper()
+                except (OSError, ValueError):
+                    pass
+        return result
+
+    @app.post("/api/v1/mailbox/poll")
+    async def poll_mailbox(request: Request) -> dict[str, Any]:
+        signed = await _signed_request(request)
+        try:
+            messages = active_registry.poll_mailbox(signed)
+        except MailboxError as exc:
+            code = str(exc)
+            raise HTTPException(status_code=_MAILBOX_STATUS.get(code, 400), detail=code) from exc
+        except (RegistryError, OSError, KeyError, TypeError, ValueError) as exc:
+            raise HTTPException(status_code=400, detail="mailbox_request_invalid") from exc
+        return {"messages": [item.to_dict() for item in messages]}
 
     @app.post("/api/v1/relay/blobs")
     async def upload_relay_blob(request: Request) -> dict[str, Any]:
